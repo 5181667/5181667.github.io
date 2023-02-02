@@ -1,102 +1,19 @@
-<%--
-  import javax.servlet.http.HttpServletRequest;
-%>
-<%--
-  Created by IntelliJ IDEA.
-  denglu.User: huchi
-  Date: 2022/9/28
-  Time: 12:31
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8"  pageEncoding="UTF-8" %>
-<html>
-<%String name = request.getParameter("name");
-String password=request.getParameter("pass");%>
-<jsp:useBean id="stu" class="denglu.User" scope="application"/>
-<jsp:setProperty name="stu" property="password" value="<%=password%>"/>
-<jsp:setProperty name="stu" property="username" value="<%=name%>"/>
-  <head>
-    <title>投票页面</title>
-    <meta http-equiv="Content-Type" content="text/html:charset=UTF-8">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
     <style type="text/css">
-      h1{
-        font-family: 宋体;
-        font-size: 40px;
-        color: red;
-      }
-      p{
-        font-family: 宋体;
-        color: blue;
-        text-decoration: underline;
-      }
-      #userDiv{
-
-      }
-      #base_info{
-        font-size: 20px;
-        color:blue;
-        text-decoration: underline;
-      }
-      #list{
-        color: darkblue;
-      }
-      table{
-        box-shadow: 10px 10px #888888;
-      }
-      td{
-        color: orange;
-      }
-      body{
-        background-image: url("666.jpg");
-        background-size: cover;
-      }
-      #formVote{
-        line-height: 30px;
-      }
+        h1{
+            text-align: center;
+            font-size: 200px;
+        }
     </style>
-  </head>
-  <body>
-  <hr>
-
-  欢迎<%=name%>访问本网站！
-  <h1 align="center">个人信息展示</h1>
-
-  <hr align="center" width="800" size="9"color="black" >
-  <table border="1"width="57%"cellspacing="2"height="846">
-    <tr height="60"valign="middle">
-      <th width="20%">姓名：户驰</th>
-      <img src="篮球.jpeg" alt="篮球" align="right">
-    </tr>
-    <tr height="60"valign="middle">
-      <th width="20%">年龄：17</th>
-    </tr>
-    <tr height="60"valign="middle">
-      <th width="20%">专业：软件工程</th>
-    </tr>
-    <tr height="60"valign="middle">
-      <th width="20%">爱好：play basketball</th>
-    </tr>
-    <tr height="60"valign="middle">
-      <th width="20%">学校：郑州轻工业大学</th>
-    </tr>
-    <tr height="60"valign="middle">
-      <th width="20%">主要作品：无</th>
-    </tr>
-  </table>
-  <hr align="center" width="1000" size="9" color="black" >
-<form name="id" method="get" action="vote.jsp">
-  <table border="1">
-    <br>
-       最喜欢什么编译器：
-    </br>
-    <input type="radio"      name="1" value="Xcode">Xcode
-    <br> <input type="radio" name="1" value="vscode">vscode</br>
-    <br> <input type="radio" name="1" value="Clion">Clion</br>
-    <br> <input type="radio" name="1" value="eclipse">eclipse</br>
-    <br> <input type="radio" name="1" value="Others">Others</br>
-     <td><input type="submit" name="tijiao" value="提交"></td>
-     <td><input type="reset" name="houhui" value="取消"></td>
-  </table>
-  </form>
-  </body>
+</head>
+<body>
+    <h1>6</h1> 
+  <h2>徐鼎博到此一游</h2>
+  
+<!-- <img src="bobo.PNG"> -->
+</body>
 </html>
