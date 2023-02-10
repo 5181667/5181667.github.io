@@ -1,72 +1,16 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html>
-
 <head>
-    <meta charset="UTF-8">
-    <title>没有名字</title>
-
+    <title>1024Code</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
-
 <body>
-<div id="box">
-    <p><span id="">看什么电影</span></p>
-    <button onclick="run_star()" id="begin">点击开始</button>
-    <button onclick="run_stop()" id="stop">点击结束</button>
-</div>
-<script type="text/javascript">
-    var span = document.getElementById('box').getElementsByTagName('span')[0]; //获取span节点
-    var btn_star = document.getElementsByTagName('button')[0]; //获取开始按钮的节点
-    var btn_stop = document.getElementsByTagName('button')[1]; //获取结束按钮的节点
-    var time; //先定义个空的定时器变量，等待赋值
-    function run_star() { //开始按钮 的函数
-        time = setInterval(function() {
-            //arr列表存储名字
-            var arr = ['户驰', '徐鼎博', 'xdb', 'hc', '李峋', '满江红','流浪地球2','七龙珠','歇吧']; //定义一个容器来存储名字
-            var arr_index = Math.floor(Math.random() * arr.length); //随机生成一个数组的索引值
-            var arr_random = arr[arr_index]; //通过索引值随机生成的数组中的某个名字
-            span.innerHTML = arr_random; //将随机生成的这个名字赋值给span的innerHTML属性。
-        }, 100)
-    }
-
-    function run_stop() { //结束按钮的函数
-        clearInterval(time); //清除定时器，即停止通过time启动的这个函数。
-
-        alert('朋友，污秽里能有什么洁净呢？虚妄中又有什么真实呢？\n答案在你心中。')
-    }
-</script>
-<style type="text/css">
-    div {
-        position: relative;
-        margin: 0 auto;
-        width: 300px;
-        height: 300px;
-        background: burlywood;
-    }
-
-    div p {
-        font-weight: bold;
-        color: darkgreen;
-        font-size: 30px;
-        width: 100%;
-        position: absolute;
-        top: 100px;
-        text-align: center;
-    }
-
-      #begin {
-          position: absolute;
-          float: left;
-          left: 50px;
-          bottom: 0px;
-      }
-      #stop {
-          position: absolute;
-          float: left;
-          left: 170px;
-          bottom: 0px;
-      }
-</style>
+<h1>平安的回去吧，你的信德救了你</h1>
+<div id="ripple" class="ripple"></div>
+<image id="muyuicon" class="muyuicon" src="/muyu1.png" onclick="muyuiconTap()"></image>
+<audio id="audio" controls src="/yumu.wav"></audio>
+<script type="text/javascript" src="script.js"></script>
 </body>
-
 </html>
