@@ -1,16 +1,18 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <title>1024Code</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <link rel="stylesheet" type="text/css" href="style.css">
-</head>
-<body>
-<h1>平安的回去吧，你的信德救了你</h1>
-<div id="ripple" class="ripple"></div>
-<image id="muyuicon" class="muyuicon" src="/muyu1.png" onclick="muyuiconTap()"></image>
-<audio id="audio" controls src="/yumu.wav"></audio>
-<script type="text/javascript" src="script.js"></script>
-</body>
+<html lang="en" >
+    <head>
+        <meta charset="utf-8" />
+        <title>打地鼠</title>
+        <script type="text/javascript" src="./script.js"></script>
+    </head>
+    <body onload="init()">
+        <div class="container">
+            <canvas onmouseover="hideCursor(this)" onmouseout="showCursor"
+					onmousemove="hammerMove(this);"  
+					onmousedown="hammerDown();" onmouseUp="hammerUp();" 
+					id="screen" width="700" height="500" style="border:1px solid #000"></canvas>
+        </div>
+		
+		<div id="info"></div>
+    </body>
 </html>
