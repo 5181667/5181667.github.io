@@ -151,7 +151,7 @@ function init(){
 	}
 	
 	var msImg = new Image();
-	msImg.src = 'mouse.jpeg';
+	msImg.src = 'mouse.png';
 	
 	msImg.onload = function(){
 		for(i=0;i<3;i++){
