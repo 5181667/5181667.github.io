@@ -1,202 +1,228 @@
-var canvas, ctx, info;
-var bg;
-var hammer, hamX, hamY;
-var mouseState, mouseFrmLen = 10, mousePress = false;
-var sprites = [], holes = [];
-var score = 0;
-var Sprite = function(w, h, x, y, state, image){
-	var self = this;
-	this.w = w;
-	this.h = h;
-	this.x = x;
-	this.y = y;
-	this.image = image;
-	this.state = state;
-	
-	this.draw = function(){
-		if(this.state == 'show'){
-			ctx.drawImage(this.image, this.x, this.y, this.w, this.h);
-			setTimeout(function(){
-				self.state = 'hide';
-			},3000);
-		}
-	}
-}
+    gsap.registerPlugin(ScrollTrigger);
+    let speed = 100;
 
-var HoleSprite = function(w, h, x, y, state, image){
-	var self = this;
-	this.w = w;
-	this.h = h;
-	this.x = x;
-	this.y = y;
-	this.image = image;
-	this.state = state;
-	
-	this.draw = function(){
-		if(this.state == 'show'){
-			ctx.drawImage(this.image, this.x, this.y, this.w, this.h);
-		}
-	}
-}
+    /*  SCENE 1 */
+    let scene1 = gsap.timeline();
+    ScrollTrigger.create({
+        animation: scene1,
+        trigger: ".scrollElement",
+        start: "top top",
+        end: "45% 100%",
+        scrub: 3,
+    });
 
-function HammerSprite(w, h, x, y, image){
-	HammerSprite.prototype.w = w;
-	HammerSprite.prototype.h = h;
-	HammerSprite.prototype.x = x;
-	HammerSprite.prototype.y = y;
-	
-	HammerSprite.prototype.draw = function(isPress){
-		if(isPress){
-			ctx.save();
-			
-			ctx.translate(this.x-10, this.y+34);
-			ctx.rotate(Math.PI/180*330);
-			ctx.drawImage(image, 0, 0, w, h);
-			
-			ctx.restore();
-		}else{
-			ctx.drawImage(image, this.x, this.y, w, h);
-		}
-		
-	}
-}
+    // hills animation 
+    scene1.to("#h1-1", { y: 3 * speed, x: 1 * speed, scale: 0.9, ease: "power1.in" }, 0)
+    scene1.to("#h1-2", { y: 2.6 * speed, x: -0.6 * speed, ease: "power1.in" }, 0)
+    scene1.to("#h1-3", { y: 1.7 * speed, x: 1.2 * speed }, 0.03)
+    scene1.to("#h1-4", { y: 3 * speed, x: 1 * speed }, 0.03)
+    scene1.to("#h1-5", { y: 2 * speed, x: 1 * speed }, 0.03)
+    scene1.to("#h1-6", { y: 2.3 * speed, x: -2.5 * speed }, 0)
+    scene1.to("#h1-7", { y: 5 * speed, x: 1.6 * speed }, 0)
+    scene1.to("#h1-8", { y: 3.5 * speed, x: 0.2 * speed }, 0)
+    scene1.to("#h1-9", { y: 3.5 * speed, x: -0.2 * speed }, 0)
 
-function clearScreen(){
-	//ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-	ctx.drawImage(bg, 0, 0, ctx.canvas.width, ctx.canvas.height);
-}
-
-function drawScreen(){
-	clearScreen();
-	
-	//绘制得分
-	
-	ctx.font = "40px serif"
-	ctx.strokeStyle = "#FF00ff";
-	ctx.strokeText ("LION打地鼠", 50,50);
-	ctx.fillStyle = "#000000";
-	ctx.fillText("LION打地鼠",50,50);
-
-	ctx.fillStyle = "#ff0000";
-	ctx.fillText("你的得分:"+score,450,50);
-	for(i=0;i<3;i++){
-		for(j=0; j<3; j++){
-			holes[i][j].draw();
-		}
-	}
-	
-
-	for(i=0;i<3;i++){
-		for(j=0; j<3; j++){
-			sprites[i][j].draw();
-		}
-	}
-	
-	if(hammer){
-		hammer.draw(mousePress);
-	}
-}
-
-function updateLogic(){
-
-	for(i=0;i<3;i++){
-		for(j=0; j<3; j++){
-			sprites[i][j].state=='hide'
-		}
-	}
-	
-	var a = Math.round(Math.random()*100)%3;
-	var b = Math.round(Math.random()*100)%3;
-	sprites[a][b].state='show';
-}
+    //animate text
+    scene1.to("#info", { y: 8 * speed }, 0)
 
 
-function hammerMove(e){
-	if(hammer){
-		hammer.x = event.x-40;
-		hammer.y = event.y-40;
-	}
-}
 
-function hit(x, y){
- 	
-	for(i=0;i<3;i++){
-		for(j=0;j<3;j++){
-			var s = sprites[i][j];
-			
-			if(s.state=='show'){
-				if(x>s.x+30 && y>s.y && x<(s.x+s.w+30) && y<(s.y+s.h)){
-					score++;
-					s.state = 'hide';
-				}
-			}
-		}
-	}
-}
+    /*   Bird   */
+    gsap.fromTo("#bird", { opacity: 1 }, {
+        y: -250,
+        x: 800,
+        ease: "power2.out",
+        scrollTrigger: {
+            trigger: ".scrollElement",
+            start: "15% top",
+            end: "60% 100%",
+            scrub: 4,
+            onEnter: function() { gsap.to("#bird", { scaleX: 1, rotation: 0 }) },
+            onLeave: function() { gsap.to("#bird", { scaleX: -1, rotation: -15 }) },
+        }
+    })
 
-function init(){
-	info = document.getElementById('info');
-	canvas = document.getElementById('screen');
-	ctx = canvas.getContext('2d');
-	
-	bg = new Image();
-	bg.src = 'bg.jpg';
-	bg.onload = function(){};
-	
-	
-	var hamImg = new Image();
-	hamImg.src = 'hammer.png';
-	hamImg.onload = function(){
-		hammer = new HammerSprite(48, 48, 100, 100, hamImg);
-	}
-	
-	var msImg = new Image();
-	msImg.src = 'mouse.png';
-	
-	msImg.onload = function(){
-		for(i=0;i<3;i++){
-			var arr = [];
-			for(j=0; j<3; j++){
-				var s = new Sprite(60, 70, 50+240*i, 80+120*j, 'hide', msImg); 
-				arr[j] = s;
-			}
-			sprites[i] = arr;
-		}		
-	}
-	
-	var holeImg = new Image();
-	holeImg.src = 'hole.png';
-	holeImg.onload = function(){
-		for(i=0;i<3;i++){
-			var arr = [];
-			for(j=0; j<3; j++){
-				var s = new HoleSprite(80, 30, 40+240*i, 140+120*j, 'show', holeImg); 
-				arr[j] = s;
-			}
-			holes[i] = arr;
-		}		
-	}
-	
-	setInterval(drawScreen, 30);
-	setInterval(updateLogic, 3000);
-	
-};
 
-function hammerDown(){
-	mousePress = true;
-}
+    /* Clouds  */
+    let clouds = gsap.timeline();
+    ScrollTrigger.create({
+        animation: clouds,
+        trigger: ".scrollElement",
+        start: "top top",
+        end: "70% 100%",
+        scrub: 1,
+    });
 
-function hammerUp(){
+    clouds.to("#cloud1", { x: 500 }, 0)
+    clouds.to("#cloud2", { x: 1000 }, 0)
+    clouds.to("#cloud3", { x: -1000 }, 0)
+    clouds.to("#cloud4", { x: -700, y: 25 }, 0)
 
-	info.innerHTML=event.x+':'+event.y;
-	mousePress = false;
-	hit(event.x, event.y);
-}
 
-function hideCursor(obj){
-	obj.style.cursor='none';
-}
 
-function showCursor(obj){
-	obj.style.cursor='';
-}
+    /* Sun motion Animation  */
+    let sun = gsap.timeline();
+    ScrollTrigger.create({
+        animation: sun,
+        trigger: ".scrollElement",
+        start: "top top",
+        end: "2200 100%",
+        scrub: 1,
+    });
+
+    //sun motion 
+    sun.to("#bg_grad", { attr: { cy: "330" } }, 0.00)
+
+    //bg change
+    sun.to("#sun", { attr: { offset: "0.15" } }, 0.00)
+    sun.to("#bg_grad stop:nth-child(2)", { attr: { offset: "0.15" } }, 0.00)
+    sun.to("#bg_grad stop:nth-child(3)", { attr: { offset: "0.18" } }, 0.00)
+    sun.to("#bg_grad stop:nth-child(4)", { attr: { offset: "0.25" } }, 0.00)
+    sun.to("#bg_grad stop:nth-child(5)", { attr: { offset: "0.46" } }, 0.00)
+    sun.to("#bg_grad stop:nth-child(6)", { attr: { "stop-color": "#FF9171" } }, 0)
+
+
+
+    /*   SCENE 2  */
+    let scene2 = gsap.timeline();
+    ScrollTrigger.create({
+        animation: scene2,
+        trigger: ".scrollElement",
+        start: "15% top",
+        end: "40% 100%",
+        scrub: 4,
+    });
+
+    scene2.fromTo("#h2-1", { y: 500, opacity: 0 }, { y: 0, opacity: 1 }, 0)
+    scene2.fromTo("#h2-2", { y: 500 }, { y: 0 }, 0.1)
+    scene2.fromTo("#h2-3", { y: 700 }, { y: 0 }, 0.1)
+    scene2.fromTo("#h2-4", { y: 700 }, { y: 0 }, 0.2)
+    scene2.fromTo("#h2-5", { y: 800 }, { y: 0 }, 0.3)
+    scene2.fromTo("#h2-6", { y: 900 }, { y: 0 }, 0.3)
+
+
+
+    /* Bats */
+    gsap.fromTo("#bats", { opacity: 1, y: 400, scale: 0 }, {
+        y: 120,
+        scale: 0.8,
+        transformOrigin: "50% 50%",
+        ease: "power3.out",
+        scrollTrigger: {
+            trigger: ".scrollElement",
+            start: "40% top",
+            end: "70% 100%",
+            scrub: 3,
+            onEnter: function() {
+                gsap.utils.toArray("#bats path").forEach((item, i) => {
+                    gsap.to(item, { scaleX: 0.5, yoyo: true, repeat: 11, duration: 0.15, delay: 0.7 + (i / 10), transformOrigin: "50% 50%" })
+                });
+                gsap.set("#bats", { opacity: 1 })
+            },
+            onLeave: function() { gsap.to("#bats", { opacity: 0, delay: 2 }) },
+        }
+    })
+
+
+    /* Sun increase */
+    let sun2 = gsap.timeline();
+    ScrollTrigger.create({
+        animation: sun2,
+        trigger: ".scrollElement",
+        start: "2200 top",
+        end: "5000 100%",
+        scrub: 1,
+    });
+
+    sun2.to("#sun", { attr: { offset: "0.6" } }, 0)
+    sun2.to("#bg_grad stop:nth-child(2)", { attr: { offset: "0.7" } }, 0)
+    sun2.to("#sun", { attr: { "stop-color": "#ffff00" } }, 0)
+    sun2.to("#lg4 stop:nth-child(1)", { attr: { "stop-color": "#623951" } }, 0)
+    sun2.to("#lg4 stop:nth-child(2)", { attr: { "stop-color": "#261F36" } }, 0)
+    sun2.to("#bg_grad stop:nth-child(6)", { attr: { "stop-color": "#45224A" } }, 0)
+
+
+
+    /* Transition (from Scene2 to Scene3) */
+    gsap.set("#scene3", { y: 580, visibility: "visible" })
+    let sceneTransition = gsap.timeline();
+    ScrollTrigger.create({
+        animation: sceneTransition,
+        trigger: ".scrollElement",
+        start: "70% top",
+        end: "bottom 100%",
+        scrub: 3,
+    });
+
+    sceneTransition.to("#h2-1", { y: -680, scale: 1.5, transformOrigin: "50% 50%" }, 0)
+    sceneTransition.to("#bg_grad", { attr: { cy: "-80" } }, 0.00)
+    sceneTransition.to("#bg2", { y: 0 }, 0)
+
+
+
+    /* Scene 3 */
+    let scene3 = gsap.timeline();
+    ScrollTrigger.create({
+        animation: scene3,
+        trigger: ".scrollElement",
+        start: "80% 50%",
+        end: "bottom 100%",
+        scrub: 3,
+    });
+
+    //Hills motion
+    scene3.fromTo("#h3-1", { y: 300 }, { y: -550 }, 0)
+    scene3.fromTo("#h3-2", { y: 800 }, { y: -550 }, 0.03)
+    scene3.fromTo("#h3-3", { y: 600 }, { y: -550 }, 0.06)
+    scene3.fromTo("#h3-4", { y: 800 }, { y: -550 }, 0.09)
+    scene3.fromTo("#h3-5", { y: 1000 }, { y: -550 }, 0.12)
+
+    //stars
+    scene3.fromTo("#stars", { opacity: 0 }, { opacity: 0.5, y: -500 }, 0)
+
+    // Scroll Back text
+    scene3.fromTo("#arrow2", { opacity: 0 }, { opacity: 0.7, y: -710 }, 0.25)
+    scene3.fromTo("#text2", { opacity: 0 }, { opacity: 0.7, y: -710 }, 0.3)
+
+    //gradient value change
+    scene3.to("#bg2-grad", { attr: { cy: 600 } }, 0)
+    scene3.to("#bg2-grad", { attr: { r: 500 } }, 0)
+
+
+    /*   falling star   */
+    gsap.to("#fstar", {
+        x: -700,
+        y: -250,
+        ease: "power4.out",
+        scrollTrigger: {
+            trigger: ".scrollElement",
+            start: "4000 top",
+            end: "6000 100%",
+            scrub: 5,
+            onEnter: function() { gsap.set("#fstar", { opacity: 1 }) },
+            onLeave: function() { gsap.set("#fstar", { opacity: 0 }) },
+        }
+    })
+
+
+    //reset scrollbar position after refresh
+    window.onbeforeunload = function() {
+        window.scrollTo(0, 0);
+    }
+
+
+let fullscreen;
+let fsEnter = document.getElementById('fullscr');
+fsEnter.addEventListener('click', function (e) {
+    e.preventDefault();
+    if (!fullscreen) {
+        fullscreen = true;
+        document.documentElement.requestFullscreen();
+        fsEnter.innerHTML = "Exit Fullscreen";
+    }
+    else {
+        fullscreen = false;
+        document.exitFullscreen();
+        fsEnter.innerHTML = "Go Fullscreen";
+    }
+});
