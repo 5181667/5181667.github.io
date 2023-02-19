@@ -10,7 +10,7 @@ html, body {
 	max-width: 100%;
 	overflow-x: hidden;
 	overflow-y: hidden;
-	background-color: #6adecd;
+	background-color: steelblue;
 }
 
 #slideshow {
@@ -18,7 +18,7 @@ html, body {
 	padding-top: 50px;
 	height: 600px;
 	width: 100%;
-	background-color: #6adecd;
+	background-color: steelblue;
 	box-sizing: border-box;
 }
 
@@ -130,21 +130,72 @@ html, body {
 		transform: rotateY(360deg);
 	}
 }
+#header {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	padding: 30px 100px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	z-index: 100;
+}
+
+#header .logo {
+	color: var(--primary);
+	font-weight: 700;
+	font-size: 2em;
+	text-decoration: none;
+}
+
+#header ul {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#header ul li {
+	list-style: none;
+	margin-left: 20px;
+}
+
+#header ul li a {
+	text-decoration: none;
+	padding: 6px 15px;
+	color: var(--primary);
+	border-radius: 20px;
+}
+
+#header ul li a:hover,
+#header ul li a.active {
+	background: var(--primary);
+	color: #fff;
+}
 
 </style>
-<!-- 3D Slideshow Section --> 
+<!-- 3D Slideshow Section -->
+<header id="header">
+	<a href="new.html" class="logo">Forest</a>
+	<ul>
+		<li><a href="http://www.hcvip.com.cn" >Home</a></li>
+		<li><a href="time.html">Time</a></li>
+		<li><a href="photo.html" class="active">photo</a></li>
+		<li><a href="#">Contact</a></li>
+	</ul>
+</header>
 <section id="slideshow">
 			<div class="entire-content">
 				<div class="content-carrousel">
-					<figure class="shadow"><img src="2.19/lake.jpeg"/></figure>
-					<figure class="shadow"><img src="2.19/basket.jpeg"/></figure>
-					<figure class="shadow"><img src="2.19/sky.jpeg"/></figure>
-					<figure class="shadow"><img src="2.19/sun.jpeg"/></figure>
-					<figure class="shadow"><img src="2.19/library.jpeg"/></figure>
-					<figure class="shadow"><img src="2.19/court.jpeg"/></figure>
-					<figure class="shadow"><img src="2.19/light.jpeg"/></figure>
-					<figure class="shadow"><img src="2.19/li.jpeg"/></figure>
-					<figure class="shadow"><img src="2.19/black.jpeg"/></figure>
+					<a href="2.19/lake.jpeg"><figure class="shadow"><img src="2.19/lake.jpeg"/></figure></a>
+					<a href="2.19/lake.jpeg"><figure class="shadow"><img src="2.19/basket.jpeg"/></figure></a>
+					<a href="2.19/lake.jpeg"><figure class="shadow"><img src="2.19/sky.jpeg"/></figure></a>
+					<a href="2.19/lake.jpeg"><figure class="shadow"><img src="2.19/sun.jpeg"/></figure></a>
+					<a href="2.19/lake.jpeg">	<figure class="shadow"><img src="2.19/library.jpeg"/></figure></a>
+					<a href="2.19/lake.jpeg"><figure class="shadow"><img src="2.19/court.jpeg"/></figure></a>
+					<a href="2.19/lake.jpeg"><figure class="shadow"><img src="2.19/light.jpeg"/></figure></a>
+					<a href="2.19/lake.jpeg"><figure class="shadow"><img src="2.19/li.jpeg"/></figure></a>
+					<a href="2.19/lake.jpeg"><figure class="shadow"><img src="2.19/black.jpeg"/></figure></a>
 		</div>
 	</div>
 </section>
