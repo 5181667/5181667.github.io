@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>提交留言</title>
+  <style>
+    .sec {
+      position: relative;
+      padding: 100px;
+      background: var(--primary);
+    }
+    #header {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 30px 100px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+    }
+
+    #header .logo {
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 2em;
+      text-decoration: none;
+    }
+
+    #header ul {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #header ul li {
+      list-style: none;
+      margin-left: 20px;
+    }
+
+    #header ul li a {
+      text-decoration: none;
+      padding: 6px 15px;
+      color: var(--primary);
+      border-radius: 20px;
+    }
+
+    #header ul li a:hover,
+    #header ul li a.active {
+      background: var(--primary);
+      color: #fff;
+    }
+    section {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .sec h2 {
+      font-size: 3.5em;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+  </style>
+  <header id="header">
+    <ul>
+      <li><a href="http://www.hcvip.com.cn" class="active">Home</a></li>
+    </ul>
+  </header>
+</head>
+<body>
+
+<div style="width:800px;margin:10px auto">
+  <h2>提交留言</h2>
+  <table><tr><td> 标题：</td><td><input type="text" style="width:500px" /></td></tr>
+    <tr><td>内容：</td><td><textarea style="width:500px;height:200px"></textarea></td></tr>
+    <tr><td>留言者：</td><td><input type="text" style="width:500px" /></td></tr>
+    <tr><td></td><td><input type="button" value="提交" /></td></tr>
+  </table>
+
+</div>
+<section>
+  <h2> hc</h2>
+</section>
+
+
+</body>
+</html>
