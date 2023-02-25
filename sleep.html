@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>sleep</title>
+</head>
+    <style>
+        * {
+            box-sizing:border-box;
+        }
+
+        body {
+            font-family: 'Poppins';
+            margin:0;
+            padding:3rem 3rem 4rem 3rem;
+            background:#000022 url(https://images.unsplash.com/photo-1533134486753-c833f0ed4866?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80) no-repeat center center;
+            background-size:cover;
+        }
+        .container {
+            display:flex;
+            flex-flow: row wrap;
+            max-width:1600px;
+            margin:0 auto;
+        }
+        .col {
+            margin:auto;
+        }
+        .left {
+            flex:1 100%;
+            order:2;
+            background:rgba(0,0,0,.3);
+            padding:3rem;
+            border-radius:2rem 2rem 0 0;
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            overflow: none;
+            color:white;
+            display:flex;
+            flex-flow: column wrap;
+            justify-content:space-between;
+        }
+        .right {
+            order:3;
+            flex:1 100%;
+            background:#eee;
+            padding:3rem;
+            border-radius:0 0 2rem 2rem;
+            font-size:20px;
+            /* is there a better way to position the scrollbar? */
+            border-right:40px solid transparent;
+            border-top:40px solid transparent;
+            border-bottom:40px solid transparent;
+        }
+        .left > div {
+            order:2;
+        }
+        h1 {
+            font-size:70px;
+            margin:3rem 0 0;
+            line-height:1;
+        }
+        .back {
+            padding:1rem 2rem;
+            border:2px solid white;
+            border-radius:100px;
+            display:inline;
+            width:max-content;
+            color:white;
+            text-decoration:none;
+            font-weight:bold;
+            order:1;
+        }
+        .back:hover {
+            background:white;
+            color:black;
+        }
+        .right::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+            border-radius:5px;
+            background-color: #ccc;
+        }
+        .right::-webkit-scrollbar-thumb {
+            background: #777;
+            border-radius:5px;
+        }
+
+        /* on desktop header at bottom, on mobile up at top */
+        header {
+            order:1;
+            flex:1 100%;
+            color:white;
+            padding:0 0 4rem 0;
+            display:flex;
+            justify-content: space-between;
+        }
+        .site-title {
+            margin:auto 0;
+            font-size:24px;
+            font-weight:bold;
+        }
+        .profile {
+            height:50px;
+            width:50px;
+            border-radius:100%;
+            background:white;
+            margin:auto 0;
+        }
+
+        @media all and (min-width: 1200px) {
+            body {
+                height:100vh;
+            }
+            .left {
+                border-radius:2rem 0 0 2rem;
+                order:1;
+                flex: 1 0;
+            }
+            .left > div {
+                order:1;
+            }
+            .back {
+                order:2;
+            }
+            .right {
+                border-radius:0 2rem 2rem 0;
+                flex:2 0px;
+                order:2;
+            }
+            .col {
+                margin:auto;
+                max-height:calc(100vh - 14rem);
+                height:100vh;
+                overflow-y:scroll;
+            }
+            header {
+                padding:4rem 0 0;
+                order:3;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+
+
+<div class="container">
+    <div class="left col">
+        <div>
+            <h1> 睡 觉</h1>
+            <p><strong>2.13, 2023</strong><br/>by 户驰</p>
+        </div>
+        <a class="back" href="#">&larr; Back</a>
+    </div>
+    <div class="right col">
+        <p><strong>新学期第二天，今天下雨，不知为何睁开眼👀就1点了🕐 。 </strong> 被大班长嘲笑了（怎么会有人睡到一点啊）hhhhhhhhhh 我也该高兴我现在睡的还算快，有时很不想睡觉，却困的眼睁不开 。有时候很想睡觉 ，眼睛闭的再紧也会睁开。</p>
+
+        <h2>至人无梦</h2>
+        <blockquote><p> 我喜欢睡觉，不喜欢做梦。 我是信又不信命的，我不算命和占卜，即使算，我也不信，即使它是真的，没有什么改变不了何况是捕风捉影。污秽里能有什么洁净呢？ 虚伪中能有什么真实呢？人心如临产妇女的心，容易遭受幻想的袭击；梦使许多人误入迷途，他们寄望于梦，却大失所望。法律并不赖虚伪。   </p></blockquote>
+
+        <h2>以下只是测试滑动条</h2>
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    </div>
+    <header>
+        <div class="site-title"> 2023 </div>
+        <div class="profile"></div>
+    </header>
+</div>
+<iframe allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write" frameborder="0" height="175" style="width:100%;max-width:660px;overflow:hidden;background:black;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src="https://embed.music.apple.com/cn/album/%E8%BD%A8%E8%BF%B9/536108118?i=536108122"></iframe>
+</body>
+</html>

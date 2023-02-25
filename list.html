@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        body {
+            overflow-x: hidden;
+            background: #fff;
+            min-height: 100vh;
+        }
+        #header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 30px 100px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+        }
+
+        #header .logo {
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 2em;
+            text-decoration: none;
+        }
+
+        #header ul {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #header ul li {
+            list-style: none;
+            margin-left: 20px;
+        }
+
+        #header ul li a {
+            text-decoration: none;
+            padding: 6px 15px;
+            color: var(--primary);
+            border-radius: 20px;
+        }
+
+        #header ul li a:hover,
+        #header ul li a.active {
+            background: var(--primary);
+            color: #fff;
+        }
+
+    </style>
+    <script>
+        var password="";
+        password=prompt('请输入hc的密码 :','');
+        if (password != '5181667')   {
+            alert("密码不正确,886!!！(此页面或许不该被您访问😜😜😜)");
+            window.opener=null; window.close();
+        }
+        // 密码不正确就关闭//-->
+    </script>
+    <meta charset="UTF-8">
+    <title>list</title>
+</head>
+<body>
+<header id="header">
+    <ul>
+        <li><a href="http://www.hcvip.com.cn" class="active">Home</a></li>
+        <li><a href="time.html">Time</a></li>
+        <li><a href="photo.html">photo</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="list.html">blog</a></li>
+    </ul>
+</header>
+<a href="sleep.html" style="align-self: center">睡 觉</a>
+</body>
+</html>
