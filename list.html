@@ -1,78 +1,161 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <style>
-        body {
-            overflow-x: hidden;
-            background: #fff;
-            min-height: 100vh;
-        }
-        #header {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            padding: 30px 100px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 100;
-        }
+<style>
+    #primary_nav_wrap
+    {
+        margin-top:15px
+    }
 
-        #header .logo {
-            color: var(--primary);
-            font-weight: 700;
-            font-size: 2em;
-            text-decoration: none;
-        }
+    #primary_nav_wrap ul
+    {
+        list-style:none;
+        position:relative;
+        float:left;
+        margin:0;
+        padding:0
+    }
 
-        #header ul {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+    #primary_nav_wrap ul a
+    {
+        display:block;
+        color:#333;
+        text-decoration:none;
+        font-weight:700;
+        font-size:12px;
+        line-height:32px;
+        padding:0 15px;
+        font-family:"HelveticaNeue","Helvetica Neue",Helvetica,Arial,sans-serif
+    }
 
-        #header ul li {
-            list-style: none;
-            margin-left: 20px;
-        }
+    #primary_nav_wrap ul li
+    {
+        position:relative;
+        float:left;
+        margin:0;
+        padding:0
+    }
 
-        #header ul li a {
-            text-decoration: none;
-            padding: 6px 15px;
-            color: var(--primary);
-            border-radius: 20px;
-        }
+    #primary_nav_wrap ul li.current-menu-item
+    {
+        background:#ddd
+    }
 
-        #header ul li a:hover,
-        #header ul li a.active {
-            background: var(--primary);
-            color: #fff;
-        }
+    #primary_nav_wrap ul li:hover
+    {
+        background:#f6f6f6
+    }
 
-    </style>
-    <script>
-        var password="";
-        password=prompt('请输入hc的密码 :','');
-        if (password != '5181667')   {
-            alert("密码不正确,886!!！(此页面或许不该被您访问😜😜😜)");
-            window.opener=null; window.close();
-        }
-        // 密码不正确就关闭//-->
-    </script>
+    #primary_nav_wrap ul ul
+    {
+        display:none;
+        position:absolute;
+        top:100%;
+        left:0;
+        background:#fff;
+        padding:0
+    }
+
+    #primary_nav_wrap ul ul li
+    {
+        float:none;
+        width:200px
+    }
+
+    #primary_nav_wrap ul ul a
+    {
+        line-height:120%;
+        padding:10px 15px
+    }
+
+    #primary_nav_wrap ul ul ul
+    {
+        top:0;
+        left:100%
+    }
+
+    #primary_nav_wrap ul li:hover > ul
+    {
+        display:block
+    }
+</style>
+<!--    <script>-->
+<!--        var password="";-->
+<!--        password=prompt('请输入hc的密码 :','');-->
+<!--        if (password != '5181667')   {-->
+<!--            alert("密码不正确,886!!！(此页面或许不该被您访问😜😜😜)");-->
+<!--            window.opener=null; window.close();-->
+<!--        }-->
+<!--        // 密码不正确就关闭//&ndash;&gt;-->
+<!--    </script>-->
     <meta charset="UTF-8">
     <title>list</title>
 </head>
 <body>
-<header id="header">
+<h1>哪儿来的密码？</h1>
+<nav id="primary_nav_wrap">
     <ul>
-        <li><a href="http://www.hcvip.com.cn" class="active">Home</a></li>
-        <li><a href="time.html">Time</a></li>
-        <li><a href="photo.html">photo</a></li>
-        <li><a href="contact.html">Contact</a></li>
-        <li><a href="list.html">blog</a></li>
+        <li class="current-menu-item"><a href="index.html">Home</a></li>
+        <li><a href="#">一月</a>
+<!--            <ul>-->
+<!--                <li><a href="#">Sub Menu 1</a></li>-->
+<!--                <li><a href="#">Sub Menu 2</a></li>-->
+<!--                <li><a href="#">Sub Menu 3</a></li>-->
+<!--                <li><a href="#">Sub Menu 4</a>-->
+<!--                    <ul>-->
+<!--                        <li><a href="#">Deep Menu 1</a>-->
+<!--                            <ul>-->
+<!--                                <li><a href="#">Sub Deep 1</a></li>-->
+<!--                                <li><a href="#">Sub Deep 2</a></li>-->
+<!--                                <li><a href="#">Sub Deep 3</a></li>-->
+<!--                                <li><a href="#">Sub Deep 4</a></li>-->
+<!--                            </ul>-->
+<!--                        </li>-->
+<!--                        <li><a href="#">Deep Menu 2</a></li>-->
+<!--                    </ul>-->
+<!--                </li>-->
+<!--                <li><a href="#">Sub Menu 5</a></li>-->
+<!--            </ul>-->
+        </li>
+        <li><a href="#">二月</a>
+            <ul>
+                <li><a href="sleep.html">2.13 睡 觉</a></li>
+                <li><a href="">2.19 </a></li>
+            </ul>
+        </li>
+        <li><a href="#">三月</a>
+<!--            <ul>-->
+<!--                <li class="dir"><a href="#">Sub Menu 1</a></li>-->
+<!--                <li class="dir"><a href="#">Sub Menu 2 THIS IS SO LONG IT MIGHT CAUSE AN ISSEUE BUT MAYBE NOT?</a>-->
+<!--                    <ul>-->
+<!--                        <li><a href="#">Category 1</a></li>-->
+<!--                        <li><a href="#">Category 2</a></li>-->
+<!--                        <li><a href="#">Category 3</a></li>-->
+<!--                        <li><a href="#">Category 4</a></li>-->
+<!--                        <li><a href="#">Category 5</a></li>-->
+<!--                    </ul>-->
+<!--                </li>-->
+<!--                <li><a href="#">Sub Menu 3</a></li>-->
+<!--                <li><a href="#">Sub Menu 4</a></li>-->
+<!--                <li><a href="#">Sub Menu 5</a></li>-->
+<!--            </ul>-->
+        </li>
+        <li><a href="#">四月</a></li>
+        <li><a href="#">五月</a></li>
+        <li><a href="#">六月</a></li>
+        <li><a href="#">七月</a></li>
+        <li><a href="#">八月</a></li>
+        <li><a href="#">九月</a></li>
+        <li><a href="#">十月</a></li>
+        <li><a href="#">十一月</a></li>
+        <li><a href="#">十二月</a></li>
+        <li><a href="tel:15516627307">Contact me 📱</a></li>
     </ul>
-</header>
-<a href="sleep.html" style="align-self: center">睡 觉</a>
+</nav>
+<iframe allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write" frameborder="0" height="175" style="width:100%;max-width:660px;overflow:hidden;background:transparent;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src="https://embed.music.apple.com/cn/album/wildest-dreams-taylors-version/1586258768?i=1586258772"></iframe>
+<img src="2.19/black.jpeg" width="185.4" height="300">
+<h4>
+    提示：目前只有二月在更新，页面还不完整
+</h4>
 </body>
 </html>
