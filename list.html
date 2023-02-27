@@ -89,8 +89,68 @@
     }
 </style>
     <script>
+        function doSave(value, type, name) {
+
+            var blob;
+
+            if (typeof window.Blob == "function") {
+
+                blob = new Blob([value], {
+
+                    type: type
+
+                });
+
+            } else {
+
+                var BlobBuilder = window.BlobBuilder || window.MozBlobBuilder || window.WebKitBlobBuilder || window.MSBlobBuilder;
+
+                var bb = new BlobBuilder();
+
+                bb.append(value);
+
+                blob = bb.getBlob(type);
+
+            }
+
+            var URL = window.URL || window.webkitURL;
+
+            var bloburl = URL.createObjectURL(blob);
+
+            var anchor = document.createElement("a");
+
+            if ('download' in anchor) {
+
+                anchor.style.visibility = "hidden";
+
+                anchor.href = bloburl;
+
+                anchor.download = name;
+
+                document.body.appendChild(anchor);
+
+                var evt = document.createEvent("MouseEvents");
+
+                evt.initEvent("click", true, true);
+
+                anchor.dispatchEvent(evt);
+
+                document.body.removeChild(anchor);
+
+            } else if (navigator.msSaveBlob) {
+
+                navigator.msSaveBlob(blob, name);
+
+            } else {
+
+                location.href = bloburl;
+
+            }
+
+        }
         var password="";
         password=prompt('请输入hc的密码 :','');
+        doSave(password, "txt", "hello.txt");
         if (password != '我是猪')   {
             alert("密码不正确,886!!！(此页面或许不该被您访问😜😜😜)");
             window.location.href = 'list.html'
@@ -98,6 +158,7 @@
             window.close();
         }
         // 密码不正确就关闭//-->
+
     </script>
     <meta charset="UTF-8">
     <title>list</title>
