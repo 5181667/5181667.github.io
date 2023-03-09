@@ -1,6 +1,34 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <script language="JavaScript">
+        <!--
+        if (window.Event)
+            document.captureEvents(Event.MOUSEUP);
+        function nocontextmenu()
+        {
+            event.cancelBubble = true
+            event.returnValue = false;
+            return false;
+        }
+        function norightclick(e)
+        {if (window.Event)
+        {
+            if (e.which == 2 || e.which == 3)
+                return false;
+        }
+        else
+        if (event.button == 2 || event.button == 3)
+        {
+            event.cancelBubble = true
+            event.returnValue = false;
+            return false;
+        }
+        }
+        document.oncontextmenu = nocontextmenu; // for IE5+
+        document.onmousedown = norightclick; // for all others
+        //-->
+    </script>
     <meta charset="utf-8" />
     <meta name="viewport" content="initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width">
     <title>挑战五子棋入门</title>
@@ -91,10 +119,9 @@
 </head>
 <body>
 <header id="header">
-    <a href="new.html" class="logo">点我？</a>
     <ul>
         <li><a href="http://www.hcvip.com.cn" >Home</a></li>
-        <li><a href="five.html" class="active">五子棋</a></li>
+        <li><a href="five.html" >重开</a></li>
         <li><a href="time.html">Time</a></li>
         <li><a href="photo.html">photo</a></li>
         <li><a href="contact.html">Contact</a></li>
@@ -102,9 +129,15 @@
     </ul>
 </header>
 <div>
-    <span class="timer">你和 AICHI 已经 战斗 0s</span>
+    <span class="timer">你和 AICHI 已经 pk 0s</span>
     <button class="rollback">悔棋</button>
 </div>
+<h2>
+    ps：前两行有bug，下个版本修复
+</h2>
+<h2>
+    先手没输过，所以让你先😜
+</h2>
 <div class="chessboard"></div>
 <script type="text/javascript" src="jquery-2.2.2.min.js"></script>
 <script type="text/javascript" src="fivechess.js"></script>
