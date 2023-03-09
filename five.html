@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width">
+    <title>挑战五子棋入门</title>
+    <style type="text/css">
+        #header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 30px 100px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+        }
+
+        #header .logo {
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 2em;
+            text-decoration: none;
+        }
+
+        #header ul {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #header ul li {
+            list-style: none;
+            margin-left: 20px;
+        }
+
+        #header ul li a {
+            text-decoration: none;
+            padding: 6px 15px;
+            color: var(--primary);
+            border-radius: 20px;
+        }
+
+        #header ul li a:hover,
+        #header ul li a.active {
+            background: var(--primary);
+            color: #fff;
+        }
+
+        body{
+            margin: 0;
+            font-family: Microsoft Yahei;
+            text-align: center;
+        }
+        .timer{
+            margin: 0 20px;
+        }
+        .rollback{
+            width: 70px;
+            height: 30px;
+            margin: 20px;
+        }
+        .chessboard{
+            width: 315px;
+            margin: 0 auto;
+            border-left: 1px solid #ccc;
+            border-top: 1px solid #ccc;
+        }
+        .chessboard .row{
+            overflow: hidden;
+        }
+        .chessboard .tile{
+            width: 20px;
+            height: 20px;
+            float: left;
+            border-right: 1px solid #ccc;
+            border-bottom: 1px solid #ccc;
+            text-align: center;
+            line-height: 20px;
+        }
+        .chessboard .tile.current{
+            background-color: #ddd;
+        }
+        .chessboard .chess-max,.chessboard .chess-min{
+            font-size: 20px;
+            cursor: pointer;
+            -webkit-user-select: none;
+        }
+    </style>
+</head>
+<body>
+<header id="header">
+    <a href="new.html" class="logo">点我？</a>
+    <ul>
+        <li><a href="http://www.hcvip.com.cn" >Home</a></li>
+        <li><a href="five.html" class="active">五子棋</a></li>
+        <li><a href="time.html">Time</a></li>
+        <li><a href="photo.html">photo</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="list.html">blog</a></li>
+    </ul>
+</header>
+<div>
+    <span class="timer">你和 AICHI 已经 战斗 0s</span>
+    <button class="rollback">悔棋</button>
+</div>
+<div class="chessboard"></div>
+<script type="text/javascript" src="jquery-2.2.2.min.js"></script>
+<script type="text/javascript" src="fivechess.js"></script>
+<script type="text/javascript" src="main.js"></script>
+</body>
+</html>
