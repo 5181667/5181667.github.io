@@ -11,7 +11,7 @@
         })();
     </script>
     <script language="JavaScript">
-        <!--
+
         if (window.Event)
             document.captureEvents(Event.MOUSEUP);
         function nocontextmenu()
@@ -139,10 +139,10 @@
 </header>
 <div>
     <span class="timer">你和 AICHI 已经 pk 0s</span>
-    <button class="rollback">悔棋</button>
+    <button class="rollback" onclick="Chessboard.prototype.rollback(10)">悔棋</button>
 </div>
 <h2>
-    ps：前两行有bug，下个版本修复
+    ps：晦棋有bug，小驰正在修复中
 </h2>
 <h2>
     先手没输过，所以让你先😜
