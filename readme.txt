@@ -1,2 +1,1 @@
-Something good
-没事。
+作者休息中。
