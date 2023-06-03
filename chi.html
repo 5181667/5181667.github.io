@@ -1,0 +1,42 @@
+<head>
+  <script src="chifan.js"></script>
+  <meta charset="UTF-8">
+  <style>
+    *{
+      font-size:30px;
+      font-family:Microsoft JhengHei;
+    }
+
+    #result{
+      border: 5px solid #FFDC76;
+      font-size:50px;
+      text-align:center;
+      background:lightyellow;
+      padding:10px;
+      border-radius:10px;
+      margin-bottom:10px;
+    }
+
+    #pick-btn{
+      width:100%;
+      border-radius:10px;
+    }
+
+  </style>
+  <script>
+    var foods = ['拉麵','義大利麵','炒飯','滷肉飯','鍋貼','甜不辣','牛肉麵','漢堡'];
+
+    function pickFood(){
+      var foodIndex = Math.floor(Math.random()*foods.length);
+      $("#result").html(foods[foodIndex]);
+    }
+
+    $("#pick-btn").click(pickFood);
+
+  </script>
+</head>
+<h1>🍛 🍝 今晚吃什麼？ 🍱 🍗</h1>
+<hr>
+
+<div id="result">今日的晚餐是...</div>
+<button id="pick-btn">抽出今日晚餐</button>
