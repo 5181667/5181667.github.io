@@ -8,5 +8,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="dmego-home-page" level="application" />
+    <orderEntry type="library" name="magnific-popup.js" level="application" />
   </component>
 </module>
