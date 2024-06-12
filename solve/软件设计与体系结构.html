@@ -1,0 +1,600 @@
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
+
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,700,400&subset=latin,latin-ext' rel='stylesheet' type='text/css' /><style type='text/css'>html {overflow-x: initial !important;}:root { --bg-color: #ffffff; --text-color: #333333; --select-text-bg-color: #B5D6FC; --select-text-font-color: auto; --monospace: "Lucida Console",Consolas,"Courier",monospace; --title-bar-height: 20px; }
+.mac-os-11 { --title-bar-height: 28px; }
+html { font-size: 14px; background-color: var(--bg-color); color: var(--text-color); font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+h1, h2, h3, h4, h5 { white-space: pre-wrap; }
+body { margin: 0px; padding: 0px; height: auto; inset: 0px; font-size: 1rem; line-height: 1.428571; overflow-x: hidden; background: inherit; }
+iframe { margin: auto; }
+a.url { word-break: break-all; }
+a:active, a:hover { outline: 0px; }
+.in-text-selection, ::selection { text-shadow: none; background: var(--select-text-bg-color); color: var(--select-text-font-color); }
+#write { margin: 0px auto; height: auto; width: inherit; word-break: normal; overflow-wrap: break-word; position: relative; white-space: normal; overflow-x: visible; padding-top: 36px; }
+#write.first-line-indent p { text-indent: 2em; }
+#write.first-line-indent li p, #write.first-line-indent p * { text-indent: 0px; }
+#write.first-line-indent li { margin-left: 2em; }
+.for-image #write { padding-left: 8px; padding-right: 8px; }
+body.typora-export { padding-left: 30px; padding-right: 30px; }
+.typora-export .footnote-line, .typora-export li, .typora-export p { white-space: pre-wrap; }
+.typora-export .task-list-item input { pointer-events: none; }
+@media screen and (max-width: 500px) {
+  body.typora-export { padding-left: 0px; padding-right: 0px; }
+  #write { padding-left: 20px; padding-right: 20px; }
+}
+#write li > figure:last-child { margin-bottom: 0.5rem; }
+#write ol, #write ul { position: relative; }
+img { max-width: 100%; vertical-align: middle; image-orientation: from-image; }
+button, input, select, textarea { color: inherit; font-style: inherit; font-variant-caps: inherit; font-weight: inherit; font-stretch: inherit; font-size: inherit; line-height: inherit; font-family: inherit; font-size-adjust: inherit; font-kerning: inherit; font-variant-alternates: inherit; font-variant-ligatures: inherit; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-variant-position: inherit; font-feature-settings: inherit; font-optical-sizing: inherit; font-variation-settings: inherit; }
+input[type="checkbox"], input[type="radio"] { line-height: normal; padding: 0px; }
+*, ::after, ::before { box-sizing: border-box; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p, #write pre { width: inherit; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p { position: relative; }
+p { line-height: inherit; }
+h1, h2, h3, h4, h5, h6 { break-after: avoid-page; break-inside: avoid; orphans: 4; }
+p { orphans: 4; }
+h1 { font-size: 2rem; }
+h2 { font-size: 1.8rem; }
+h3 { font-size: 1.6rem; }
+h4 { font-size: 1.4rem; }
+h5 { font-size: 1.2rem; }
+h6 { font-size: 1rem; }
+.md-math-block, .md-rawblock, h1, h2, h3, h4, h5, h6, p { margin-top: 1rem; margin-bottom: 1rem; }
+.hidden { display: none; }
+.md-blockmeta { color: rgb(204, 204, 204); font-weight: 700; font-style: italic; }
+a { cursor: pointer; }
+sup.md-footnote { padding: 2px 4px; background-color: rgba(238, 238, 238, 0.7); color: rgb(85, 85, 85); border-radius: 4px; cursor: pointer; }
+sup.md-footnote a, sup.md-footnote a:hover { color: inherit; text-transform: inherit; text-decoration: inherit; }
+#write input[type="checkbox"] { cursor: pointer; width: inherit; height: inherit; }
+figure { overflow-x: auto; margin: 1.2em 0px; max-width: calc(100% + 16px); padding: 0px; }
+figure > table { margin: 0px; }
+thead, tr { break-inside: avoid; break-after: auto; }
+thead { display: table-header-group; }
+table { border-collapse: collapse; border-spacing: 0px; width: 100%; overflow: auto; break-inside: auto; text-align: left; }
+table.md-table td { min-width: 32px; }
+.CodeMirror-gutters { border-right-width: 0px; border-right-style: none; border-right-color: currentcolor; background-color: inherit; }
+.CodeMirror-linenumber { -webkit-user-select: none; }
+.CodeMirror { text-align: left; }
+.CodeMirror-placeholder { opacity: 0.3; }
+.CodeMirror pre { padding: 0px 4px; }
+.CodeMirror-lines { padding: 0px; }
+div.hr:focus { cursor: none; }
+#write pre { white-space: pre-wrap; }
+#write.fences-no-line-wrapping pre { white-space: pre; }
+#write pre.ty-contain-cm { white-space: normal; }
+.CodeMirror-gutters { margin-right: 4px; }
+.md-fences { font-size: 0.9rem; display: block; break-inside: avoid; text-align: left; overflow: visible; white-space: pre; background: inherit; position: relative !important; }
+.md-fences-adv-panel { width: 100%; margin-top: 10px; text-align: center; padding-top: 0px; padding-bottom: 8px; overflow-x: auto; }
+#write .md-fences.mock-cm { white-space: pre-wrap; }
+.md-fences.md-fences-with-lineno { padding-left: 0px; }
+#write.fences-no-line-wrapping .md-fences.mock-cm { white-space: pre; overflow-x: auto; }
+.md-fences.mock-cm.md-fences-with-lineno { padding-left: 8px; }
+.CodeMirror-line, twitterwidget { break-inside: avoid; }
+svg { break-inside: avoid; }
+.footnotes { opacity: 0.8; font-size: 0.9rem; margin-top: 1em; margin-bottom: 1em; }
+.footnotes + .footnotes { margin-top: 0px; }
+.md-reset { margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: top; background: 0px 0px; text-decoration: none; text-shadow: none; float: none; position: static; width: auto; height: auto; white-space: nowrap; cursor: inherit; line-height: normal; font-weight: 400; text-align: left; box-sizing: content-box; direction: ltr; }
+li div { padding-top: 0px; }
+blockquote { margin: 1rem 0px; }
+li .mathjax-block, li p { margin: 0.5rem 0px; }
+li blockquote { margin: 1rem 0px; }
+li { margin: 0px; position: relative; }
+blockquote > :last-child { margin-bottom: 0px; }
+blockquote > :first-child, li > :first-child { margin-top: 0px; }
+.footnotes-area { color: rgb(136, 136, 136); margin-top: 0.714rem; padding-bottom: 0.143rem; white-space: normal; }
+#write .footnote-line { white-space: pre-wrap; }
+@media print {
+  body, html { border: 1px solid transparent; height: 99%; break-after: avoid; break-before: avoid; font-variant-ligatures: no-common-ligatures; }
+  #write { margin-top: 0px; border-color: transparent !important; padding-top: 0px !important; padding-bottom: 0px !important; }
+  .typora-export * { print-color-adjust: exact; }
+  .typora-export #write { break-after: avoid; }
+  .typora-export #write::after { height: 0px; }
+  .is-mac table { break-inside: avoid; }
+  #write > p:nth-child(1) { margin-top: 0px; }
+  .typora-export-show-outline .typora-export-sidebar { display: none; }
+  figure { overflow-x: visible; }
+}
+.footnote-line { margin-top: 0.714em; font-size: 0.7em; }
+a img, img a { cursor: pointer; }
+pre.md-meta-block { font-size: 0.8rem; min-height: 0.8rem; white-space: pre-wrap; background: rgb(204, 204, 204); display: block; overflow-x: hidden; }
+p > .md-image:only-child:not(.md-img-error) img, p > img:only-child { display: block; margin: auto; }
+#write.first-line-indent p > .md-image:only-child:not(.md-img-error) img { left: -2em; position: relative; }
+p > .md-image:only-child { display: inline-block; width: 100%; }
+#write .MathJax_Display { margin: 0.8em 0px 0px; }
+.md-math-block { width: 100%; }
+.md-math-block:not(:empty)::after { display: none; }
+.MathJax_ref { fill: currentcolor; }
+[contenteditable="true"]:active, [contenteditable="true"]:focus, [contenteditable="false"]:active, [contenteditable="false"]:focus { outline: 0px; box-shadow: none; }
+.md-task-list-item { position: relative; list-style-type: none; }
+.task-list-item.md-task-list-item { padding-left: 0px; }
+.md-task-list-item > input { position: absolute; top: 0px; left: 0px; margin-left: -1.2em; margin-top: calc(1em - 10px); border: medium; }
+.math { font-size: 1rem; }
+.md-toc { min-height: 3.58rem; position: relative; font-size: 0.9rem; border-radius: 10px; }
+.md-toc-content { position: relative; margin-left: 0px; }
+.md-toc-content::after, .md-toc::after { display: none; }
+.md-toc-item { display: block; color: rgb(65, 131, 196); }
+.md-toc-item a { text-decoration: none; }
+.md-toc-inner:hover { text-decoration: underline; }
+.md-toc-inner { display: inline-block; cursor: pointer; }
+.md-toc-h1 .md-toc-inner { margin-left: 0px; font-weight: 700; }
+.md-toc-h2 .md-toc-inner { margin-left: 2em; }
+.md-toc-h3 .md-toc-inner { margin-left: 4em; }
+.md-toc-h4 .md-toc-inner { margin-left: 6em; }
+.md-toc-h5 .md-toc-inner { margin-left: 8em; }
+.md-toc-h6 .md-toc-inner { margin-left: 10em; }
+@media screen and (max-width: 48em) {
+  .md-toc-h3 .md-toc-inner { margin-left: 3.5em; }
+  .md-toc-h4 .md-toc-inner { margin-left: 5em; }
+  .md-toc-h5 .md-toc-inner { margin-left: 6.5em; }
+  .md-toc-h6 .md-toc-inner { margin-left: 8em; }
+}
+a.md-toc-inner { font-size: inherit; font-style: inherit; font-weight: inherit; line-height: inherit; }
+.footnote-line a:not(.reversefootnote) { color: inherit; }
+.reversefootnote { font-family: ui-monospace, sans-serif; }
+.md-attr { display: none; }
+.md-fn-count::after { content: "."; }
+code, pre, samp, tt { font-family: var(--monospace); }
+kbd { margin: 0px 0.1em; padding: 0.1em 0.6em; font-size: 0.8em; color: rgb(36, 39, 41); background: rgb(255, 255, 255); border: 1px solid rgb(173, 179, 185); border-radius: 3px; box-shadow: rgba(12, 13, 14, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; white-space: nowrap; vertical-align: middle; }
+.md-comment { color: rgb(162, 127, 3); opacity: 0.6; font-family: var(--monospace); }
+code { text-align: left; vertical-align: initial; }
+a.md-print-anchor { white-space: pre !important; border-width: medium !important; border-style: none !important; border-color: currentcolor !important; display: inline-block !important; position: absolute !important; width: 1px !important; right: 0px !important; outline: 0px !important; background: 0px 0px !important; text-decoration: initial !important; text-shadow: initial !important; }
+.os-windows.monocolor-emoji .md-emoji { font-family: "Segoe UI Symbol", sans-serif; }
+.md-diagram-panel > svg { max-width: 100%; }
+[lang="flow"] svg, [lang="mermaid"] svg { max-width: 100%; height: auto; }
+[lang="mermaid"] .node text { font-size: 1rem; }
+table tr th { border-bottom-width: 0px; border-bottom-style: none; border-bottom-color: currentcolor; }
+video { max-width: 100%; display: block; margin: 0px auto; }
+iframe { max-width: 100%; width: 100%; border: medium; }
+.highlight td, .highlight tr { border: 0px; }
+mark { background: rgb(255, 255, 0); color: rgb(0, 0, 0); }
+.md-html-inline .md-plain, .md-html-inline strong, mark .md-inline-math, mark strong { color: inherit; }
+.md-expand mark .md-meta { opacity: 0.3 !important; }
+mark .md-meta { color: rgb(0, 0, 0); }
+@media print {
+  .typora-export h1, .typora-export h2, .typora-export h3, .typora-export h4, .typora-export h5, .typora-export h6 { break-inside: avoid; }
+}
+.md-diagram-panel .messageText { stroke: none !important; }
+.md-diagram-panel .start-state { fill: var(--node-fill); }
+.md-diagram-panel .edgeLabel rect { opacity: 1 !important; }
+.md-fences.md-fences-math { font-size: 1em; }
+.md-fences-advanced:not(.md-focus) { padding: 0px; white-space: nowrap; border: 0px; }
+.md-fences-advanced:not(.md-focus) { background: inherit; }
+.typora-export-show-outline .typora-export-content { max-width: 1440px; margin: auto; display: flex; flex-direction: row; }
+.typora-export-sidebar { width: 300px; font-size: 0.8rem; margin-top: 80px; margin-right: 18px; }
+.typora-export-show-outline #write { --webkit-flex: 2; flex: 2 1 0%; }
+.typora-export-sidebar .outline-content { position: fixed; top: 0px; max-height: 100%; overflow: hidden auto; padding-bottom: 30px; padding-top: 60px; width: 300px; }
+@media screen and (max-width: 1024px) {
+  .typora-export-sidebar, .typora-export-sidebar .outline-content { width: 240px; }
+}
+@media screen and (max-width: 800px) {
+  .typora-export-sidebar { display: none; }
+}
+.outline-content li, .outline-content ul { margin-left: 0px; margin-right: 0px; padding-left: 0px; padding-right: 0px; list-style: none; overflow-wrap: anywhere; }
+.outline-content ul { margin-top: 0px; margin-bottom: 0px; }
+.outline-content strong { font-weight: 400; }
+.outline-expander { width: 1rem; height: 1.428571rem; position: relative; display: table-cell; vertical-align: middle; cursor: pointer; padding-left: 4px; }
+.outline-expander::before { content: ""; position: relative; font-family: Ionicons; display: inline-block; font-size: 8px; vertical-align: middle; }
+.outline-item { padding-top: 3px; padding-bottom: 3px; cursor: pointer; }
+.outline-expander:hover::before { content: ""; }
+.outline-h1 > .outline-item { padding-left: 0px; }
+.outline-h2 > .outline-item { padding-left: 1em; }
+.outline-h3 > .outline-item { padding-left: 2em; }
+.outline-h4 > .outline-item { padding-left: 3em; }
+.outline-h5 > .outline-item { padding-left: 4em; }
+.outline-h6 > .outline-item { padding-left: 5em; }
+.outline-label { cursor: pointer; display: table-cell; vertical-align: middle; text-decoration: none; color: inherit; }
+.outline-label:hover { text-decoration: underline; }
+.outline-item:hover { border-color: rgb(245, 245, 245); background-color: var(--item-hover-bg-color); }
+.outline-item:hover { margin-left: -28px; margin-right: -28px; border-left-width: 28px; border-left-style: solid; border-left-color: transparent; border-right-width: 28px; border-right-style: solid; border-right-color: transparent; }
+.outline-item-single .outline-expander::before, .outline-item-single .outline-expander:hover::before { display: none; }
+.outline-item-open > .outline-item > .outline-expander::before { content: ""; }
+.outline-children { display: none; }
+.info-panel-tab-wrapper { display: none; }
+.outline-item-open > .outline-children { display: block; }
+.typora-export .outline-item { padding-top: 1px; padding-bottom: 1px; }
+.typora-export .outline-item:hover { margin-right: -8px; border-right-width: 8px; border-right-style: solid; border-right-color: transparent; }
+.typora-export .outline-expander::before { content: "+"; font-family: inherit; top: -1px; }
+.typora-export .outline-expander:hover::before, .typora-export .outline-item-open > .outline-item > .outline-expander::before { content: "−"; }
+.typora-export-collapse-outline .outline-children { display: none; }
+.typora-export-collapse-outline .outline-item-open > .outline-children, .typora-export-no-collapse-outline .outline-children { display: block; }
+.typora-export-no-collapse-outline .outline-expander::before { content: "" !important; }
+.typora-export-show-outline .outline-item-active > .outline-item .outline-label { font-weight: 700; }
+.md-inline-math-container mjx-container { zoom: 0.95; }
+mjx-container { break-inside: avoid; }
+
+
+:root {
+    --side-bar-bg-color: #fafafa;
+    --control-text-color: #777;
+}
+
+@include-when-export url(https://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,700,400&subset=latin,latin-ext);
+
+/* open-sans-regular - latin-ext_latin */
+  /* open-sans-italic - latin-ext_latin */
+    /* open-sans-700 - latin-ext_latin */
+    /* open-sans-700italic - latin-ext_latin */
+  html {
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+}
+
+body {
+    font-family: "Open Sans","Clear Sans", "Helvetica Neue", Helvetica, Arial, 'Segoe UI Emoji', sans-serif;
+    color: rgb(51, 51, 51);
+    line-height: 1.6;
+}
+
+#write {
+    max-width: 860px;
+  	margin: 0 auto;
+  	padding: 30px;
+    padding-bottom: 100px;
+}
+
+@media only screen and (min-width: 1400px) {
+	#write {
+		max-width: 1024px;
+	}
+}
+
+@media only screen and (min-width: 1800px) {
+	#write {
+		max-width: 1200px;
+	}
+}
+
+#write > ul:first-child,
+#write > ol:first-child{
+    margin-top: 30px;
+}
+
+a {
+    color: #4183C4;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    position: relative;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+    line-height: 1.4;
+    cursor: text;
+}
+h1:hover a.anchor,
+h2:hover a.anchor,
+h3:hover a.anchor,
+h4:hover a.anchor,
+h5:hover a.anchor,
+h6:hover a.anchor {
+    text-decoration: none;
+}
+h1 tt,
+h1 code {
+    font-size: inherit;
+}
+h2 tt,
+h2 code {
+    font-size: inherit;
+}
+h3 tt,
+h3 code {
+    font-size: inherit;
+}
+h4 tt,
+h4 code {
+    font-size: inherit;
+}
+h5 tt,
+h5 code {
+    font-size: inherit;
+}
+h6 tt,
+h6 code {
+    font-size: inherit;
+}
+h1 {
+    font-size: 2.25em;
+    line-height: 1.2;
+    border-bottom: 1px solid #eee;
+}
+h2 {
+    font-size: 1.75em;
+    line-height: 1.225;
+    border-bottom: 1px solid #eee;
+}
+
+/*@media print {
+    .typora-export h1,
+    .typora-export h2 {
+        border-bottom: none;
+        padding-bottom: initial;
+    }
+
+    .typora-export h1::after,
+    .typora-export h2::after {
+        content: "";
+        display: block;
+        height: 100px;
+        margin-top: -96px;
+        border-top: 1px solid #eee;
+    }
+}*/
+
+h3 {
+    font-size: 1.5em;
+    line-height: 1.43;
+}
+h4 {
+    font-size: 1.25em;
+}
+h5 {
+    font-size: 1em;
+}
+h6 {
+   font-size: 1em;
+    color: #777;
+}
+p,
+blockquote,
+ul,
+ol,
+dl,
+table{
+    margin: 0.8em 0;
+}
+li>ol,
+li>ul {
+    margin: 0 0;
+}
+hr {
+    height: 2px;
+    padding: 0;
+    margin: 16px 0;
+    background-color: #e7e7e7;
+    border: 0 none;
+    overflow: hidden;
+    box-sizing: content-box;
+}
+
+li p.first {
+    display: inline-block;
+}
+ul,
+ol {
+    padding-left: 30px;
+}
+ul:first-child,
+ol:first-child {
+    margin-top: 0;
+}
+ul:last-child,
+ol:last-child {
+    margin-bottom: 0;
+}
+blockquote {
+    border-left: 4px solid #dfe2e5;
+    padding: 0 15px;
+    color: #777777;
+}
+blockquote blockquote {
+    padding-right: 0;
+}
+table {
+    padding: 0;
+    word-break: initial;
+}
+table tr {
+    border: 1px solid #dfe2e5;
+    margin: 0;
+    padding: 0;
+}
+table tr:nth-child(2n),
+thead {
+    background-color: #f8f8f8;
+}
+table th {
+    font-weight: bold;
+    border: 1px solid #dfe2e5;
+    border-bottom: 0;
+    margin: 0;
+    padding: 6px 13px;
+}
+table td {
+    border: 1px solid #dfe2e5;
+    margin: 0;
+    padding: 6px 13px;
+}
+table th:first-child,
+table td:first-child {
+    margin-top: 0;
+}
+table th:last-child,
+table td:last-child {
+    margin-bottom: 0;
+}
+
+.CodeMirror-lines {
+    padding-left: 4px;
+}
+
+.code-tooltip {
+    box-shadow: 0 1px 1px 0 rgba(0,28,36,.3);
+    border-top: 1px solid #eef2f2;
+}
+
+.md-fences,
+code,
+tt {
+    border: 1px solid #e7eaed;
+    background-color: #f8f8f8;
+    border-radius: 3px;
+    padding: 0;
+    padding: 2px 4px 0px 4px;
+    font-size: 0.9em;
+}
+
+code {
+    background-color: #f3f4f4;
+    padding: 0 2px 0 2px;
+}
+
+.md-fences {
+    margin-bottom: 15px;
+    margin-top: 15px;
+    padding-top: 8px;
+    padding-bottom: 6px;
+}
+
+
+.md-task-list-item > input {
+  margin-left: -1.3em;
+}
+
+@media print {
+    html {
+        font-size: 13px;
+    }
+    pre {
+        page-break-inside: avoid;
+        word-wrap: break-word;
+    }
+}
+
+.md-fences {
+	background-color: #f8f8f8;
+}
+#write pre.md-meta-block {
+	padding: 1rem;
+    font-size: 85%;
+    line-height: 1.45;
+    background-color: #f7f7f7;
+    border: 0;
+    border-radius: 3px;
+    color: #777777;
+    margin-top: 0 !important;
+}
+
+.mathjax-block>.code-tooltip {
+	bottom: .375rem;
+}
+
+.md-mathjax-midline {
+    background: #fafafa;
+}
+
+#write>h3.md-focus:before{
+	left: -1.5625rem;
+	top: .375rem;
+}
+#write>h4.md-focus:before{
+	left: -1.5625rem;
+	top: .285714286rem;
+}
+#write>h5.md-focus:before{
+	left: -1.5625rem;
+	top: .285714286rem;
+}
+#write>h6.md-focus:before{
+	left: -1.5625rem;
+	top: .285714286rem;
+}
+.md-image>.md-meta {
+    /*border: 1px solid #ddd;*/
+    border-radius: 3px;
+    padding: 2px 0px 0px 4px;
+    font-size: 0.9em;
+    color: inherit;
+}
+
+.md-tag {
+    color: #a7a7a7;
+    opacity: 1;
+}
+
+.md-toc { 
+    margin-top:20px;
+    padding-bottom:20px;
+}
+
+.sidebar-tabs {
+    border-bottom: none;
+}
+
+#typora-quick-open {
+    border: 1px solid #ddd;
+    background-color: #f8f8f8;
+}
+
+#typora-quick-open-item {
+    background-color: #FAFAFA;
+    border-color: #FEFEFE #e5e5e5 #e5e5e5 #eee;
+    border-style: solid;
+    border-width: 1px;
+}
+
+/** focus mode */
+.on-focus-mode blockquote {
+    border-left-color: rgba(85, 85, 85, 0.12);
+}
+
+header, .context-menu, .megamenu-content, footer{
+    font-family: "Segoe UI", "Arial", sans-serif;
+}
+
+.file-node-content:hover .file-node-icon,
+.file-node-content:hover .file-node-open-state{
+    visibility: visible;
+}
+
+.mac-seamless-mode #typora-sidebar {
+    background-color: #fafafa;
+    background-color: var(--side-bar-bg-color);
+}
+
+.md-lang {
+    color: #b4654d;
+}
+
+/*.html-for-mac {
+    --item-hover-bg-color: #E6F0FE;
+}*/
+
+#md-notification .btn {
+    border: 0;
+}
+
+.dropdown-menu .divider {
+    border-color: #e5e5e5;
+    opacity: 0.4;
+}
+
+.ty-preferences .window-content {
+    background-color: #fafafa;
+}
+
+.ty-preferences .nav-group-item.active {
+    color: white;
+    background: #999;
+}
+
+.menu-item-container a.menu-style-btn {
+    background-color: #f5f8fa;
+    background-image: linear-gradient( 180deg , hsla(0, 0%, 100%, 0.8), hsla(0, 0%, 100%, 0)); 
+}
+
+
+ @media print { @page {margin: 0 0 0 0;} body.typora-export {padding-left: 0; padding-right: 0;} #write {padding:0;}}
+</style><title>软件设计与体系结构</title>
+</head>
+<body class='typora-export typora-export-show-outline typora-export-no-collapse-outline'><div class='typora-export-content'>
+<div class="typora-export-sidebar"><div class="outline-content"><li class="outline-item-wrapper outline-h2"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#"></a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h2"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#1策略模式">1.策略模式</a></div><ul class="outline-children"><li class="outline-item-wrapper outline-h4"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#uml类图-">UML类图 ：</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h3"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#策略模式优缺点">策略模式优缺点：</a></div><ul class="outline-children"><li class="outline-item-wrapper outline-h4"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#优">优：</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h4"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#缺">缺：</a></div><ul class="outline-children"></ul></li></ul></li><li class="outline-item-wrapper outline-h3"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#使用场景">使用场景：</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h3"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#例">例:</a></div><ul class="outline-children"></ul></li></ul></li><li class="outline-item-wrapper outline-h2"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#2适配器模式">2.适配器模式</a></div><ul class="outline-children"><li class="outline-item-wrapper outline-h4"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#实例">实例：</a></div><ul class="outline-children"></ul></li></ul></li><li class="outline-item-wrapper outline-h2"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#优缺点">优缺点</a></div><ul class="outline-children"><li class="outline-item-wrapper outline-h4"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#优点">优点：</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h4"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#缺点">缺点：</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h3"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#适用范围">适用范围</a></div><ul class="outline-children"><li class="outline-item-wrapper outline-h4"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#例子">例子</a></div><ul class="outline-children"></ul></li></ul></li><li class="outline-item-wrapper outline-h3"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#策略模式是否满足开闭原则和单一职责原则">策略模式是否满足<strong>开闭原则</strong>和<strong>单一职责原则</strong>？</a></div><ul class="outline-children"><li class="outline-item-wrapper outline-h4"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#均满足">均满足 </a></div><ul class="outline-children"></ul></li></ul></li><li class="outline-item-wrapper outline-h3"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#适配器模式是否满足开闭原则和单一职责原则">适配器模式是否满足<strong>开闭原则</strong>和<strong>单一职责原则</strong>？</a></div><ul class="outline-children"><li class="outline-item-wrapper outline-h4"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#均满足-2">均满足</a></div><ul class="outline-children"></ul></li></ul></li></ul></li><li class="outline-item-wrapper outline-h1"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#3道编程题">3道编程题</a></div><ul class="outline-children"><li class="outline-item-wrapper outline-h2"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#工厂方法模式">工厂方法模式</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h2"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#单例模式">单例模式</a></div><ul class="outline-children"><li class="outline-item-wrapper outline-h3"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#定义">定义：</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h3"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#要点">要点：</a></div><ul class="outline-children"></ul></li></ul></li><li class="outline-item-wrapper outline-h2"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#外观模式">外观模式：</a></div><ul class="outline-children"></ul></li></ul></li><li class="outline-item-wrapper outline-h1"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#论述题">论述题：</a></div><ul class="outline-children"><li class="outline-item-wrapper outline-h2"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#经典的软件体系结构cs--bs-mvc">经典的软件体系结构：C/S , B/S, MVC</a></div><ul class="outline-children"><li class="outline-item-wrapper outline-h3"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#cs">C/S</a></div><ul class="outline-children"><li class="outline-item-wrapper outline-h4"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#特点">特点</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h4"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#优点-2">优点</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h4"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#缺点-2">缺点</a></div><ul class="outline-children"></ul></li></ul></li></ul></li><li class="outline-item-wrapper outline-h2"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#bs">B/S</a></div><ul class="outline-children"><li class="outline-item-wrapper outline-h3"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#特点-2">特点</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h3"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#优点-3">优点</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h3"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#缺点-3">缺点</a></div><ul class="outline-children"></ul></li></ul></li><li class="outline-item-wrapper outline-h2"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#软件设计的目标">软件设计的目标：</a></div><ul class="outline-children"></ul></li></ul></li></div></div><div id='write'  class=''><h2><img src="/Users/huchi/Library/Application Support/typora-user-images/image-20240612下午45459535.png" referrerpolicy="no-referrer" alt="image-20240612下午45459535"></h2><p>&nbsp;</p><h2 id='1策略模式'><span>1.策略模式</span></h2><p>&nbsp;</p><p><span>模式动机：实现某个目标的途径不止一条，可根据实际情况选择一条合适的途径。</span></p><p><span>模式定义：定义一些列算法，将每一个算法封装起来，并让他们可以互相替换。</span></p><p><span>策略模式：让算法独立于使用它的客户而变化。</span></p><p><span>策略模式：是一种总行为型模式。</span></p><p>&nbsp;</p><p><em><span>例：</span></em><span> 旅行出行可选乘飞机，火车，自行车，策略模式来模拟这一过程。</span></p><p>&nbsp;</p><h4 id='uml类图-'><span>UML类图 ：</span></h4><p><img src="/Users/huchi/Library/Application Support/typora-user-images/image-20240612下午42335603.png" referrerpolicy="no-referrer" alt="image-20240612下午42335603"></p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><h3 id='策略模式优缺点'><span>策略模式优缺点：</span></h3><h4 id='优'><span>优：</span></h4><ol><li><p><span>提供了对开闭原则的完美支持，用户可以在不修改原有系统的基础上选择算法或行为。也可以灵活地增加新的算法或行为。</span></p></li><li><p><span>提供了管理相关的算法族的方法，策略类的等级结构定义了一个算法或行为族，恰当使用继承可以把公共类的代码移到父类里面，从而避免重复的代码。</span></p></li><li><p><span>提供了一种可以替换继承关系的办法，继承可以处理多种算法或行为，如果不使用策略模式，那么使用算法或行为的环境类就可能会有一些子类，每一个子类提供一个不同算法或行为。</span></p></li><li><p><span>可以避免多重条件选择语句，提供了一种算法的复用机制，不同环境类可以方便的复用策略类。</span></p></li></ol><p>&nbsp;</p><h4 id='缺'><span>缺：</span></h4><ol><li><p><span>客户端必须知道所有的策略类，并自行决定使用哪一个策略类，这意味着客户端必须理解这些算法的区别，以便适时选择恰当的算法类，换言之，策略模式只适用于客户端知道所有的算法或行为的情况。</span></p></li><li><p><span>将造成系统产生很多具体策略类和对象。</span></p></li><li><p><span>无法同时在客户端使用多个策略类。</span></p></li></ol><p>&nbsp;</p><h3 id='使用场景'><span>使用场景：</span></h3><ol><li><p><span>一个系统需要动态地在几种算法中选择一种。</span></p></li><li><p><span>如果一个系统里面有许多类，他们之间的区别仅在于他们的行为。</span></p></li><li><p><span>如果一个对象有很多行为，如果不用恰当的模式，这些行为就只好用使用多重条件选择语句来实现，此时使用策略模式可避免使用难以维护的多重条件选择语句，并且体现面向对象的设计思想。</span></p></li></ol><p>&nbsp;</p><h3 id='例'><span>例:</span></h3><p><span>开发一个电南平台支付系统，周户可以选择多种支付方式v x,支付宝等。</span></p><p><span>每一种支付方式都有自己的一套流程和算法、可以用到策略模式。</span></p><p><span>排序策略：现以排序操作为例，使用策略模式设计该数组的操作类，使客户端可以动态选择排序算法。冒泡、插入排序，选择排序等、也能灵活地增加新的排序算法。。</span></p><p>&nbsp;</p><h2 id='2适配器模式'><span>2.适配器模式</span></h2><p>&nbsp;</p><p><span>定义：将一个接口转换成客户希望的另一个接口，适配器模式使接口不兼容的那些类可以一起工作。</span></p><p><span>适配器模式既可以作为类结构型模式，也可以作为对向结构模式。</span></p><p><img src="/Users/huchi/Library/Application Support/typora-user-images/image-20240612下午42317885.png" referrerpolicy="no-referrer" alt="image-20240612下午42317885"></p><p><img src="/Users/huchi/Library/Application Support/typora-user-images/image-20240612下午42412775.png" referrerpolicy="no-referrer" alt="image-20240612下午42412775"></p><p>&nbsp;</p><h4 id='实例'><span>实例：</span></h4><p><span>设计一个可以模仿各种动作行为的机械人，在机器人中定义了一系列方法，如机械人叫喊方法，机器人移动方法，等，如果希望在不修改已有代码的基础上使机器人能像狗一样跑，使用适配器模式进行设计。</span></p><p><img src="/Users/huchi/Library/Application Support/typora-user-images/image-20240612下午42614005.png" referrerpolicy="no-referrer" alt="image-20240612下午42614005"></p><p>&nbsp;</p><p>&nbsp;</p><h2 id='优缺点'><span>优缺点</span></h2><h4 id='优点'><span>优点：</span></h4><ol><li><p><span>将目标类和适配者类解耦，通过引入一个适配器类来重用现有的适配者类，无须修改原有结构。</span></p></li><li><p><span>增加了类的透明性和复用性，提高了适配者的复用性，同一个适配者类可以在多个不同的系统中复用。</span></p></li><li><p><span>灵活性和扩展性非常好。</span></p></li></ol><p><span>类适配器模式：置换一些适配器的方法很方便。</span></p><p><span>对象适配器模式：可以把多个不同的适配者配到同一个目标，还可以适配一个适配者的子类。</span></p><p>&nbsp;</p><h4 id='缺点'><span>缺点：</span></h4><ol><li><p><span>类适配器模式一次最多只能适配一个适配者，不能同时适配多个适配者。</span></p></li><li><p><span>适配者类不能为最终类。</span></p></li><li><p><span>目标抽象类只能为接口，不能为类。</span></p></li></ol><p><span>对象适配器模式：在适配器中置换适配者类的某些方法比较麻烦。</span></p><p>&nbsp;</p><h3 id='适用范围'><span>适用范围</span></h3><ul><li><p><span>系统需要使用一些现有的类，而这些类的接口不符合系统的需要，甚至没有这些类的代码。</span></p></li><li><p><span>创建一个可以重复使用的类，用于和一些彼此之间没有太大关联的类，包括一些可能在将来引进的类一起工作。</span></p></li></ul><p>&nbsp;</p><h4 id='例子'><span>例子</span></h4><p><span>小明买了台进口电视机（</span><em><span>110V</span></em><span>）与国内 </span><em><span>220V</span></em><span> 不符合，设置一些适配器将插头输出的220v转变成 110V</span></p><p><img src="/Users/huchi/Library/Application Support/typora-user-images/image-20240612下午43613388.png" referrerpolicy="no-referrer" alt="image-20240612下午43613388"></p><p>&nbsp;</p><p>&nbsp;</p><h3 id='策略模式是否满足开闭原则和单一职责原则'><span>策略模式是否满足</span><strong><span>开闭原则</span></strong><span>和</span><strong><span>单一职责原则</span></strong><span>？</span></h3><h4 id='均满足'><span>均满足 </span></h4><p><span>策略模式通过定义一组策略接口，并将具体算法封装独立的策略中，确保每个类都有单一的职责，使得系统能够通过添加新策略类来扩展功能 ， 而不需要修改现有系统的代码。</span></p><h3 id='适配器模式是否满足开闭原则和单一职责原则'><span>适配器模式是否满足</span><strong><span>开闭原则</span></strong><span>和</span><strong><span>单一职责原则</span></strong><span>？</span></h3><h4 id='均满足-2'><span>均满足</span></h4><p><span>适配器模式通过适配器类将不兼容的接口转换为兼容的接口，实现了对扩展开放，对修改关闭的开闭原则，适配器类只负责适配的职责，符合单一职责原则。</span></p><p>&nbsp;</p><h1 id='3道编程题'><span>3道编程题</span></h1><p><img src="/Users/huchi/Library/Application Support/typora-user-images/image-20240612下午45519484.png" referrerpolicy="no-referrer" alt="image-20240612下午45519484"></p><h2 id='工厂方法模式'><span>工厂方法模式</span></h2><p><span>在工厂方法模式中，工厂父类负责定义创建产业对象的公共接口，而工厂子类负责具体的产品对象。</span></p><p><span>工厂生产电视机，为每一种品牌的电视机提供一个子工厂，海尔工厂专门生产海尔电视机，海信专门生产海信电视机，如果需要新生产TCL,只需对应增加一个TCL工厂即可。</span></p><p>&nbsp;</p><p>&nbsp;</p><h2 id='单例模式'><span>单例模式</span></h2><p>&nbsp;</p><p><span>一种对象创建模式。</span></p><h3 id='定义'><span>定义：</span></h3><p><span>确保某一个类只有一个实例，而且自行实例化，并向整个系统提供这个实例。这个类被称为单例类，它提供全局访问的方法。</span></p><h3 id='要点'><span>要点：</span></h3><ol><li><p><span>某个类只能有一个实例</span></p></li><li><p><span>必须自行创建这个实例。</span></p></li><li><p><span>必须自行向整个系统提供这个实例。</span></p></li></ol><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><h2 id='外观模式'><span>外观模式：</span></h2><p><span>定义：外部与子系统的通信通过一个统一的外观对象进行，为子系统中的一组接口提供一个统一的接口。</span></p><p><span>外观模式定义了一个高层接口，这个接口使得子系统更加容易使用，又称为门面系统，他是一种对象结构型模式。</span></p><p>&nbsp;</p><h1 id='论述题'><span>论述题：</span></h1><p><img src="/Users/huchi/Library/Application Support/typora-user-images/image-20240612下午45533948.png" referrerpolicy="no-referrer" alt="image-20240612下午45533948"></p><h2 id='经典的软件体系结构cs--bs-mvc'><span>经典的软件体系结构：C/S , B/S, MVC</span></h2><h3 id='cs'><span>C/S</span></h3><h4 id='特点'><span>特点</span></h4><ol start='' ><li><p><strong><span>双层结构</span></strong><span>：通常分为客户端和服务器两个层次。</span></p></li><li><p><strong><span>紧密耦合</span></strong><span>：客户端和服务器之间有明确的通信协议，通常采用专用的协议和接口。</span></p></li><li><p><strong><span>固定角色</span></strong><span>：客户端主要负责用户界面和业务逻辑的部分，而服务器主要负责数据处理和存储。</span></p></li><li><p><strong><span>实时交互</span></strong><span>：客户端与服务器之间通常进行实时的数据交换和处理。</span></p></li></ol><h4 id='优点-2'><span>优点</span></h4><p><span>两层C/S 体系结构具有强大的数据操作和事务处理能力， 模型思想简单，易于人们理解和接受。</span></p><p><span>系统的客户应用程序和服务器组件分别运行在不同的计算机上，系统中每台服务器都可以适合各组件的要求，这对于硬件和软件的变化显示出极大的适应性和灵活性，而且易于对系统进行扩充和缩小。</span></p><p><span>在两层C/S体系结构中，系统中的功能组件充分隔离，客户应用程序的开发集中于数据的显示和分析，而数据库服务器的开发则集中于数据的管理。将大的应用处理任务分布到许多通过网络连接的低成本计算机上，以节约大量费用</span></p><h4 id='缺点-2'><span>缺点</span></h4><p><span>互操作性差</span></p><p><span>系统管理与配置成本高：</span></p><p><span>采用两层C/S体系结构的软件要升级，开发人员必须到现场为客户机升级，每个客户机上的软件都需维护。当系统升级时，对软件的一个小小改动，每一个客户端必须更新。</span></p><p><span>导致：软件维护和升级困难</span></p><p><span>系统伸缩性差：</span></p><p><span>当用户数超过100，性能急剧恶化</span></p><p><span>服务器成为系统的瓶颈</span></p><p><span>开发成本高，客户端程序设计复杂，用户界面风格不一。</span></p><p>&nbsp;</p><h2 id='bs'><span>B/S</span></h2><h3 id='特点-2'><span>特点</span></h3><p><span>在B/S结构中，应用程序以网页形式存放于Web服务器上。</span></p><p><span>用户运行某个应用程序时，只要在客户端上的浏览器中键入相应的网址（URL），调用Web服务器上的应用程序并对麥据库进行操作，完成相应的数据处理工作，最后将结果通过浏览器显示给用户。</span></p><p><span>浏览器只有在接收到用户请求后，才和Web服务器进行连接：Web服务器马上与数据库通信并生成结果；然后Web 服务器再把数据库的返回结果转发给浏览器，浏览器在收到返回信息后断开连接。</span></p><p><span>由于真正的连接时间很短，因此Web服务器能够为更多的用户提供服务。</span></p><p>&nbsp;</p><h3 id='优点-3'><span>优点</span></h3><p><span>基于B/S体系结构的软件，系统安装、修改和维护全在服务器端解决，系统维护成本低：</span></p><p><span>-客户端无任何业务逻辑，用户在使用系统时，仅仅需要一个浏览器就可运行全部的模块，真正达到了“零客户端”的功能，很容易在运行时自动升级。</span></p><p><span>-良好的灵活性和可扩展性：对于环境和应用条件经常变动的情况，只要对业务逻辑层实施相应的改变，就能够达到目的。</span></p><p><span>B/S体系结构还提供了异种机、异种网、异种应用服务的联机、联网、统一服务的最现实的开放性基础。</span></p><p><span>较好的安全性：在这种结构中，客户应用程序不能直接访问数据，应用服务器不仅可控制哪些数据被改变和被访问，而且还可控制数据的改变和访问方式。</span></p><p><span>三层模式成为真正意义上的“瘦客户端”，从而具备了很高的稳定性、延展性和执行效率。</span></p><p><span>三层模式可以将服务集中在一起管理，统一服务于客户端，从而具备了良好的容错能力和负载平衡能力。</span></p><p>&nbsp;</p><h3 id='缺点-3'><span>缺点</span></h3><p><span>客户端浏览器以同步的请求/响应模式交换数据，每请求一次服务器就要刷新一次页面；</span></p><p><span>受HTTP协议“基于文本的数据交换”的限制，在数据查询等响应速度上，要远远低于C/S体系结构；</span></p><p><span>数据提交一般以页面为单位，数据的动态交互性不强 ，不利于在线事务处理（OLTP）应用；</span></p><p><span>受限于HTML的表达能力，难以支持复杂GUI（如报表等）</span></p><p>&nbsp;</p><h2 id='软件设计的目标'><span>软件设计的目标：</span></h2><ol><li><p><span>正确性</span></p></li><li><p><span>健壮性</span></p></li><li><p><span>可维护性</span></p></li><li><p><span>可复用性</span></p></li><li><p><span>高效性</span></p></li></ol><p>&nbsp;</p><p><strong><span>正确性 </span></strong><span> 指设计符合需求，代码按照要求执行。通常对给定的需求可能有多种正确的设计。</span></p><p><span>如果在出现错误时应用程序也能执行，那么设计是具有 </span><strong><span>健壮性</span></strong><span> 的；</span></p><p><span>一个 </span><strong><span>可维护性 </span></strong><span>的设计意味着可以很容易地对其进行修改</span></p><p><span>• </span><strong><span>可复用性</span></strong><span> 是指可以将其方便地移植到其他应用中。</span></p><p><strong><span>•高效性 </span></strong><span>有两个方面——时间效率和空间效率。</span></p><p>&nbsp;</p></div></div>
+
+<script>(function(){var e=document.body.parentElement,t=[],n=null,i=document.body.classList.contains("typora-export-collapse-outline"),r=function(e,t,n){document.addEventListener(e,function(e){if(!e.defaultPrevented)for(var i=e.target;i&&i!=this;i=i.parentNode)if(i.matches(t)){!1===n.call(i,e)&&(e.preventDefault(),e.stopPropagation());break}},!1)};function o(){return e.scrollTop}r("click",".outline-expander",function(e){var t=this.closest(".outline-item-wrapper").classList;return t.contains("outline-item-open")?t.remove("outline-item-open"):t.add("outline-item-open"),d(),!1}),r("click",".outline-item",function(e){var t=this.querySelector(".outline-label");if(location.hash="#"+t.getAttribute("href"),i){var n=this.closest(".outline-item-wrapper").classList;n.contains("outline-item-open")||n.add("outline-item-open"),c(),n.add("outline-item-active")}});var a,s,l=function(){var e=o();n=null;for(var i=0;i<t.length&&t[i][1]-e<60;i++)n=t[i]},c=function(){document.querySelectorAll(".outline-item-active").forEach(e=>e.classList.remove("outline-item-active")),document.querySelectorAll(".outline-item-single.outline-item-open").forEach(e=>e.classList.remove("outline-item-open"))},d=function(){if(n){c();var e=document.querySelector('.outline-label[href="#'+(CSS.escape?CSS.escape(n[0]):n[0])+'"]');if(e)if(i){var t=e.closest(".outline-item-open>ul>.outline-item-wrapper");if(t)t.classList.add("outline-item-active");else{for(var r=(e=e.closest(".outline-item-wrapper")).parentElement.closest(".outline-item-wrapper");r;)r=(e=r).parentElement.closest(".outline-item-wrapper");e.classList.add("outline-item-active")}}else e.closest(".outline-item-wrapper").classList.add("outline-item-active")}};window.addEventListener("scroll",function(e){a&&clearTimeout(a),a=setTimeout(function(){l(),d()},300)});var u=function(){s=setTimeout(function(){!function(){t=[];var e=o();document.querySelector("#write").querySelectorAll("h1, h2, h3, h4, h5, h6").forEach(n=>{var i=n.getAttribute("id");t.push([i,e+n.getBoundingClientRect().y])})}(),l(),d()},300)};window.addEventListener("resize",function(e){s&&clearTimeout(s),u()}),u()})();</script></body>
+</html>
