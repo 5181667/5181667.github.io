@@ -1,0 +1,600 @@
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
+
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,700,400&subset=latin,latin-ext' rel='stylesheet' type='text/css' /><style type='text/css'>html {overflow-x: initial !important;}:root { --bg-color: #ffffff; --text-color: #333333; --select-text-bg-color: #B5D6FC; --select-text-font-color: auto; --monospace: "Lucida Console",Consolas,"Courier",monospace; --title-bar-height: 20px; }
+.mac-os-11 { --title-bar-height: 28px; }
+html { font-size: 14px; background-color: var(--bg-color); color: var(--text-color); font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+h1, h2, h3, h4, h5 { white-space: pre-wrap; }
+body { margin: 0px; padding: 0px; height: auto; inset: 0px; font-size: 1rem; line-height: 1.428571; overflow-x: hidden; background: inherit; }
+iframe { margin: auto; }
+a.url { word-break: break-all; }
+a:active, a:hover { outline: 0px; }
+.in-text-selection, ::selection { text-shadow: none; background: var(--select-text-bg-color); color: var(--select-text-font-color); }
+#write { margin: 0px auto; height: auto; width: inherit; word-break: normal; overflow-wrap: break-word; position: relative; white-space: normal; overflow-x: visible; padding-top: 36px; }
+#write.first-line-indent p { text-indent: 2em; }
+#write.first-line-indent li p, #write.first-line-indent p * { text-indent: 0px; }
+#write.first-line-indent li { margin-left: 2em; }
+.for-image #write { padding-left: 8px; padding-right: 8px; }
+body.typora-export { padding-left: 30px; padding-right: 30px; }
+.typora-export .footnote-line, .typora-export li, .typora-export p { white-space: pre-wrap; }
+.typora-export .task-list-item input { pointer-events: none; }
+@media screen and (max-width: 500px) {
+  body.typora-export { padding-left: 0px; padding-right: 0px; }
+  #write { padding-left: 20px; padding-right: 20px; }
+}
+#write li > figure:last-child { margin-bottom: 0.5rem; }
+#write ol, #write ul { position: relative; }
+img { max-width: 100%; vertical-align: middle; image-orientation: from-image; }
+button, input, select, textarea { color: inherit; font-style: inherit; font-variant-caps: inherit; font-weight: inherit; font-stretch: inherit; font-size: inherit; line-height: inherit; font-family: inherit; font-size-adjust: inherit; font-kerning: inherit; font-variant-alternates: inherit; font-variant-ligatures: inherit; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-variant-position: inherit; font-feature-settings: inherit; font-optical-sizing: inherit; font-variation-settings: inherit; }
+input[type="checkbox"], input[type="radio"] { line-height: normal; padding: 0px; }
+*, ::after, ::before { box-sizing: border-box; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p, #write pre { width: inherit; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p { position: relative; }
+p { line-height: inherit; }
+h1, h2, h3, h4, h5, h6 { break-after: avoid-page; break-inside: avoid; orphans: 4; }
+p { orphans: 4; }
+h1 { font-size: 2rem; }
+h2 { font-size: 1.8rem; }
+h3 { font-size: 1.6rem; }
+h4 { font-size: 1.4rem; }
+h5 { font-size: 1.2rem; }
+h6 { font-size: 1rem; }
+.md-math-block, .md-rawblock, h1, h2, h3, h4, h5, h6, p { margin-top: 1rem; margin-bottom: 1rem; }
+.hidden { display: none; }
+.md-blockmeta { color: rgb(204, 204, 204); font-weight: 700; font-style: italic; }
+a { cursor: pointer; }
+sup.md-footnote { padding: 2px 4px; background-color: rgba(238, 238, 238, 0.7); color: rgb(85, 85, 85); border-radius: 4px; cursor: pointer; }
+sup.md-footnote a, sup.md-footnote a:hover { color: inherit; text-transform: inherit; text-decoration: inherit; }
+#write input[type="checkbox"] { cursor: pointer; width: inherit; height: inherit; }
+figure { overflow-x: auto; margin: 1.2em 0px; max-width: calc(100% + 16px); padding: 0px; }
+figure > table { margin: 0px; }
+thead, tr { break-inside: avoid; break-after: auto; }
+thead { display: table-header-group; }
+table { border-collapse: collapse; border-spacing: 0px; width: 100%; overflow: auto; break-inside: auto; text-align: left; }
+table.md-table td { min-width: 32px; }
+.CodeMirror-gutters { border-right-width: 0px; border-right-style: none; border-right-color: currentcolor; background-color: inherit; }
+.CodeMirror-linenumber { -webkit-user-select: none; }
+.CodeMirror { text-align: left; }
+.CodeMirror-placeholder { opacity: 0.3; }
+.CodeMirror pre { padding: 0px 4px; }
+.CodeMirror-lines { padding: 0px; }
+div.hr:focus { cursor: none; }
+#write pre { white-space: pre-wrap; }
+#write.fences-no-line-wrapping pre { white-space: pre; }
+#write pre.ty-contain-cm { white-space: normal; }
+.CodeMirror-gutters { margin-right: 4px; }
+.md-fences { font-size: 0.9rem; display: block; break-inside: avoid; text-align: left; overflow: visible; white-space: pre; background: inherit; position: relative !important; }
+.md-fences-adv-panel { width: 100%; margin-top: 10px; text-align: center; padding-top: 0px; padding-bottom: 8px; overflow-x: auto; }
+#write .md-fences.mock-cm { white-space: pre-wrap; }
+.md-fences.md-fences-with-lineno { padding-left: 0px; }
+#write.fences-no-line-wrapping .md-fences.mock-cm { white-space: pre; overflow-x: auto; }
+.md-fences.mock-cm.md-fences-with-lineno { padding-left: 8px; }
+.CodeMirror-line, twitterwidget { break-inside: avoid; }
+svg { break-inside: avoid; }
+.footnotes { opacity: 0.8; font-size: 0.9rem; margin-top: 1em; margin-bottom: 1em; }
+.footnotes + .footnotes { margin-top: 0px; }
+.md-reset { margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: top; background: 0px 0px; text-decoration: none; text-shadow: none; float: none; position: static; width: auto; height: auto; white-space: nowrap; cursor: inherit; line-height: normal; font-weight: 400; text-align: left; box-sizing: content-box; direction: ltr; }
+li div { padding-top: 0px; }
+blockquote { margin: 1rem 0px; }
+li .mathjax-block, li p { margin: 0.5rem 0px; }
+li blockquote { margin: 1rem 0px; }
+li { margin: 0px; position: relative; }
+blockquote > :last-child { margin-bottom: 0px; }
+blockquote > :first-child, li > :first-child { margin-top: 0px; }
+.footnotes-area { color: rgb(136, 136, 136); margin-top: 0.714rem; padding-bottom: 0.143rem; white-space: normal; }
+#write .footnote-line { white-space: pre-wrap; }
+@media print {
+  body, html { border: 1px solid transparent; height: 99%; break-after: avoid; break-before: avoid; font-variant-ligatures: no-common-ligatures; }
+  #write { margin-top: 0px; border-color: transparent !important; padding-top: 0px !important; padding-bottom: 0px !important; }
+  .typora-export * { print-color-adjust: exact; }
+  .typora-export #write { break-after: avoid; }
+  .typora-export #write::after { height: 0px; }
+  .is-mac table { break-inside: avoid; }
+  #write > p:nth-child(1) { margin-top: 0px; }
+  .typora-export-show-outline .typora-export-sidebar { display: none; }
+  figure { overflow-x: visible; }
+}
+.footnote-line { margin-top: 0.714em; font-size: 0.7em; }
+a img, img a { cursor: pointer; }
+pre.md-meta-block { font-size: 0.8rem; min-height: 0.8rem; white-space: pre-wrap; background: rgb(204, 204, 204); display: block; overflow-x: hidden; }
+p > .md-image:only-child:not(.md-img-error) img, p > img:only-child { display: block; margin: auto; }
+#write.first-line-indent p > .md-image:only-child:not(.md-img-error) img { left: -2em; position: relative; }
+p > .md-image:only-child { display: inline-block; width: 100%; }
+#write .MathJax_Display { margin: 0.8em 0px 0px; }
+.md-math-block { width: 100%; }
+.md-math-block:not(:empty)::after { display: none; }
+.MathJax_ref { fill: currentcolor; }
+[contenteditable="true"]:active, [contenteditable="true"]:focus, [contenteditable="false"]:active, [contenteditable="false"]:focus { outline: 0px; box-shadow: none; }
+.md-task-list-item { position: relative; list-style-type: none; }
+.task-list-item.md-task-list-item { padding-left: 0px; }
+.md-task-list-item > input { position: absolute; top: 0px; left: 0px; margin-left: -1.2em; margin-top: calc(1em - 10px); border: medium; }
+.math { font-size: 1rem; }
+.md-toc { min-height: 3.58rem; position: relative; font-size: 0.9rem; border-radius: 10px; }
+.md-toc-content { position: relative; margin-left: 0px; }
+.md-toc-content::after, .md-toc::after { display: none; }
+.md-toc-item { display: block; color: rgb(65, 131, 196); }
+.md-toc-item a { text-decoration: none; }
+.md-toc-inner:hover { text-decoration: underline; }
+.md-toc-inner { display: inline-block; cursor: pointer; }
+.md-toc-h1 .md-toc-inner { margin-left: 0px; font-weight: 700; }
+.md-toc-h2 .md-toc-inner { margin-left: 2em; }
+.md-toc-h3 .md-toc-inner { margin-left: 4em; }
+.md-toc-h4 .md-toc-inner { margin-left: 6em; }
+.md-toc-h5 .md-toc-inner { margin-left: 8em; }
+.md-toc-h6 .md-toc-inner { margin-left: 10em; }
+@media screen and (max-width: 48em) {
+  .md-toc-h3 .md-toc-inner { margin-left: 3.5em; }
+  .md-toc-h4 .md-toc-inner { margin-left: 5em; }
+  .md-toc-h5 .md-toc-inner { margin-left: 6.5em; }
+  .md-toc-h6 .md-toc-inner { margin-left: 8em; }
+}
+a.md-toc-inner { font-size: inherit; font-style: inherit; font-weight: inherit; line-height: inherit; }
+.footnote-line a:not(.reversefootnote) { color: inherit; }
+.reversefootnote { font-family: ui-monospace, sans-serif; }
+.md-attr { display: none; }
+.md-fn-count::after { content: "."; }
+code, pre, samp, tt { font-family: var(--monospace); }
+kbd { margin: 0px 0.1em; padding: 0.1em 0.6em; font-size: 0.8em; color: rgb(36, 39, 41); background: rgb(255, 255, 255); border: 1px solid rgb(173, 179, 185); border-radius: 3px; box-shadow: rgba(12, 13, 14, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; white-space: nowrap; vertical-align: middle; }
+.md-comment { color: rgb(162, 127, 3); opacity: 0.6; font-family: var(--monospace); }
+code { text-align: left; vertical-align: initial; }
+a.md-print-anchor { white-space: pre !important; border-width: medium !important; border-style: none !important; border-color: currentcolor !important; display: inline-block !important; position: absolute !important; width: 1px !important; right: 0px !important; outline: 0px !important; background: 0px 0px !important; text-decoration: initial !important; text-shadow: initial !important; }
+.os-windows.monocolor-emoji .md-emoji { font-family: "Segoe UI Symbol", sans-serif; }
+.md-diagram-panel > svg { max-width: 100%; }
+[lang="flow"] svg, [lang="mermaid"] svg { max-width: 100%; height: auto; }
+[lang="mermaid"] .node text { font-size: 1rem; }
+table tr th { border-bottom-width: 0px; border-bottom-style: none; border-bottom-color: currentcolor; }
+video { max-width: 100%; display: block; margin: 0px auto; }
+iframe { max-width: 100%; width: 100%; border: medium; }
+.highlight td, .highlight tr { border: 0px; }
+mark { background: rgb(255, 255, 0); color: rgb(0, 0, 0); }
+.md-html-inline .md-plain, .md-html-inline strong, mark .md-inline-math, mark strong { color: inherit; }
+.md-expand mark .md-meta { opacity: 0.3 !important; }
+mark .md-meta { color: rgb(0, 0, 0); }
+@media print {
+  .typora-export h1, .typora-export h2, .typora-export h3, .typora-export h4, .typora-export h5, .typora-export h6 { break-inside: avoid; }
+}
+.md-diagram-panel .messageText { stroke: none !important; }
+.md-diagram-panel .start-state { fill: var(--node-fill); }
+.md-diagram-panel .edgeLabel rect { opacity: 1 !important; }
+.md-fences.md-fences-math { font-size: 1em; }
+.md-fences-advanced:not(.md-focus) { padding: 0px; white-space: nowrap; border: 0px; }
+.md-fences-advanced:not(.md-focus) { background: inherit; }
+.typora-export-show-outline .typora-export-content { max-width: 1440px; margin: auto; display: flex; flex-direction: row; }
+.typora-export-sidebar { width: 300px; font-size: 0.8rem; margin-top: 80px; margin-right: 18px; }
+.typora-export-show-outline #write { --webkit-flex: 2; flex: 2 1 0%; }
+.typora-export-sidebar .outline-content { position: fixed; top: 0px; max-height: 100%; overflow: hidden auto; padding-bottom: 30px; padding-top: 60px; width: 300px; }
+@media screen and (max-width: 1024px) {
+  .typora-export-sidebar, .typora-export-sidebar .outline-content { width: 240px; }
+}
+@media screen and (max-width: 800px) {
+  .typora-export-sidebar { display: none; }
+}
+.outline-content li, .outline-content ul { margin-left: 0px; margin-right: 0px; padding-left: 0px; padding-right: 0px; list-style: none; overflow-wrap: anywhere; }
+.outline-content ul { margin-top: 0px; margin-bottom: 0px; }
+.outline-content strong { font-weight: 400; }
+.outline-expander { width: 1rem; height: 1.428571rem; position: relative; display: table-cell; vertical-align: middle; cursor: pointer; padding-left: 4px; }
+.outline-expander::before { content: ""; position: relative; font-family: Ionicons; display: inline-block; font-size: 8px; vertical-align: middle; }
+.outline-item { padding-top: 3px; padding-bottom: 3px; cursor: pointer; }
+.outline-expander:hover::before { content: ""; }
+.outline-h1 > .outline-item { padding-left: 0px; }
+.outline-h2 > .outline-item { padding-left: 1em; }
+.outline-h3 > .outline-item { padding-left: 2em; }
+.outline-h4 > .outline-item { padding-left: 3em; }
+.outline-h5 > .outline-item { padding-left: 4em; }
+.outline-h6 > .outline-item { padding-left: 5em; }
+.outline-label { cursor: pointer; display: table-cell; vertical-align: middle; text-decoration: none; color: inherit; }
+.outline-label:hover { text-decoration: underline; }
+.outline-item:hover { border-color: rgb(245, 245, 245); background-color: var(--item-hover-bg-color); }
+.outline-item:hover { margin-left: -28px; margin-right: -28px; border-left-width: 28px; border-left-style: solid; border-left-color: transparent; border-right-width: 28px; border-right-style: solid; border-right-color: transparent; }
+.outline-item-single .outline-expander::before, .outline-item-single .outline-expander:hover::before { display: none; }
+.outline-item-open > .outline-item > .outline-expander::before { content: ""; }
+.outline-children { display: none; }
+.info-panel-tab-wrapper { display: none; }
+.outline-item-open > .outline-children { display: block; }
+.typora-export .outline-item { padding-top: 1px; padding-bottom: 1px; }
+.typora-export .outline-item:hover { margin-right: -8px; border-right-width: 8px; border-right-style: solid; border-right-color: transparent; }
+.typora-export .outline-expander::before { content: "+"; font-family: inherit; top: -1px; }
+.typora-export .outline-expander:hover::before, .typora-export .outline-item-open > .outline-item > .outline-expander::before { content: "−"; }
+.typora-export-collapse-outline .outline-children { display: none; }
+.typora-export-collapse-outline .outline-item-open > .outline-children, .typora-export-no-collapse-outline .outline-children { display: block; }
+.typora-export-no-collapse-outline .outline-expander::before { content: "" !important; }
+.typora-export-show-outline .outline-item-active > .outline-item .outline-label { font-weight: 700; }
+.md-inline-math-container mjx-container { zoom: 0.95; }
+mjx-container { break-inside: avoid; }
+
+
+:root {
+    --side-bar-bg-color: #fafafa;
+    --control-text-color: #777;
+}
+
+@include-when-export url(https://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,700,400&subset=latin,latin-ext);
+
+/* open-sans-regular - latin-ext_latin */
+  /* open-sans-italic - latin-ext_latin */
+    /* open-sans-700 - latin-ext_latin */
+    /* open-sans-700italic - latin-ext_latin */
+  html {
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+}
+
+body {
+    font-family: "Open Sans","Clear Sans", "Helvetica Neue", Helvetica, Arial, 'Segoe UI Emoji', sans-serif;
+    color: rgb(51, 51, 51);
+    line-height: 1.6;
+}
+
+#write {
+    max-width: 860px;
+  	margin: 0 auto;
+  	padding: 30px;
+    padding-bottom: 100px;
+}
+
+@media only screen and (min-width: 1400px) {
+	#write {
+		max-width: 1024px;
+	}
+}
+
+@media only screen and (min-width: 1800px) {
+	#write {
+		max-width: 1200px;
+	}
+}
+
+#write > ul:first-child,
+#write > ol:first-child{
+    margin-top: 30px;
+}
+
+a {
+    color: #4183C4;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    position: relative;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+    line-height: 1.4;
+    cursor: text;
+}
+h1:hover a.anchor,
+h2:hover a.anchor,
+h3:hover a.anchor,
+h4:hover a.anchor,
+h5:hover a.anchor,
+h6:hover a.anchor {
+    text-decoration: none;
+}
+h1 tt,
+h1 code {
+    font-size: inherit;
+}
+h2 tt,
+h2 code {
+    font-size: inherit;
+}
+h3 tt,
+h3 code {
+    font-size: inherit;
+}
+h4 tt,
+h4 code {
+    font-size: inherit;
+}
+h5 tt,
+h5 code {
+    font-size: inherit;
+}
+h6 tt,
+h6 code {
+    font-size: inherit;
+}
+h1 {
+    font-size: 2.25em;
+    line-height: 1.2;
+    border-bottom: 1px solid #eee;
+}
+h2 {
+    font-size: 1.75em;
+    line-height: 1.225;
+    border-bottom: 1px solid #eee;
+}
+
+/*@media print {
+    .typora-export h1,
+    .typora-export h2 {
+        border-bottom: none;
+        padding-bottom: initial;
+    }
+
+    .typora-export h1::after,
+    .typora-export h2::after {
+        content: "";
+        display: block;
+        height: 100px;
+        margin-top: -96px;
+        border-top: 1px solid #eee;
+    }
+}*/
+
+h3 {
+    font-size: 1.5em;
+    line-height: 1.43;
+}
+h4 {
+    font-size: 1.25em;
+}
+h5 {
+    font-size: 1em;
+}
+h6 {
+   font-size: 1em;
+    color: #777;
+}
+p,
+blockquote,
+ul,
+ol,
+dl,
+table{
+    margin: 0.8em 0;
+}
+li>ol,
+li>ul {
+    margin: 0 0;
+}
+hr {
+    height: 2px;
+    padding: 0;
+    margin: 16px 0;
+    background-color: #e7e7e7;
+    border: 0 none;
+    overflow: hidden;
+    box-sizing: content-box;
+}
+
+li p.first {
+    display: inline-block;
+}
+ul,
+ol {
+    padding-left: 30px;
+}
+ul:first-child,
+ol:first-child {
+    margin-top: 0;
+}
+ul:last-child,
+ol:last-child {
+    margin-bottom: 0;
+}
+blockquote {
+    border-left: 4px solid #dfe2e5;
+    padding: 0 15px;
+    color: #777777;
+}
+blockquote blockquote {
+    padding-right: 0;
+}
+table {
+    padding: 0;
+    word-break: initial;
+}
+table tr {
+    border: 1px solid #dfe2e5;
+    margin: 0;
+    padding: 0;
+}
+table tr:nth-child(2n),
+thead {
+    background-color: #f8f8f8;
+}
+table th {
+    font-weight: bold;
+    border: 1px solid #dfe2e5;
+    border-bottom: 0;
+    margin: 0;
+    padding: 6px 13px;
+}
+table td {
+    border: 1px solid #dfe2e5;
+    margin: 0;
+    padding: 6px 13px;
+}
+table th:first-child,
+table td:first-child {
+    margin-top: 0;
+}
+table th:last-child,
+table td:last-child {
+    margin-bottom: 0;
+}
+
+.CodeMirror-lines {
+    padding-left: 4px;
+}
+
+.code-tooltip {
+    box-shadow: 0 1px 1px 0 rgba(0,28,36,.3);
+    border-top: 1px solid #eef2f2;
+}
+
+.md-fences,
+code,
+tt {
+    border: 1px solid #e7eaed;
+    background-color: #f8f8f8;
+    border-radius: 3px;
+    padding: 0;
+    padding: 2px 4px 0px 4px;
+    font-size: 0.9em;
+}
+
+code {
+    background-color: #f3f4f4;
+    padding: 0 2px 0 2px;
+}
+
+.md-fences {
+    margin-bottom: 15px;
+    margin-top: 15px;
+    padding-top: 8px;
+    padding-bottom: 6px;
+}
+
+
+.md-task-list-item > input {
+  margin-left: -1.3em;
+}
+
+@media print {
+    html {
+        font-size: 13px;
+    }
+    pre {
+        page-break-inside: avoid;
+        word-wrap: break-word;
+    }
+}
+
+.md-fences {
+	background-color: #f8f8f8;
+}
+#write pre.md-meta-block {
+	padding: 1rem;
+    font-size: 85%;
+    line-height: 1.45;
+    background-color: #f7f7f7;
+    border: 0;
+    border-radius: 3px;
+    color: #777777;
+    margin-top: 0 !important;
+}
+
+.mathjax-block>.code-tooltip {
+	bottom: .375rem;
+}
+
+.md-mathjax-midline {
+    background: #fafafa;
+}
+
+#write>h3.md-focus:before{
+	left: -1.5625rem;
+	top: .375rem;
+}
+#write>h4.md-focus:before{
+	left: -1.5625rem;
+	top: .285714286rem;
+}
+#write>h5.md-focus:before{
+	left: -1.5625rem;
+	top: .285714286rem;
+}
+#write>h6.md-focus:before{
+	left: -1.5625rem;
+	top: .285714286rem;
+}
+.md-image>.md-meta {
+    /*border: 1px solid #ddd;*/
+    border-radius: 3px;
+    padding: 2px 0px 0px 4px;
+    font-size: 0.9em;
+    color: inherit;
+}
+
+.md-tag {
+    color: #a7a7a7;
+    opacity: 1;
+}
+
+.md-toc { 
+    margin-top:20px;
+    padding-bottom:20px;
+}
+
+.sidebar-tabs {
+    border-bottom: none;
+}
+
+#typora-quick-open {
+    border: 1px solid #ddd;
+    background-color: #f8f8f8;
+}
+
+#typora-quick-open-item {
+    background-color: #FAFAFA;
+    border-color: #FEFEFE #e5e5e5 #e5e5e5 #eee;
+    border-style: solid;
+    border-width: 1px;
+}
+
+/** focus mode */
+.on-focus-mode blockquote {
+    border-left-color: rgba(85, 85, 85, 0.12);
+}
+
+header, .context-menu, .megamenu-content, footer{
+    font-family: "Segoe UI", "Arial", sans-serif;
+}
+
+.file-node-content:hover .file-node-icon,
+.file-node-content:hover .file-node-open-state{
+    visibility: visible;
+}
+
+.mac-seamless-mode #typora-sidebar {
+    background-color: #fafafa;
+    background-color: var(--side-bar-bg-color);
+}
+
+.md-lang {
+    color: #b4654d;
+}
+
+/*.html-for-mac {
+    --item-hover-bg-color: #E6F0FE;
+}*/
+
+#md-notification .btn {
+    border: 0;
+}
+
+.dropdown-menu .divider {
+    border-color: #e5e5e5;
+    opacity: 0.4;
+}
+
+.ty-preferences .window-content {
+    background-color: #fafafa;
+}
+
+.ty-preferences .nav-group-item.active {
+    color: white;
+    background: #999;
+}
+
+.menu-item-container a.menu-style-btn {
+    background-color: #f5f8fa;
+    background-image: linear-gradient( 180deg , hsla(0, 0%, 100%, 0.8), hsla(0, 0%, 100%, 0)); 
+}
+
+
+ @media print { @page {margin: 0 0 0 0;} body.typora-export {padding-left: 0; padding-right: 0;} #write {padding:0;}}
+</style><title>英语单词</title>
+</head>
+<body class='typora-export typora-export-show-outline typora-export-collapse-outline'><div class='typora-export-content'>
+<div class="typora-export-sidebar"><div class="outline-content"><li class="outline-item-wrapper outline-h1 outline-item-open"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#日常单词">日常单词</a></div><ul class="outline-children"><li class="outline-item-wrapper outline-h2 outline-item-single"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#808">8.08</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h2 outline-item-single"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#809-810">8.09-8.10</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h2 outline-item-single"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#811">8.11</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h2 outline-item-single"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#812">8.12</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h2 outline-item-single"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#813-814">8.13-8.14</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h2 outline-item-single"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#815-818">8.15-8.18</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h2 outline-item-single"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#825">8.25</a></div><ul class="outline-children"></ul></li></ul></li><li class="outline-item-wrapper outline-h1 outline-item-open"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#真题单词英语1）">真题单词（英语1）</a></div><ul class="outline-children"><li class="outline-item-wrapper outline-h2"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#2008">2008</a></div><ul class="outline-children"><li class="outline-item-wrapper outline-h3 outline-item-single"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#text1">Text1</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h3 outline-item-single"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#text2">Text2</a></div><ul class="outline-children"></ul></li><li class="outline-item-wrapper outline-h3 outline-item-single"><div class="outline-item"><span class="outline-expander"></span><a class="outline-label" href="#text3">Text3</a></div><ul class="outline-children"></ul></li></ul></li></ul></li></div></div><div id='write'  class=' first-line-indent'><h1 id='日常单词'><span>日常单词</span></h1><h2 id='808'><span>8.08</span></h2><p><span>incentive :  n. 激励，动力，奖励</span></p><p><span>levy :   征收额，税款</span></p><p><span>fortune:    运气，时运，命运，巨款.      make a fortune  发财</span></p><p><span>previous ： 先前的</span></p><p><span>confine :   限制，使...局限于  监禁 关押</span></p><p><span>regulate :   管理，约束；调整 调节</span></p><p><span>unlike :  与...不同 ，不像 ，不同的 不相似的</span></p><p><span>ambiguous :  模棱两可的， 含糊不清的</span></p><p><span>collaps  :  倒塌，崩溃 ，暴跌 昏倒</span></p><p><span>vital :  极其重要的</span></p><p><span>delicate  :  微妙的 ；精美的 容易受损的</span></p><p><span>bid  : 投标 ，出价</span></p><p><span>confess ： 坦白 忏悔 供认</span></p><p><span>tone  ： 语气，风格 色调 音色；健壮度</span></p><p><span>prior  ：先前的 ， 优先的 ，在...前面的</span></p><p><span>offend  : 冒犯，得罪</span></p><p><span>sensation ： 知觉，感知 ，轰动         an internet sensation  一个网络红人</span></p><p><span>implicit  ： 含蓄的 ，不言明的 内含的；绝对的</span></p><p><span>manifest ： 显现 ，表明</span></p><p><span>preside ：掌管 ，负责                              preside over sth 掌管某事</span></p><p><span>victim  ：受害者 ， 患者</span></p><p><span>property  : 财产 ，所有物</span></p><p><span>grant  ： 批准，准许</span></p><p><span>absent ： 缺席</span></p><p><span>ethnic  ： 民族的 ，种族的</span></p><p><span>minority ： 少数，未成年   </span><span>	</span><span> </span><span>	</span><span>    an ethnic minority  少数民族</span></p><p><span>grown-up :   成年人，大人</span></p><p><span>philosopher  :   哲学家</span></p><p><span>vague   :  含糊的 笼统的 </span></p><p><span>transmit  :  传送，发送 </span></p><p><span>计数：30</span></p><h2 id='809-810'><span>8.09-8.10</span></h2><ol start='' ><li><p><span>revive :  使...苏醒，使...复活</span></p></li><li><p><span>massacre : 大屠杀</span></p></li><li><p><span>strength : 力量，强度；实力；优势</span></p></li><li><p><span>rare : 少见的 ；珍惜的 </span></p></li><li><p><span>proportion ：部分；比例</span></p></li><li><p><span>diversion : 转向，转移</span></p></li><li><p><span>substance ：物质；根据。主旨</span></p></li><li><p><span>option ：选择权；选项</span></p></li><li><p><span>trait ：特性，性质</span></p></li><li><p><span>preach : 讲道，布道；宣传，鼓吹</span></p></li><li><p><span>convention ：习俗；大会；公约</span></p></li><li><p><span>conference ： 会议</span></p></li><li><p><span>investment ：投资，投入</span></p></li><li><p><span>assemble ：（使）集合，（使）聚集</span></p></li><li><p><span>privacy ：隐私 </span></p></li><li><p><span>cease : （使）停止</span></p></li><li><p><span>denote ：代表，意指</span></p></li><li><p><span>obsession ：着魔，痴迷</span></p></li><li><p><span>mandate ：授权；命令；强制执行</span></p></li><li><p><span>attach ：附上，系上，贴上；认为...具有</span></p></li><li><p><span>protocol ：礼仪，礼节；协议；治疗方案</span></p></li><li><p><span>alternative ：可替代的，其他的；非传统的；可供选择的事物</span></p></li><li><p><span>privilege：特权；权势；荣幸；给...特权</span></p></li><li><p><span>conscious：意识到的</span></p></li><li><p><span>designate：指定，选定；尚未就职的</span></p></li><li><p><span>auxiliary：辅助的，备用的</span></p></li><li><p><span>press：报刊；新闻界；印刷机；按，压</span></p></li><li><p><span>fling：扔，掷；猛动身体；一时的放纵</span></p></li><li><p><span>trigger：板机，触发器；起因，诱因；引起，触发</span></p></li><li><p><span>worship：敬奉，崇拜（有n有v）；阁下</span></p></li><li><p><span>instinct：天性，本能；直觉</span></p></li><li><p><span>probe：追问，探究；探针，航天探测器</span></p></li><li><p><span>derive：起源于，来自；从...中获得</span></p></li><li><p><span>qualitative：质量的，定性的，性质的</span></p></li><li><p><span>compose：组成；作曲，写信；使平静</span></p></li><li><p><span>distribute：分发；分配</span></p></li><li><p><span>nasty：不友善的；糟糕的，严重的</span></p></li><li><p><span>tow：牵引，拖，拉</span></p></li><li><p><span>otherwise：否则，除此以外；以其他方式</span></p></li><li><p><span>vulnerable：脆弱的，易受伤害的</span></p></li><li><p><span>transction : 交易，业务</span></p></li><li><p><span>alter : 改变</span></p></li><li><p><span>amateur ：业余爱好者；外行；业余的</span></p></li><li><p><span>annual ：年度的</span></p></li><li><p><span>anxiety ：焦虑；担心害怕</span></p></li><li><p><span>anxious ： 焦虑的；紧张的</span></p></li><li><p><span>automation ： 自动化</span></p></li><li><p><span>abandon ： 放弃</span></p></li><li><p><span>debate ： 辩论</span></p></li><li><p><span>bias ：偏见；偏爱</span></p></li><li><p><span>brief ： 短时间的，短暂的；简洁的；简单的</span></p></li><li><p><span>cancer ：癌症</span></p></li><li><p><span>candidate ： 候选人，申请人</span></p></li><li><p><span>capital ：资本；资方；首都；中心</span></p></li><li><p><span>perceive ： 意识到；注意到；将...视为</span></p></li><li><p><span>celebrate ：歌颂</span></p></li><li><p><span>celebrity ：名人</span></p></li><li><p><span>percentage ：百分比</span></p></li><li><p><span>capacity ：容量；领悟能力</span></p></li><li><p><span>capture ：吸引；激发；占领，俘虏</span></p></li><li><p><span>capable ：有...能力的</span></p></li><li><p><span>exception ： 例外，除外</span></p></li><li><p><span>exceptional ： 例外的；特殊的；优秀的，杰出的</span></p></li><li><p><span>certain ： 特定的；某个；显而易见无法描述的；确信，无疑</span></p></li><li><p><span>procedure ： 程序，步骤；手术</span></p></li><li><p><span>access ：机会，权利</span></p></li><li><p><span>assess ：评估</span></p></li><li><p><span>recession ： 经济衰退；退后，撤回</span></p></li><li><p><span>chart ：图表；记录，跟踪</span></p></li><li><p><span>chemical ：化学的</span></p></li><li><p><span>casual ： 不经意的；漫不经心的；随便的</span></p></li><li><p><span>cautious ： 谨慎的</span></p></li><li><p><span>suicide ： 自杀；自毁，自取灭亡的行为</span></p></li><li><p><span>council : 委员会；理事会</span></p></li><li><p><span>civil ： 民用的；公民的；客气的</span></p></li><li><p><span>declare ： 宣布；宣告；申报</span></p></li><li><p><span>classical ： 古典的；严肃的</span></p></li><li><p><span>classify ：将...分类；界定，划分</span></p></li><li><p><span>decline ： 减少；下降</span></p></li><li><p><span>exclude ： 不准......进入；不放在考虑之列</span></p></li><li><p><span>contrary：相反的</span></p></li><li><p><span>corporation ： 大公司；大企业</span></p></li><li><p><span>discovery ： 被发现的事物；发现</span></p></li><li><p><span>creature ： 生物；动物 </span></p></li><li><p><span>criminal ： 犯罪的，犯法的；刑法的 ； 刑事的；罪犯</span></p></li></ol><p><span>计数：89</span></p><h2 id='811'><span>8.11</span></h2><ol start='' ><li><p><span>financial ： 金融</span></p></li><li><p><span>criticize : 批评；批判</span></p></li><li><p><span>critical ： 极重要的，关键的；批判的</span></p></li><li><p><span>criticism ：批评；批判；指责</span></p></li><li><p><span>crucial ： 至关重要的；关键性的</span></p></li><li><p><span>crude ： 未加提炼的 ； 粗糙的 ； 粗俗的；原油；石油</span></p></li><li><p><span>cultivate ： 培养 ； 培育 ； 获得</span></p></li><li><p><span>cure ： 药；疗法；对策；治好；消除；解决</span></p></li><li><p><span>security ： 安全；保安措施；保安部门</span></p></li><li><p><span>accuracy ： 准确性；精准度；准确；正确</span></p></li><li><p><span>occur ： 发生；出现 </span></p></li><li><p><span>core ： 最重要的；主要的；核心，要点</span></p></li><li><p><span>democratic ： 民主精神的；民主作风的；民主党的</span></p></li><li><p><span>democracy ： 民主制度；民主；民主国家</span></p></li><li><p><span>epidemic ： 传染病；流行病；盛行</span></p></li><li><p><span>indicate ： 表明 ； 显示 ；象征</span></p></li><li><p><span>discipline ： 纪律；训练；学科</span></p></li><li><p><span>diverse ： 不同的；多种多样的</span></p></li><li><p><span>individual ： 单独的；个别的</span></p></li><li><p><span>dominate ： 主宰：控制</span></p></li><li><p><span>dominant ：占支配地位；基因-》显性的 ； 显著的</span></p></li><li><p><span>conduct ： 进行；执行；行为，举止；实施办法</span></p></li><li><p><span>endure : 忍受 ； 忍耐；持续；持久</span></p></li><li><p><span>ethic ： 伦理学；道德学</span></p></li><li><p><span>inevitable ： 不可避免的；必然发生的</span></p></li><li><p><span>faculty ： 全体教员；院，系</span></p></li><li><p><span>efficient ： 效率高的</span></p></li><li><p><span>artificial ： 人工的；人造的；人为的；虚假的；假装的</span></p></li><li><p><span>qualification ： 学历；资格</span></p></li><li><p><span>profitable ：盈利的；有利润的；有益的；</span></p></li><li><p><span>affect ：影响；感染</span></p></li><li><p><span>fiction ： 假想之物；虚构的事；小说</span></p></li><li><p><span>inflation ： 通货膨胀；充气</span></p></li><li><p><span>inform ： 通知；告知；对...有影响</span></p></li><li><p><span>reinforce ： 加强；增强</span></p></li><li><p><span>confront ： 勇敢的面对；正视；</span></p></li></ol><p><span>计数 ： 36</span></p><h2 id='812'><span>8.12</span></h2><ol start='' ><li><p><span>aggressive ： 有进取心的；汲汲于成功的；好斗的；挑衅的</span></p></li><li><p><span>degree ： 程度；学位；度数</span></p></li><li><p><span>congress ： 国会</span></p></li><li><p><span>inherent ： 固有的；内在的</span></p></li><li><p><span>exhibit ： 展出；表现</span></p></li><li><p><span>exhibition：展览会；展出；</span></p></li><li><p><span>habitat ：生活环境；栖息地</span></p></li><li><p><span>historical ：有关历史研究的；历史学的</span></p></li><li><p><span>imitate ： 模仿；仿效</span></p></li><li><p><span>internal ： 内部的；体内的；内心的；内部的</span></p></li><li><p><span>interior ： 内部；里面；室内的</span></p></li><li><p><span>initial ：最初的；开始的</span></p></li><li><p><span>transition ： 过渡；转变</span></p></li><li><p><span>objection ： 反对的理由，异议</span></p></li><li><p><span>jury ： 陪审团</span></p></li><li><p><span>justice ： 法官；公平；审判；法律制度</span></p></li><li><p><span>justify ： 证明  ...... 正确</span></p></li><li><p><span>collective ： 集体的；共同的；全体成员的</span></p></li><li><p><span>lecture ： 讲座；讲课；演讲</span></p></li><li><p><span>liability ： 责任；债务</span></p></li><li><p><span>religion ： 宗教；宗教信仰</span></p></li><li><p><span>religious ： 宗教的</span></p></li><li><p><span>legitimate ： 合法的；法定的；正当的；合理的</span></p></li><li><p><span>illegal ： 非法的；违法的</span></p></li><li><p><span>legislation ： 立法；法律；法规</span></p></li><li><p><span>liberal ： 自由的；开明的</span></p></li><li><p><span>license ： 许可证</span></p></li><li><p><span>eliminate ： 排除；消除；清除</span></p></li><li><p><span>literature ： 文学；文学作品</span></p></li><li><p><span>literary ： 文学的</span></p></li><li><p><span>locate ： 确定......的准确地点</span></p></li><li><p><span>reluctant ： 不情愿的；勉强的</span></p></li><li><p><span>permanent ： 永久的；长久的；终生的，长期的</span></p></li><li><p><span>majority ： 大多数；大部分</span></p></li><li><p><span>remark ： 意见；评论；言论</span></p></li><li><p><span>remarkable ： 显著的；非凡的</span></p></li><li><p><span>mechanism ： 方法；机制；机械装置</span></p></li><li><p><span>mechanical ： 机械的；机械驱动的；行为机械的</span></p></li><li><p><span>medical ： 医学的；医疗的</span></p></li><li><p><span>emerge ： 显现；显露；出现</span></p></li><li><p><span>military ：军事的；军用的</span></p></li><li><p><span>diminish ： 减小</span></p></li></ol><p>&nbsp;</p><p><span>计数：42</span></p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><h2 id='813-814'><span>8.13-8.14</span></h2><ol start='' ><li><p><span>commit :犯（罪或错）；承诺；全心全意投入。</span></p></li><li><p><span>compromise : 妥协；折中；让步</span></p></li><li><p><span>dismiss ： 不予考虑；摒弃；解雇；开除；驳回</span></p></li><li><p><span>committee : 委员会</span></p></li><li><p><span>commission : 委员会；正式委托</span></p></li><li><p><span>commodity : 商品</span></p></li><li><p><span>demostrate : 证明，表明；表现；示范；示威</span></p></li><li><p><span>promote : 促进，推动；</span></p></li><li><p><span>motor : 汽车</span></p></li><li><p><span>prompt ： 促使 激起；迅速的；</span></p></li><li><p><span>mysterious: 神秘的；</span></p></li><li><p><span>renaissance : 复兴；文艺复兴</span></p></li><li><p><span>enormous : 巨大的；庞大的</span></p></li><li><p><span>notion ： 观念；理解</span></p></li><li><p><span>ignore ： 忽视</span></p></li><li><p><span>announce ： 宣告</span></p></li><li><p><span>innovation ： 创新；改革；新思想；新方法；</span></p></li><li><p><span>obesity ： 肥胖</span></p></li><li><p><span>obscure ： 无名的；费解的</span></p></li><li><p><span>operation ： 经营；业务；手术；公司；运转；</span></p></li><li><p><span>option ：选择；可选择的事物</span></p></li><li><p><span>adopt ： 采用；采取；正式通过；</span></p></li><li><p><span>optimistic ： 乐观的；抱乐观看法的；</span></p></li><li><p><span>ordinary ： 普通的；平常的；平凡的</span></p></li><li><p><span>negotiate ： 谈判；协商</span></p></li><li><p><span>impact ： 有影响；巨大影响；巨大作用；</span></p></li><li><p><span>parliament ：议会，国会</span></p></li><li><p><span>counterpart ： 职位或作用相当的人</span></p></li><li><p><span>sympathy ： 同情，赞同</span></p></li><li><p><span>passion ：激情；热爱；盛怒</span></p></li><li><p><span>appeal ： 上诉；呼吁；有吸引力</span></p></li><li><p><span>apparent : 明显的；显而易见的；</span></p></li><li><p><span>separate ： 单独的；独立的；不同的；不相关的</span></p></li><li><p><span>comparison ： 对比；相比 ；比较</span></p></li><li><p><span>peculiar ： 特有的；特别的；奇怪的；不寻常的；</span></p></li><li><p><span>indispensable ： 不可或缺的；必不可少的</span></p></li><li><p><span>emphasize : 强调；重视；使明显；使突出</span></p></li><li><p><span>physics ： 物理学</span></p></li><li><p><span>physical ： 客观存在的；有形的；身体的；按照自然规律的</span></p></li><li><p><span>complaint ： 抱怨投诉；</span></p></li></ol><p>&nbsp;</p><h2 id='815-818'><span>8.15-8.18</span></h2><ol start='' ><li><p><span>multiple ：倍数；多种多样的；数量多的。</span></p></li><li><p><span>explosion : 爆炸；猛增</span></p></li><li><p><span>application : 申请书；应用</span></p></li><li><p><span>implication : 暗指</span></p></li><li><p><span>complicated : 复杂的，难懂的。</span></p></li><li><p><span>politician : 政治家</span></p></li><li><p><span>monopoly : 垄断；专营服务；垄断企业</span></p></li><li><p><span>impose : 强制施行</span></p></li><li><p><span>exposure : 暴露，揭露。</span></p></li><li><p><span>propose ： 提出，建议：提议，打算；</span></p></li><li><p><span>proposal : 提议；提案；求婚。</span></p></li><li><p><span>composition ： 作文；成分；构成</span></p></li><li><p><span>opposite : 对面的；另一边的</span></p></li><li><p><span>possess ： 拥有；有；具有</span></p></li><li><p><span>potential ： 潜在的；潜力；可能性</span></p></li><li><p><span>appreciate ： 欣赏；感激；感谢</span></p></li><li><p><span>praise : 赞扬；称赞；</span></p></li><li><p><span>comprehension : 理解能力；理解</span></p></li><li><p><span>comprehensive : 全面的；详尽的</span></p></li><li><p><span>suppress : 克制；抑制</span></p></li><li><p><span>principle : 原则；原理</span></p></li><li><p><span>primary : 主要的</span></p></li><li><p><span>prior ： 先前的；优先的</span></p></li><li><p><span>priority ： 优先事项；首要事情</span></p></li><li><p><span>privilege ： 优惠待遇；特殊待遇</span></p></li><li><p><span>deprive ： 剥夺；使不能享有</span></p></li><li><p><span>approach ： 方式；对付</span></p></li><li><p><span>appropriate ：适当的；合适的；盗用；挪用</span></p></li><li><p><span>proper : 恰当的；合适的</span></p></li><li><p><span>property ： 财产；财务；房地产</span></p></li><li><p><span>psychology ： 心理学</span></p></li><li><p><span>symptom ： 症状；征兆</span></p></li><li><p><span>republican : 共和主义者；共和党的</span></p></li><li><p><span>pure ： 纯的；纯粹的；完全的</span></p></li><li><p><span>acquire ： 获得；购买；学到；</span></p></li><li><p><span>enquiry ： 探究；探索</span></p></li><li><p><span>acquisition ： 收购；获得；习得</span></p></li><li><p><span>radical ： 彻底的；根本的</span></p></li><li><p><span>arrange ： 安排；整理；</span></p></li><li><p><span>rigid ： 严格死板的；固执的；坚硬的</span></p></li><li><p><span>regulate ： 控制；管理；调整</span></p></li><li><p><span>regulation ： 规章制度；法规</span></p></li><li><p><span>render ： 使变得；使处于某状态；</span></p></li><li><p><span>ritual ： 惯例；程序；宗教仪式</span></p></li><li><p><span>scale ： 规模；程度；等级；级别</span></p></li><li><p><span>sceptical ： 怀疑的</span></p></li></ol><h2 id='825'><span>8.25</span></h2><p><span>scholar ：学者</span></p><p><span>conscious ：刻意的，有意识地</span></p><p><span>telescope ： 望远镜</span></p><p><span>present ： 展示，展现；现在</span></p><p><span>represent ： 象征，体现；</span></p><p><span>representative ： 有代表性的</span></p><p><span>sensitive ：敏感的 ； 过敏的</span></p><p><span>pursue ： 追求；致力于</span></p><p><span>consequence ： 后果，影响</span></p><p><span>consequently ： 因此；所以</span></p><p><span>pursuit ： 追求；寻找；追赶；</span></p><p><span>conservation ： 节约；保存；</span></p><p><span>conservative ：保守的；守旧的</span></p><p><span>preserve ： 保护；维护；保鲜；专门领域</span></p><p><span>reserve ： 预定；留出；保留</span></p><p><span>deserve : 值得，应得；</span></p><p><span>severe : 十分严重的</span></p><p><span>considerable ： 相当多（大，重要）的</span></p><p><span>significant : 数量相当大的；显著的；重要的</span></p><p><span>significance : 重要性，意义</span></p><p><span>assign ：分派 布置</span></p><p><span>associate ： 同事；伙伴；联系；联想</span></p><p><span>association ： 协会；交往；联系；</span></p><p><span>resolve ： 解决 ； 决心；</span></p><p><span>philosophy : 哲学；人生哲学；</span></p><p><span>philosopher : 哲学家；思想家；哲人</span></p><p><span>speculate ： 推测 </span></p><p><span>prospect ： 前景；展望；</span></p><p><span>perspective ： （思考问题的）角度；合理判断</span></p><p><span>specific : 具体的；明确的；特定的；细节</span></p><p><span>specialist ： 专家；专科医生</span></p><p><span>desperate ： 不顾一切的；孤注一掷的；渴望的</span></p><p><span>prosperity ： 繁荣；兴旺</span></p><p><span>responsible ： 有责任心的；负有责任的</span></p><p><span>sponsor ： 赞助；举办</span></p><p><span>spouse ： 配偶</span></p><p><span>substance ： 物质</span></p><p><span>instance ： 例子；事例；</span></p><p><span>stable : 稳定的；稳固的；</span></p><p><span>establish ： 建立；创立；证实</span></p><p><span>status ： 地位，身份；职位；状态；</span></p><p><span>circumstance :条件；状况；环境</span></p><p><span>contrast : 对比；对照；</span></p><p><span>estate ： 庄园；地产；住宅区</span></p><p><span>distinction ： 差别； 区别； 不同</span></p><p><span>distinguish ： 区分 ；辨别 ；分清；认出</span></p><p><span>stimulate ： 刺激 ； 促使 ； 激发</span></p><p><span>constitute ： 组成；构成</span></p><p><span>constitution : 身体素质 ；宪法；宪章</span></p><p><span>institute : 制度 ； 提出（诉讼）；机构</span></p><p><span>restore ： 恢复 </span></p><p><span>restrict ： 限制；约束</span></p><p><span> strain ： 压力 ； 拉伤；</span></p><p><span>persuade : 劝说；说服</span></p><p><span>insurance : 保险；保障措施；</span></p><p><span>assure ： 使确信；确保；保证</span></p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p><span> </span></p><p>&nbsp;</p><h1 id='真题单词英语1）'><span>真题单词（英语1）</span></h1><h2 id='2008'><span>2008</span></h2><h3 id='text1'><span>Text1</span></h3><p><span>category：类别</span></p><p><span>veteran：老兵</span></p><p><span>hormone：激素，荷尔蒙</span></p><p><span>ovary：卵巢</span></p><p><span>reproductive：生殖的</span></p><p><span>capacity：容量/能力</span></p><p><span>durable：耐用的</span></p><p><span>wear-and-tear：磨损</span></p><p><span>be susceptible to：易受……影响</span></p><p><span>anxiety disorder：焦虑症</span></p><p><span>be vulnerable to：易受……伤害</span></p><p><span>chronic：慢性的</span></p><p><span>domestic：国内的/家庭的</span></p><p>&nbsp;</p><h3 id='text2'><span>Text2</span></h3><p><span>straightforward：直截了当的/简单明了的</span></p><p><span>affiliation：隶属/关系</span></p><p><span>commercial：商业的</span></p><p><span>far-reaching：影响深远的</span></p><p><span>endeavor：努力/尝试</span></p><p><span>association：协会/联系</span></p><p><span>so-called： 所谓的</span></p><p><span>site-licensing：站点许可/网站许可</span></p><p><span>peer-review：同行评审</span></p><p><span>estimate：估计/估算</span></p><p><span>render：呈现/使成为</span></p><p><span>archive：档案/存档</span></p><p><span>hybrid： 混合的/杂交的</span></p><p><span>rest with sb：由某人负责/取决于某人</span></p><p><span>specialize in：专攻/专门从事</span></p><p>&nbsp;</p><h3 id='text3'><span>Text3</span></h3><p><span>cite : 引用</span></p></div></div>
+
+<script>(function(){var e=document.body.parentElement,t=[],n=null,i=document.body.classList.contains("typora-export-collapse-outline"),r=function(e,t,n){document.addEventListener(e,function(e){if(!e.defaultPrevented)for(var i=e.target;i&&i!=this;i=i.parentNode)if(i.matches(t)){!1===n.call(i,e)&&(e.preventDefault(),e.stopPropagation());break}},!1)};function o(){return e.scrollTop}r("click",".outline-expander",function(e){var t=this.closest(".outline-item-wrapper").classList;return t.contains("outline-item-open")?t.remove("outline-item-open"):t.add("outline-item-open"),d(),!1}),r("click",".outline-item",function(e){var t=this.querySelector(".outline-label");if(location.hash="#"+t.getAttribute("href"),i){var n=this.closest(".outline-item-wrapper").classList;n.contains("outline-item-open")||n.add("outline-item-open"),c(),n.add("outline-item-active")}});var a,s,l=function(){var e=o();n=null;for(var i=0;i<t.length&&t[i][1]-e<60;i++)n=t[i]},c=function(){document.querySelectorAll(".outline-item-active").forEach(e=>e.classList.remove("outline-item-active")),document.querySelectorAll(".outline-item-single.outline-item-open").forEach(e=>e.classList.remove("outline-item-open"))},d=function(){if(n){c();var e=document.querySelector('.outline-label[href="#'+(CSS.escape?CSS.escape(n[0]):n[0])+'"]');if(e)if(i){var t=e.closest(".outline-item-open>ul>.outline-item-wrapper");if(t)t.classList.add("outline-item-active");else{for(var r=(e=e.closest(".outline-item-wrapper")).parentElement.closest(".outline-item-wrapper");r;)r=(e=r).parentElement.closest(".outline-item-wrapper");e.classList.add("outline-item-active")}}else e.closest(".outline-item-wrapper").classList.add("outline-item-active")}};window.addEventListener("scroll",function(e){a&&clearTimeout(a),a=setTimeout(function(){l(),d()},300)});var u=function(){s=setTimeout(function(){!function(){t=[];var e=o();document.querySelector("#write").querySelectorAll("h1, h2, h3, h4, h5, h6").forEach(n=>{var i=n.getAttribute("id");t.push([i,e+n.getBoundingClientRect().y])})}(),l(),d()},300)};window.addEventListener("resize",function(e){s&&clearTimeout(s),u()}),u()})();</script></body>
+</html>
