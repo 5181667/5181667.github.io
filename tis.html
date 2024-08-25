@@ -9,6 +9,18 @@
     <style>
         body {
             font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        #countdown {
+            font-size: 2em;
+            color: #333;
+        }
+    </style>
+    <style>
+        
+        body {
+            font-family: Arial, sans-serif;
             margin: 20px;
         }
 
@@ -40,6 +52,33 @@
 </head>
 
 <body>
+<h1>距离考研还有</h1>
+<div id="countdown"></div>
+
+<script>
+    function countdown() {
+        // 考研日期
+        const examDate = new Date("2024-12-21");
+
+        // 当前日期
+        const now = new Date();
+
+        // 计算差值 (毫秒)
+        const timeDiff = examDate - now;
+
+        // 转换成天数
+        const daysLeft = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+
+        // 更新页面
+        document.getElementById("countdown").innerText = daysLeft + " 天";
+    }
+
+    // 页面加载后立即执行一次
+    countdown();
+
+    // 每天更新一次
+    setInterval(countdown, 1000 * 60 * 60 * 24);
+</script>
 <h1>Algorithm Contests</h1>
 <ul>
     <li><a href="solve/11_30.html">11.30题解</a></li>
@@ -47,6 +86,7 @@
     <li><a href="solve/11_11.html">11.11题解</a></li>
     <li><a href="solve/11_4.html">11.04题解</a></li>
     <li><a href="solve/英语单词.html">考研单词</a></li>
+    <li><a href="solve/0825.html">8.25</a></li>
     <li><a href="solve/软件设计与体系结构.html">复习</a></li>
     <li><a href="https://blog.csdn.net/hc5181667">CSDN个人主页</a></li>
     <!-- Add more contest names as needed -->
