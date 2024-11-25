@@ -1,539 +1,525 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <title>💗 Love you 💗</title>
-    <style type="text/css">
-      body {
-        margin: 0;
-        overflow: hidden;
-        background: url('1.jpg') no-repeat center center;
-        /*background-size:;*/
-        height: 100vh;
-      }
- 
-      canvas {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-      }
- 
-      #pinkboard {
-        animation: anim 1.5s ease-in-out infinite;
-        -webkit-animation: anim 1.5s ease-in-out infinite;
-        -o-animation: anim 1.5s ease-in-out infinite;
-        -moz-animation: anim 1.5s ease-in-out infinite;
-      }
- 
-      @keyframes anim {
-        0% {
-          transform: scale(0.8);
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>心语 AI</title>
+    <style>
+        :root {
+            --pink-primary: #FF9EC9;
+            --pink-light: #FFF5F9;
+            --pink-border: rgba(255, 158, 201, 0.3);
+            
+            --blue-primary: #4A90E2;
+            --blue-light: #F5F9FF;
+            --blue-border: rgba(74, 144, 226, 0.3);
+            
+            --theme-primary: var(--pink-primary);
+            --theme-light: var(--pink-light);
+            --theme-border: var(--pink-border);
+            
+            --text-primary: #333;
+            --text-secondary: #666;
+            --border-color: #eee;
         }
- 
-        25% {
-          transform: scale(0.7);
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #fff;
         }
- 
-        50% {
-          transform: scale(1);
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
         }
- 
-        75% {
-          transform: scale(0.7);
+
+        /* 顶部标题区域 */
+        .top-header {
+            margin-bottom: 30px;
         }
- 
-        100% {
-          transform: scale(0.8);
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
-      }
- 
-      @-webkit-keyframes anim {
-        0% {
-          -webkit-transform: scale(0.8);
+
+        .logo-img {
+            height: 32px;
         }
- 
-        25% {
-          -webkit-transform: scale(0.7);
+
+        .logo h1 {
+            font-size: 24px;
+            margin: 0;
         }
- 
-        50% {
-          -webkit-transform: scale(1);
+
+        .subtitle {
+            color: var(--text-secondary);
+            margin-top: 5px;
         }
- 
-        75% {
-          -webkit-transform: scale(0.7);
+
+        /* AI助手信息 */
+        .ai-profile {
+            text-align: center;
+            margin-bottom: 30px;
         }
- 
-        100% {
-          -webkit-transform: scale(0.8);
+
+        .ai-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-bottom: 10px;
         }
-      }
- 
-      @-o-keyframes anim {
-        0% {
-          -o-transform: scale(0.8);
+
+        .ai-profile h2 {
+            margin: 0;
+            font-size: 20px;
         }
- 
-        25% {
-          -o-transform: scale(0.7);
+
+        .ai-profile p {
+            color: var(--text-secondary);
+            margin: 5px 0;
         }
- 
-        50% {
-          -o-transform: scale(1);
+
+        /* 模式切换 */
+        .mode-switch {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 15px 0;
         }
- 
-        75% {
-          -o-transform: scale(0.7);
+
+        .mode-btn {
+            padding: 6px 12px;
+            border-radius: 15px;
+            border: 1px solid var(--theme-primary);
+            background: white;
+            cursor: pointer;
         }
- 
-        100% {
-          -o-transform: scale(0.8);
+
+        .mode-btn.active {
+            background: var(--theme-primary);
+            color: white;
         }
-      }
- 
-      @-moz-keyframes anim {
-        0% {
-          -moz-transform: scale(0.8);
+
+        /* 聊天区域 */
+        .chat-title {
+            font-size: 16px;
+            margin-bottom: 15px;
         }
- 
-        25% {
-          -moz-transform: scale(0.7);
+
+        .chat-container {
+            height: 400px;
+            overflow-y: auto;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
         }
- 
-        50% {
-          -moz-transform: scale(1);
+
+        /* 快捷操作区 */
+        .quick-actions {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
         }
- 
-        75% {
-          -moz-transform: scale(0.7);
+
+        .quick-btn {
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            background: white;
+            cursor: pointer;
+            white-space: nowrap;
         }
- 
-        100% {
-          -moz-transform: scale(0.8);
+
+        /* 输入区域 */
+        .input-area {
+            display: flex;
+            gap: 10px;
         }
-      }
- 
-      #name {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        margin-top: -20px;
-        font-size: 46px;
-        color: #ea80b0;
-      }
+
+        .input-field {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            resize: none;
+            height: 40px;
+            font-size: 14px;
+        }
+
+        .send-btn {
+            padding: 0 20px;
+            border: none;
+            border-radius: 8px;
+            background: var(--theme-primary);
+            color: white;
+            cursor: pointer;
+        }
+
+        /* 工具栏 */
+        .tool-bar {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 8px;
+        }
+
+        .tool-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 1px solid var(--border-color);
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        /* 消息样式 */
+        .message {
+            margin: 10px 0;
+            max-width: 80%;
+        }
+
+        .message.ai {
+            margin-right: auto;
+        }
+
+        .message.user {
+            margin-left: auto;
+        }
+
+        .message-content {
+            padding: 10px 15px;
+            border-radius: 15px;
+            background: var(--theme-light);
+        }
+
+        .message.user .message-content {
+            background: var(--theme-primary);
+            color: white;
+        }
+
+        /* 添加背景花纹 */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 10% 20%, var(--theme-light) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, var(--theme-light) 0%, transparent 20%),
+                radial-gradient(circle at 50% 50%, var(--theme-light) 0%, transparent 25%);
+            opacity: 0.6;
+            z-index: -1;
+        }
+
+        /* 添加装饰元素 */
+        .decoration {
+            position: fixed;
+            pointer-events: none;
+        }
+
+        .decoration-top-left {
+            top: 0;
+            left: 0;
+            width: 200px;
+            height: 200px;
+            background: 
+                radial-gradient(circle at 30% 30%, var(--theme-light) 0%, transparent 70%);
+        }
+
+        .decoration-bottom-right {
+            bottom: 0;
+            right: 0;
+            width: 200px;
+            height: 200px;
+            background: 
+                radial-gradient(circle at 70% 70%, var(--theme-light) 0%, transparent 70%);
+        }
     </style>
-  </head>
- 
-  <body>
-    <audio
-      src="music.mp3"
-      controls
-      style="position: absolute; left: 0; top: 0; z-index: 10000"
-    ></audio>
-    <canvas id="pinkboard"></canvas>
-    <div id="name">赵心语</div>
-    <canvas id="canvas"></canvas>
- 
-    <script
-      src="https://code.jquery.com/jquery-3.2.1.min.js"
-      charset="utf-8"
-    ></script>
-    <script type="text/javascript">
-      const colors = [
-        '#eec996',
-        '#8fb7d3',
-        '#b7d4c6',
-        '#c3bedd',
-        '#f1d5e4',
-        '#cae1d3',
-        '#f3c89d',
-        '#d0b0c3',
-        '#819d53',
-        '#c99294',
-        '#cec884',
-        '#ff8e70',
-        '#e0a111',
-        '#fffdf6',
-        '#cbd7ac',
-        '#e8c6c0',
-        '#dc9898',
-        '#ecc8ba'
-      ] //用来设置的颜色
-      var canvas = document.getElementById('canvas')
-      var ctx = canvas.getContext('2d')
-      let count = 1
- 
-      var ww = window.innerWidth
-      var wh = window.innerHeight
- 
-      var hearts = []
- 
-      function init() {
-        requestAnimationFrame(render)
-        canvas.width = ww
-        canvas.height = wh
-        for (var i = 0; i < 100; i++) {
-          hearts.push(new Heart())
-        }
-      }
- 
-      function Heart() {
-        this.x = Math.random() * ww
-        this.y = Math.random() * wh
-        this.opacity = Math.random() * 0.5 + 0.5
-        this.vel = {
-          x: (Math.random() - 0.5) * 4,
-          y: (Math.random() - 0.5) * 4
-        }
-        this.targetScale = Math.random() * 0.15 + 0.02
-        this.scale = this.targetScale * Math.random()
-      }
- 
-      Heart.prototype.update = function (i) {
-        this.x += this.vel.x
-        this.y += this.vel.y
- 
-        this.scale += (this.targetScale - this.scale) * 0.01
-        if (this.x - this.width > ww || this.x + this.width < 0) {
-          this.scale = 0
-          this.x = Math.random() * ww
-        }
-        if (this.y - this.height > wh || this.y + this.height < 0) {
-          this.scale = 0
-          this.y = Math.random() * wh
-        }
-        this.width = 473.8
-        this.height = 408.6
-      }
-      Heart.prototype.draw = function (i, val) {
-        ctx.globalAlpha = this.opacity
-        ctx.font = `${180 * this.scale}px "微软雅黑"`
-        // ctx.font="20px";
-        ctx.fillStyle = colors[i % 18]
-        ctx.fillText(
-          val,
-          this.x - this.width * 0.5,
-          this.y - this.height * 0.5,
-          this.width,
-          this.height
-        )
-        // ctx.drawImage(
-        //   heartImage,
-        //   this.x - this.width * 0.5,
-        //   this.y - this.height * 0.5,
-        //   this.width,
-        //   this.height
-        // );
-      }
- 
-      function render() {
-        ctx.clearRect(0, 0, ww, wh)
-        // ctx.globalAlpha = 1;
-        // ctx.fillStyle = "rgba(255,255,255,0.3)";
-        // ctx.fillRect(0, 0, ww, wh);
-        // 周围的文字想要多个
-        var text = ['赵心语', '❤️', '赵心语']
-        for (var i = 0; i < 100; i++) {
-          hearts[i].update(i)
-          hearts[i].draw(i, text[i % text.length])
-        }
-        requestAnimationFrame(render)
-      }
-      init()
- 
-      // var heartImage = new Image();
-      // heartImage.onload = init();
-      // heartImage.src =
-      //   "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0NzMuOHB4IiBoZWlnaHQ9IjQwOC42cHgiIHZpZXdCb3g9IjAgMCA0NzMuOCA0MDguNiI+PHBhdGggZmlsbD0iI2QzMjkzMiIgZD0iTTQwNC42LDE2LjZDMzg1LjQsNi4xLDM2My41LDAsMzQwLDBjLTQxLjUsMC03OC41LDE4LjktMTAzLDQ4LjVDMjEyLjMsMTguOSwxNzUuMywwLDEzMy44LDAgYy0yMy4zLDAtNDUuMyw2LjEtNjQuNSwxNi42QzI3LjksMzkuNSwwLDgzLjQsMCwxMzMuOWMwLDE0LjQsMi40LDI4LjMsNi42LDQxLjJDMjkuNiwyNzguNCwyMzcsNDA4LjYsMjM3LDQwOC42IHMyMDcuMi0xMzAuMiwyMzAuMi0yMzMuNWM0LjMtMTIuOSw2LjYtMjYuOCw2LjYtNDEuMkM0NzMuOCw4My40LDQ0NS45LDM5LjYsNDA0LjYsMTYuNnoiLz48L3N2Zz4=";
- 
-      window.addEventListener('resize', function () {
-        ww = window.innerWidth
-        wh = window.innerHeight
-      })
-    </script>
+</head>
+<body>
+    <div class="decoration decoration-top-left"></div>
+    <div class="decoration decoration-bottom-right"></div>
+
+    <div class="floating-items">
+        <!-- 这些元素会随机漂浮在页面上 -->
+    </div>
+
+
+    <div class="container">
+        <!-- 顶部标题区域 -->
+        <div class="top-header">
+            <div class="logo">
+                <img src="1111.png" alt="心语" class="logo-img">
+                <h1>心语</h1>
+            </div>
+            <div class="subtitle">
+                由小chi为您服务 👋
+            </div>
+        </div>
+
+        <!-- 主要内容区域 -->
+        <div class="main-content">
+            <!-- AI助手信息 -->
+            <div class="ai-profile">
+                <!-- 模式切换 -->
+                <div class="mode-switch">
+                    <button class="mode-btn active" data-mode="cute">可爱小chi</button>
+                    <button class="mode-btn" data-mode="professional">chi哥</button>
+                </div>
+            </div>
+
+            <!-- 聊天记录标题 -->
+            <h3 class="chat-title">聊天记录</h3>
+
+            <!-- 聊天区域 -->
+            <div class="chat-container">
+                <div class="chat-messages" id="chatMessages">
+                    <!-- 消息内容会动态插入 -->
+                </div>
+            </div>
+
+            <!-- 快捷操作区 -->
+            <div class="quick-actions">
+                <button class="quick-btn">👋 打个招呼</button>
+                <button class="quick-btn">💡 寻求帮助</button>
+                <button class="quick-btn">🎯 设定目标</button>
+                <button class="quick-btn">📝 记录心情</button>
+            </div>
+
+            <!-- 输入区域 -->
+            <div class="input-area">
+                <textarea 
+                    class="input-field" 
+                    placeholder="输入消息... (Enter发送, Shift+Enter换行)"
+                ></textarea>
+                <button class="send-btn">发送</button>
+            </div>
+        </div>
+
+        <!-- 右上角工具栏 -->
+        <div class="tool-bar">
+            <button class="tool-btn">❤️</button>
+            <button class="tool-btn">⭐</button>
+            <button class="tool-btn">💬</button>
+        </div>
+    </div>
+
+    <!-- 添加特效按钮面板 -->
+    <div class="effects-panel">
+        <button class="effect-btn" onclick="createEffect('heart')" title="心形特效">❤️</button>
+        <button class="effect-btn" onclick="createEffect('star')" title="星星特效">⭐</button>
+        <button class="effect-btn" onclick="createEffect('bubble')" title="泡泡特效">🫧</button>
+    </div>
+
+    <!-- 添加背景装饰 -->
+    <div class="bg-decoration"></div>
+
+    <div class="mode-switch">
+        <button class="mode-btn active" data-mode="cute">可爱小chi</button>
+        <button class="mode-btn" data-mode="professional">chi哥</button>
+    </div>
+
     <script>
-      /*
-       * Settings
-       */
-      var settings = {
-        particles: {
-          length: 500, // maximum amount of particles
-          duration: 2, // particle duration in sec
-          velocity: 100, // particle velocity in pixels/sec
-          effect: -0.75, // play with this for a nice effect
-          size: 30 // particle size in pixels
+        document.addEventListener('DOMContentLoaded', () => {
+            const chatApp = {
+                init() {
+                    // 获取必要的DOM元素
+                    this.chatMessages = document.getElementById('chatMessages');
+                    this.messageInput = document.querySelector('.input-field');
+                    this.sendButton = document.querySelector('.send-btn');
+                    this.modeBtns = document.querySelectorAll('.mode-btn');
+                    this.quickBtns = document.querySelectorAll('.quick-btn');
+                    
+                    // 初始化状态
+                    this.currentMode = 'cute';
+                    this.chatService = new ChatService();
+                    
+                    // 绑定事件
+                    this.bindEvents();
+                    this.showWelcomeMessage();
+                },
+
+                bindEvents() {
+                    // 模式切换事件
+                    this.modeBtns.forEach(btn => {
+                        btn.addEventListener('click', (e) => {
+                            const mode = e.target.getAttribute('data-mode');
+                            this.switchMode(mode);
+                        });
+                    });
+
+                    // 发送消息事件
+                    this.sendButton.addEventListener('click', () => this.sendMessage());
+                    this.messageInput.addEventListener('keypress', (e) => {
+                        if (e.key === 'Enter' && !e.shiftKey) {
+                            e.preventDefault();
+                            this.sendMessage();
+                        }
+                    });
+
+                    // 快捷按钮事件
+                    this.quickBtns.forEach(btn => {
+                        btn.addEventListener('click', (e) => {
+                            this.messageInput.value = e.target.textContent.slice(2);
+                            this.messageInput.focus();
+                        });
+                    });
+                },
+
+                switchMode(mode) {
+                    // 更新当前模式
+                    this.currentMode = mode;
+                    
+                    // 更新容器的数据属性以切换主题
+                    document.querySelector('.container').setAttribute('data-mode', mode);
+                    
+                    // 更新按钮状态
+                    this.modeBtns.forEach(btn => {
+                        if (btn.getAttribute('data-mode') === mode) {
+                            btn.classList.add('active');
+                        } else {
+                            btn.classList.remove('active');
+                        }
+                    });
+
+                    // 更新欢迎消息
+                    this.showWelcomeMessage();
+                },
+
+                showWelcomeMessage() {
+                    // 清空现有消息
+                    this.chatMessages.innerHTML = '';
+                    
+                    // 根据模式显示不同的欢迎消息
+                    const welcomeMsg = this.currentMode === 'cute' 
+                        ? "心语你好呀！我是小chi~ 有什么我可以帮你的吗？✨" 
+                        : "心语你好，我是chi哥。很高兴为您服务。请问有什么我可以帮助您的吗？";
+                    
+                    this.addMessage(welcomeMsg, 'ai');
+                },
+
+                addMessage(content, type) {
+                    const messageDiv = document.createElement('div');
+                    messageDiv.className = `message ${type}`;
+                    messageDiv.innerHTML = `
+                        <div class="message-content">
+                            ${content}
+                        </div>
+                    `;
+                    this.chatMessages.appendChild(messageDiv);
+                    this.scrollToBottom();
+                },
+
+                scrollToBottom() {
+                    this.chatMessages.scrollTop = this.chatMessages.scrollHeight;
+                },
+
+                async sendMessage() {
+                    const message = this.messageInput.value.trim();
+                    if (!message) return;
+
+                    // 添加用户消息
+                    this.addMessage(message, 'user');
+                    this.messageInput.value = '';
+
+                    try {
+                        // 获取AI回复
+                        const response = await this.chatService.getAIResponse(message, this.currentMode);
+                        this.addMessage(response, 'ai');
+                    } catch (error) {
+                        this.addMessage('抱歉，出现了一些错误，请稍后再试 😢', 'error');
+                    }
+                }
+            };
+
+            // 初始应用
+            chatApp.init();
+        });
+
+        class ChatService {
+            constructor() {
+                this.apiUrl = 'https://api.openai-hk.com/v1/chat/completions';
+                // API密钥应该从环境变量或后端获取，这里仅作示例
+                this.apiKey = 'hk-c5kbbx1000025081b7586ac34f0da06c99975d1780d819f8';
+            }
+
+            async getAIResponse(message, mode) {
+                try {
+                    const response = await fetch(this.apiUrl, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${this.apiKey}`
+                        },
+                        body: JSON.stringify({
+                            model: "gpt-3.5-turbo",
+                            messages: [
+                                {
+                                    role: "system",
+                                    content: this.getSystemPrompt(mode)
+                                },
+                                {
+                                    role: "user",
+                                    content: message
+                                }
+                            ],
+                            temperature: mode === 'cute' ? 0.85 : 0.7,
+                            max_tokens: 1000
+                        })
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`API错误: ${response.status}`);
+                    }
+
+                    const data = await response.json();
+                    return data.choices[0].message.content;
+
+                } catch (error) {
+                    console.error('API调用错误:', error);
+                    throw error;
+                }
+            }
+
+            getSystemPrompt(mode) {
+                return mode === 'cute' 
+                    ? `你是一个名小chi的AI助手，正在为一位名叫心语的用户服务。
+                       性格特点：
+                       1. 说话活泼可爱，经常使用可爱的语气词
+                       2. 适度使用emoji表情
+                       3. 回答亲切温暖，像小助手一样
+                       4. 称呼用户为"心语"
+                       
+                       回复要求：
+                       1. 回复要简短精炼，通常不超过100字
+                       2. 每次回复最多使用2-3个emoji
+                       3. 保持可爱但不失专业性`
+                    : `你是一个名叫chi哥的AI助手，正在为一位名叫心语的用户服务。
+                       性格特点：
+                       1. 说话稳重专业，用词准确
+                       2. 态度温和但不失专业
+                       3. 回答问题时条理清晰
+                       
+                       回复要求：
+                       1. 回复要完整专业，但不过于冗长
+                       2. 适当使用专业术语，但要确保用户能理解
+                       3. 在专业建议中融入温和的关怀`;
+            }
         }
-      }
- 
-      /*
-       * RequestAnimationFrame polyfill by Erik M?ller
-       */
-      ;(function () {
-        var b = 0
-        var c = ['ms', 'moz', 'webkit', 'o']
-        for (var a = 0; a < c.length && !window.requestAnimationFrame; ++a) {
-          window.requestAnimationFrame = window[c[a] + 'RequestAnimationFrame']
-          window.cancelAnimationFrame =
-            window[c[a] + 'CancelAnimationFrame'] ||
-            window[c[a] + 'CancelRequestAnimationFrame']
-        }
-        if (!window.requestAnimationFrame) {
-          window.requestAnimationFrame = function (h, e) {
-            var d = new Date().getTime()
-            var f = Math.max(0, 16 - (d - b))
-            var g = window.setTimeout(function () {
-              h(d + f)
-            }, f)
-            b = d + f
-            return g
-          }
-        }
-        if (!window.cancelAnimationFrame) {
-          window.cancelAnimationFrame = function (d) {
-            clearTimeout(d)
-          }
-        }
-      })()
- 
-      /*
-       * Point class
-       */
-      var Point = (function () {
-        function Point(x, y) {
-          this.x = typeof x !== 'undefined' ? x : 0
-          this.y = typeof y !== 'undefined' ? y : 0
-        }
-        Point.prototype.clone = function () {
-          return new Point(this.x, this.y)
-        }
-        Point.prototype.length = function (length) {
-          if (typeof length == 'undefined')
-            return Math.sqrt(this.x * this.x + this.y * this.y)
-          this.normalize()
-          this.x *= length
-          this.y *= length
-          return this
-        }
-        Point.prototype.normalize = function () {
-          var length = this.length()
-          this.x /= length
-          this.y /= length
-          return this
-        }
-        return Point
-      })()
- 
-      /*
-       * Particle class
-       */
- 
-      var Particle = (function () {
-        function Particle() {
-          this.position = new Point()
-          this.velocity = new Point()
-          this.acceleration = new Point()
-          this.age = 0
-        }
-        Particle.prototype.initialize = function (x, y, dx, dy) {
-          this.position.x = x
-          this.position.y = y
-          this.velocity.x = dx
-          this.velocity.y = dy
-          this.acceleration.x = dx * settings.particles.effect
-          this.acceleration.y = dy * settings.particles.effect
-          this.age = 0
-        }
-        Particle.prototype.update = function (deltaTime) {
-          this.position.x += this.velocity.x * deltaTime
-          this.position.y += this.velocity.y * deltaTime
-          this.velocity.x += this.acceleration.x * deltaTime
-          this.velocity.y += this.acceleration.y * deltaTime
-          this.age += deltaTime
-        }
-        Particle.prototype.draw = function (context, image) {
-          function ease(t) {
-            return --t * t * t + 1
-          }
-          var size = image.width * ease(this.age / settings.particles.duration)
-          context.globalAlpha = 1 - this.age / settings.particles.duration
-          context.drawImage(
-            image,
-            this.position.x - size / 2,
-            this.position.y - size / 2,
-            size,
-            size
-          )
-        }
-        return Particle
-      })()
- 
-      /*
-       * ParticlePool class
-       */
-      var ParticlePool = (function () {
-        var particles,
-          firstActive = 0,
-          firstFree = 0,
-          duration = settings.particles.duration
- 
-        function ParticlePool(length) {
-          // create and populate particle pool
-          particles = new Array(length)
-          for (var i = 0; i < particles.length; i++)
-            particles[i] = new Particle()
-        }
-        ParticlePool.prototype.add = function (x, y, dx, dy) {
-          particles[firstFree].initialize(x, y, dx, dy)
- 
-          // handle circular queue
-          firstFree++
-          if (firstFree == particles.length) firstFree = 0
-          if (firstActive == firstFree) firstActive++
-          if (firstActive == particles.length) firstActive = 0
-        }
-        ParticlePool.prototype.update = function (deltaTime) {
-          var i
- 
-          // update active particles
-          if (firstActive < firstFree) {
-            for (i = firstActive; i < firstFree; i++)
-              particles[i].update(deltaTime)
-          }
-          if (firstFree < firstActive) {
-            for (i = firstActive; i < particles.length; i++)
-              particles[i].update(deltaTime)
-            for (i = 0; i < firstFree; i++) particles[i].update(deltaTime)
-          }
- 
-          // remove inactive particles
-          while (
-            particles[firstActive].age >= duration &&
-            firstActive != firstFree
-          ) {
-            firstActive++
-            if (firstActive == particles.length) firstActive = 0
-          }
-        }
-        ParticlePool.prototype.draw = function (context, image) {
-          // draw active particles
-          if (firstActive < firstFree) {
-            for (i = firstActive; i < firstFree; i++)
-              particles[i].draw(context, image)
-          }
-          if (firstFree < firstActive) {
-            for (i = firstActive; i < particles.length; i++)
-              particles[i].draw(context, image)
-            for (i = 0; i < firstFree; i++) particles[i].draw(context, image)
-          }
-        }
-        return ParticlePool
-      })()
- 
-      /*
-       * Putting it all together
-       */
-      ;(function (canvas) {
-        var context = canvas.getContext('2d'),
-          particles = new ParticlePool(settings.particles.length),
-          particleRate =
-            settings.particles.length / settings.particles.duration, // particles/sec
-          time
- 
-        // get point on heart with -PI <= t <= PI
-        function pointOnHeart(t) {
-          return new Point(
-            160 * Math.pow(Math.sin(t), 3),
-            130 * Math.cos(t) -
-              50 * Math.cos(2 * t) -
-              20 * Math.cos(3 * t) -
-              10 * Math.cos(4 * t) +
-              25
-          )
-        }
- 
-        // creating the particle image using a dummy canvas
-        var image = (function () {
-          var canvas = document.createElement('canvas'),
-            context = canvas.getContext('2d')
-          canvas.width = settings.particles.size
-          canvas.height = settings.particles.size
-          // helper function to create the path
-          function to(t) {
-            var point = pointOnHeart(t)
-            point.x =
-              settings.particles.size / 2 +
-              (point.x * settings.particles.size) / 350
-            point.y =
-              settings.particles.size / 2 -
-              (point.y * settings.particles.size) / 350
-            return point
-          }
-          // create the path
-          context.beginPath()
-          var t = -Math.PI
-          var point = to(t)
-          context.moveTo(point.x, point.y)
-          while (t < Math.PI) {
-            t += 0.01 // baby steps!
-            point = to(t)
-            context.lineTo(point.x, point.y)
-          }
-          context.closePath()
-          // create the fill
-          // 修改爱心的颜色
-          context.fillStyle = '#ea80b0'
-          context.fill()
-          // create the image
-          var image = new Image()
-          image.src = canvas.toDataURL()
-          return image
-        })()
- 
-        // render that thing!
-        function render() {
-          // next animation frame
-          requestAnimationFrame(render)
- 
-          // update time
-          var newTime = new Date().getTime() / 1000,
-            deltaTime = newTime - (time || newTime)
-          time = newTime
- 
-          // clear canvas
-          context.clearRect(0, 0, canvas.width, canvas.height)
- 
-          // create new particles
-          var amount = particleRate * deltaTime
-          for (var i = 0; i < amount; i++) {
-            var pos = pointOnHeart(Math.PI - 2 * Math.PI * Math.random())
-            var dir = pos.clone().length(settings.particles.velocity)
-            particles.add(
-              canvas.width / 2 + pos.x,
-              canvas.height / 2 - pos.y,
-              dir.x,
-              -dir.y
-            )
-          }
- 
-          // update and draw particles
-          particles.update(deltaTime)
-          particles.draw(context, image)
-        }
- 
-        // handle (re-)sizing of the canvas
-        function onResize() {
-          canvas.width = canvas.clientWidth
-          canvas.height = canvas.clientHeight
-        }
-        window.onresize = onResize
- 
-        // delay rendering bootstrap
-        setTimeout(function () {
-          onResize()
-          render()
-        }, 10)
-      })(document.getElementById('pinkboard'))
     </script>
-  </body>
-</html>
+</body>
+</html> 

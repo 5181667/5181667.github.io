@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>概率值计算器</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+        textarea {
+            width: 100%;
+            height: 100px;
+            margin-top: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            resize: none; /* 禁止改变大小 */
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            background-color: #28a745;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>定制计算器</h1>
+    <p>请输入以回车分隔的概率值：</p>
+    <textarea id="inputValues" placeholder="0.1&#10;0.2&#10;0.3&#10;0.4"></textarea>
+    <button onclick="calculateC()">计算 C 值</button>
+    <div id="result"></div>
+</div>
+
+<script>
+    function calculateC() {
+        const input = document.getElementById('inputValues').value;
+        const lines = input.split('\n').map(line => parseFloat(line)).filter(n => !isNaN(n) && n > 0);
+
+        const n = lines.length;
+        if (n === 0) {
+            document.getElementById('result').innerText = "请提供有效的概率值。";
+            return;
+        }
+
+        const sumPiLnPi = lines.reduce((sum, p) => sum + (p * Math.log(p)), 0);
+        const C = 1 + (sumPiLnPi / Math.log(n));
+
+        document.getElementById('result').innerText = "计算得到的 C 值: " + C.toFixed(4);
+    }
+</script>
+</body>
+</html>
