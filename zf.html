@@ -72,6 +72,7 @@
       width: 100%;
       margin-top: 15px;
       transition: background-color 0.3s;
+      display: none; /* 初始时隐藏按钮 */
     }
 
     .back-button:hover {
@@ -89,7 +90,7 @@
 
 <div class="container" id="payment-container">
   <h2>感谢您的支持！多少无所谓，重在支持！！！</h2>
-  <p>请选择支付方式进行打赏：</p>
+  <p>请选择支付方式进行打赏（打赏后出现跳转界面）：</p>
 
   <button class="pay-button" id="wechat-pay-button">微信支付</button>
   <button class="pay-button" id="alipay-pay-button">支付宝支付</button>
@@ -100,10 +101,10 @@
   </div>
 
   <!-- 跳转按钮 -->
-  <button class="back-button" onclick="window.location.href='xlg.html'">跳过支付，感谢您的支持</button>
+  <button class="back-button" id="redirect-button" onclick="window.location.href='xlg.html'">感谢您的支持（哈哈不支付也可以跳转，主要是想看看有多少人来过）</button>
 
   <!-- 提示用户支付选项 -->
-  <p class="skip-message">如果您不打算支付，您也可以选择跳过，感谢您的支持！</p>
+  <p class="skip-message">感谢您的支持！</p>
 </div>
 
 <script>
@@ -112,6 +113,7 @@
   const alipayPayButton = document.getElementById("alipay-pay-button");
   const qrCodeImage = document.getElementById("qr-code");
   const qrCodeContainer = document.getElementById("qr-code-container");
+  const redirectButton = document.getElementById("redirect-button");
 
   // 静态二维码的路径
   const wechatQRCode = "wechat.JPG"; // 替换为微信支付二维码的图片链接
@@ -130,6 +132,11 @@
     qrCodeImage.style.display = "block";
     qrCodeContainer.style.display = "flex";
   };
+
+  // 30秒后显示跳转按钮
+  setTimeout(function() {
+    redirectButton.style.display = "block"; // 显示跳转按钮
+  }, 3000); // 30秒延迟（30000毫秒）
 </script>
 
 </body>
