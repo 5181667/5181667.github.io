@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>替换并复制到剪贴板</title>
+    <style>
+        /* 全局样式 */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+        }
+
+        h2 {
+            color: #2C3E50;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 16px;
+            color: #7f8c8d;
+        }
+
+        select, input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        button:active {
+            background-color: #1c5987;
+        }
+
+        pre {
+            background-color: #ecf0f1;
+            padding: 15px;
+            border-radius: 4px;
+            font-family: monospace;
+            word-wrap: break-word;
+            max-height: 200px;
+            overflow-y: auto;
+            color: #2c3e50;
+            text-align: left;
+        }
+
+        .alert {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #2ecc71;
+            color: white;
+            border-radius: 4px;
+            display: none;
+            font-size: 16px;
+        }
+    </style>
+    <script>
+        // 映射字典
+        const mapping = {
+            "铱刀（W）": "66",
+            "收莱飞快自动抚摸器（BC）": "272",
+            "回程竞杖": "ReturnScepter",
+            "海凝胶": "SeaJelly",
+            "洞穴凝胶": "CaveJelly",
+            "翡翠": "70",
+            "钻石": "72",
+            "金核桃": "73",
+            "五彩碎片": "74",
+            "五彩胶冻": "876",
+            "铱锭": "337",
+            "铱环": "527",
+            "珍珠": "797",
+            "幸运兔腳": "446",
+            "银河之魂": "896",
+            "虚空幽灵吊坠": "808",
+            "矮人卷轴I": "96",
+            "矮人卷轴II": "97",
+            "矮人卷轴III": "98",
+            "矮人卷轴IV": "99",
+            "矮人头盛": "121",
+            "矮人小工具": "122",
+            "传说之鱼": "163",
+            "传说之鱼二世": "900",
+            "传送图腾海滩": "690",
+            "传送图腾农场": "688",
+            "七彩糖": "279",
+            "香蕉": "91",
+            "樱桃树苗": "628"
+            // 可以继续扩展
+        };
+
+        // 函数：根据用户输入的模式替换内容
+        function replaceAndCopy() {
+            var userInput = document.getElementById("inputNumber").value;
+            var mode = document.getElementById("modeSelect").value;
+            var quantity = parseInt(document.getElementById("quantity").value);
+            var starLevel = parseInt(document.getElementById("starLevel").value);
+            var originalText = "#$actio${^^\n}$n Add${^^\n}$Item ${^^\n}$857${^^\n}$ 999 3";
+
+            // 检查数量和星级是否在允许的范围内
+            if (isNaN(quantity) || quantity < 1 || quantity > 999) {
+                alert("请输入有效的数量（1 到 999）！");
+                return;
+            }
+            if (isNaN(starLevel) || starLevel < 0 || starLevel > 3) {
+                alert("星级只能是 0 到 3 之间的数字！");
+                return;
+            }
+
+            // 根据选择的模式来进行不同的替换操作
+            var modifiedText = originalText;
+
+            if (mode === "direct") {
+                // 直接替换
+                if (userInput) {
+                    modifiedText = originalText.replace("857", userInput);
+                } else {
+                    alert("请输入一个数字！");
+                    return;
+                }
+            } else if (mode === "mapping") {
+                // 映射替换
+                // for (var key in mapping) {
+                    var value = mapping[userInput];
+                    // var regex = new RegExp(key, "g");
+                    modifiedText = modifiedText.replace("857", value);
+                // }
+            }
+
+            // 替换数量和星级
+            modifiedText = modifiedText.replace("999", quantity).replace("3", starLevel);
+
+            // 将修改后的文本复制到剪贴板
+            navigator.clipboard.writeText(modifiedText).then(function() {
+                showAlert("文本已成功复制到剪贴板！");
+            }, function(err) {
+                alert("复制失败: " + err);
+            });
+
+            // 显示修改后的文本
+            document.getElementById("modifiedText").textContent = modifiedText;
+        }
+
+        // 显示成功消息
+        function showAlert(message) {
+            var alertBox = document.getElementById("alert");
+            alertBox.textContent = message;
+            alertBox.style.display = "block";
+            setTimeout(function() {
+                alertBox.style.display = "none";
+            }, 3000);
+        }
+    </script>
+</head>
+<body>
+
+<div class="container">
+    <h2>替换并复制到剪贴板</h2>
+
+    <p>请选择替换模式：</p>
+    <select id="modeSelect">
+        <option value="direct">直接替换</option>
+        <option value="mapping">映射替换</option>
+    </select>
+
+    <p>请输入替换内容（数字或名称）：</p>
+    <input type="text" id="inputNumber" placeholder="输入数字或名称" />
+
+    <p>请输入物品数量（1 到 999）：</p>
+    <input type="number" id="quantity" min="1" max="999" value="999" />
+
+    <p>请选择物品星级（0 到 3）：</p>
+    <select id="starLevel">
+        <option value="0">0 星</option>
+        <option value="1">1 星</option>
+        <option value="2">2 星</option>
+        <option value="3">3 星</option>
+    </select>
+
+    <button onclick="replaceAndCopy()">生成并复制</button>
+
+    <div id="alert" class="alert"></div>
+
+    <h3>修改后的文本：</h3>
+    <pre id="modifiedText"></pre>
+</div>
+
+</body>
+</html>
