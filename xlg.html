@@ -16,6 +16,7 @@
             height: 100vh;
             margin: 0;
             padding: 0;
+            flex-direction: column; /* 垂直布局 */
         }
 
         .container {
@@ -90,6 +91,39 @@
             display: none;
             font-size: 16px;
         }
+
+        /* 跳转按钮样式 */
+        .jump-button {
+            background-color: #e74c3c;
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 4px;
+            border: none;
+            width: auto;
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+
+        .jump-button:hover {
+            background-color: #c0392b;
+        }
+
+        /* 新增说明样式 */
+        .instructions {
+            font-size: 16px;
+            color: #2c3e50;
+            margin: 10px 0;
+        }
+
+        .instructions a {
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        .instructions a:hover {
+            text-decoration: underline;
+        }
     </style>
     <script>
         // 映射字典
@@ -157,11 +191,8 @@
                 }
             } else if (mode === "mapping") {
                 // 映射替换
-                // for (var key in mapping) {
-                    var value = mapping[userInput];
-                    // var regex = new RegExp(key, "g");
-                    modifiedText = modifiedText.replace("857", value);
-                // }
+                var value = mapping[userInput];
+                modifiedText = modifiedText.replace("857", value);
             }
 
             // 替换数量和星级
@@ -187,12 +218,25 @@
                 alertBox.style.display = "none";
             }, 3000);
         }
+
+        // 跳转到 JSON 数据操作界面
+        function jumpToJsonDataInterface() {
+            window.location.href = 'data.html';  // 替换为实际的 JSON 数据操作界面的 URL
+        }
     </script>
 </head>
 <body>
 
+<!-- 跳转按钮 -->
+<button class="jump-button" onclick="jumpToJsonDataInterface()">打开代码查询界面</button>
+
 <div class="container">
     <h2>替换并复制到剪贴板</h2>
+
+    <!-- 说明文字 -->
+    <div class="instructions">
+        <p>建议使用直接替换，输入物品代码。如果您不知道物品代码，可以点击上方的查询页面进行查询。</p>
+    </div>
 
     <p>请选择替换模式：</p>
     <select id="modeSelect">

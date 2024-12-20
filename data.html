@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>代码查询界面</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 30px auto;
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    .search-box {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .search-box input {
+      padding: 10px;
+      width: 100%;
+      max-width: 400px;
+      font-size: 16px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      box-sizing: border-box;
+      margin-bottom: 20px;
+      transition: all 0.3s ease;
+    }
+    .search-box input:focus {
+      border-color: #5c6bc0;
+      outline: none;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    th, td {
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+      text-align: left;
+      font-size: 14px;
+    }
+    th {
+      background-color: #f4f4f4;
+      color: #333;
+    }
+    td {
+      background-color: #fff;
+      color: #666;
+    }
+    tr:nth-child(even) td {
+      background-color: #f9f9f9;
+    }
+    tr:hover td {
+      background-color: #e0e0e0;
+    }
+    @media (max-width: 768px) {
+      .search-box input {
+        width: 90%;
+      }
+      table {
+        font-size: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>代码查询界面</h1>
+
+  <!-- 搜索框 -->
+  <div class="search-box">
+    <input type="text" id="searchInput" placeholder="请输入名称或代码进行搜索..." onkeyup="searchData()">
+  </div>
+
+  <!-- 数据表格 -->
+  <table id="dataTable">
+    <thead>
+    <tr>
+      <th>名称</th>
+      <th>类型</th>
+      <th>代码</th>
+      <th>分类</th>
+      <th>作用</th>
+      <th>价格</th>
+    </tr>
+    </thead>
+    <tbody id="dataBody">
+    <!-- 数据行将会动态插入这里 -->
+    </tbody>
+  </table>
+</div>
+
+<script>
+  // 变量来存储从 JSON 文件加载的数据
+  let jsonData = [];
+
+  // 加载 output.json 数据
+  fetch('output.json')
+          .then(response => response.json())
+          .then(data => {
+            jsonData = data; // 存储数据
+            renderData(jsonData); // 渲染数据
+          })
+          .catch(error => {
+            console.error('无法加载 JSON 数据:', error);
+          });
+
+  // 渲染数据到表格
+  function renderData(filteredData) {
+    const tableBody = document.getElementById('dataBody');
+    tableBody.innerHTML = ''; // 清空当前表格内容
+
+    filteredData.forEach(item => {
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td>${item.名称}</td>
+        <td>${item.类型}</td>
+        <td>${item.代码}</td>
+        <td>${item.分类}</td>
+        <td>${item.作用}</td>
+        <td>${item.价格}</td>
+      `;
+      tableBody.appendChild(row);
+    });
+  }
+
+  // 搜索功能
+  function searchData() {
+    const searchValue = document.getElementById('searchInput').value.toLowerCase();
+    const filteredData = jsonData.filter(item => {
+      return item.名称.toLowerCase().includes(searchValue) || item.代码.includes(searchValue);
+    });
+
+    renderData(filteredData);
+  }
+</script>
+
+</body>
+</html>
