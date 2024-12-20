@@ -60,6 +60,7 @@
             border-radius: 4px;
             width: 100%;
             transition: background-color 0.3s;
+            margin-bottom: 20px;
         }
 
         button:hover {
@@ -93,16 +94,22 @@
         }
 
         /* 跳转按钮样式 */
+        .jump-button-container {
+            width: 100%;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
         .jump-button {
             background-color: #e74c3c;
             color: white;
-            padding: 10px 20px;
-            font-size: 16px;
+            padding: 15px 30px;
+            font-size: 18px;
             border-radius: 4px;
             border: none;
-            width: auto;
-            margin-bottom: 20px;
             cursor: pointer;
+            width: auto;
+            transition: background-color 0.3s;
         }
 
         .jump-button:hover {
@@ -221,21 +228,23 @@
 
         // 跳转到 JSON 数据操作界面
         function jumpToJsonDataInterface() {
-            window.location.href = 'data.html';  // 替换为实际的 JSON 数据操作界面的 URL
+            window.location.href = 'your_json_data_interface.html';  // 替换为实际的 JSON 数据操作界面的 URL
         }
     </script>
 </head>
 <body>
 
-<!-- 跳转按钮 -->
-<button class="jump-button" onclick="jumpToJsonDataInterface()">打开代码查询界面</button>
-
 <div class="container">
-    <h2>替换并复制到剪贴板</h2>
+    <h2>代码生成</h2>
+
+    <!-- 跳转按钮 -->
+    <div class="jump-button-container">
+        <button class="jump-button" onclick="jumpToJsonDataInterface()">打开 JSON 数据操作界面</button>
+    </div>
 
     <!-- 说明文字 -->
     <div class="instructions">
-        <p>建议使用直接替换，输入物品代码。如果您不知道物品代码，可以点击上方的查询页面进行查询。</p>
+        <p>建议使用直接替换，输入物品代码。如果您不知道物品代码，可以点击下方的查询页面进行查找。</p>
     </div>
 
     <p>请选择替换模式：</p>
