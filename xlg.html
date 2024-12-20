@@ -27,6 +27,7 @@
             max-width: 600px;
             width: 100%;
             text-align: center;
+            box-sizing: border-box;
         }
 
         h2 {
@@ -130,6 +131,72 @@
 
         .instructions a:hover {
             text-decoration: underline;
+        }
+
+        /* 媒体查询：适配移动设备 */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+                max-width: 100%;
+            }
+
+            h2 {
+                font-size: 20px;
+            }
+
+            p {
+                font-size: 14px;
+            }
+
+            select, input, button {
+                font-size: 14px;
+                padding: 8px;
+            }
+
+            .jump-button {
+                font-size: 16px;
+                padding: 12px 24px;
+            }
+
+            pre {
+                font-size: 14px;
+                padding: 12px;
+            }
+
+            .alert {
+                font-size: 14px;
+                padding: 8px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h2 {
+                font-size: 18px;
+            }
+
+            p {
+                font-size: 12px;
+            }
+
+            select, input, button {
+                font-size: 12px;
+                padding: 6px;
+            }
+
+            .jump-button {
+                font-size: 14px;
+                padding: 10px 20px;
+            }
+
+            pre {
+                font-size: 12px;
+                padding: 10px;
+            }
+
+            .alert {
+                font-size: 12px;
+                padding: 6px;
+            }
         }
     </style>
     <script>
