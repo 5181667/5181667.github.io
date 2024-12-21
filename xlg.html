@@ -200,39 +200,18 @@
         }
     </style>
     <script>
-        // 映射字典
-        const mapping = {
-            "铱刀（W）": "66",
-            "收莱飞快自动抚摸器（BC）": "272",
-            "回程竞杖": "ReturnScepter",
-            "海凝胶": "SeaJelly",
-            "洞穴凝胶": "CaveJelly",
-            "翡翠": "70",
-            "钻石": "72",
-            "金核桃": "73",
-            "五彩碎片": "74",
-            "五彩胶冻": "876",
-            "铱锭": "337",
-            "铱环": "527",
-            "珍珠": "797",
-            "幸运兔腳": "446",
-            "银河之魂": "896",
-            "虚空幽灵吊坠": "808",
-            "矮人卷轴I": "96",
-            "矮人卷轴II": "97",
-            "矮人卷轴III": "98",
-            "矮人卷轴IV": "99",
-            "矮人头盛": "121",
-            "矮人小工具": "122",
-            "传说之鱼": "163",
-            "传说之鱼二世": "900",
-            "传送图腾海滩": "690",
-            "传送图腾农场": "688",
-            "七彩糖": "279",
-            "香蕉": "91",
-            "樱桃树苗": "628"
-            // 可以继续扩展
-        };
+        let mapping = []; // 用于存储从 output.json 中加载的映射数据
+
+        // 从 output.json 文件加载数据
+        fetch('output.json')
+            .then(response => response.json())
+            .then(data => {
+                mapping = data; // 将 JSON 数据存储在 mapping 中
+            })
+            .catch(error => {
+                console.error('无法加载映射数据:', error);
+                alert('无法加载映射数据');
+            });
 
         // 函数：根据用户输入的模式替换内容
         function replaceAndCopy() {
@@ -265,8 +244,19 @@
                 }
             } else if (mode === "mapping") {
                 // 映射替换
-                var value = mapping[userInput];
-                modifiedText = modifiedText.replace("857", value);
+                var found = false;
+                // 遍历 mapping 数组查找匹配的名称
+                for (let i = 0; i < mapping.length; i++) {
+                    if (mapping[i].名称 === userInput) {
+                        modifiedText = modifiedText.replace("857", mapping[i].代码);
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found) {
+                    alert("未找到对应的物品名称！");
+                    return;
+                }
             }
 
             // 替换数量和星级
@@ -311,7 +301,9 @@
 
     <!-- 说明文字 -->
     <div class="instructions">
-        <p>建议使用直接替换，输入物品代码。如果您不知道物品代码，可以点击下方的查询页面进行查找。</p>
+        <p>直接替换，输入物品代码。如果您不知道物品代码，可以点击上方的红色查询页面进行查找。</p>
+        <p>映射替换，输入物品名称，但要保证准确，如果数据库中没有此物品，可以抖音私信我添加！</p>
+        <p>制作不易，如果有用可以打赏一下！</p>
     </div>
 
     <p>请选择替换模式：</p>
