@@ -78,6 +78,107 @@
         font-size: 12px;
       }
     }
+    .filter-container {
+      margin: 20px 0;
+      text-align: center;
+    }
+    .tag-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    .tag {
+      padding: 8px 16px;
+      border-radius: 20px;
+      background: #f0f0f0;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: none;
+      font-size: 14px;
+      color: #666;
+    }
+    .tag:hover {
+      background: #e0e0e0;
+    }
+    .tag.active {
+      background: #3498db;
+      color: white;
+    }
+    .clear-filter {
+      padding: 8px 16px;
+      border-radius: 4px;
+      background: #e74c3c;
+      color: white;
+      border: none;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: all 0.3s ease;
+    }
+    .clear-filter:hover {
+      background: #c0392b;
+    }
+    .table-container {
+      overflow-x: auto;
+      margin-top: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    @media (max-width: 768px) {
+      .tag {
+        padding: 6px 12px;
+        font-size: 12px;
+      }
+      .tag-group {
+        gap: 6px;
+      }
+    }
+    .search-tips, .filter-tips {
+      margin-bottom: 10px;
+      color: #666;
+      font-size: 14px;
+    }
+    
+    .search-tips p, .filter-tips p {
+      margin: 5px 0;
+      color: #2c3e50;
+    }
+    
+    .search-tips {
+      background: #f8f9fa;
+      padding: 10px;
+      border-radius: 6px;
+      border-left: 4px solid #3498db;
+      margin-bottom: 15px;
+    }
+    
+    .search-tips p {
+      margin: 8px 0;
+      color: #2c3e50;
+      line-height: 1.5;
+    }
+    
+    .search-tips p:last-child {
+      color: #e74c3c;
+      font-weight: 500;
+    }
+    
+    .filter-tips {
+      font-size: 13px;
+      color: #7f8c8d;
+      font-style: italic;
+    }
+    
+    @media (max-width: 768px) {
+      .search-tips, .filter-tips {
+        font-size: 12px;
+        padding: 8px;
+      }
+      .search-tips p {
+        margin: 6px 0;
+      }
+    }
   </style>
 </head>
 <body>
@@ -87,46 +188,156 @@
 
   <!-- 搜索框 -->
   <div class="search-box">
+    <div class="search-tips">
+      <p>💡 提示：直接输入关键词搜索，支持模糊匹配（如：输入"剑"可搜索所有带"剑"的物品）</p>
+      <p>📢 如果需要的物品代码不在列表中，可以私信我添加</p>
+    </div>
     <input type="text" id="searchInput" placeholder="请输入名称或代码进行搜索..." onkeyup="searchData()">
   </div>
 
+  <!-- 添加标签筛选区域 -->
+  <div class="filter-container">
+    <div class="filter-tips">
+      <p>点击下方标签可按类型和分类筛选，可与搜索框组合使用</p>
+    </div>
+    <div class="tag-group" id="typeFilter">
+      <!-- 类型标签将通过 JavaScript 动态添加 -->
+    </div>
+    <div class="tag-group" id="categoryFilter">
+      <!-- 分类标签将通过 JavaScript 动态添加 -->
+    </div>
+    <button class="clear-filter" onclick="clearFilters()">清除筛选</button>
+  </div>
+
   <!-- 数据表格 -->
-  <table id="dataTable">
-    <thead>
-    <tr>
-      <th>名称</th>
-      <th>类型</th>
-      <th>代码</th>
-      <th>分类</th>
-      <th>作用</th>
-      <th>价格</th>
-    </tr>
-    </thead>
-    <tbody id="dataBody">
-    <!-- 数据行将会动态插入这里 -->
-    </tbody>
-  </table>
+  <div class="table-container">
+    <table id="dataTable">
+      <thead>
+        <tr>
+          <th>名称</th>
+          <th>类型</th>
+          <th>代码</th>
+          <th>分类</th>
+          <th>作用</th>
+          <th>价格</th>
+        </tr>
+      </thead>
+      <tbody id="dataBody">
+        <!-- 数据行将会动态插入这里 -->
+      </tbody>
+    </table>
+  </div>
 </div>
 
 <script>
-  // 变量来存储从 JSON 文件加载的数据
   let jsonData = [];
+  let activeFilters = {
+    type: null,
+    category: null,
+    search: ''
+  };
 
-  // 加载 output.json 数据
+  // 加载数据
   fetch('output.json')
           .then(response => response.json())
           .then(data => {
-            jsonData = data; // 存储数据
-            renderData(jsonData); // 渲染数据
+            jsonData = data;
+            initializeFilters();
+            renderData(jsonData);
           })
           .catch(error => {
             console.error('无法加载 JSON 数据:', error);
           });
 
+  // 初始化筛选标签
+  function initializeFilters() {
+    // 获取所有唯一的类型和分类
+    const types = [...new Set(jsonData.map(item => item.类型))];
+    const categories = [...new Set(jsonData.map(item => item.分类))];
+
+    // 渲染类型标签
+    const typeContainer = document.getElementById('typeFilter');
+    types.forEach(type => {
+      if (type) { // 只添加非空类型
+        const tag = document.createElement('button');
+        tag.className = 'tag';
+        tag.textContent = type;
+        tag.onclick = () => toggleFilter('type', type);
+        typeContainer.appendChild(tag);
+      }
+    });
+
+    // 渲染分类标签
+    const categoryContainer = document.getElementById('categoryFilter');
+    categories.forEach(category => {
+      if (category) { // 只添加非空分类
+        const tag = document.createElement('button');
+        tag.className = 'tag';
+        tag.textContent = category;
+        tag.onclick = () => toggleFilter('category', category);
+        categoryContainer.appendChild(tag);
+      }
+    });
+  }
+
+  // 切换筛选器状态
+  function toggleFilter(filterType, value) {
+    const tags = document.querySelectorAll(`.tag`);
+    tags.forEach(tag => {
+      if (tag.textContent === value) {
+        tag.classList.toggle('active');
+      }
+    });
+
+    if (activeFilters[filterType] === value) {
+      activeFilters[filterType] = null;
+    } else {
+      activeFilters[filterType] = value;
+    }
+
+    applyFilters();
+  }
+
+  // 清除所有筛选
+  function clearFilters() {
+    activeFilters = {
+      type: null,
+      category: null,
+      search: document.getElementById('searchInput').value
+    };
+
+    document.querySelectorAll('.tag').forEach(tag => {
+      tag.classList.remove('active');
+    });
+
+    applyFilters();
+  }
+
+  // 搜索功能
+  function searchData() {
+    activeFilters.search = document.getElementById('searchInput').value.toLowerCase();
+    applyFilters();
+  }
+
+  // 应用所有筛选条件
+  function applyFilters() {
+    let filteredData = jsonData.filter(item => {
+      const matchesType = !activeFilters.type || item.类型 === activeFilters.type;
+      const matchesCategory = !activeFilters.category || item.分类 === activeFilters.category;
+      const matchesSearch = !activeFilters.search || 
+        item.名称.toLowerCase().includes(activeFilters.search) || 
+        item.代码.includes(activeFilters.search);
+
+      return matchesType && matchesCategory && matchesSearch;
+    });
+
+    renderData(filteredData);
+  }
+
   // 渲染数据到表格
   function renderData(filteredData) {
     const tableBody = document.getElementById('dataBody');
-    tableBody.innerHTML = ''; // 清空当前表格内容
+    tableBody.innerHTML = '';
 
     filteredData.forEach(item => {
       const row = document.createElement('tr');
@@ -140,16 +351,6 @@
       `;
       tableBody.appendChild(row);
     });
-  }
-
-  // 搜索功能
-  function searchData() {
-    const searchValue = document.getElementById('searchInput').value.toLowerCase();
-    const filteredData = jsonData.filter(item => {
-      return item.名称.toLowerCase().includes(searchValue) || item.代码.includes(searchValue);
-    });
-
-    renderData(filteredData);
   }
 </script>
 

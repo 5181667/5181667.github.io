@@ -4,283 +4,722 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>批量刷物品2.0</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <style>
-        /* 全局样式 */
+        /* 全局样式调整 */
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
-            color: #333;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            font-family: 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            color: #2c3e50;
+            min-height: 100vh;
             margin: 0;
-            padding: 0;
-            flex-direction: column; /* 垂直布局 */
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
         }
 
         .container {
-            background-color: #fff;
-            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.92);
+            border-radius: 15px;
             padding: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            max-width: 600px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            max-width: 800px;
+            margin: 0 auto;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
             width: 100%;
-            text-align: center;
             box-sizing: border-box;
         }
 
         h2 {
             color: #2C3E50;
-            margin-bottom: 20px;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 28px;
+            font-weight: 600;
         }
 
-        p {
-            font-size: 16px;
-            color: #7f8c8d;
+        /* 输入区域样式优化 */
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #34495e;
+            font-weight: 500;
         }
 
         select, input {
             width: 100%;
             padding: 10px;
-            margin-top: 10px;
-            margin-bottom: 20px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
             font-size: 16px;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
             box-sizing: border-box;
         }
 
+        select:focus, input:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+            outline: none;
+        }
+
+        /* 按钮样式 */
+        .button-group {
+            margin: 30px 0;
+        }
+
         button {
-            background-color: #3498db;
+            background: #3498db;
             color: white;
             border: none;
-            padding: 12px 20px;
+            padding: 15px 25px;
+            border-radius: 8px;
             font-size: 16px;
             cursor: pointer;
-            border-radius: 4px;
+            transition: all 0.3s ease;
             width: 100%;
-            transition: background-color 0.3s;
-            margin-bottom: 20px;
+            font-weight: 500;
         }
 
         button:hover {
-            background-color: #2980b9;
-        }
-
-        button:active {
-            background-color: #1c5987;
-        }
-
-        pre {
-            background-color: #ecf0f1;
-            padding: 15px;
-            border-radius: 4px;
-            font-family: monospace;
-            word-wrap: break-word;
-            max-height: 200px;
-            overflow-y: auto;
-            color: #2c3e50;
-            text-align: left;
-        }
-
-        .alert {
-            margin-top: 20px;
-            padding: 10px;
-            background-color: #2ecc71;
-            color: white;
-            border-radius: 4px;
-            display: none;
-            font-size: 16px;
-        }
-
-        /* 跳转按钮样式 */
-        .jump-button-container {
-            width: 100%;
-            text-align: center;
-            margin-bottom: 30px;
+            background: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
 
         .jump-button {
-            background-color: #e74c3c;
-            color: white;
-            padding: 15px 30px;
-            font-size: 18px;
-            border-radius: 4px;
-            border: none;
-            cursor: pointer;
-            width: auto;
-            transition: background-color 0.3s;
+            background: #e74c3c;
+            margin-bottom: 30px;
         }
 
         .jump-button:hover {
-            background-color: #c0392b;
+            background: #c0392b;
         }
 
-        /* 新增说明样式 */
+        /* 提示框样式 */
+        .alert {
+            background: #2ecc71;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            margin: 20px 0;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* 代码显示区域 */
+        pre {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border: 2px solid #e9ecef;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+            margin-top: 20px;
+        }
+
+        /* 说明文字样式 */
         .instructions {
-            font-size: 16px;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #3498db;
+        }
+
+        .instructions h3 {
             color: #2c3e50;
+            margin-top: 0;
+        }
+
+        .instructions p {
             margin: 10px 0;
+            line-height: 1.6;
+            color: #34495e;
         }
 
-        .instructions a {
-            color: #3498db;
-            text-decoration: none;
-        }
-
-        .instructions a:hover {
-            text-decoration: underline;
-        }
-
-        /* 媒体查询：适配移动设备 */
+        /* 移动端适配样式 */
         @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
             .container {
                 padding: 15px;
-                max-width: 100%;
+                margin: 0;
+                border-radius: 10px;
             }
 
             h2 {
                 font-size: 20px;
+                margin-bottom: 20px;
             }
 
-            p {
+            h3 {
+                font-size: 18px;
+            }
+
+            .instructions {
+                padding: 15px;
+                margin: 15px 0;
+            }
+
+            .instructions p {
+                font-size: 14px;
+                margin: 8px 0;
+            }
+
+            .input-group label {
+                font-size: 14px;
+                margin-bottom: 5px;
+            }
+
+            select, input {
+                padding: 8px 12px;
                 font-size: 14px;
             }
 
-            select, input, button {
+            button {
+                padding: 12px 20px;
                 font-size: 14px;
-                padding: 8px;
+                margin-bottom: 15px;
             }
 
             .jump-button {
-                font-size: 16px;
-                padding: 12px 24px;
+                margin-bottom: 20px;
             }
 
             pre {
-                font-size: 14px;
                 padding: 12px;
+                font-size: 13px;
+                white-space: pre-wrap;
+                word-break: break-all;
             }
 
             .alert {
+                padding: 10px;
                 font-size: 14px;
-                padding: 8px;
+                margin: 15px 0;
             }
         }
 
-        @media (max-width: 480px) {
+        /* 超小屏幕适配 */
+        @media (max-width: 320px) {
+            body {
+                padding: 5px;
+            }
+
+            .container {
+                padding: 10px;
+            }
+
             h2 {
                 font-size: 18px;
             }
 
-            p {
+            .instructions p {
                 font-size: 12px;
             }
 
             select, input, button {
                 font-size: 12px;
-                padding: 6px;
-            }
-
-            .jump-button {
-                font-size: 14px;
-                padding: 10px 20px;
+                padding: 8px;
             }
 
             pre {
-                font-size: 12px;
-                padding: 10px;
+                font-size: 11px;
+                padding: 8px;
+            }
+        }
+
+        /* 修复iOS设备上的输入框样式 */
+        input[type="number"] {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        /* 添加触摸反馈效果 */
+        @media (hover: none) {
+            button:active {
+                transform: scale(0.98);
+                background: #2980b9;
             }
 
-            .alert {
-                font-size: 12px;
-                padding: 6px;
+            .jump-button:active {
+                background: #c0392b;
             }
+        }
+
+        /* 优化滚动条样式 */
+        pre::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        pre::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 3px;
+        }
+
+        pre::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 3px;
+        }
+
+        pre::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+        .selected-items {
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            min-height: 50px;
+            padding: 10px;
+            margin-bottom: 10px;
+            background: #fff;
+        }
+
+        .item-tag {
+            display: inline-block;
+            background: #3498db;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            margin: 3px;
+            font-size: 14px;
+        }
+
+        .item-tag .remove {
+            margin-left: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .multi-input {
+            display: flex;
+            gap: 10px;
+        }
+
+        .multi-input input {
+            flex: 1;
+        }
+
+        .multi-input .quantity-input {
+            width: 80px;
+            flex: none;
+        }
+
+        .multi-input .star-level-select {
+            width: 70px;
+            flex: none;
+        }
+
+        .add-btn {
+            width: auto;
+            padding: 10px 20px;
+            margin: 0;
+        }
+
+        @media (max-width: 768px) {
+            .item-tag {
+                font-size: 12px;
+                padding: 4px 8px;
+            }
+        }
+
+        .support-text {
+            background: linear-gradient(45deg, #ff6b6b, #ee5253);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 500;
+            text-align: center;
+            margin: 15px 0;
+            padding: 10px;
+            border: 1px dashed #ff6b6b;
+            border-radius: 8px;
+            background: rgba(255, 107, 107, 0.1);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.02);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .support-button {
+            background: linear-gradient(45deg, #ff6b6b, #ff758c);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 20px auto;
+            display: block;
+            width: 200px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-6px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        .support-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.6);
+            background: linear-gradient(45deg, #ff758c, #ff6b6b);
         }
     </style>
     <script>
         let mapping = []; // 用于存储从 output.json 中加载的映射数据
+        let selectedItems = []; // 存储已选择的物品
 
         // 从 output.json 文件加载数据
         fetch('output.json')
             .then(response => response.json())
             .then(data => {
-                mapping = data; // 将 JSON 数据存储在 mapping 中
+                mapping = data;
             })
             .catch(error => {
                 console.error('无法加载映射数据:', error);
                 alert('无法加载映射数据');
             });
 
-        // 函数：根据用户输入的模式替换内容
-        function replaceAndCopy() {
-            var userInput = document.getElementById("inputNumber").value;
-            var mode = document.getElementById("modeSelect").value;
-            var quantity = parseInt(document.getElementById("quantity").value);
-            var starLevel = parseInt(document.getElementById("starLevel").value);
-            var originalText = "#$actio${^^\n}$n Add${^^\n}$Item ${^^\n}$857${^^\n}$ 999 3";
-
-            // 检查数量和星级是否在允许的范围内
-            if (isNaN(quantity) || quantity < 1 || quantity > 999) {
-                alert("请输入有效的数量（1 到 999）！");
-                return;
-            }
-            if (isNaN(starLevel) || starLevel < 0 || starLevel > 3) {
-                alert("星级只能是 0 到 3 之间的数字！");
-                return;
-            }
-
-            // 根据选择的模式来进行不同的替换操作
-            var modifiedText = originalText;
-
-            if (mode === "direct") {
-                // 直接替换
-                if (userInput) {
-                    modifiedText = originalText.replace("857", userInput);
-                } else {
-                    alert("请输入一个数字！");
-                    return;
+        // 等待DOM加载完成后执行
+        document.addEventListener('DOMContentLoaded', function() {
+            // 添加回车键支持
+            document.getElementById("multipleInput").addEventListener("keypress", function(e) {
+                if (e.key === "Enter") {
+                    addItem();
                 }
-            } else if (mode === "mapping") {
-                // 映射替换
-                var found = false;
-                // 遍历 mapping 数组查找匹配的名称
-                for (let i = 0; i < mapping.length; i++) {
-                    if (mapping[i].名称 === userInput) {
-                        modifiedText = modifiedText.replace("857", mapping[i].代码);
-                        found = true;
-                        break;
-                    }
-                }
-                if (!found) {
-                    alert("未找到对应的物品名称！");
-                    return;
-                }
-            }
-
-            // 替换数量和星级
-            modifiedText = modifiedText.replace("999", quantity).replace("3", starLevel);
-
-            // 将修改后的文本复制到剪贴板
-            navigator.clipboard.writeText(modifiedText).then(function() {
-                showAlert("文本已成功复制到剪贴板！");
-            }, function(err) {
-                alert("复制失败: " + err);
             });
 
-            // 显示修改后的文本
-            document.getElementById("modifiedText").textContent = modifiedText;
+            // 初始化界面显示
+            const mode = document.getElementById("modeSelect").value; // 默认是多物品模式
+            const normalInputArea = document.getElementById("normalInputArea");
+            const multipleArea = document.getElementById("multipleInputArea");
+            const quantityInput = document.getElementById("quantity").parentElement;
+            const starLevelInput = document.getElementById("starLevel").parentElement;
+            const multiQuantity = document.getElementById("multiQuantity");
+            const multiStarLevel = document.getElementById("multiStarLevel");
+
+            // 多物品模式的初始显示设置
+            normalInputArea.style.display = "none";
+            multipleArea.style.display = "block";
+            quantityInput.style.display = "none";
+            starLevelInput.style.display = "none";
+            multiQuantity.style.display = "block";
+            multiStarLevel.style.display = "block";
+            document.getElementById("multipleInput").placeholder = "输入物品代码或名称，回车添加";
+        });
+
+        function toggleInputMode() {
+            const mode = document.getElementById("modeSelect").value;
+            const normalInputArea = document.getElementById("normalInputArea");
+            const multipleArea = document.getElementById("multipleInputArea");
+            const quantityInput = document.getElementById("quantity").parentElement;
+            const starLevelInput = document.getElementById("starLevel").parentElement;
+            const multiQuantity = document.getElementById("multiQuantity");
+            const multiStarLevel = document.getElementById("multiStarLevel");
+            
+            if (mode === "multiple") {
+                normalInputArea.style.display = "none";
+                multipleArea.style.display = "block";
+                quantityInput.style.display = "none";
+                starLevelInput.style.display = "none";
+                // 显示数量和星级输入
+                multiQuantity.style.display = "block";
+                multiStarLevel.style.display = "block";
+            } else if (mode === "longcode") {
+                normalInputArea.style.display = "none";
+                multipleArea.style.display = "block";
+                quantityInput.style.display = "none";
+                starLevelInput.style.display = "none";
+                // 隐藏数量和星级输入
+                multiQuantity.style.display = "none";
+                multiStarLevel.style.display = "none";
+                // 修改输入框提示
+                document.getElementById("multipleInput").placeholder = "输入物品代码，回车添加";
+            }
+        }
+
+        function addItem() {
+            const mode = document.getElementById("modeSelect").value;
+            const input = document.getElementById("multipleInput");
+            const value = input.value.trim();
+            
+            if (!value) return;
+
+            // 通用的物品代码查询逻辑
+            let itemToAdd;
+            
+            // 判断输入是中文还是代码
+            if (/[\u4e00-\u9fa5]/.test(value)) {
+                // 输入是中文名称，从mapping中查找代码
+                const mappedItem = mapping.find(item => item.名称 === value);
+                if (!mappedItem) {
+                    alert("未找到对应的物品！");
+                    return;
+                }
+                itemToAdd = {
+                    code: mappedItem.代码,
+                    name: value
+                };
+            } else {
+                // 输入是代码，从mapping中查找名称
+                const mappedItem = mapping.find(item => item.代码 === value);
+                if (mappedItem) {
+                    itemToAdd = {
+                        code: value,
+                        name: mappedItem.名称
+                    };
+                } else {
+                    // 如果在mapping中找不到，就直接使用输入的代码
+                    itemToAdd = {
+                        code: value,
+                        name: `代码${value}`
+                    };
+                }
+            }
+
+            if (mode === "longcode") {
+                // 长代码模式直接添加
+                if (!selectedItems.some(item => item.code === itemToAdd.code)) {
+                    selectedItems.push(itemToAdd);
+                    updateSelectedItemsDisplay();
+                }
+            } else {
+                // 多物品模式下检查代码长度
+                if (itemToAdd.code.length > 10) {
+                    alert("检测到长代码，请使用长代码模式！");
+                    // 自动切换到长代码模式
+                    // document.getElementById("modeSelect").value = "longcode";
+                    // toggleInputMode();
+                    // 将代码保留在输入框中
+                    // input.value = value;
+                    return;
+                }
+
+                // 多物品模式需要添加数量和星级
+                const quantity = parseInt(document.getElementById("multiQuantity").value);
+                const starLevel = parseInt(document.getElementById("multiStarLevel").value);
+
+                // 检查数量和星级
+                if (isNaN(quantity) || quantity < 1 || quantity > 999) {
+                    alert("请输入有效的数量（1 到 999）！");
+                    return;
+                }
+                if (isNaN(starLevel) || starLevel < 0 || starLevel > 3) {
+                    alert("星级只能是 0 到 3 之间的数字！");
+                    return;
+                }
+
+                // 添加数量和星级属性
+                itemToAdd.quantity = quantity;
+                itemToAdd.starLevel = starLevel;
+
+                // 检查是否已添加
+                if (!selectedItems.some(item => item.code === itemToAdd.code)) {
+                    selectedItems.push(itemToAdd);
+                    updateSelectedItemsDisplay();
+                }
+            }
+
+            input.value = "";
+        }
+
+        function removeItem(code) {
+            selectedItems = selectedItems.filter(item => item.code !== code);
+            updateSelectedItemsDisplay();
+        }
+
+        function updateSelectedItemsDisplay() {
+            const mode = document.getElementById("modeSelect").value;
+            const container = document.getElementById("selectedItems");
+            
+            if (mode === "longcode") {
+                container.innerHTML = selectedItems.map(item => 
+                    `<span class="item-tag">
+                        ${item.name} (${item.code})
+                        <span class="remove" onclick="removeItem('${item.code}')">&times;</span>
+                    </span>`
+                ).join("");
+            } else {
+                // 原有的多物品显示逻辑保持不变
+                container.innerHTML = selectedItems.map(item => 
+                    `<span class="item-tag">
+                        ${item.name} (${item.code}) - ${item.quantity}个 ${item.starLevel}星
+                        <span class="remove" onclick="removeItem('${item.code}')">&times;</span>
+                    </span>`
+                ).join("");
+            }
+        }
+
+        function splitLongCode(code) {
+            // 果代码长度超过10个字符，需要分
+            if (code.length > 10) {
+                let parts = [];
+                let remaining = code;
+                
+                while (remaining.length > 10) {
+                    parts.push(remaining.substring(0, 10));
+                    remaining = remaining.substring(10);
+                }
+                if (remaining.length > 0) {
+                    parts.push(remaining);
+                }
+                return parts;
+            }
+            return [code];
+        }
+
+        function replaceAndCopy() {
+            const mode = document.getElementById("modeSelect").value;
+            
+            if (mode === "longcode") {
+                if (selectedItems.length === 0) {
+                    alert("请至少加一个物品代码！");
+                    return;
+                }
+
+                // 生成长代码格式
+                let result = "";
+                selectedItems.forEach((item, index) => {
+                    // 检查是否需要分行
+                    const codeParts = splitLongCode(item.code);
+                    
+                    if (codeParts.length > 1) {
+                        // 多行代码，只在开头和结尾添加中括号
+                        result += "[" + codeParts[0] + "${^^\n}$";
+                        // 中间的部分不加中括号
+                        for (let i = 1; i < codeParts.length - 1; i++) {
+                            result += codeParts[i] + "${^^\n}$";
+                        }
+                        // 最后一部分加上结束中括号
+                        result += codeParts[codeParts.length - 1] + "]";
+                    } else {
+                        // 单行代码直接包裹中括号
+                        result += `[${item.code}]`;
+                    }
+
+                    // 如果不是最后一个物品，添加分隔符
+                    if (index < selectedItems.length - 1) {
+                        result += "${^^\n}$";
+                    }
+                });
+
+                // 复制到剪贴板
+                navigator.clipboard.writeText(result).then(function() {
+                    showAlert("代码已成功复制到剪贴板！");
+                }, function(err) {
+                    alert("复制失败: " + err);
+                });
+
+                // 显示修改后的文本
+                document.getElementById("modifiedText").textContent = result;
+            } else {
+                // 多物品模式
+                if (selectedItems.length === 0) {
+                    alert("请至少添加一个物品！");
+                    return;
+                }
+
+                // 生成多物品代码
+                let result = "";
+                
+                selectedItems.forEach((item, index) => {
+                    // 每个物品都是完整的代码块
+                    result += "#$actio${^^\n";
+                    result += "}$n Add${^^\n";
+                    result += "}$Item ${^^\n";
+                    result += "}$" + item.code + "${^^\n";
+                    result += "}$ " + item.quantity + " " + item.starLevel;
+                    
+                    // 每个物品后面添加两个换行符（除了最后一个物品）
+                    if (index < selectedItems.length - 1) {
+                        result += "\n\n";
+                    }
+                });
+
+                // 复制到剪贴板
+                navigator.clipboard.writeText(result).then(function() {
+                    showAlert("代码已成功复制到剪贴板！");
+                }, function(err) {
+                    alert("复制失败: " + err);
+                });
+
+                // 显示修改后的文本
+                document.getElementById("modifiedText").textContent = result;
+            }
         }
 
         // 显示成功消息
         function showAlert(message) {
             var alertBox = document.getElementById("alert");
-            alertBox.textContent = message;
+            // 随机选择一条感恩提示
+            const tips = [
+                "代码已复制！如果对您有帮助，欢迎打赏支持~",
+                "复制成功！维护不易，感谢支持！",
+                "搞定啦！喜欢的话可以请我喝杯奶茶~",
+                "代码已复制！开发不易，感谢支持！"
+            ];
+            alertBox.textContent = tips[Math.floor(Math.random() * tips.length)];
             alertBox.style.display = "block";
             setTimeout(function() {
                 alertBox.style.display = "none";
-            }, 3000);
+            }, 10000);
         }
 
         // 跳转到 JSON 数据操作界面
@@ -292,49 +731,83 @@
 <body>
 
 <div class="container">
-    <h2>代码生成</h2>
+    <h2>星露谷物品代码生成器</h2>
 
-    <!-- 跳转按钮 -->
     <div class="jump-button-container">
-        <button class="jump-button" onclick="jumpToJsonDataInterface()">打开 代码 查询界面</button>
+        <button class="jump-button" onclick="jumpToJsonDataInterface()">
+            <i class="fas fa-search"></i> 打开代码查询界面
+        </button>
     </div>
 
-    <!-- 说明文字 -->
-    <h1>
-        使用说明：
-    </h1>
     <div class="instructions">
-        <p>代码替换，输入物品代码。如果您不知道物品代码，可以点击上方的红色查询页面进行查找。</p>
-        <p>名称替换，输入物品名称，但要保证准确，如果数据库中没有此物品，可以抖音私信我添加！3开头的代码 有bug，正在修复</p>
-        <p>代码输入完后如果没用，试试摁摁空格 再回车</p>
+        <h3>使用说明</h3>
+        <p>1. 长代码模式：面对长代码，请使用长代码模式，只能刷单个物品</p>
+        <p>2. 多物品选择：可输入物品名称或代码，支持中文搜索，可设置数量和星级</p>
+        <p>3. 数量范围：1-999，星级范围：0-3</p>
+        <p>4. 注意：输入中文时要准确，输入英文或数字默认是代码</p>
+        <p>粘贴后要加空格！！！</p>
+        <p class="support-text">❤️ 工具完全免费，维护不易，感谢支持~</p>
+        <p>注意：有bug私信我修复，粘贴后要加空格！！！</p>
     </div>
 
-    <p>请选择替换模式：</p>
-    <select id="modeSelect">
-        <option value="direct">代码替换</option>
-        <option value="mapping">名称替换</option>
-    </select>
+    <div class="input-group">
+        <label for="modeSelect">选择替换模式：</label>
+        <select id="modeSelect" onchange="toggleInputMode()">
+            <option value="multiple">多物品选择</option>
+            <option value="longcode">长代码模式</option>
+        </select>
+    </div>
 
-    <p>请输入替换内容（数字或名称）：</p>
-    <input type="text" id="inputNumber" placeholder="输入数字或名称" />
+    <div id="multipleInputArea" class="input-group">
+        <label>添加物品：</label>
+        <div class="multi-input">
+            <input type="text" id="multipleInput" placeholder="输入物品代码或名称，回车添加" />
+            <input type="number" id="multiQuantity" min="1" max="999" value="999" placeholder="数量" class="quantity-input" />
+            <select id="multiStarLevel" class="star-level-select">
+                <option value="0">0星</option>
+                <option value="1">1星</option>
+                <option value="2">2星</option>
+                <option value="3">3星</option>
+            </select>
+            <button onclick="addItem()" class="add-btn">添加</button>
+        </div>
+        <div id="selectedItems" class="selected-items"></div>
+    </div>
 
-    <p>请输入物品数量（1 到 999）：</p>
-    <input type="number" id="quantity" min="1" max="999" value="999" />
+    <div class="input-group" id="normalInputArea" style="display: none;">
+        <label for="inputNumber">输入替换内容：</label>
+        <input type="text" id="inputNumber" placeholder="输入物品代码或名称" />
+    </div>
 
-    <p>请选择物品星级（0 到 3）：</p>
-    <select id="starLevel">
-        <option value="0">0 星</option>
-        <option value="1">1 星</option>
-        <option value="2">2 星</option>
-        <option value="3">3 星</option>
-    </select>
+    <div class="input-group" style="display: none;">
+        <label for="quantity">物品数量（1-999）：</label>
+        <input type="number" id="quantity" min="1" max="999" value="999" />
+    </div>
 
-    <button onclick="replaceAndCopy()">生成并复制</button>
+    <div class="input-group" style="display: none;">
+        <label for="starLevel">物品星级：</label>
+        <select id="starLevel">
+            <option value="0">0 星</option>
+            <option value="1">1 星</option>
+            <option value="2">2 星</option>
+            <option value="3">3 星</option>
+        </select>
+    </div>
 
-    <div id="alert" class="alert"></div>
+    <div class="button-group">
+        <button onclick="replaceAndCopy()">生成并复制代码</button>
+    </div>
 
-    <h3>修改后的文本：</h3>
-    <pre id="modifiedText"></pre>
+    <div id="alert" class="alert" style="display: none;"></div>
+
+    <button class="support-button" onclick="window.location.href='zf.html'">
+        <i class="fas fa-heart"></i> 请作者喝杯奶茶
+    </button>
+
+    <div class="code-display">
+        <h3>生成的代码：</h3>
+        <pre id="modifiedText"></pre>
+    </div>
 </div>
 
 </body>
