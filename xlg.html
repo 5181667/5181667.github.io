@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>批量刷物品2.0</title>
+    <title>批量刷物品3.0</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -428,13 +428,21 @@
 
         // 从 output.json 文件加载数据
         fetch('output.json')
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('无法加载映射文件');
+                }
+                return response.json();
+            })
             .then(data => {
                 mapping = data;
+                console.log('映射数据加载成功');
             })
             .catch(error => {
                 console.error('无法加载映射数据:', error);
                 alert('无法加载映射数据');
+                // 初始化一个空的映射数组，这样即使没有映射文件也能使用代码功能
+                mapping = [];
             });
 
         // 等待DOM加载完成后执行
@@ -447,7 +455,6 @@
             });
 
             // 初始化界面显示
-            const mode = document.getElementById("modeSelect").value; // 默认是多物品模式
             const normalInputArea = document.getElementById("normalInputArea");
             const multipleArea = document.getElementById("multipleInputArea");
             const quantityInput = document.getElementById("quantity").parentElement;
@@ -473,16 +480,16 @@
             const starLevelInput = document.getElementById("starLevel").parentElement;
             const multiQuantity = document.getElementById("multiQuantity");
             const multiStarLevel = document.getElementById("multiStarLevel");
-            
+
             if (mode === "multiple") {
                 normalInputArea.style.display = "none";
                 multipleArea.style.display = "block";
                 quantityInput.style.display = "none";
                 starLevelInput.style.display = "none";
-                // 显示数量和星级输入
                 multiQuantity.style.display = "block";
                 multiStarLevel.style.display = "block";
-            } else if (mode === "longcode") {
+                document.getElementById("multipleInput").placeholder = "输入物品代码或名称，回车添加";
+            } else if (mode === "tool") {
                 normalInputArea.style.display = "none";
                 multipleArea.style.display = "block";
                 quantityInput.style.display = "none";
@@ -490,8 +497,7 @@
                 // 隐藏数量和星级输入
                 multiQuantity.style.display = "none";
                 multiStarLevel.style.display = "none";
-                // 修改输入框提示
-                document.getElementById("multipleInput").placeholder = "输入物品代码，回车添加";
+                document.getElementById("multipleInput").placeholder = "输入工具代码，回车添加";
             }
         }
 
@@ -499,12 +505,12 @@
             const mode = document.getElementById("modeSelect").value;
             const input = document.getElementById("multipleInput");
             const value = input.value.trim();
-            
+
             if (!value) return;
 
             // 通用的物品代码查询逻辑
             let itemToAdd;
-            
+
             // 判断输入是中文还是代码
             if (/[\u4e00-\u9fa5]/.test(value)) {
                 // 输入是中文名称，从mapping中查找代码
@@ -534,24 +540,11 @@
                 }
             }
 
-            if (mode === "longcode") {
-                // 长代码模式直接添加
-                if (!selectedItems.some(item => item.code === itemToAdd.code)) {
-                    selectedItems.push(itemToAdd);
-                    updateSelectedItemsDisplay();
-                }
+            if (mode === "tool") {
+                // 工具模式直接添加
+                selectedItems.push(itemToAdd);
+                updateSelectedItemsDisplay();
             } else {
-                // 多物品模式下检查代码长度
-                if (itemToAdd.code.length > 10) {
-                    alert("检测到长代码，请使用长代码模式！");
-                    // 自动切换到长代码模式
-                    // document.getElementById("modeSelect").value = "longcode";
-                    // toggleInputMode();
-                    // 将代码保留在输入框中
-                    // input.value = value;
-                    return;
-                }
-
                 // 多物品模式需要添加数量和星级
                 const quantity = parseInt(document.getElementById("multiQuantity").value);
                 const starLevel = parseInt(document.getElementById("multiStarLevel").value);
@@ -570,11 +563,9 @@
                 itemToAdd.quantity = quantity;
                 itemToAdd.starLevel = starLevel;
 
-                // 检查是否已添加
-                if (!selectedItems.some(item => item.code === itemToAdd.code)) {
-                    selectedItems.push(itemToAdd);
-                    updateSelectedItemsDisplay();
-                }
+                // 直接添加物品
+                selectedItems.push(itemToAdd);
+                updateSelectedItemsDisplay();
             }
 
             input.value = "";
@@ -588,17 +579,17 @@
         function updateSelectedItemsDisplay() {
             const mode = document.getElementById("modeSelect").value;
             const container = document.getElementById("selectedItems");
-            
-            if (mode === "longcode") {
-                container.innerHTML = selectedItems.map(item => 
+
+            if (mode === "tool") {
+                container.innerHTML = selectedItems.map(item =>
                     `<span class="item-tag">
                         ${item.name} (${item.code})
                         <span class="remove" onclick="removeItem('${item.code}')">&times;</span>
                     </span>`
                 ).join("");
             } else {
-                // 原有的多物品显示逻辑保持不变
-                container.innerHTML = selectedItems.map(item => 
+                // 多物品显示逻辑
+                container.innerHTML = selectedItems.map(item =>
                     `<span class="item-tag">
                         ${item.name} (${item.code}) - ${item.quantity}个 ${item.starLevel}星
                         <span class="remove" onclick="removeItem('${item.code}')">&times;</span>
@@ -612,7 +603,7 @@
             if (code.length > 10) {
                 let parts = [];
                 let remaining = code;
-                
+
                 while (remaining.length > 10) {
                     parts.push(remaining.substring(0, 10));
                     remaining = remaining.substring(10);
@@ -627,28 +618,28 @@
 
         function replaceAndCopy() {
             const mode = document.getElementById("modeSelect").value;
-            
-            if (mode === "longcode") {
+
+            if (mode === "tool") {
                 if (selectedItems.length === 0) {
-                    alert("请至少加一个物品代码！");
+                    alert("请至少添加一个工具代码！");
                     return;
                 }
 
-                // 生成长代码格式
+                // 生成工具代码格式
                 let result = "";
                 selectedItems.forEach((item, index) => {
-                    // 检查是否需要分行
-                    const codeParts = splitLongCode(item.code);
-                    
+                    // 将物品代码按最大8个字符分割
+                    let codeParts = item.code.match(/.{1,8}/g) || [item.code];
+
                     if (codeParts.length > 1) {
                         // 多行代码，只在开头和结尾添加中括号
-                        result += "[" + codeParts[0] + "${^^\n}$";
+                        result += "[" + codeParts[0] + "${^^\n";
                         // 中间的部分不加中括号
                         for (let i = 1; i < codeParts.length - 1; i++) {
-                            result += codeParts[i] + "${^^\n}$";
+                            result += "}$" + codeParts[i] + "${^^\n";
                         }
                         // 最后一部分加上结束中括号
-                        result += codeParts[codeParts.length - 1] + "]";
+                        result += "}$" + codeParts[codeParts.length - 1] + "]";
                     } else {
                         // 单行代码直接包裹中括号
                         result += `[${item.code}]`;
@@ -656,7 +647,8 @@
 
                     // 如果不是最后一个物品，添加分隔符
                     if (index < selectedItems.length - 1) {
-                        result += "${^^\n}$";
+                        result += "${^^\n";
+                        result += "}$";
                     }
                 });
 
@@ -670,7 +662,7 @@
                 // 显示修改后的文本
                 document.getElementById("modifiedText").textContent = result;
             } else {
-                // 多物品模式
+                // 原有的多物品模式代码保持不变
                 if (selectedItems.length === 0) {
                     alert("请至少添加一个物品！");
                     return;
@@ -678,15 +670,27 @@
 
                 // 生成多物品代码
                 let result = "";
-                
+
                 selectedItems.forEach((item, index) => {
-                    // 每个物品都是完整的代码块
+                    // 将物品代码按最大8个字符分割
+                    let codeParts = item.code.match(/.{1,8}/g) || [item.code];
+
                     result += "#$actio${^^\n";
                     result += "}$n Add${^^\n";
-                    result += "}$Item ${^^\n";
-                    result += "}$" + item.code + "${^^\n";
-                    result += "}$ " + item.quantity + " " + item.starLevel;
-                    
+                    result += "}$Item (${^^\n";
+                    result += "}$O)${^^\n";
+
+                    // 添加分割的代码部分
+                    for (let i = 0; i < codeParts.length; i++) {
+                        result += "}$" + codeParts[i];
+                        if (i < codeParts.length - 1) {
+                            result += "${^^\n";
+                        }
+                    }
+
+                    result += "${^^\n";
+                    result += "}$ " + item.quantity + " " + item.starLevel + " 0";
+
                     // 每个物品后面添加两个换行符（除了最后一个物品）
                     if (index < selectedItems.length - 1) {
                         result += "\n\n";
@@ -741,27 +745,28 @@
 
     <div class="instructions">
         <h3>使用说明</h3>
-        <p>1. 长代码模式：面对长代码，请使用长代码模式，只能刷单个物品</p>
-        <p>2. 多物品选择：可输入物品名称或代码，支持中文搜索，可设置数量和星级</p>
-        <p>3. 数量范围：1-999，星级范围：0-3</p>
+        <p>1. 多物品模式：用于添加除工具武器外的所有物品，可重复添加相同物品</p>
+        <p>2. 工具模式：用于添加工具和武器，可重复添加相同工具</p>
+        <p>3. 数量范围：1-999，星级范围：0-3（仅多物品模式可用）</p>
         <p>4. 注意：输入中文时要准确，输入英文或数字默认是代码</p>
+        <p>5. 所有模式都支持重复添加相同物品</p>
         <p>粘贴后要加空格！！！</p>
         <p class="support-text">❤️ 工具完全免费，维护不易，感谢支持~</p>
         <p>注意：有bug私信我修复，粘贴后要加空格！！！</p>
     </div>
 
     <div class="input-group">
-        <label for="modeSelect">选择替换模式：</label>
+        <label for="modeSelect">选择模式：</label>
         <select id="modeSelect" onchange="toggleInputMode()">
-            <option value="multiple">多物品选择</option>
-            <option value="longcode">长代码模式</option>
+            <option value="multiple">多物品模式（除工具武器外的物品）</option>
+            <option value="tool">工具模式（工具和武器）</option>
         </select>
     </div>
 
     <div id="multipleInputArea" class="input-group">
         <label>添加物品：</label>
         <div class="multi-input">
-            <input type="text" id="multipleInput" placeholder="输入物品代码或名称，回车添加" />
+            <input type="text" id="multipleInput" placeholder="输入物品代码或名称，支持重复添加" />
             <input type="number" id="multiQuantity" min="1" max="999" value="999" placeholder="数量" class="quantity-input" />
             <select id="multiStarLevel" class="star-level-select">
                 <option value="0">0星</option>
