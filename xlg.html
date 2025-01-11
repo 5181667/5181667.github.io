@@ -426,23 +426,14 @@
         let mapping = []; // 用于存储从 output.json 中加载的映射数据
         let selectedItems = []; // 存储已选择的物品
 
-        // 从 output.json 文件加载数据
+        // 加载数据
         fetch('output.json')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('无法加载映射文件');
-                }
-                return response.json();
-            })
+            .then(response => response.json())
             .then(data => {
                 mapping = data;
-                console.log('映射数据加载成功');
             })
             .catch(error => {
-                console.error('无法加载映射数据:', error);
-                alert('无法加载映射数据');
-                // 初始化一个空的映射数组，这样即使没有映射文件也能使用代码功能
-                mapping = [];
+                console.error('无法加载 JSON 数据:', error);
             });
 
         // 等待DOM加载完成后执行
