@@ -25,7 +25,6 @@
             max-width: 500px;
             width: 100%;
             text-align: center;
-            backdrop-filter: blur(10px);
         }
 
         .header {
@@ -94,6 +93,8 @@
             transition: all 0.3s;
             background: #3498db;
             color: white;
+            position: relative;
+            overflow: hidden;
         }
 
         .support-button:hover {
@@ -168,15 +169,197 @@
         }
 
         .supporter-avatar {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #ffafbd, #ffc3a0);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+
+        .donation-list {
+            margin: 20px 0;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .donation-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px;
+            border-bottom: 1px solid #eee;
+            animation: slideIn 0.3s ease;
+        }
+
+        .donation-item:last-child {
+            border-bottom: none;
+        }
+
+        .donor-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .donor-avatar {
             width: 30px;
             height: 30px;
             border-radius: 50%;
-            background: #3498db;
+            background: linear-gradient(45deg, #3498db, #2ecc71);
             color: white;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 12px;
+        }
+
+        .donation-amount {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+
+        .donation-time {
+            color: #7f8c8d;
+            font-size: 12px;
+        }
+
+        .popular-amount {
+            display: flex;
+            gap: 10px;
+            margin: 15px 0;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .amount-btn {
+            padding: 8px 15px;
+            border: 2px solid #3498db;
+            border-radius: 20px;
+            background: white;
+            color: #3498db;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .amount-btn:hover {
+            background: #3498db;
+            color: white;
+        }
+
+        .amount-btn.popular {
+            background: #f1c40f;
+            border-color: #f1c40f;
+            color: white;
+            position: relative;
+        }
+
+        .amount-btn.popular::after {
+            content: '最受欢迎';
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 10px;
+            background: #e74c3c;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 10px;
+        }
+
+        .message-board {
+            margin: 30px 0;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .message-title {
+            padding: 15px 20px;
+            margin: 0;
+            background: linear-gradient(45deg, #3498db, #2ecc71);
+            color: white;
+            font-size: 18px;
+        }
+
+        .message-list {
+            padding: 15px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .message-item {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            transition: transform 0.2s;
+        }
+
+        .message-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .message-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .message-user {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .user-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #3498db, #2ecc71);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .user-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .user-name {
+            font-weight: 500;
+            color: #2c3e50;
+        }
+
+        .message-time {
+            font-size: 12px;
+            color: #7f8c8d;
+        }
+
+        .message-amount {
+            background: #e74c3c;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 14px;
+        }
+
+        .message-content {
+            color: #34495e;
+            line-height: 1.5;
+            font-size: 14px;
         }
 
         @media (max-width: 768px) {
@@ -192,6 +375,328 @@
                 width: 100%;
                 margin: 10px 0;
             }
+
+            .message-list {
+                max-height: 300px;
+            }
+
+            .message-item {
+                padding: 12px;
+            }
+
+            .user-avatar {
+                width: 32px;
+                height: 32px;
+            }
+
+            .message-content {
+                font-size: 13px;
+            }
+        }
+
+        .heart-beat {
+            display: inline-block;
+            animation: heartBeat 1.5s infinite;
+        }
+
+        @keyframes heartBeat {
+            0% { transform: scale(1); }
+            14% { transform: scale(1.3); }
+            28% { transform: scale(1); }
+            42% { transform: scale(1.3); }
+            70% { transform: scale(1); }
+        }
+
+        .value-props {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .value-item {
+            background: rgba(52, 152, 219, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            color: #2c3e50;
+        }
+
+        .value-item i {
+            display: block;
+            font-size: 24px;
+            color: #3498db;
+            margin-bottom: 8px;
+        }
+
+        .support-message {
+            text-align: center;
+            margin: 20px 0;
+            color: #7f8c8d;
+        }
+
+        .support-benefits {
+            color: #27ae60;
+            font-weight: 500;
+        }
+
+        .amount-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px 20px;
+        }
+
+        .amount-btn small {
+            font-size: 12px;
+            margin-top: 4px;
+            color: #7f8c8d;
+        }
+
+        .amount-btn:hover small {
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .value-props {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .recent-donations {
+            margin: 30px 0;
+            padding: 20px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .recent-donations h3 {
+            margin: 0 0 20px 0;
+            color: #2c3e50;
+            font-size: 18px;
+            text-align: center;
+        }
+
+        .donation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .donation-card {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: transform 0.2s;
+        }
+
+        .donation-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .donation-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .donor-name {
+            font-weight: 500;
+            color: #2c3e50;
+        }
+
+        .donation-amount {
+            color: #e74c3c;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .donation-time {
+            color: #7f8c8d;
+            font-size: 12px;
+        }
+
+        .support-message {
+            text-align: center;
+            margin: 30px 0;
+            padding: 20px;
+            background: rgba(52, 152, 219, 0.1);
+            border-radius: 12px;
+        }
+
+        .support-message p {
+            margin: 10px 0;
+        }
+
+        .support-benefits {
+            margin-top: 15px;
+            color: #27ae60;
+            font-weight: 500;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        @media (max-width: 768px) {
+            .donation-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            margin: 30px 0;
+        }
+
+        .support-button.primary {
+            background: linear-gradient(45deg, #3498db, #2ecc71);
+            color: white;
+        }
+
+        .support-button.secondary {
+            background: #f8f9fa;
+            color: #2c3e50;
+            border: 2px solid #e9ecef;
+        }
+
+        .support-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .choice-message {
+            text-align: center;
+            color: #7f8c8d;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .action-buttons {
+                flex-direction: column;
+            }
+        }
+
+        /* 添加新的动画样式 */
+        .skip-message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(46, 204, 113, 0.95);
+            color: white;
+            padding: 20px 40px;
+            border-radius: 10px;
+            font-size: 18px;
+            animation: fadeInOut 1s ease;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        @keyframes fadeInOut {
+            0% { opacity: 0; transform: translate(-50%, -40%); }
+            20% { opacity: 1; transform: translate(-50%, -50%); }
+            80% { opacity: 1; transform: translate(-50%, -50%); }
+            100% { opacity: 0; transform: translate(-50%, -60%); }
+        }
+
+        #supportOptions {
+            transition: all 0.5s ease;
+            opacity: 0;
+            transform: translateY(20px);
+            margin-top: 20px;
+        }
+
+        #supportOptions.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .support-button::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
+        }
+
+        .support-button:active::after {
+            width: 300px;
+            height: 300px;
+        }
+
+        .recent-support {
+            margin: 30px 0;
+            padding: 20px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .recent-support h3 {
+            margin: 0 0 20px 0;
+            color: #2c3e50;
+            font-size: 18px;
+            text-align: center;
+        }
+
+        .support-list {
+            max-height: 300px;
+            overflow-y: auto;
+            padding: 5px;
+        }
+
+        .support-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #f0f0f0;
+            transition: transform 0.2s;
+        }
+
+        .support-item:hover {
+            transform: translateX(5px);
+            background: #f8f9fa;
+            border-radius: 6px;
+        }
+
+        .supporter-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .supporter-name {
+            font-weight: 500;
+            color: #2c3e50;
+        }
+
+        .support-amount {
+            font-weight: bold;
+            color: #e74c3c;
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .support-list {
+                max-height: 250px;
+            }
         }
     </style>
 </head>
@@ -199,56 +704,139 @@
 
 <div class="container">
     <div class="header">
-        <h1 class="title">支持作者继续创作，不想支持就滑倒底部</h1>
-        <p class="subtitle">您的支持是我持续更新的动力！点击微信或支付宝后下方会出现收款码，<br>金额随意，重在心意 ❤️</p>
+        <h1 class="title">一起让工具变得更好</h1>
+        <p class="subtitle">
+            已有 <span style="color: #e74c3c; font-weight: bold;">328</span> 位玩家参与改进 
+            <span class="heart-beat">❤️</span>
+        </p>
     </div>
 
-    <div class="features">
-        <div class="feature">
-            <i class="fas fa-sync-alt"></i>
-            <span class="feature-text">持续更新新物品</span>
+    <div class="value-props">
+        <div class="value-item">
+            <i class="fas fa-code"></i>
+            <span>个人开发维护</span>
         </div>
-        <div class="feature">
-            <i class="fas fa-bug"></i>
-            <span class="feature-text">及时修复问题</span>
+        <div class="value-item">
+            <i class="fas fa-users"></i>
+            <span>及时解决问题</span>
         </div>
-        <div class="feature">
-            <i class="fas fa-comments"></i>
-            <span class="feature-text">优先解答问题</span>
-        </div>
-        <div class="feature">
+        <div class="value-item">
             <i class="fas fa-heart"></i>
-            <span class="feature-text">用爱发电</span>
+            <span>用爱发电</span>
         </div>
     </div>
 
-    <div class="social-proof">
-        <div class="supporter-count">已有 256 位玩家支持</div>
-        <div class="supporter-list">
-            <!-- 随机生成支持者头像 -->
+    <div class="support-message">
+        <p>感谢使用本工具，如果对您有帮助的话 😊</p>
+        <p class="support-benefits">
+            <i class="fas fa-gift"></i> 
+            您的每一份心意都是对我最大的鼓励 ❤️
+        </p>
+    </div>
+
+    <!-- <div class="popular-amount">
+        <button class="amount-btn">￥0.99 <small>象征性支持</small></button>
+        <button class="amount-btn">￥3.00 <small>一杯奶茶</small></button>
+        <button class="amount-btn">￥5.20 <small>一份爱意</small></button>
+        <button class="amount-btn popular">￥6.66 <small>最受欢迎</small></button>
+        <button class="amount-btn">￥9.99 <small>进阶支持</small></button>
+        <button class="amount-btn">￥10.00 <small>大佬赏</small></button>
+    </div> -->
+
+    <div class="action-buttons">
+        <button class="support-button primary" onclick="showSupportOptions()">
+            <i class="fas fa-heart"></i>支持一下
+        </button>
+        <button class="support-button secondary" onclick="skipToMain()">
+            <i class="fas fa-arrow-right"></i>直接使用
+        </button>
+    </div>
+
+    <div class="choice-message">
+        <p>两个选择都很好，工具永久免费 😊</p>
+    </div>
+
+    <div id="supportOptions" style="display: none;">
+        <div class="support-options">
+            <button class="support-button wechat" onclick="showQR('wechat')">
+                <i class="fab fa-weixin"></i>微信支持
+            </button>
+            <button class="support-button alipay" onclick="showQR('alipay')">
+                <i class="fab fa-alipay"></i>支付宝支持
+            </button>
+        </div>
+
+        <div class="qr-code" id="qr-code">
+            <img id="qr-image" src="" alt="支付二维码">
+        </div>
+
+        <div class="appreciation" id="appreciation">
+            感谢您的支持！您的鼓励是我最大的动力 ❤️<br>
+            <small style="color: #7f8c8d;">支付后请加群，获取更多福利！</small>
         </div>
     </div>
 
-    <div class="support-options">
-        <button class="support-button wechat" onclick="showQR('wechat')">
-            <i class="fab fa-weixin"></i>微信支持
-        </button>
-        <button class="support-button alipay" onclick="showQR('alipay')">
-            <i class="fab fa-alipay"></i>支付宝支持
-        </button>
+    <div class="recent-support">
+        <h3>一周内支持</h3>
+        <div class="support-list">
+            <div class="support-item">
+                <div class="supporter-info">
+                    <div class="supporter-avatar">🎮</div>
+                    <span class="supporter-name">游戏达人</span>
+                </div>
+                <span class="support-amount">￥0.88</span>
+            </div>
+            <div class="support-item">
+                <div class="supporter-info">
+                    <div class="supporter-avatar">🌱</div>
+                    <span class="supporter-name">种地小能手</span>
+                </div>
+                <span class="support-amount">￥5.20</span>
+            </div>
+            <div class="support-item">
+                <div class="supporter-info">
+                    <div class="supporter-avatar">🎣</div>
+                    <span class="supporter-name">钓鱼佬</span>
+                </div>
+                <span class="support-amount">￥0.99</span>
+            </div>
+            <div class="support-item">
+                <div class="supporter-info">
+                    <div class="supporter-avatar">🏃</div>
+                    <span class="supporter-name">跑男</span>
+                </div>
+                <span class="support-amount">￥2.00</span>
+            </div>
+            <div class="support-item">
+                <div class="supporter-info">
+                    <div class="supporter-avatar">🌟</div>
+                    <span class="supporter-name">星露谷老玩家</span>
+                </div>
+                <span class="support-amount">￥3.00</span>
+            </div>
+            <div class="support-item">
+                <div class="supporter-info">
+                    <div class="supporter-avatar">🎨</div>
+                    <span class="supporter-name">装修达人</span>
+                </div>
+                <span class="support-amount">￥10.00</span>
+            </div>
+            <div class="support-item">
+                <div class="supporter-info">
+                    <div class="supporter-avatar">🌾</div>
+                    <span class="supporter-name">农场主</span>
+                </div>
+                <span class="support-amount">￥20.00</span>
+            </div>
+            <div class="support-item">
+                <div class="supporter-info">
+                    <div class="supporter-avatar">🎁</div>
+                    <span class="supporter-name">收藏家</span>
+                </div>
+                <span class="support-amount">￥52.00</span>
+            </div>
+        </div>
     </div>
-
-    <div class="qr-code" id="qr-code">
-        <img id="qr-image" src="" alt="支付二维码">
-    </div>
-
-    <div class="appreciation" id="appreciation">
-        感谢您的支持！您的鼓励是我最大的动力 ❤️
-    </div>
-
-    <button class="skip-button" onclick="skipToMain()">
-        下次一定 →
-    </button>
 </div>
 
 <script>
@@ -262,28 +850,167 @@
         supporterList.appendChild(avatar);
     }
 
+    function showSupportOptions() {
+        const supportOptions = document.getElementById('supportOptions');
+        
+        // 显示支付选项
+        supportOptions.style.display = 'block';
+        
+        // 触发动画
+        setTimeout(() => {
+            supportOptions.classList.add('show');
+        }, 10);
+        
+        // 平滑滚动
+        supportOptions.scrollIntoView({ 
+            behavior: 'smooth',
+            block: 'center'
+        });
+    }
+
+    function skipToMain() {
+        const container = document.querySelector('.container');
+        
+        // 创建提示消息
+        const message = document.createElement('div');
+        message.className = 'skip-message';
+        message.innerHTML = '感谢使用，祝您游戏愉快！ 😊';
+        
+        // 显示消息
+        document.body.appendChild(message);
+        
+        // 设置跳转延时
+        setTimeout(() => {
+            window.location.href = 'xlg.html';
+        }, 1000);
+    }
+
     function showQR(type) {
         const qrCode = document.getElementById('qr-code');
         const qrImage = document.getElementById('qr-image');
         const appreciation = document.getElementById('appreciation');
         
+        // 添加淡入效果
+        qrCode.style.opacity = '0';
         qrCode.style.display = 'block';
-        qrImage.src = type === 'wechat' ? 'wechat.JPG' : 'zfb.JPG';
+        qrImage.src = type === 'wechat' ? 'wechat.jpg' : 'zfb.jpg';
         
-        // 3秒后显示感谢信息
+        // 触发淡入动画
+        setTimeout(() => {
+            qrCode.style.transition = 'opacity 0.3s ease';
+            qrCode.style.opacity = '1';
+        }, 10);
+        
+        // 显示感谢信息
         setTimeout(() => {
             appreciation.style.display = 'block';
+            appreciation.style.animation = 'fadeIn 0.5s ease';
         }, 3000);
-    }
-
-    function skipToMain() {
-        window.location.href = 'xlg.html';
     }
 
     // 30秒后自动显示跳过按钮
     setTimeout(() => {
         document.querySelector('.skip-button').style.opacity = '1';
     }, 30000);
+
+    function updateDonationList() {
+        const donations = [
+            { name: '张', amount: 6.66, time: '2分钟前' },
+            { name: '李', amount: 9.99, time: '5分钟前' },
+            { name: '王', amount: 5.20, time: '12分钟前' },
+            { name: '赵', amount: 3.00, time: '15分钟前' },
+            { name: '孙', amount: 6.66, time: '18分钟前' },
+            // ... 更多捐赠数据
+        ];
+
+        const list = document.querySelector('.donation-list');
+        list.innerHTML = donations.map(d => `
+            <div class="donation-item">
+                <div class="donor-info">
+                    <div class="donor-avatar">${d.name}</div>
+                    <span>${d.name}**</span>
+                    <span class="donation-time">${d.time}</span>
+                </div>
+                <span class="donation-amount">￥${d.amount.toFixed(2)}</span>
+            </div>
+        `).join('');
+    }
+
+    // 定期更新捐赠列表
+    setInterval(updateDonationList, 30000);
+
+    // 修改按钮点击事件
+    document.querySelectorAll('.amount-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const amount = btn.textContent.replace('￥', '');
+            // 存储选中的金额
+            localStorage.setItem('selectedAmount', amount);
+        });
+    });
+
+    // 修改支付按钮点击事件
+    document.querySelector('.support-button.wechat').onclick = () => {
+        const amount = localStorage.getItem('selectedAmount') || '6.66';
+        showQR('wechat');
+    };
+
+    document.querySelector('.support-button.alipay').onclick = () => {
+        const amount = localStorage.getItem('selectedAmount') || '6.66';
+        showQR('alipay');
+    };
+
+    // 微信支付
+    function callWechatPay(amount) {
+        // 需要服务器支持，生成支付参数
+        fetch('/api/create-wechat-order', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                amount: amount,
+                description: '支持作者'
+            })
+        })
+        .then(res => res.json())
+        .then(data => {
+            WeixinJSBridge.invoke(
+                'getBrandWCPayRequest', {
+                    "appId": data.appId,
+                    "timeStamp": data.timeStamp,
+                    "nonceStr": data.nonceStr,
+                    "package": data.package,
+                    "signType": data.signType,
+                    "paySign": data.paySign
+                },
+                function(res) {
+                    if(res.err_msg == "get_brand_wcpay_request:ok") {
+                        showThankYouMessage();
+                    }
+                }
+            );
+        });
+    }
+
+    // 支付宝支付
+    function callAlipay(amount) {
+        // 需要服务器支持，生成支付参数
+        fetch('/api/create-alipay-order', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                amount: amount,
+                description: '支持作者'
+            })
+        })
+        .then(res => res.json())
+        .then(data => {
+            // 跳转到支付宝支付页面
+            window.location.href = data.payUrl;
+        });
+    }
 </script>
 
 </body>
