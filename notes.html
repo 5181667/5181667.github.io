@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>使用说明与注意事项</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        }
+
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2em;
+        }
+
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            border-left: 4px solid #3498db;
+        }
+
+        .section h2 {
+            color: #2c3e50;
+            margin-top: 0;
+        }
+
+        .section p, .section li {
+            color: #34495e;
+            line-height: 1.6;
+            margin: 10px 0;
+        }
+
+        .important {
+            background: #fff3cd;
+            border-left-color: #ffc107;
+        }
+
+        .warning {
+            background: #f8d7da;
+            border-left-color: #dc3545;
+        }
+
+        .tip {
+            background: #d4edda;
+            border-left-color: #28a745;
+        }
+
+        .back-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        .icon {
+            margin-right: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+                margin: 10px;
+            }
+
+            h1 {
+                font-size: 1.5em;
+            }
+
+            .section {
+                padding: 15px;
+            }
+        }
+
+        .doc-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #3498db;
+            text-decoration: none;
+            padding: 8px 16px;
+            background: rgba(52, 152, 219, 0.1);
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .doc-link:hover {
+            background: rgba(52, 152, 219, 0.2);
+            transform: translateX(5px);
+        }
+
+        .doc-link i {
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>使用说明与注意事项</h1>
+
+        <div class="section important">
+            <h2><i class="fas fa-exclamation-circle icon"></i>重要提示</h2>
+            <ul>
+                <li>使用代码生成器后，粘贴代码时<strong>必须在末尾加一个空格（可以多个）</strong>！</li>
+                <li>工具生成的代码仅适用于星露谷物语游戏</li>
+                <li>请勿在多人游戏中滥用此工具</li>
+                <li>大家可以加入主页粉丝群，一起讨论使用方法和游戏心得</li>
+            </ul>
+        </div>
+
+        <div class="section warning">
+            <h2><i class="fas fa-exclamation-triangle icon"></i>常见问题</h2>
+            <ul>
+                <li>如果代码无效，请检查：
+                    <ul>
+                        <li>是否在代码末尾加了空格</li>
+                        <li>是否选择了正确的模式（工具模式/多物品模式）</li>
+                        <li>物品代码是否正确</li>
+                    </ul>
+                </li>
+                <li>部分物品可能会显示为问号，这是正常现象</li>
+                <li>如遇到bug，请及时反馈</li>
+            </ul>
+        </div>
+
+        <div class="section warning">
+            <h2><i class="fas fa-mobile-alt icon"></i>非电脑端使用说明，pc也可参考</h2>
+            <ul>
+                <li>手机/平板用户注意事项：
+                    <ul>
+                        <li>用不了多物品模式，只能使用[代码]的工具模式</li>
+                        <li>部分浏览器可能无法自动复制代码，此时请手动复制代码框中的内容</li>
+                        <li>建议使用系统自带浏览器或主流浏览器（如Chrome）访问</li>
+                        <li>复制代码后请勿使用第三方输入法粘贴，建议使用系统自带的粘贴功能</li>
+                        <li>iOS用户请使用Safari浏览器访问，其他浏览器可能会出现复制失败的情况</li>
+                    </ul>
+                </li>
+                <li>如果复制不成功：
+                    <ul>
+                        <li>手动选择代码框中的全部内容</li>
+                        <li>使用系统自带的复制功能</li>
+                        <li>确保复制时选中了完整的代码</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="section tip">
+            <h2><i class="fas fa-lightbulb icon"></i>使用技巧</h2>
+            <ul>
+                <li>工具模式：用于生成工具、武器等装备的代码</li>
+                <li>多物品模式：用于生成普通物品、作物、矿石等的代码</li>
+                <li>可以通过中文名称或物品代码来搜索物品</li>
+                <li>支持批量添加多个物品</li>
+                <li>数量限制在1-999之间</li>
+                <li>星级范围为0-3星</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2><i class="fas fa-code icon"></i>代码格式说明</h2>
+            <ul>
+                <li>普通物品代码格式：<code>#$action Add$Item (O)物品代码 数量 星级 0</code></li>
+                <li>工具代码格式：<code>[物品代码]</code></li>
+                <li>带括号的物品代码会自动去除(O)前缀</li>
+            </ul>
+        </div>
+
+        <div class="section tip">
+            <h2><i class="fas fa-file-alt icon"></i>共享文档</h2>
+            <ul>
+                <li>
+                    <a href="https://kdocs.cn/l/cpqTwV0w6Bqq" target="_blank" class="doc-link">
+                        <i class="fas fa-external-link-alt"></i> 点击查看完整物品代码文档
+                    </a>
+                </li>
+                <li>文档包含：
+                    <ul>
+                        <li>完整的物品代码列表</li>
+                        <li>特殊物品获取方法</li>
+                        <li>常见问题解答</li>
+                        <li>使用技巧分享</li>
+                    </ul>
+                </li>
+                <li>文档持续更新中，欢迎查看和分享</li>
+            </ul>
+        </div>
+
+        <a href="xlg.html" class="back-button">
+            <i class="fas fa-arrow-left"></i> 返回生成器
+        </a>
+    </div>
+</body>
+</html> 
