@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>慧慧的论文目录</title>
+    <style>
+        body {
+            font-family: "Microsoft YaHei", "SimSun", sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            line-height: 1.6;
+            background-color: #f0f8ff;
+            position: relative;
+        }
+        
+        .heart {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            font-size: 24px;
+            color: #4dabf7;
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); color: #4dabf7; }
+            50% { transform: scale(1.2); color: #e91e63; }
+            100% { transform: scale(1); color: #4dabf7; }
+        }
+        
+        .container {
+            background-color: #fff;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            padding: 30px;
+            border-radius: 10px;
+            position: relative;
+            border: 1px solid #bbdefb;
+        }
+        
+        h1 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #4dabf7;
+            padding-bottom: 15px;
+            color: #0d47a1;
+        }
+        
+        .dedication {
+            text-align: center;
+            font-style: italic;
+            margin-bottom: 30px;
+            padding: 15px;
+            background-color: #f5f9ff;
+            border-radius: 8px;
+            color: #1976d2;
+            border: 1px dashed #bbdefb;
+        }
+        
+        .toc {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .toc li {
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .toc li:hover {
+            transform: translateX(5px);
+            color: #1976d2;
+            cursor: pointer;
+        }
+        
+        .chapter {
+            font-weight: bold;
+            font-size: 18px;
+            margin-top: 25px;
+            color: #000;
+            background-color: #ebf5ff;
+            padding: 8px 10px;
+            border-radius: 5px;
+            border-left: 4px solid #2196f3;
+        }
+        
+        .level-1 {
+            margin-left: 30px;
+            font-size: 16px;
+            position: relative;
+        }
+        
+        .level-1:before {
+            content: "❧";
+            color: #4dabf7;
+            margin-right: 8px;
+            font-size: 14px;
+        }
+        
+        .level-2 {
+            margin-left: 60px;
+            font-size: 15px;
+            color: #444;
+            position: relative;
+        }
+        
+        .level-2:before {
+            content: "♡";
+            color: #e91e63;
+            margin-right: 8px;
+            font-size: 12px;
+        }
+        
+        .level-3 {
+            margin-left: 90px;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .page-num {
+            float: right;
+            color: #666;
+        }
+        
+        .toc-item {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+        }
+        
+        .toc-text {
+            flex-grow: 1;
+        }
+        
+        .toc-dots {
+            flex-grow: 0;
+            border-bottom: 1px dotted #bbdefb;
+            margin: 0 5px;
+            margin-bottom: 5px;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #bbdefb;
+            font-size: 14px;
+            color: #1976d2;
+        }
+        
+        .corner-heart {
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #4dabf7 50%, #e91e63 50%);
+            transform: rotate(45deg);
+            z-index: -1;
+        }
+        
+        .corner-heart:before, .corner-heart:after {
+            content: "";
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+        }
+        
+        .corner-heart:before {
+            top: -25px;
+            left: 0;
+            background-color: #4dabf7;
+        }
+        
+        .corner-heart:after {
+            top: 0;
+            left: -25px;
+            background-color: #e91e63;
+        }
+        
+        /* 模态框样式 */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            overflow: auto;
+        }
+        
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 700px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            position: relative;
+        }
+        
+        .close-btn {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .close-btn:hover {
+            color: #4dabf7;
+        }
+        
+        .modal-title {
+            color: #1976d2;
+            border-bottom: 2px solid #bbdefb;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-style: italic;
+        }
+        
+        .ai-response {
+            line-height: 1.8;
+            padding: 10px;
+        }
+        
+        .ai-response p {
+            margin-bottom: 15px;
+        }
+        
+        .ai-response ol, .ai-response ul {
+            padding-left: 20px;
+        }
+        
+        .ai-response b {
+            color: #1976d2;
+        }
+    </style>
+</head>
+<body>
+    <div class="heart">❤</div>
+    <div class="container">
+        <div class="corner-heart"></div>
+        <h1>论正当防卫在互殴案件中的司法适用</h1>
+        
+        <div class="dedication">
+            给亲爱的慧慧，愿我们共同成长，共同进步！
+        </div>
+        
+        <ul class="toc">
+            <li class="chapter" onclick="showAIExplanation(this)">第一章 绪论</li>
+            <li class="level-1" onclick="showAIExplanation(this)">1.1 研究背景与意义</li>
+            <li class="level-1" onclick="showAIExplanation(this)">1.2 研究现状评述</li>
+            <li class="level-1" onclick="showAIExplanation(this)">1.3 研究方法与思路</li>
+            <li class="level-1" onclick="showAIExplanation(this)">1.4 概念界定</li>
+            
+            <li class="chapter" onclick="showAIExplanation(this)">第二章 正当防卫制度的基本理论</li>
+            <li class="level-1" onclick="showAIExplanation(this)">2.1 正当防卫的法理基础</li>
+            <li class="level-1" onclick="showAIExplanation(this)">2.2 正当防卫的构成要件</li>
+            <li class="level-2" onclick="showAIExplanation(this)">2.2.1 不法侵害的存在</li>
+            <li class="level-2" onclick="showAIExplanation(this)">2.2.2 防卫意图</li>
+            <li class="level-2" onclick="showAIExplanation(this)">2.2.3 防卫对象</li>
+            <li class="level-2" onclick="showAIExplanation(this)">2.2.4 防卫限度</li>
+            <li class="level-1" onclick="showAIExplanation(this)">2.3 正当防卫与过当防卫的界限</li>
+            <li class="level-1" onclick="showAIExplanation(this)">2.4 特殊防卫情形分析</li>
+            
+            <li class="chapter" onclick="showAIExplanation(this)">第三章 互殴案件的法律特征与认定难点</li>
+            <li class="level-1" onclick="showAIExplanation(this)">3.1 互殴案件的概念与特征</li>
+            <li class="level-1" onclick="showAIExplanation(this)">3.2 互殴与正当防卫的交叉关系</li>
+            <li class="level-1" onclick="showAIExplanation(this)">3.3 互殴案件中正当防卫认定的难点</li>
+            <li class="level-2" onclick="showAIExplanation(this)">3.3.1 不法侵害判断困境</li>
+            <li class="level-2" onclick="showAIExplanation(this)">3.3.2 侵害起因与责任分配问题</li>
+            <li class="level-2" onclick="showAIExplanation(this)">3.3.3 时间连续性判断问题</li>
+            <li class="level-2" onclick="showAIExplanation(this)">3.3.4 防卫限度把握问题</li>
+            
+            <li class="chapter" onclick="showAIExplanation(this)">第四章 互殴案件中正当防卫的司法适用现状</li>
+            <li class="level-1" onclick="showAIExplanation(this)">4.1 司法实践中的主要认定模式</li>
+            <li class="level-1" onclick="showAIExplanation(this)">4.2 典型案例分析</li>
+            <li class="level-2" onclick="showAIExplanation(this)">4.2.1 案例一：[具体案例名称]</li>
+            <li class="level-2" onclick="showAIExplanation(this)">4.2.2 案例二：[具体案例名称]</li>
+            <li class="level-2" onclick="showAIExplanation(this)">4.2.3 案例三：[具体案例名称]</li>
+            <li class="level-1" onclick="showAIExplanation(this)">4.3 司法适用中存在的问题</li>
+            <li class="level-2" onclick="showAIExplanation(this)">4.3.1 认定标准不统一</li>
+            <li class="level-2" onclick="showAIExplanation(this)">4.3.2 对互殴情形下防卫权的过度限制</li>
+            <li class="level-2" onclick="showAIExplanation(this)">4.3.3 举证责任分配不合理</li>
+            <li class="level-2" onclick="showAIExplanation(this)">4.3.4 防卫限度判断过于严苛</li>
+            
+            <li class="chapter" onclick="showAIExplanation(this)">第五章 域外互殴案件中正当防卫制度的比较研究</li>
+            <li class="level-1" onclick="showAIExplanation(this)">5.1 大陆法系国家的相关规定与实践</li>
+            <li class="level-2" onclick="showAIExplanation(this)">5.1.1 德国法的规定与实践</li>
+            <li class="level-2" onclick="showAIExplanation(this)">5.1.2 日本法的规定与实践</li>
+            <li class="level-1" onclick="showAIExplanation(this)">5.2 英美法系国家的相关规定与实践</li>
+            <li class="level-2" onclick="showAIExplanation(this)">5.2.1 美国法的规定与实践</li>
+            <li class="level-2" onclick="showAIExplanation(this)">5.2.2 英国法的规定与实践</li>
+            <li class="level-1" onclick="showAIExplanation(this)">5.3 国际比较与启示</li>
+            
+            <li class="chapter" onclick="showAIExplanation(this)">第六章 完善我国互殴案件中正当防卫司法适用的建议</li>
+            <li class="level-1" onclick="showAIExplanation(this)">6.1 明确互殴案件中正当防卫的认定标准</li>
+            <li class="level-1" onclick="showAIExplanation(this)">6.2 合理分配举证责任</li>
+            <li class="level-1" onclick="showAIExplanation(this)">6.3 完善防卫限度的判断机制</li>
+            <li class="level-1" onclick="showAIExplanation(this)">6.4 建立互殴中正当防卫的裁判指引</li>
+            <li class="level-1" onclick="showAIExplanation(this)">6.5 加强司法人员的专业培训与案例指导</li>
+            
+            <li class="chapter" onclick="showAIExplanation(this)">第七章 结论</li>
+            
+            <li class="chapter" onclick="showAIExplanation(this)">参考文献</li>
+            
+            <li class="chapter" onclick="showAIExplanation(this)">附录</li>
+        </ul>
+        
+        <div class="footer">
+            加油哟小乖 ❤
+        </div>
+    </div>
+
+    <!-- 模态框 -->
+    <div id="aiModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle" class="modal-title"></h2>
+            <div id="loadingText" class="loading">正在思考中，请稍候...</div>
+            <div id="aiResponse" class="ai-response"></div>
+        </div>
+    </div>
+
+    <script>
+        // 模态框元素
+        var modal = document.getElementById('aiModal');
+        var modalTitle = document.getElementById('modalTitle');
+        var loadingText = document.getElementById('loadingText');
+        var aiResponse = document.getElementById('aiResponse');
+        
+        // 预设的解释内容
+        var explanations = {
+            "第一章 绪论": "《绪论》是论文的开篇章节，主要用于介绍研究的背景、意义、内容框架以及研究方法等。在撰写正当防卫在互殴案件中司法适用的绪论时，应当：<br><br>1. <b>明确研究背景</b>：概述我国正当防卫制度在互殴案件中适用的现状和存在的问题，可以从现实案例引入。<br><br>2. <b>阐述研究意义</b>：从理论和实践两个方面分析研究的必要性和价值，比如解决司法实践中的认定困难、保障公民合法权益等。<br><br>3. <b>梳理研究现状</b>：总结国内外学者对正当防卫在互殴案件中适用的研究成果，找出研究空白点。<br><br>4. <b>说明研究方法</b>：明确文章采用的研究方法，如案例分析法、比较研究法、规范分析法等。<br><br>5. <b>界定核心概念</b>：对正当防卫、互殴等关键概念进行界定，为后续分析奠定基础。<br><br>绪论应当言简意赅，篇幅通常控制在8-10页左右，让读者对整个研究有清晰的了解。",
+            
+            "1.1 研究背景与意义": "《研究背景与意义》部分是论文的开端，需要充分展示研究的必要性和价值。在撰写时：<br><br>1. <b>研究背景</b>应包含：<br>- 我国正当防卫制度的发展概况<br>- 互殴案件中正当防卫认定的司法现状<br>- 近年来典型案例引发的社会关注和争议<br>- 现行法律规定与司法实践中存在的问题<br><br>2. <b>理论意义</b>方面可以阐述：<br>- 填补互殴案件中正当防卫认定理论的研究空白<br>- 推动正当防卫制度理论的完善<br>- 为互殴案件的司法认定提供理论支撑<br><br>3. <b>实践意义</b>应当强调：<br>- 解决司法实践中认定难点和争议问题<br>- 统一司法标准，减少自由裁量权滥用<br>- 保障公民合法防卫权利<br>- 提高司法公信力<br><br>建议结合2-3个典型的互殴案件中正当防卫认定争议的案例，以具体事实说明研究的现实意义，使论文更有说服力。",
+            
+            "1.2 研究现状评述": "《研究现状评述》部分需要全面梳理国内外学术界关于正当防卫在互殴案件中适用的研究成果，并进行评价。撰写要点：<br><br>1. <b>国内研究现状</b>：<br>- 梳理中国学者对互殴案件中正当防卫认定的主要观点<br>- 总结现有研究的主要成果和贡献<br>- 指出国内研究存在的不足，如理论与实践脱节、针对性不强等<br><br>2. <b>国外研究现状</b>：<br>- 介绍主要法系(大陆法系、英美法系)对互殴中自卫权的理论研究<br>- 分析国外学者的代表性观点<br>- 比较不同法系在处理此类问题上的异同<br><br>3. <b>评述与总结</b>：<br>- 对已有研究进行客观评价<br>- 找出现有研究的共识和分歧<br>- 指明研究空白和值得深入探讨的问题<br>- 明确自己研究的切入点和创新之处<br><br>文献综述应当有逻辑性，不是简单罗列已有研究，而是要有评价性和分析性，为自己的研究奠定基础。建议至少引用30篇以上的相关文献，包括中文和外文文献，确保研究现状评述的全面性和权威性。",
+            
+            "3.1 互殴案件的概念与特征": "《互殴案件的概念与特征》部分需要清晰界定互殴的法律内涵及其特征，为后续分析奠定基础。撰写要点：<br><br>1. <b>互殴的概念界定</b>：<br>- 从法律层面分析互殴的定义<br>- 区分互殴与单方面侵害、群体斗殴等概念<br>- 互殴在刑法与民法中的不同定位<br><br>2. <b>互殴案件的法律特征</b>：<br>- 双方或多方均有攻击行为<br>- 相互攻击行为的时间连续性<br>- 责任认定的复杂性<br>- 行为人主观意图的多元化<br>- 侵害与被侵害角色的交替性<br><br>3. <b>互殴案件的类型分析</b>：<br>- 按起因分类：偶发型互殴、预谋型互殴<br>- 按参与人数分类：双方互殴、多方互殴<br>- 按时间特征分类：一次性互殴、持续性互殴<br>- 按伤害程度分类：轻微互殴、重伤互殴、致死互殴<br><br>4. <b>互殴案件的司法认定难点</b>：<br>- 事实认定的困难<br>- 责任划分的复杂性<br>- 主观恶性判断的模糊性<br><br>本部分应当结合实际案例进行分析，使概念和特征更加具体化、生动化，便于读者理解。同时，需要引用权威文献和司法解释来支持你的观点，增强论证的说服力。",
+            
+            "2.2.4 防卫限度": "《防卫限度》是正当防卫构成要件中的关键部分，也是互殴案件中最容易引发争议的问题。撰写要点：<br><br>1. <b>防卫限度的法律规定</b>：<br>- 我国刑法对防卫限度的规定<br>- 最高法相关司法解释的内容<br>- 防卫限度与"明显超过必要限度"的关系<br><br>2. <b>防卫限度的判断标准</b>：<br>- 主观标准：行为人当时的认知和判断<br>- 客观标准：一般理性人的合理判断<br>- 比例原则：防卫手段与不法侵害的均衡性<br>- 必要性原则：防卫行为的必要程度<br><br>3. <b>互殴情境下防卫限度的特殊性</b>：<br>- 互殴中判断防卫限度的复杂因素<br>- 情绪激化对判断能力的影响<br>- 双方均有攻击行为时的限度认定<br>- 持续性互殴中防卫限度的动态变化<br><br>4. <b>典型案例分析</b>：<br>- 选择2-3个涉及防卫限度认定的互殴案例<br>- 分析案例中法院对防卫限度的认定理由<br>- 评价认定是否合理以及存在的问题<br><br>5. <b>防卫限度认定的完善建议</b>：<br>- 提出更明确、可操作的判断标准<br>- 考虑互殴特殊情境下的弹性认定标准<br>- 防卫限度与过当防卫的区分方法<br><br>本部分应当深入分析防卫限度在理论和实践中的争议问题，避免简单重复法律条文，而是要有自己的见解和思考。建议结合具体案例进行分析，使论述更有说服力。",
+            
+            "4.3.4 防卫限度判断过于严苛": "《防卫限度判断过于严苛》部分需要分析司法实践中对互殴案件中正当防卫限度判断存在的问题。撰写要点：<br><br>1. <b>现行防卫限度判断标准的问题</b>：<br>- 对"明显超过必要限度"的过度严格解释<br>- 对防卫结果的过分看重而忽视当时情境<br>- 脱离互殴的特殊语境进行孤立判断<br>- 过于强调客观标准而忽视主观因素<br><br>2. <b>严苛认定导致的后果</b>：<br>- 正当防卫权的实质弱化<br>- 防卫人合法权益无法得到有效保障<br>- 公众对防卫权的普遍误解和恐惧<br>- 防卫人转变为被告的不合理现象<br><br>3. <b>典型案例分析</b>：<br>- 选择3-4个具有代表性的互殴案例<br>- 分析判决中防卫限度认定过于严苛的表现<br>- 指出认定偏差与司法解释不符之处<br><br>4. <b>严苛认定的成因分析</b>：<br>- 对防卫制度价值理念的认识不足<br>- "重刑炫法"思想的影响<br>- 法官自由裁量权边界不清<br>- 对互殴情境下心理压力和紧急状态考量不足<br><br>5. <b>域外经验借鉴</b>：<br>- 介绍国外对防卫限度较为宽松的认定标准<br>- 分析其合理性及适用效果<br><br>本部分应当有理有据，避免空泛批评，需要引用实际案例、司法统计数据和学术观点支持你的论点。同时，应当为后续提出改进建议做好铺垫。",
+            
+            "第七章 结论": "《结论》是论文的终章，需要总结全文研究成果并提出展望。撰写要点：<br><br>1. <b>研究成果总结</b>：<br>- 概括论文的主要研究内容和各章节要点<br>- 强调研究中发现的主要问题<br>- 总结提出的核心观点和建议<br><br>2. <b>理论意义与实践价值</b>：<br>- 论文对正当防卫理论研究的贡献<br>- 对互殴案件中正当防卫司法适用的实践价值<br>- 对立法完善的参考价值<br><br>3. <b>研究不足与局限性</b>：<br>- 客观分析研究中存在的不足<br>- 指出因条件限制未能深入的问题<br><br>4. <b>未来研究展望</b>：<br>- 提出值得进一步探讨的问题<br>- 指明后续研究的可能方向<br><br>结论应当简明扼要，避免引入新的观点或重复论述已有内容。结论的篇幅通常控制在3-5页，力求表达准确、深刻，给读者留下深刻印象。同时，结论应当呼应绪论中提出的问题，形成完整的闭环。"
+        };
+        
+        // 显示AI解释
+        function showAIExplanation(element) {
+            var title = element.textContent.trim();
+            modalTitle.textContent = title;
+            
+            // 显示模态框和加载状态
+            modal.style.display = "block";
+            loadingText.style.display = "block";
+            aiResponse.style.display = "none";
+            aiResponse.innerHTML = "";
+            
+            // 模拟异步加载效果
+            setTimeout(function() {
+                loadingText.style.display = "none";
+                aiResponse.style.display = "block";
+                
+                // 获取预设解释或生成默认解释
+                if (explanations[title]) {
+                    aiResponse.innerHTML = explanations[title];
+                } else {
+                    // 为没有预设解释的标题生成通用解释
+                    generateExplanation(title);
+                }
+            }, 1000);
+        }
+        
+        // 为没有预设解释的标题生成通用解释
+        function generateExplanation(title) {
+            // 提取标题编号和内容
+            var titleParts = title.split(' ');
+            var titleNumber = titleParts[0];
+            var titleContent = titleParts.slice(1).join(' ');
+            
+            // 根据标题级别生成不同的解释
+            if (title.startsWith('第')) {
+                // 章级标题
+                aiResponse.innerHTML = "<p>《" + titleContent + "》是本论文的重要章节，撰写时应注意以下几点：</p>" +
+                "<ol>" +
+                    "<li><b>明确本章研究目的</b>：阐明本章在整个论文中的地位和作用</li>" +
+                    "<li><b>结构清晰</b>：本章应当分为几个小节，每个小节有明确的主题</li>" +
+                    "<li><b>理论与实践结合</b>：结合法律理论和司法实践案例进行分析</li>" +
+                    "<li><b>逻辑性强</b>：各部分之间要有逻辑关联，层层递进</li>" +
+                    "<li><b>有独到见解</b>：不仅是对已有观点的总结，还要有自己的分析和思考</li>" +
+                "</ol>" +
+                "<p>建议在撰写前先构思本章的整体框架，确定各部分内容占比，再进行具体写作。可以参考一些高质量的法学期刊文章或优秀论文的写作风格。</p>";
+            } else if (/^\d+\.\d+$/.test(titleNumber)) {
+                // 二级标题
+                aiResponse.innerHTML = "<p>《" + title + "》是一个二级标题，在撰写时应当：</p>" +
+                "<ol>" +
+                    "<li><b>明确定位</b>：阐明该部分在本章中的位置和作用</li>" +
+                    "<li><b>内容聚焦</b>：围绕标题展开分析，避免内容发散</li>" +
+                    "<li><b>观点明确</b>：提出自己对该问题的看法和立场</li>" +
+                    "<li><b>论据充分</b>：使用法律条文、司法案例、学术观点等支持论点</li>" +
+                    "<li><b>与上下文衔接</b>：注意与上一节和下一节的内容衔接，保持连贯性</li>" +
+                "</ol>" +
+                "<p>这部分内容建议控制在3-5页左右，既要有深度又要简明扼要。可以考虑使用小标题或要点式写作增强可读性。</p>";
+            } else if (/^\d+\.\d+\.\d+$/.test(titleNumber)) {
+                // 三级标题
+                aiResponse.innerHTML = "<p>《" + title + "》是一个三级标题，在撰写时应当：</p>" +
+                "<ol>" +
+                    "<li><b>精准聚焦</b>：内容应当非常具体和专注，直接针对标题进行分析</li>" +
+                    "<li><b>案例支撑</b>：建议使用1-2个具体的互殴案例进行分析，增强说服力</li>" +
+                    "<li><b>结构简明</b>：可采用"问题-分析-解决方案"的结构进行论述</li>" +
+                    "<li><b>篇幅适中</b>：通常控制在2-3页，避免过于冗长</li>" +
+                    "<li><b>观点突出</b>：清晰表达你对该具体问题的见解和态度</li>" +
+                "</ol>" +
+                "<p>三级标题是最具体的分析单元，应当确保内容的专业性和精准性，避免泛泛而论。</p>";
+            } else {
+                // 其他标题(如参考文献、附录等)
+                aiResponse.innerHTML = "<p>《" + title + "》部分的写作要求：</p>" +
+                "<ul>" +
+                    "<li><b>格式规范</b>：遵循学术论文的标准格式要求</li>" +
+                    "<li><b>内容完整</b>：确保包含所有必要的信息</li>" +
+                    "<li><b>条理清晰</b>：按照一定的逻辑顺序排列</li>" +
+                    "<li><b>准确可靠</b>：所有引用和数据必须准确无误</li>" +
+                "</ul>" +
+                "<p>这部分内容虽然不是论文的主体，但对论文的严谨性和学术价值有重要影响，应当认真对待。</p>";
+            }
+        }
+        
+        // 关闭模态框
+        function closeModal() {
+            modal.style.display = "none";
+        }
+        
+        // 点击模态框外部关闭
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html> 
