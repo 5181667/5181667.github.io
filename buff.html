@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>星露谷增益效果生成器</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* 基础样式 */
+        :root {
+            --primary: #4361ee;
+            --primary-light: #eef2ff;
+            --secondary: #f72585;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #2ecc71;
+            --info: #3498db;
+            --warning: #f39c12;
+            --danger: #e74c3c;
+            --gray-100: #f8f9fa;
+            --gray-200: #e9ecef;
+            --gray-300: #dee2e6;
+            --gray-400: #ced4da;
+            --gray-500: #adb5bd;
+            --gray-800: #343a40;
+        }
+
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(-45deg, #7209b7, #4361ee, #4cc9f0, #4895ef);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            margin: 0;
+            padding: 15px;
+            box-sizing: border-box;
+            min-height: 100vh;
+            color: var(--dark);
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* 容器样式 */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            padding: 25px;
+            position: relative;
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--primary);
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+
+        /* 主要内容布局 */
+        .content-wrapper {
+            display: flex;
+            gap: 25px;
+        }
+
+        .left-column {
+            flex: 2;
+        }
+
+        .right-column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* 分类导航 */
+        .category-nav {
+            display: flex;
+            margin-bottom: 15px;
+            background: var(--gray-100);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .category-btn {
+            flex: 1;
+            padding: 12px;
+            text-align: center;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--gray-800);
+            transition: all 0.2s;
+        }
+
+        .category-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .category-btn:hover:not(.active) {
+            background: var(--gray-200);
+        }
+
+        /* 物品列表 */
+        .item-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 12px;
+            max-height: 60vh;
+            overflow-y: auto;
+            padding-right: 5px;
+        }
+
+        .item-card {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid var(--gray-200);
+        }
+
+        .item-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .item-card.selected {
+            background: var(--primary-light);
+            border-color: var(--primary);
+        }
+
+        .item-icon {
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(67, 97, 238, 0.1);
+            border-radius: 50%;
+            margin-right: 12px;
+            color: var(--primary);
+            font-size: 16px;
+        }
+
+        .item-info {
+            flex: 1;
+        }
+
+        .item-name {
+            font-weight: 600;
+            margin-bottom: 3px;
+        }
+
+        .item-desc {
+            font-size: 12px;
+            color: var(--gray-500);
+        }
+
+        /* 选择项目区域 */
+        .selected-panel {
+            background: var(--gray-100);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .selected-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--gray-300);
+        }
+
+        .selected-title {
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+        }
+
+        .selected-title i {
+            margin-right: 8px;
+        }
+
+        .clear-btn {
+            background: transparent;
+            border: none;
+            color: var(--danger);
+            cursor: pointer;
+            font-size: 13px;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+
+        .clear-btn:hover {
+            background: rgba(231, 76, 60, 0.1);
+        }
+
+        .selected-items {
+            overflow-y: auto;
+            flex: 1;
+        }
+
+        .selected-item {
+            display: flex;
+            align-items: center;
+            background: white;
+            padding: 10px 12px;
+            border-radius: 6px;
+            margin-bottom: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .selected-item-name {
+            flex: 1;
+            font-weight: 500;
+        }
+
+        .remove-btn {
+            background: transparent;
+            border: none;
+            color: var(--danger);
+            cursor: pointer;
+            font-size: 16px;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .remove-btn:hover {
+            background: rgba(231, 76, 60, 0.1);
+        }
+
+        .no-items {
+            text-align: center;
+            color: var(--gray-500);
+            font-size: 14px;
+            padding: 20px 0;
+        }
+
+        /* 行动按钮区域 */
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .action-btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .action-btn i {
+            margin-right: 8px;
+        }
+
+        .generate-btn {
+            background: var(--primary);
+            color: white;
+        }
+
+        .generate-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .copy-btn {
+            background: var(--success);
+            color: white;
+        }
+
+        .copy-btn:hover {
+            background: #27ae60;
+            transform: translateY(-2px);
+        }
+
+        .back-btn {
+            background: var(--gray-200);
+            color: var(--gray-800);
+        }
+
+        .back-btn:hover {
+            background: var(--gray-300);
+            transform: translateY(-2px);
+        }
+
+        /* 结果展示区域 */
+        .result-panel {
+            background: var(--dark);
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 15px;
+            color: white;
+        }
+
+        .result-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .result-title {
+            font-weight: 600;
+        }
+
+        .code-output {
+            white-space: pre-wrap;
+            font-family: monospace;
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 8px;
+            overflow: auto;
+            max-height: 300px;
+        }
+
+        /* 弹出消息 */
+        .toast {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+
+        .toast.show {
+            opacity: 1;
+        }
+
+        /* 数量控制 */
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 10px;
+            background: var(--gray-100);
+            border-radius: 8px;
+        }
+
+        .quantity-label {
+            margin-right: 10px;
+            font-weight: 500;
+        }
+
+        .quantity-input {
+            width: 80px;
+            padding: 8px;
+            border: 1px solid var(--gray-300);
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .content-wrapper {
+                flex-direction: column;
+            }
+            
+            .item-list {
+                max-height: 40vh;
+            }
+            
+            .selected-panel {
+                margin-bottom: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>星露谷增益效果生成器</h1>
+        
+        <div class="content-wrapper">
+            <!-- 左侧物品选择区域 -->
+            <div class="left-column">
+                <!-- 分类导航 -->
+                <div class="category-nav">
+                    <button class="category-btn active" data-category="buff">
+                        <i class="fas fa-magic"></i> 增益效果
+                    </button>
+                    <button class="category-btn" data-category="wallet">
+                        <i class="fas fa-coins"></i> 钱包物品
+                    </button>
+                    <button class="category-btn" data-category="special">
+                        <i class="fas fa-key"></i> 特殊物品
+                    </button>
+                </div>
+                
+                <!-- 物品数量控制 (仅钱包物品时显示) -->
+                <div class="quantity-control" id="quantityControl" style="display: none;">
+                    <span class="quantity-label">物品数量：</span>
+                    <input type="number" id="itemQuantity" class="quantity-input" value="999" min="1" max="999">
+                </div>
+                
+                <!-- 增益效果列表 -->
+                <div class="item-list" id="buffList">
+                    <div class="item-card" data-type="buff" data-value="矿石祝福#buff#dwarfStatue_0">
+                        <div class="item-icon buff-icon"><i class="fas fa-gem"></i></div>
+                        <div class="item-info">
+                            <div class="item-name">矿石祝福</div>
+                            <div class="item-desc">每个采矿点+1个矿石</div>
+                        </div>
+                    </div>
+                    <div class="item-card" data-type="buff" data-value="梯井祝福#buff#dwarfStatue_1">
+                        <div class="item-icon buff-icon"><i class="fas fa-stream"></i></div>
+                        <div class="item-info">
+                            <div class="item-name">梯井祝福</div>
+                            <div class="item-desc">更容易找到梯子和竖井</div>
+                        </div>
+                    </div>
+                    <div class="item-card" data-type="buff" data-value="煤炭祝福#buff#dwarfStatue_2">
+                        <div class="item-icon buff-icon"><i class="fas fa-fire"></i></div>
+                        <div class="item-info">
+                            <div class="item-name">煤炭祝福</div>
+                            <div class="item-desc">更容易找到煤炭</div>
+                        </div>
+                    </div>
+                    <div class="item-card" data-type="buff" data-value="爆炸免疫#buff#dwarfStatue_3">
+                        <div class="item-icon buff-icon"><i class="fas fa-bomb"></i></div>
+                        <div class="item-info">
+                            <div class="item-name">爆炸免疫</div>
+                            <div class="item-desc">炸弹无法对你造成伤害</div>
+                        </div>
+                    </div>
+                    <div class="item-card" data-type="buff" data-value="晶球祝福#buff#dwarfStatue_4">
+                        <div class="item-icon buff-icon"><i class="fas fa-dice-d20"></i></div>
+                        <div class="item-info">
+                            <div class="item-name">晶球祝福</div>
+                            <div class="item-desc">更容易找到晶球</div>
+                        </div>
+                    </div>
+                    <div class="item-card" data-type="buff" data-value="速度祝福#buff#statue_of_blessings_0">
+                        <div class="item-icon buff-icon"><i class="fas fa-tachometer-alt"></i></div>
+                        <div class="item-info">
+                            <div class="item-name">速度祝福</div>
+                            <div class="item-desc">增加移动和工作速度</div>
+                        </div>
+                    </div>
+                    <div class="item-card" data-type="buff" data-value="幸运祝福#buff#statue_of_blessings_1">
+                        <div class="item-icon buff-icon"><i class="fas fa-dice"></i></div>
+                        <div class="item-info">
+                            <div class="item-name">幸运祝福</div>
+                            <div class="item-desc">增加幸运值</div>
+                        </div>
+                    </div>
+                    <div class="item-card" data-type="buff" data-value="能量祝福#buff#statue_of_blessings_2">
+                        <div class="item-icon buff-icon"><i class="fas fa-bolt"></i></div>
+                        <div class="item-info">
+                            <div class="item-name">能量祝福</div>
+                            <div class="item-desc">增加能量恢复速度</div>
+                        </div>
+                    </div>
+                    <div class="item-card" data-type="buff" data-value="水域祝福#buff#statue_of_blessings_3">
+                        <div class="item-icon buff-icon"><i class="fas fa-water"></i></div>
+                        <div class="item-info">
+                            <div class="item-name">水域祝福</div>
+                            <div class="item-desc">增加钓鱼和捕蟹效率</div>
+                        </div>
+                    </div>
+                    <div class="item-card" data-type="buff" data-value="友谊祝福#buff#statue_of_blessings_4">
+                        <div class="item-icon buff-icon"><i class="fas fa-users"></i></div>
+                        <div class="item-info">
+                            <div class="item-name">友谊祝福</div>
+                            <div class="item-desc">增加友谊点数获取</div>
+                        </div>
+                    </div>
+                    <div class="item-card" data-type="buff" data-value="利齿祝福#buff#statue_of_blessings_5">
+                        <div class="item-icon buff-icon"><i class="fas fa-paw"></i></div>
+                        <div class="item-info">
+                            <div class="item-name">利齿祝福</div>
+                            <div class="item-desc">增加战斗效率</div>
+                        </div>
+                    </div>
+                    <div class="item-card" data-type="buff" data-value="蝴蝶祝福#buff#statue_of_blessings_6">
+                        <div class="item-icon buff-icon"><i class="fas fa-bug"></i></div>
+                        <div class="item-info">
+                            <div class="item-name">蝴蝶祝福</div>
+                            <div class="item-desc">捕捉昆虫效率提高</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 钱包物品列表 (默认隐藏) -->
+                <div class="item-list" id="walletList" style="display: none;">
+                    <div class="item-card" data-value="金钱#O#73">
+                        <div class="item-icon"><i class="fas fa-coins"></i></div>
+                        <div class="item-info">
+                            <div class="item-name">金钱</div>
+                            <div class="item-desc">添加金币</div>
+                        </div>
+                    </div>
+                    <div class="item-card" data-value="木材#O#30">
+                        <div class="item-icon"><i class="fas fa-tree"></i></div>
+                        <div class="item-info">
+                            <div class="item-name">木材</div>
+                            <div class="item-desc">基础建筑材料</div>
+                        </div>
+                    </div>
+                    <div class="item-card" data-value="石头#O#31">
+                        <div class="item-icon"><i class="fas fa-mountain"></i></div>
+                        <div class="item-info">
+                            <div class="item-name">石头</div>
+                            <div class="item-desc">基础建筑材料</div>
+                        </div>
+                    </div>
+                    <div class="item-card" data-value="铜矿石#O#378">
+                        <div class="item-icon"><i class="fas fa-gem"></i></div>
+                        <div class="item-info">
+                            <div class="item-name">铜矿石</div>
+                            <div class="item-desc">基础金属矿石</div>
+                        </div>
+                    </div>
+                    <div class="item-card" data-value="铁矿石#O#380">
+                        <div class="item-icon"><i class="fas fa-gem"></i></div>
+                        <div class="item-info">
+                            <div class="item-name">铁矿石</div>
+                            <div class="item-desc">常见金属矿石</div>
+                        </div>
+                    </div>
+                    <div class="item-card" data-value="金矿石#O#384">
+                        <div class="item-icon"><i class="fas fa-gem"></i></div>
+                        <div class="item-info">
+                            <div class="item-name">金矿石</div>
+                            <div class="item-desc">稀有金属矿石</div>
+                        </div>
+                    </div>
+                    <div class="item-card" data-value="虹彩碎片#O#74">
+                        <div class="item-icon"><i class="fas fa-certificate"></i></div>
+                        <div class="item-info">
+                            <div class="item-name">虹彩碎片</div>
+                            <div class="item-desc">珍贵资源</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 特殊物品列表 (默认隐藏) -->
+                <div class="item-list" id="specialList" style="display: none;">
+                    <div class="item-card" data-type="special" data-value="森林魔法#$action \${^^\n}$AddMail \${^^\n}$Current \${^^\n}$canReadJunimoText \${^^\n}$now  0">
+                        <div class="item-icon special-icon"><i class="fas fa-leaf"></i></div>
+                        <div class="item-info">
+                            <div class="item-name">森林魔法</div>
+                            <div class="item-desc">理解森林精灵语言</div>
+                        </div>
+                    </div>
+                    <div class="item-card" data-type="special" data-value="矮人语教程#$action \${^^\n}$AddMail \${^^\n}$Current \${^^\n}$HasDwarvishTranslationGuide \${^^\n}$now  0">
+                        <div class="item-icon special-icon"><i class="fas fa-book"></i></div>
+                        <div class="item-info">
+                            <div class="item-name">矮人语教程</div>
+                            <div class="item-desc">理解矮人语言</div>
+                        </div>
+                    </div>
+                    <div class="item-card" data-type="special" data-value="生锈的钥匙#$action \${^^\n}$AddMail \${^^\n}$Current \${^^\n}$HasRustyKey \${^^\n}$now  0">
+                        <div class="item-icon special-icon"><i class="fas fa-key"></i></div>
+                        <div class="item-info">
+                            <div class="item-name">生锈的钥匙</div>
+                            <div class="item-desc">打开下水道</div>
+                        </div>
+                    </div>
+                    <div class="item-card" data-type="special" data-value="会员卡#$action \${^^\n}$AddMail \${^^\n}$Current \${^^\n}$HasClubCard \${^^\n}$now  0">
+                        <div class="item-icon special-icon"><i class="fas fa-id-card"></i></div>
+                        <div class="item-info">
+                            <div class="item-name">会员卡</div>
+                            <div class="item-desc">进入沙漠俱乐部</div>
+                        </div>
+                    </div>
+                    <div class="item-card" data-type="special" data-value="特殊的魅力#$action \${^^\n}$AddMail \${^^\n}$Current \${^^\n}$HasSpecialCharm \${^^\n}$now  0">
+                        <div class="item-icon special-icon"><i class="fas fa-hat-wizard"></i></div>
+                        <div class="item-info">
+                            <div class="item-name">特殊的魅力</div>
+                            <div class="item-desc">增加好运</div>
+                        </div>
+                    </div>
+                    <div class="item-card" data-type="special" data-value="头骨钥匙#$action \${^^\n}$AddMail \${^^\n}$Current \${^^\n}$HasSkullKey \${^^\n}$now  0">
+                        <div class="item-icon special-icon"><i class="fas fa-skull"></i></div>
+                        <div class="item-info">
+                            <div class="item-name">头骨钥匙</div>
+                            <div class="item-desc">进入危险矿洞</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 右侧已选择区域 -->
+            <div class="right-column">
+                <div class="selected-panel">
+                    <div class="selected-header">
+                        <span class="selected-title">
+                            <i class="fas fa-check-circle"></i> 已选择项目
+                        </span>
+                        <button class="clear-btn" id="clearBtn">
+                            <i class="fas fa-trash"></i> 清空
+                        </button>
+                    </div>
+                    
+                    <div class="selected-items" id="selectedItems">
+                        <div class="no-items">暂无选择的项目</div>
+                    </div>
+                </div>
+                
+                <div class="action-buttons">
+                    <button class="action-btn generate-btn" id="generateBtn">
+                        <i class="fas fa-code"></i> 生成代码
+                    </button>
+                    <button class="action-btn copy-btn" id="copyBtn">
+                        <i class="fas fa-copy"></i> 复制代码
+                    </button>
+                </div>
+                
+                <button class="action-btn back-btn" id="backBtn" onclick="window.location.href='xlg.html'">
+                    <i class="fas fa-arrow-left"></i> 返回主页
+                </button>
+                
+                <div class="result-panel">
+                    <div class="result-header">
+                        <span class="result-title">生成的代码</span>
+                    </div>
+                    <pre class="code-output" id="codeOutput"></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 弹出提示 -->
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        // 全局状态
+        const state = {
+            selectedItems: [],
+            currentCategory: 'buff'
+        };
+
+        // 初始化页面
+        document.addEventListener('DOMContentLoaded', function() {
+            // 初始化分类切换
+            initCategoryButtons();
+            
+            // 初始化物品点击事件
+            initItemCards();
+            
+            // 初始化功能按钮
+            initButtons();
+        });
+
+        // 初始化分类按钮
+        function initCategoryButtons() {
+            const categoryBtns = document.querySelectorAll('.category-btn');
+            categoryBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const category = this.getAttribute('data-category');
+                    
+                    // 更新按钮状态
+                    categoryBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // 显示对应列表
+                    document.getElementById('buffList').style.display = 'none';
+                    document.getElementById('walletList').style.display = 'none';
+                    document.getElementById('specialList').style.display = 'none';
+                    document.getElementById(`${category}List`).style.display = 'grid';
+                    
+                    // 显示/隐藏数量控制
+                    document.getElementById('quantityControl').style.display = 
+                        category === 'wallet' ? 'flex' : 'none';
+                    
+                    // 更新当前分类
+                    state.currentCategory = category;
+                });
+            });
+        }
+
+        // 初始化物品卡片
+        function initItemCards() {
+            const itemCards = document.querySelectorAll('.item-card');
+            itemCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    const value = this.getAttribute('data-value');
+                    const isSelected = this.classList.contains('selected');
+                    
+                    if (isSelected) {
+                        // 取消选择
+                        this.classList.remove('selected');
+                        
+                        // 从列表中移除
+                        const index = state.selectedItems.findIndex(item => item.value === value);
+                        if (index !== -1) {
+                            state.selectedItems.splice(index, 1);
+                        }
+                    } else {
+                        // 添加选择
+                        this.classList.add('selected');
+                        
+                        // 获取物品信息
+                        const parts = value.split('#');
+                        const name = parts[0];
+                        
+                        // 添加到列表
+                        state.selectedItems.push({
+                            name: name,
+                            value: value,
+                            type: state.currentCategory,
+                            element: this
+                        });
+                    }
+                    
+                    // 更新已选择列表
+                    updateSelectedItems();
+                });
+            });
+        }
+
+        // 初始化按钮
+        function initButtons() {
+            // 清空按钮
+            document.getElementById('clearBtn').addEventListener('click', function() {
+                // 清空选择状态
+                document.querySelectorAll('.item-card.selected').forEach(card => {
+                    card.classList.remove('selected');
+                });
+                
+                // 清空列表
+                state.selectedItems = [];
+                updateSelectedItems();
+                
+                // 清空代码
+                document.getElementById('codeOutput').textContent = '';
+                
+                // 显示提示
+                showToast('已清空所有选择');
+            });
+            
+            // 生成代码按钮
+            document.getElementById('generateBtn').addEventListener('click', function() {
+                if (state.selectedItems.length === 0) {
+                    showToast('请至少选择一个项目');
+                    return;
+                }
+                
+                generateCode();
+                showToast('代码生成成功！');
+            });
+            
+            // 复制代码按钮
+            document.getElementById('copyBtn').addEventListener('click', function() {
+                const codeOutput = document.getElementById('codeOutput');
+                const code = codeOutput.textContent;
+                
+                if (!code) {
+                    showToast('没有可复制的代码');
+                    return;
+                }
+                
+                // 复制到剪贴板
+                copyToClipboard(code);
+            });
+        }
+
+        // 更新已选择项目显示
+        function updateSelectedItems() {
+            const container = document.getElementById('selectedItems');
+            
+            if (state.selectedItems.length === 0) {
+                container.innerHTML = '<div class="no-items">暂无选择的项目</div>';
+                return;
+            }
+            
+            let html = '';
+            state.selectedItems.forEach((item, index) => {
+                html += `
+                    <div class="selected-item">
+                        <span class="selected-item-name">${item.name}</span>
+                        <button class="remove-btn" data-index="${index}">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+            
+            // 添加移除按钮事件
+            document.querySelectorAll('.remove-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const index = parseInt(this.getAttribute('data-index'));
+                    
+                    if (index >= 0 && index < state.selectedItems.length) {
+                        // 移除选中状态
+                        const item = state.selectedItems[index];
+                        if (item.element) {
+                            item.element.classList.remove('selected');
+                        }
+                        
+                        // 从数组中移除
+                        state.selectedItems.splice(index, 1);
+                        
+                        // 更新显示
+                        updateSelectedItems();
+                    }
+                });
+            });
+        }
+
+        // 修复生成代码的函数
+        function generateCode() {
+            if (state.selectedItems.length === 0) return;
+            
+            const quantity = document.getElementById('itemQuantity').value || '999';
+            let result = '';
+            
+            state.selectedItems.forEach((item, index) => {
+                if (item.type === 'buff') {
+                    // Buff格式修复
+                    const parts = item.value.split('#');
+                    const buffCode = parts[2] || '';
+                    result += `#$action \${^^\n}$AddBuff \${^^\n}$${buffCode} \${^^\n}$900000  0`;
+                } else if (item.type === 'special') {
+                    // 特殊物品格式 - 完全使用原始格式
+                    const parts = item.value.split('#');
+                    if (parts.length > 1) {
+                        // 直接使用完整的命令格式
+                        result += `#${parts[1]}`;
+                    }
+                } else if (item.type === 'wallet') {
+                    // 钱包物品格式
+                    const parts = item.value.split('#');
+                    const itemType = parts[1] || 'O';
+                    const itemCode = parts[2] || '0';
+                    result += `#$action \${^^\n}$AddItem \${^^\n}$${itemType}${itemCode} \${^^\n}$${quantity} 0 0`;
+                }
+                
+                // 添加换行符 - 修复换行格式
+                if (index < state.selectedItems.length - 1) {
+                    result += '\n\n';
+                }
+            });
+            
+            // 显示结果
+            document.getElementById('codeOutput').textContent = result;
+        }
+
+        // 复制到剪贴板
+        function copyToClipboard(text) {
+            // 尝试使用现代API
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(text)
+                    .then(() => {
+                        showToast('代码已复制到剪贴板');
+                    })
+                    .catch(() => {
+                        // 如果出错，使用备选方法
+                        fallbackCopyToClipboard(text);
+                    });
+            } else {
+                // 备选方法
+                fallbackCopyToClipboard(text);
+            }
+        }
+
+        // 备选复制方法
+        function fallbackCopyToClipboard(text) {
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            textArea.style.position = 'fixed';
+            textArea.style.opacity = '0';
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            
+            try {
+                const successful = document.execCommand('copy');
+                showToast(successful ? '代码已复制到剪贴板' : '复制失败，请手动复制');
+            } catch (err) {
+                showToast('复制失败，请手动复制');
+                console.error('复制失败：', err);
+            }
+            
+            document.body.removeChild(textArea);
+        }
+
+        // 显示提示信息
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+    </script>
+</body>
+</html> 

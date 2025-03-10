@@ -9,10 +9,29 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <style>
-        /* 全局样式调整 */
+        /* 更现代的配色方案 */
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a56d4;
+            --secondary: #f72585;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #2ecc71;
+            --info: #3498db;
+            --warning: #f39c12;
+            --danger: #e74c3c;
+            --gray-100: #f8f9fa;
+            --gray-200: #e9ecef;
+            --gray-300: #dee2e6;
+            --gray-400: #ced4da;
+            --gray-500: #adb5bd;
+            --gray-800: #343a40;
+        }
+
+        /* 更好的渐变背景 */
         body {
             font-family: 'Microsoft YaHei', sans-serif;
-            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background: linear-gradient(-45deg, #7209b7, #4361ee, #4cc9f0, #4895ef);
             background-size: 400% 400%;
             animation: gradient 15s ease infinite;
             color: #2c3e50;
@@ -34,26 +53,41 @@
             }
         }
 
+        /* 改进容器样式 */
         .container {
-            background: rgba(255, 255, 255, 0.92);
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-            max-width: 800px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            max-width: 850px;
             margin: 0 auto;
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            border: 1px solid rgba(255, 255, 255, 0.18);
             width: 100%;
             box-sizing: border-box;
         }
 
+        /* 标题样式增强 */
         h2 {
-            color: #2C3E50;
+            color: var(--primary);
             text-align: center;
-            margin-bottom: 30px;
-            font-size: 28px;
-            font-weight: 600;
+            margin-bottom: 25px;
+            font-weight: 700;
+            font-size: 32px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        h2:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            border-radius: 2px;
         }
 
         /* 输入区域样式优化 */
@@ -548,29 +582,819 @@
                 font-size: 12px;
             }
         }
+
+        /* 自动补全下拉菜单样式 */
+        .autocomplete-container {
+            position: relative;
+            width: 100%;
+        }
+        
+        .autocomplete-items {
+            position: absolute;
+            border: 1px solid #ddd;
+            border-top: none;
+            z-index: 99;
+            top: 100%;
+            left: 0;
+            right: 0;
+            max-height: 250px;
+            overflow-y: auto;
+            border-radius: 0 0 8px 8px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .autocomplete-items div {
+            padding: 10px;
+            cursor: pointer;
+            background-color: #fff;
+            border-bottom: 1px solid #f4f4f4;
+        }
+        
+        .autocomplete-items div:hover {
+            background-color: #e9e9e9;
+        }
+        
+        .autocomplete-active {
+            background-color: #3498db !important;
+            color: #ffffff;
+        }
+        
+        .multi-input {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 40px; /* 增加空间以容纳下拉菜单 */
+        }
+
+        @media (max-width: 768px) {
+            .autocomplete-items {
+                max-height: 180px;
+            }
+            
+            .autocomplete-items div {
+                padding: 8px;
+                font-size: 14px;
+            }
+        }
+
+        /* 模式选择卡片样式 */
+        .mode-selector {
+            display: flex;
+            gap: 18px;
+            margin-bottom: 30px;
+        }
+
+        .mode-card {
+            flex: 1;
+            background: white;
+            border-radius: 16px;
+            padding: 22px 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border: none;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .mode-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .mode-card.active {
+            background: linear-gradient(145deg, #f8f9fa, #ffffff);
+            border: 2px solid var(--primary);
+            box-shadow: 0 10px 20px rgba(67, 97, 238, 0.15);
+        }
+
+        .mode-icon {
+            font-size: 36px;
+            margin-bottom: 18px;
+            color: var(--primary);
+            background: rgba(67, 97, 238, 0.1);
+            width: 70px;
+            height: 70px;
+            line-height: 70px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+        }
+
+        .mode-title {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+
+        .mode-desc {
+            font-size: 14px;
+            color: #7f8c8d;
+        }
+
+        /* 添加模式选择卡片的选中指示器 */
+        .mode-card .checkmark {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #3498db;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transform: scale(0);
+            transition: all 0.3s ease;
+        }
+
+        .mode-card.active .checkmark {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* 移动端适配 */
+        @media (max-width: 768px) {
+            .mode-selector {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .mode-card {
+                padding: 15px 10px;
+            }
+
+            .mode-icon {
+                font-size: 24px;
+                margin-bottom: 10px;
+            }
+
+            .mode-title {
+                font-size: 16px;
+                margin-bottom: 5px;
+            }
+
+            .mode-desc {
+                font-size: 12px;
+            }
+        }
+
+        /* 美化输入区域 */
+        .multi-input {
+            gap: 12px;
+            background: var(--gray-100);
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        input, select {
+            border-radius: 10px;
+            padding: 12px 15px;
+            border: 2px solid var(--gray-300);
+            transition: all 0.3s ease;
+            font-size: 15px;
+        }
+
+        input:focus, select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(67, 97, 238, 0.15);
+        }
+
+        .add-btn {
+            background: var(--primary);
+            border-radius: 10px;
+            padding: 12px 20px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+        }
+
+        .add-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        /* 美化选中物品标签 */
+        .selected-items {
+            min-height: 60px;
+            border-radius: 12px;
+            background: linear-gradient(145deg, #f8f9fa, #ffffff);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+            margin: 20px 0;
+            padding: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            align-items: flex-start;
+            align-content: flex-start;
+        }
+
+        .item-tag {
+            background: linear-gradient(45deg, var(--primary), var(--info));
+            border-radius: 50px;
+            padding: 8px 15px;
+            color: white;
+            font-size: 14px;
+            font-weight: 500;
+            box-shadow: 0 3px 8px rgba(52, 152, 219, 0.2);
+            transition: all 0.3s ease;
+            margin: 4px;
+        }
+
+        .item-tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 12px rgba(52, 152, 219, 0.3);
+        }
+
+        .item-tag .remove {
+            margin-left: 8px;
+            font-weight: bold;
+            opacity: 0.8;
+            transition: all 0.2s ease;
+        }
+
+        .item-tag .remove:hover {
+            opacity: 1;
+        }
+
+        /* 美化生成按钮 */
+        .button-group {
+            margin: 30px 0;
+        }
+
+        button {
+            background: linear-gradient(45deg, var(--primary), var(--info));
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.2);
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(52, 152, 219, 0.3);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .support-button {
+            background: linear-gradient(45deg, #f72585, #ff0676);
+            border-radius: 50px;
+            padding: 12px 30px;
+            font-weight: 600;
+            width: auto;
+            margin: 30px auto;
+            display: block;
+            max-width: 250px;
+            box-shadow: 0 8px 20px rgba(247, 37, 133, 0.25);
+        }
+
+        .support-button:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 10px 25px rgba(247, 37, 133, 0.35);
+        }
+
+        /* 美化代码显示区域 */
+        .code-display {
+            margin-top: 30px;
+            background: var(--gray-800);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .code-display h3 {
+            background: var(--dark);
+            color: white;
+            margin: 0;
+            padding: 15px 20px;
+            font-size: 16px;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        pre {
+            background: var(--gray-800);
+            color: #f8f9fa;
+            padding: 20px;
+            border-radius: 0 0 15px 15px;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        /* 提示框样式改进 */
+        .alert {
+            background: linear-gradient(45deg, var(--success), #27ae60);
+            color: white;
+            padding: 15px;
+            border-radius: 12px;
+            text-align: center;
+            margin: 20px 0;
+            animation: slideInUp 0.4s ease;
+            box-shadow: 0 5px 15px rgba(46, 204, 113, 0.2);
+            font-weight: 500;
+        }
+
+        @keyframes slideInUp {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* 自动补全列表美化 */
+        .autocomplete-items {
+            border: none;
+            border-radius: 0 0 12px 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            max-height: 280px;
+        }
+
+        .autocomplete-items div {
+            padding: 12px 15px;
+            cursor: pointer;
+            border-bottom: 1px solid var(--gray-200);
+            transition: all 0.2s ease;
+        }
+
+        .autocomplete-items div:hover {
+            background-color: var(--gray-200);
+        }
+
+        .autocomplete-active {
+            background-color: var(--primary) !important;
+            color: white;
+        }
+
+        /* 文档模块美化 */
+        .doc-banner {
+            background: linear-gradient(135deg, #4cc9f0, #4361ee);
+            border-radius: 16px;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 20px rgba(76, 201, 240, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .doc-banner:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(76, 201, 240, 0.3);
+        }
+
+        .doc-link {
+            padding: 25px;
+        }
+
+        .doc-icon {
+            width: 55px;
+            height: 55px;
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(5px);
+        }
+
+        .doc-info h3 {
+            font-size: 20px;
+            margin-bottom: 6px;
+        }
+
+        .doc-info p {
+            font-size: 15px;
+        }
+
+        /* 改进说明区域 */
+        .instructions {
+            background: linear-gradient(145deg, #f8f9fa, #ffffff);
+            padding: 25px;
+            border-radius: 16px;
+            margin: 25px 0;
+            border-left: 5px solid var(--primary);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .instructions h3 {
+            color: var(--primary);
+            margin-top: 0;
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .instructions p {
+            margin: 12px 0;
+            line-height: 1.6;
+            color: var(--gray-800);
+            display: flex;
+            align-items: center;
+        }
+
+        .instructions p i {
+            color: var(--primary);
+            margin-right: 10px;
+            width: 22px;
+            text-align: center;
+        }
+
+        .instructions p strong {
+            margin-right: 5px;
+        }
+
+        /* 响应式优化 */
+        @media (max-width: 768px) {
+            .multi-input {
+                padding: 12px;
+            }
+            
+            .instructions p {
+                font-size: 14px;
+            }
+            
+            .item-tag {
+                font-size: 12px;
+                padding: 6px 12px;
+            }
+            
+            .mode-icon {
+                width: 60px;
+                height: 60px;
+                line-height: 60px;
+                font-size: 28px;
+            }
+        }
+
+        /* Buff模式的样式 */
+        .buff-container {
+            margin-bottom: 20px;
+        }
+        
+        .buff-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .buff-item {
+            display: flex;
+            align-items: center;
+            background: linear-gradient(145deg, #f8f9fa, #ffffff);
+            padding: 12px 15px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid #e9ecef;
+        }
+        
+        .buff-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary);
+        }
+        
+        .buff-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(67, 97, 238, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 18px;
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+        
+        .buff-info {
+            flex-grow: 1;
+        }
+        
+        .buff-name {
+            font-weight: 600;
+            margin-bottom: 3px;
+            color: var(--dark);
+        }
+        
+        .buff-desc {
+            font-size: 12px;
+            color: #7f8c8d;
+        }
+        
+        .buff-tag {
+            background: linear-gradient(135deg, #4361ee, #7209b7);
+            color: white;
+        }
+        
+        /* 响应式调整 */
+        @media (max-width: 768px) {
+            .buff-list {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+            
+            .buff-item {
+                padding: 10px;
+            }
+            
+            .buff-icon {
+                width: 32px;
+                height: 32px;
+                font-size: 16px;
+                margin-right: 8px;
+            }
+            
+            .buff-name {
+                font-size: 14px;
+            }
+            
+            .buff-desc {
+                font-size: 10px;
+            }
+        }
+
+        /* 在现有样式底部添加以下代码 */
+        
+        /* 改进模式卡片样式 */
+        .mode-card {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 2px solid transparent;
+        }
+        
+        .mode-card:before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, transparent 50%, rgba(67, 97, 238, 0.1) 50%);
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: scale(0);
+        }
+        
+        .mode-card:hover:before {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        .mode-card.active:before {
+            background: linear-gradient(135deg, transparent 50%, rgba(67, 97, 238, 0.3) 50%);
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        .mode-icon {
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.2);
+        }
+        
+        .mode-card:hover .mode-icon {
+            transform: scale(1.1);
+        }
+        
+        /* 改进按钮样式 */
+        .button-group button {
+            transform: translateY(0);
+            transition: all 0.3s ease;
+        }
+        
+        .button-group button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* 提示卡片改进 */
+        .info-alert, .warning-alert {
+            transform: translateY(0);
+            transition: all 0.3s ease;
+        }
+        
+        .info-alert:hover, .warning-alert:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        /* 改进移动端显示 */
+        @media (max-width: 768px) {
+            .mode-selector {
+                flex-wrap: wrap;
+            }
+            
+            .mode-card {
+                flex: 1 0 45%;
+                margin-bottom: 15px;
+            }
+            
+            .mode-icon {
+                width: 50px;
+                height: 50px;
+                line-height: 50px;
+                font-size: 24px;
+            }
+        }
     </style>
     <script>
-        let mapping = []; // 用于存储从 output.json 中加载的映射数据
+        let mapping = []; // 用于存储物品映射数据
         let selectedItems = []; // 存储已选择的物品
+        let selectedBuffs = []; // 存储已选择的Buff
+
+        // 内置基础物品数据，防止CORS错误
+        const fallbackData = [
+            { "代码": "74", "名称": "棱镜碎片" },
+            { "代码": "105", "名称": "煤炭" },
+            { "代码": "378", "名称": "铜矿石" },
+            { "代码": "380", "名称": "铁矿石" },
+            { "代码": "384", "名称": "金矿石" },
+            { "代码": "386", "名称": "虹辉碎片" },
+            { "代码": "388", "名称": "木材" },
+            { "代码": "390", "名称": "石头" },
+            { "代码": "466", "名称": "草料" },
+            { "代码": "58", "名称": "小爵床" },
+            { "代码": "170", "名称": "铱锭" },
+            { "代码": "709", "名称": "硬木" },
+            { "代码": "336", "名称": "蘑菇" },
+            { "代码": "428", "名称": "闪长岩" },
+            { "代码": "787", "名称": "电池组" },
+            { "代码": "349", "名称": "珊瑚" },
+            { "代码": "767", "名称": "恐龙蛋" },
+            { "代码": "472", "名称": "地精卷轴" },
+            { "代码": "288", "名称": "甜浆果" },
+            { "代码": "684", "名称": "彩虹贝壳" }
+        ];
 
         // 加载数据
         fetch('output.json')
             .then(response => response.json())
             .then(data => {
                 mapping = data;
+                console.log('成功加载物品数据');
             })
             .catch(error => {
-                console.error('无法加载 JSON 数据:', error);
+                console.error('无法加载外部JSON数据，使用内置数据:', error);
+                mapping = fallbackData;
+                
+                // 显示提示给用户
+                const alertBox = document.createElement('div');
+                alertBox.className = 'alert';
+                alertBox.style.background = '#ff6b6b';
+                alertBox.innerHTML = '无法加载完整物品数据。正在使用内置基础物品列表。<br>如需更多物品，请手动输入代码或将网页放到服务器上。';
+                document.querySelector('.container').appendChild(alertBox);
+                
+                setTimeout(() => {
+                    alertBox.style.display = 'none';
+                }, 8000);
             });
 
         // 等待DOM加载完成后执行
-        document.addEventListener('DOMContentLoaded', function() {
+            document.addEventListener('DOMContentLoaded', function() {
             // 添加回车键支持
+            // 初始化模式选择卡片功能
+             initModeCards();
+        
+        // 为所有Buff项添加点击事件
+             initBuffItems();
             document.getElementById("multipleInput").addEventListener("keypress", function(e) {
                 if (e.key === "Enter") {
                     addItem();
                 }
             });
+            function initModeCards() {
+        const modeCards = document.querySelectorAll('.mode-card');
+        console.log("找到模式卡片:", modeCards.length);
+        
+        modeCards.forEach(card => {
+            card.addEventListener('click', function() {
+                const mode = this.getAttribute('data-mode');
+                console.log("点击了模式:", mode);
+                
+                // 更新选择器值
+                document.getElementById('modeSelect').value = mode;
+                
+                // 更新卡片样式
+                modeCards.forEach(c => c.classList.remove('active'));
+                this.classList.add('active');
+                
+                // 切换输入区域显示
+                toggleModeInputAreas(mode);
+            });
+        });
+    }
+    
+    // 切换模式输入区域显示
+    function toggleModeInputAreas(mode) {
+        console.log("切换到模式:", mode);
+        
+        // 获取所有输入区域
+        const multipleArea = document.getElementById('multipleInputArea');
+        const normalArea = document.getElementById('normalInputArea');
+        const buffArea = document.getElementById('buffInputArea');
+        
+        // 隐藏所有区域
+        multipleArea.style.display = 'none';
+        normalArea.style.display = 'none';
+        if (buffArea) buffArea.style.display = 'none';
+        
+        // 根据选择的模式显示对应区域
+        if (mode === 'multiple') {
+            multipleArea.style.display = 'block';
+            document.getElementById('multiQuantity').style.display = 'block';
+            document.getElementById('multiStarLevel').style.display = 'block';
+        } else if (mode === 'tool') {
+            multipleArea.style.display = 'block';
+            document.getElementById('multiQuantity').style.display = 'none';
+            document.getElementById('multiStarLevel').style.display = 'none';
+        } else if (mode === 'mobile') {
+            multipleArea.style.display = 'block';
+            document.getElementById('multiQuantity').style.display = 'none';
+            document.getElementById('multiStarLevel').style.display = 'none';
+        } else if (mode === 'buff') {
+            if (buffArea) buffArea.style.display = 'block';
+        }
+    }
+    
+    // 初始化Buff项点击事件
+    function initBuffItems() {
+        const buffItems = document.querySelectorAll('.buff-item');
+        console.log("找到Buff项:", buffItems.length);
+        
+        buffItems.forEach(item => {
+            item.addEventListener('click', function() {
+                const buffData = this.getAttribute('data-buff');
+                console.log("点击了Buff:", buffData);
+                addBuff(buffData);
+            });
+        });
+    }
+    
+    // 添加Buff到已选择列表
+    function addBuff(buffData) {
+        if (!buffData) return;
+        
+        // 解析Buff数据
+        const [name, command] = buffData.split('#');
+        
+        // 检查是否已经添加过
+        const existingBuff = selectedBuffs.find(buff => buff.name === name);
+        if (existingBuff) {
+            showAlert("该Buff已添加！");
+            return;
+        }
+        
+        // 添加到已选择列表
+        selectedBuffs.push({
+            name: name,
+            command: command
+        });
+        
+        // 更新显示
+        updateSelectedBuffsDisplay();
+    }
+    
+    // 更新已选择的Buff显示
+    function updateSelectedBuffsDisplay() {
+        const container = document.getElementById('selectedBuffs');
+        if (!container) {
+            console.error("找不到selectedBuffs容器");
+            return;
+        }
+        
+        container.innerHTML = '';
+        
+        selectedBuffs.forEach((buff, index) => {
+            const tag = document.createElement('div');
+            tag.className = 'item-tag buff-tag';
+            tag.innerHTML = `
+                <span>${buff.name}</span>
+                <button onclick="removeBuff(${index})">
+                    <i class="fas fa-times"></i>
+                </button>
+            `;
+            container.appendChild(tag);
+        });
+    }
+    
+    // 移除已选择的Buff
+    function removeBuff(index) {
+        selectedBuffs.splice(index, 1);
+        updateSelectedBuffsDisplay();
+    }
 
             // 初始化界面显示
             const normalInputArea = document.getElementById("normalInputArea");
@@ -588,34 +1412,116 @@
             multiQuantity.style.display = "block";
             multiStarLevel.style.display = "block";
             document.getElementById("multipleInput").placeholder = "输入物品代码或名称，回车添加";
+            
+            // 初始化自动补全功能
+            setupAutocomplete(document.getElementById("multipleInput"));
+
+            // 初始化模式选择卡片
+            const modeCards = document.querySelectorAll('.mode-card');
+            modeCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    // 移除所有卡片的active类
+                    modeCards.forEach(c => c.classList.remove('active'));
+                    // 添加当前卡片的active类
+                    this.classList.add('active');
+                    
+                    // 更新选择的模式并触发切换
+                    const mode = this.getAttribute('data-mode');
+                    document.getElementById('modeSelect').value = mode;
+                    toggleInputMode();
+                    
+                    // 添加动画效果
+                    this.style.animation = 'pulse 0.5s';
+                    setTimeout(() => {
+                        this.style.animation = '';
+                    }, 500);
+                });
+            });
+            
+            // 初始化选中"多物品模式"卡片
+            const defaultModeCard = document.querySelector('.mode-card[data-mode="multiple"]');
+            if (defaultModeCard) {
+                defaultModeCard.classList.add('active');
+            }
+
+            // 添加代码区复制按钮
+            const codeTitle = document.querySelector('.code-display h3');
+            const copyBtn = document.createElement('button');
+            copyBtn.innerHTML = '<i class="fas fa-copy"></i> 复制';
+            copyBtn.style.background = 'rgba(255,255,255,0.1)';
+            copyBtn.style.fontSize = '14px';
+            copyBtn.style.padding = '5px 10px';
+            copyBtn.style.marginLeft = 'auto';
+            
+            copyBtn.onclick = function() {
+                const codeText = document.getElementById('modifiedText').textContent;
+                navigator.clipboard.writeText(codeText).then(function() {
+                    copyBtn.innerHTML = '<i class="fas fa-check"></i> 已复制';
+                    setTimeout(() => {
+                        copyBtn.innerHTML = '<i class="fas fa-copy"></i> 复制';
+                    }, 2000);
+                });
+            };
+            
+            codeTitle.appendChild(copyBtn);
+
+            // 初始化模式选择
+            initModeSelection();
+            
+            // 添加Buff项目的点击事件
+            const buffItems = document.querySelectorAll('.buff-item');
+            buffItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const buffData = this.getAttribute('data-buff');
+                    addBuff(buffData);
+                });
+            });
         });
 
         function toggleInputMode() {
             const mode = document.getElementById("modeSelect").value;
             const normalInputArea = document.getElementById("normalInputArea");
             const multipleArea = document.getElementById("multipleInputArea");
+            const buffInputArea = document.getElementById("buffInputArea");
             const quantityInput = document.getElementById("quantity").parentElement;
             const starLevelInput = document.getElementById("starLevel").parentElement;
             const multiQuantity = document.getElementById("multiQuantity");
             const multiStarLevel = document.getElementById("multiStarLevel");
-
+            
+            // 首先隐藏所有输入区域
+            normalInputArea.style.display = "none";
+            multipleArea.style.display = "none";
+            buffInputArea.style.display = "none";
+            
             if (mode === "multiple") {
-                normalInputArea.style.display = "none";
                 multipleArea.style.display = "block";
-                quantityInput.style.display = "none";
-                starLevelInput.style.display = "none";
                 multiQuantity.style.display = "block";
                 multiStarLevel.style.display = "block";
                 document.getElementById("multipleInput").placeholder = "输入物品代码或名称，回车添加";
+                // 清空buff选择
+                selectedBuffs = [];
+                updateSelectedBuffsDisplay();
             } else if (mode === "tool") {
-                normalInputArea.style.display = "none";
                 multipleArea.style.display = "block";
-                quantityInput.style.display = "none";
-                starLevelInput.style.display = "none";
-                // 隐藏数量和星级输入
                 multiQuantity.style.display = "none";
                 multiStarLevel.style.display = "none";
                 document.getElementById("multipleInput").placeholder = "输入工具代码，回车添加";
+                // 清空buff选择
+                selectedBuffs = [];
+                updateSelectedBuffsDisplay();
+            } else if (mode === "mobile") {
+                multipleArea.style.display = "block";
+                multiQuantity.style.display = "none";
+                multiStarLevel.style.display = "none";
+                document.getElementById("multipleInput").placeholder = "输入物品代码，回车添加";
+                // 清空buff选择
+                selectedBuffs = [];
+                updateSelectedBuffsDisplay();
+            } else if (mode === "buff") {
+                buffInputArea.style.display = "block";
+                // 清空物品选择
+                selectedItems = [];
+                updateSelectedItemsDisplay();
             }
         }
 
@@ -662,6 +1568,10 @@
                 // 工具模式直接添加
                 selectedItems.push(itemToAdd);
                 updateSelectedItemsDisplay();
+            } else if (mode === "mobile") {
+                // 手机模式直接添加
+                selectedItems.push(itemToAdd);
+                updateSelectedItemsDisplay();
             } else {
                 // 多物品模式需要添加数量和星级
                 const quantity = parseInt(document.getElementById("multiQuantity").value);
@@ -705,6 +1615,13 @@
                         <span class="remove" onclick="removeItem('${item.code}')">&times;</span>
                     </span>`
                 ).join("");
+            } else if (mode === "mobile") {
+                container.innerHTML = selectedItems.map(item =>
+                    `<span class="item-tag">
+                        ${item.name} (${item.code})
+                        <span class="remove" onclick="removeItem('${item.code}')">&times;</span>
+                    </span>`
+                ).join("");
             } else {
                 // 多物品显示逻辑
                 container.innerHTML = selectedItems.map(item =>
@@ -736,8 +1653,39 @@
 
         function replaceAndCopy() {
             const mode = document.getElementById("modeSelect").value;
-
-            if (mode === "tool") {
+            
+            if (mode === "buff") {
+                if (selectedBuffs.length === 0) {
+                    alert("请至少选择一个Buff效果！");
+                    return;
+                }
+                
+                // 生成Buff代码
+                let result = "";
+                
+                selectedBuffs.forEach((buff, index) => {
+                    result += buff.command;
+                    
+                    // 添加换行符，最后一个除外
+                    if (index < selectedBuffs.length - 1) {
+                        result += " ${^^\n}$";
+                    }
+                });
+                
+                // 复制到剪贴板
+                const modifiedText = document.getElementById("modifiedText");
+                modifiedText.textContent = result;
+                
+                if (navigator.clipboard && window.isSecureContext) {
+                    navigator.clipboard.writeText(result).then(function() {
+                        showAlert("Buff代码已成功复制到剪贴板！");
+                    }).catch(function(err) {
+                        fallbackCopyTextToClipboard(result);
+                    });
+                } else {
+                    fallbackCopyTextToClipboard(result);
+                }
+            } else if (mode === "tool") {
                 if (selectedItems.length === 0) {
                     alert("请至少添加一个工具代码！");
                     return;
@@ -770,59 +1718,51 @@
                     }
                 });
 
-                // 修改复制到剪贴板的部分
-                function copyToClipboard(text) {
-                    // 显示修改后的文本
-                    const modifiedText = document.getElementById("modifiedText");
-                    modifiedText.textContent = text;
+                // 复制到剪贴板
+                const modifiedText = document.getElementById("modifiedText");
+                modifiedText.textContent = result;
 
-                    // 尝试使用新API
-                    if (navigator.clipboard && window.isSecureContext) {
-                        navigator.clipboard.writeText(text).then(function() {
-                            showAlert("代码已成功复制到剪贴板！");
-                        }).catch(function(err) {
-                            // 如果新API失败，使用传统方法
-                            fallbackCopyToClipboard(text);
-                        });
-                    } else {
-                        // 在不支持新API的环境中使用传统方法
-                        fallbackCopyToClipboard(text);
-                    }
+                // 尝试使用新API
+                if (navigator.clipboard && window.isSecureContext) {
+                    navigator.clipboard.writeText(result).then(function() {
+                        showAlert("代码已成功复制到剪贴板！");
+                    }).catch(function(err) {
+                        // 如果新API失败，使用传统方法
+                        fallbackCopyTextToClipboard(result);
+                    });
+                } else {
+                    // 在不支持新API的环境中使用传统方法
+                    fallbackCopyTextToClipboard(result);
+                }
+            } else if (mode === "mobile") {
+                if (selectedItems.length === 0) {
+                    alert("请至少添加一个物品！");
+                    return;
                 }
 
-                function fallbackCopyToClipboard(text) {
-                    try {
-                        // 创建临时文本区域
-                        const textArea = document.createElement("textarea");
-                        textArea.value = text;
-                        
-                        // 设置样式使其不可见
-                        textArea.style.position = 'fixed';
-                        textArea.style.left = '-9999px';
-                        textArea.style.top = '0';
-                        
-                        document.body.appendChild(textArea);
-                        textArea.focus();
-                        textArea.select();
+                let result = "";
 
-                        try {
-                            // 执行复制命令
-                            document.execCommand('copy');
-                            showAlert("代码已成功复制到剪贴板！");
-                        } catch (err) {
-                            showAlert("自动复制失败，请手动复制代码框中的内容！");
-                            console.error('复制失败:', err);
-                        }
+                // 手机模式简化生成逻辑，只用方括号包裹代码，没有数量和星级
+                selectedItems.forEach((item) => {
+                    result += "[" + item.code + "]";
+                });
 
-                        document.body.removeChild(textArea);
-                    } catch (err) {
-                        showAlert("自动复制失败，请手动复制代码框中的内容！");
-                        console.error('复制失败:', err);
-                    }
+                // 复制到剪贴板
+                const modifiedText = document.getElementById("modifiedText");
+                modifiedText.textContent = result;
+
+                // 尝试使用新API
+                if (navigator.clipboard && window.isSecureContext) {
+                    navigator.clipboard.writeText(result).then(function() {
+                        showAlert("代码已成功复制到剪贴板！");
+                    }).catch(function(err) {
+                        // 如果新API失败，使用传统方法
+                        fallbackCopyTextToClipboard(result);
+                    });
+                } else {
+                    // 在不支持新API的环境中使用传统方法
+                    fallbackCopyTextToClipboard(result);
                 }
-
-                // 在生成代码后调用复制函数
-                copyToClipboard(result);
             } else {
                 // 多物品模式
                 if (selectedItems.length === 0) {
@@ -864,59 +1804,54 @@
                     }
                 });
 
-                // 修改复制到剪贴板的部分
-                function copyToClipboard(text) {
-                    // 显示修改后的文本
-                    const modifiedText = document.getElementById("modifiedText");
-                    modifiedText.textContent = text;
+                // 复制到剪贴板
+                const modifiedText = document.getElementById("modifiedText");
+                modifiedText.textContent = result;
 
-                    // 尝试使用新API
-                    if (navigator.clipboard && window.isSecureContext) {
-                        navigator.clipboard.writeText(text).then(function() {
-                            showAlert("代码已成功复制到剪贴板！");
-                        }).catch(function(err) {
-                            // 如果新API失败，使用传统方法
-                            fallbackCopyToClipboard(text);
-                        });
-                    } else {
-                        // 在不支持新API的环境中使用传统方法
-                        fallbackCopyToClipboard(text);
-                    }
+                // 尝试使用新API
+                if (navigator.clipboard && window.isSecureContext) {
+                    navigator.clipboard.writeText(result).then(function() {
+                        showAlert("代码已成功复制到剪贴板！");
+                    }).catch(function(err) {
+                        // 如果新API失败，使用传统方法
+                        fallbackCopyTextToClipboard(result);
+                    });
+                } else {
+                    // 在不支持新API的环境中使用传统方法
+                    fallbackCopyTextToClipboard(result);
+                }
+            }
+        }
+
+        // 修复错误：添加缺失的fallbackCopyTextToClipboard函数
+        function fallbackCopyTextToClipboard(text) {
+            try {
+                // 创建临时文本区域
+                const textArea = document.createElement("textarea");
+                textArea.value = text;
+                
+                // 设置样式使其不可见
+                textArea.style.position = 'fixed';
+                textArea.style.left = '-9999px';
+                textArea.style.top = '0';
+                
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+
+                try {
+                    // 执行复制命令
+                    document.execCommand('copy');
+                    showAlert("代码已成功复制到剪贴板！");
+                } catch (err) {
+                    showAlert("自动复制失败，请手动复制代码框中的内容！");
+                    console.error('复制失败:', err);
                 }
 
-                function fallbackCopyToClipboard(text) {
-                    try {
-                        // 创建临时文本区域
-                        const textArea = document.createElement("textarea");
-                        textArea.value = text;
-                        
-                        // 设置样式使其不可见
-                        textArea.style.position = 'fixed';
-                        textArea.style.left = '-9999px';
-                        textArea.style.top = '0';
-                        
-                        document.body.appendChild(textArea);
-                        textArea.focus();
-                        textArea.select();
-
-                        try {
-                            // 执行复制命令
-                            document.execCommand('copy');
-                            showAlert("代码已成功复制到剪贴板！");
-                        } catch (err) {
-                            showAlert("自动复制失败，请手动复制代码框中的内容！");
-                            console.error('复制失败:', err);
-                        }
-
-                        document.body.removeChild(textArea);
-                    } catch (err) {
-                        showAlert("自动复制失败，请手动复制代码框中的内容！");
-                        console.error('复制失败:', err);
-                    }
-                }
-
-                // 在生成代码后调用复制函数
-                copyToClipboard(result);
+                document.body.removeChild(textArea);
+            } catch (err) {
+                showAlert("自动复制失败，请手动复制代码框中的内容！");
+                console.error('复制失败:', err);
             }
         }
 
@@ -941,6 +1876,186 @@
         function jumpToJsonDataInterface() {
             window.location.href = 'https://kdocs.cn/l/cpqTwV0w6Bqq';  // 替换为实际的 JSON 数据操作界面的 URL
         }
+
+        // 添加自动补全功能
+        function setupAutocomplete(inp) {
+            // 为输入框添加容器以正确定位下拉列表
+            const parentNode = inp.parentNode;
+            const wrapper = document.createElement("div");
+            wrapper.className = "autocomplete-container";
+            parentNode.insertBefore(wrapper, inp);
+            wrapper.appendChild(inp);
+            
+            let currentFocus = -1;
+            
+            // 当用户在输入框中输入时，执行搜索
+            inp.addEventListener("input", function(e) {
+                let val = this.value;
+                closeAllLists();
+                
+                if (!val) { return false; }
+                
+                // 创建包含匹配项的下拉列表
+                const itemsContainer = document.createElement("div");
+                itemsContainer.setAttribute("id", this.id + "autocomplete-list");
+                itemsContainer.setAttribute("class", "autocomplete-items");
+                wrapper.appendChild(itemsContainer);
+                
+                // 过滤并显示匹配的物品
+                let filteredItems = mapping.filter(item => {
+                    const nameMatch = item.名称 && item.名称.toLowerCase().includes(val.toLowerCase());
+                    const codeMatch = item.代码 && item.代码.toLowerCase().includes(val.toLowerCase());
+                    return nameMatch || codeMatch;
+                }).slice(0, 20); // 限制结果数量以提高性能
+                
+                for (let i = 0; i < filteredItems.length; i++) {
+                    const item = filteredItems[i];
+                    const itemDiv = document.createElement("div");
+                    
+                    // 创建显示内容：物品名称 (代码)
+                    const itemText = `${item.名称 || '未知物品'} (${item.代码 || '未知代码'})`;
+                    itemDiv.innerHTML = itemText;
+                    
+                    // 添加点击事件
+                    itemDiv.addEventListener("click", function(e) {
+                        inp.value = item.代码 || item.名称;
+                        closeAllLists();
+                    });
+                    
+                    itemsContainer.appendChild(itemDiv);
+                }
+            });
+            
+            // 键盘导航功能
+            inp.addEventListener("keydown", function(e) {
+                let x = document.getElementById(this.id + "autocomplete-list");
+                if (x) x = x.getElementsByTagName("div");
+                
+                if (e.keyCode == 40) { // 向下箭头
+                    currentFocus++;
+                    addActive(x);
+                } else if (e.keyCode == 38) { // 向上箭头
+                    currentFocus--;
+                    addActive(x);
+                } else if (e.keyCode == 13) { // 回车
+                    e.preventDefault();
+                    if (currentFocus > -1) {
+                        if (x) x[currentFocus].click();
+                    }
+                }
+            });
+            
+            // 高亮当前选中项
+            function addActive(x) {
+                if (!x) return false;
+                removeActive(x);
+                if (currentFocus >= x.length) currentFocus = 0;
+                if (currentFocus < 0) currentFocus = (x.length - 1);
+                x[currentFocus].classList.add("autocomplete-active");
+            }
+            
+            // 移除所有高亮
+            function removeActive(x) {
+                for (let i = 0; i < x.length; i++) {
+                    x[i].classList.remove("autocomplete-active");
+                }
+            }
+            
+            // 关闭所有自动补全列表
+            function closeAllLists(elmnt) {
+                const x = document.getElementsByClassName("autocomplete-items");
+                for (let i = 0; i < x.length; i++) {
+                    if (elmnt != x[i] && elmnt != inp) {
+                        x[i].parentNode.removeChild(x[i]);
+                    }
+                }
+            }
+            
+            // 点击文档其他位置时关闭列表
+            document.addEventListener("click", function(e) {
+                closeAllLists(e.target);
+            });
+        }
+
+        // 初始化模式选择
+        function initModeSelection() {
+            const modeCards = document.querySelectorAll('.mode-card');
+            
+            // 默认选中多物品模式
+            setActiveMode('multiple');
+            
+            modeCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    const mode = this.getAttribute('data-mode');
+                    setActiveMode(mode);
+                });
+            });
+        }
+        
+        // 设置当前激活的模式
+        function setActiveMode(mode) {
+            // 清除所有模式卡片的激活状态
+            const modeCards = document.querySelectorAll('.mode-card');
+            modeCards.forEach(card => {
+                card.classList.remove('active');
+            });
+            
+            // 设置当前选中的模式卡片为激活状态
+            const activeCard = document.querySelector(`.mode-card[data-mode="${mode}"]`);
+            if (activeCard) {
+                activeCard.classList.add('active');
+            }
+            
+            // 切换输入模式
+            document.getElementById('modeSelect').value = mode;
+            toggleInputMode();
+        }
+
+        // 添加Buff到已选择列表
+        function addBuff(buffData) {
+            // 解析Buff数据
+            const [name, command] = buffData.split('#');
+            
+            // 检查是否已经添加过
+            const existingBuff = selectedBuffs.find(buff => buff.name === name);
+            if (existingBuff) {
+                showAlert("该Buff已添加！");
+                return;
+            }
+            
+            // 添加到已选择列表
+            selectedBuffs.push({
+                name: name,
+                command: command
+            });
+            
+            // 更新显示
+            updateSelectedBuffsDisplay();
+        }
+        
+        // 更新已选择的Buff显示
+        function updateSelectedBuffsDisplay() {
+            const container = document.getElementById('selectedBuffs');
+            container.innerHTML = '';
+            
+            selectedBuffs.forEach((buff, index) => {
+                const tag = document.createElement('div');
+                tag.className = 'item-tag buff-tag';
+                tag.innerHTML = `
+                    <span>${buff.name}</span>
+                    <button onclick="removeBuff(${index})">
+                        <i class="fas fa-times"></i>
+                    </button>
+                `;
+                container.appendChild(tag);
+            });
+        }
+        
+        // 移除已选择的Buff
+        function removeBuff(index) {
+            selectedBuffs.splice(index, 1);
+            updateSelectedBuffsDisplay();
+        }
     </script>
 </head>
 <body>
@@ -962,7 +2077,7 @@
     </div>
     <h2>星露谷物品代码生成器</h2>
 
-    <div class="jump-button-container">
+    <div class="jump-button-container" style="display: none;">
         <button class="jump-button" onclick="jumpToJsonDataInterface()">
             <i class="fas fa-search"></i> 打开共享文档界面
         </button>
@@ -973,22 +2088,47 @@
 
     <div class="instructions">
         <h3>使用说明</h3>
-        <p>1. 多物品模式：用于添加除工具武器外的所有物品，可重复添加相同物品</p>
-        <p>2. 工具模式：用于添加工具和武器但不限于工具和武器，可重复添加相同工具</p>
-        <p>3. 数量范围：1-999，星级范围：0-3（仅多物品模式可用）</p>
-        <p>4. 注意：输入中文时要准确，输入英文或数字默认是代码</p>
-        <p>5. 所有模式都支持重复添加相同物品</p>
-        <p>粘贴后要加空格！！！</p>
-        <p class="support-text">❤️ 工具完全免费，维护不易，感谢支持~</p>
-        <p>注意：有bug私信我修复，粘贴后要加空格！！！</p>
+        <p><i class="fas fa-boxes"></i> <strong>多物品模式</strong>：添加普通物品，可设置数量和星级 (1-999, 0-3星)</p>
+        <p><i class="fas fa-hammer"></i> <strong>工具模式</strong>：添加工具武器，直接使用方括号格式</p>
+        <p><i class="fas fa-mobile-alt"></i> <strong>手机模式</strong>：生成简单的[代码]格式，适合手机使用</p>
+        <p><i class="fas fa-info-circle"></i> 输入中文自动匹配代码，输入英文或数字视为直接代码</p>
+        <p><i class="fas fa-exclamation-triangle"></i> 粘贴代码到游戏后需要加空格！</p>
     </div>
 
-    <div class="input-group">
+    <div class="input-group" style="display: none;">
         <label for="modeSelect">选择模式：</label>
         <select id="modeSelect" onchange="toggleInputMode()">
             <option value="multiple">多物品模式（除工具武器外的物品）</option>
             <option value="tool">工具模式（工具和武器）</option>
+            <option value="mobile">手机模式（紧凑格式）</option>
         </select>
+    </div>
+
+    <div class="mode-selector">
+        <div class="mode-card" data-mode="multiple">
+            <div class="checkmark"><i class="fas fa-check"></i></div>
+            <div class="mode-icon"><i class="fas fa-boxes"></i></div>
+            <div class="mode-title">多物品模式</div>
+            <div class="mode-desc">用于添加除工具武器外的所有物品，可设置数量和星级</div>
+        </div>
+        <div class="mode-card" data-mode="tool">
+            <div class="checkmark"><i class="fas fa-check"></i></div>
+            <div class="mode-icon"><i class="fas fa-hammer"></i></div>
+            <div class="mode-title">工具模式</div>
+            <div class="mode-desc">用于添加工具和武器，可重复添加相同工具</div>
+        </div>
+        <div class="mode-card" data-mode="mobile">
+            <div class="checkmark"><i class="fas fa-check"></i></div>
+            <div class="mode-icon"><i class="fas fa-mobile-alt"></i></div>
+            <div class="mode-title">手机模式</div>
+            <div class="mode-desc">[代码]格式，无需设置数量和星级，简单易用</div>
+        </div>
+        <div class="mode-card" onclick="window.location.href='buff.html'">
+            <div class="checkmark"><i class="fas fa-check"></i></div>
+            <div class="mode-icon"><i class="fas fa-magic"></i></div>
+            <div class="mode-title">增益模式</div>
+            <div class="mode-desc">一键添加游戏增益效果和钱包物品，持续时间极长</div>
+        </div>
     </div>
 
     <div id="multipleInputArea" class="input-group">
@@ -1041,7 +2181,145 @@
         <h3>生成的代码：</h3>
         <pre id="modifiedText"></pre>
     </div>
+
+    <!-- 添加Buff选择区域 -->
+    <div id="buffInputArea" class="input-group" style="display: none;">
+        <label>选择增益效果：</label>
+        <div class="buff-container">
+            <div class="buff-list">
+                <div class="buff-item" data-buff="战士能量#$action AddBuff 20 900000  0">
+                    <div class="buff-icon"><i class="fas fa-fist-raised"></i></div>
+                    <div class="buff-info">
+                        <div class="buff-name">战士能量</div>
+                        <div class="buff-desc">增加攻击力</div>
+                    </div>
+                </div>
+                <div class="buff-item" data-buff="由巴的祝福#$action AddBuff 21 900000  0">
+                    <div class="buff-icon"><i class="fas fa-hand-sparkles"></i></div>
+                    <div class="buff-info">
+                        <div class="buff-name">由巴的祝福</div>
+                        <div class="buff-desc">增加防御力</div>
+                    </div>
+                </div>
+                <div class="buff-item" data-buff="肾上腺冲击#$action AddBuff 22 900000  0">
+                    <div class="buff-icon"><i class="fas fa-running"></i></div>
+                    <div class="buff-info">
+                        <div class="buff-name">肾上腺冲击</div>
+                        <div class="buff-desc">增加移动速度</div>
+                    </div>
+                </div>
+                <div class="buff-item" data-buff="蒜油#$action AddBuff 23 900000  0">
+                    <div class="buff-icon"><i class="fas fa-heart"></i></div>
+                    <div class="buff-info">
+                        <div class="buff-name">蒜油</div>
+                        <div class="buff-desc">增加最大生命值</div>
+                    </div>
+                </div>
+                <div class="buff-item" data-buff="怪兽香水#$action AddBuff 24 900000  0">
+                    <div class="buff-icon"><i class="fas fa-skull"></i></div>
+                    <div class="buff-info">
+                        <div class="buff-name">怪兽香水</div>
+                        <div class="buff-desc">增加怪物出现率</div>
+                    </div>
+                </div>
+                <div class="buff-item" data-buff="墨汁意大利饺#$action AddBuff 28 900000  0">
+                    <div class="buff-icon"><i class="fas fa-utensils"></i></div>
+                    <div class="buff-info">
+                        <div class="buff-name">墨汁意大利饺</div>
+                        <div class="buff-desc">增加钓鱼效率</div>
+                    </div>
+                </div>
+                <div class="buff-item" data-buff="每个采矿点+1个矿石#$action AddBuff dwarfStatue_0 900000  0">
+                    <div class="buff-icon"><i class="fas fa-gem"></i></div>
+                    <div class="buff-info">
+                        <div class="buff-name">矿石祝福</div>
+                        <div class="buff-desc">每个采矿点+1个矿石</div>
+                    </div>
+                </div>
+                <div class="buff-item" data-buff="找到梯子和竖井的几率更高#$action AddBuff dwarfStatue_1 900000  0">
+                    <div class="buff-icon"><i class="fas fa-stream"></i></div>
+                    <div class="buff-info">
+                        <div class="buff-name">探索祝福</div>
+                        <div class="buff-desc">更容易找到梯子和竖井</div>
+                    </div>
+                </div>
+                <div class="buff-item" data-buff="找到煤炭的几率更高#$action AddBuff dwarfStatue_2 900000  0">
+                    <div class="buff-icon"><i class="fas fa-fire"></i></div>
+                    <div class="buff-info">
+                        <div class="buff-name">煤炭祝福</div>
+                        <div class="buff-desc">更容易找到煤炭</div>
+                    </div>
+                </div>
+                <div class="buff-item" data-buff="炸弹无法对你造成伤害#$action AddBuff dwarfStatue_3 900000  0">
+                    <div class="buff-icon"><i class="fas fa-bomb"></i></div>
+                    <div class="buff-info">
+                        <div class="buff-name">爆炸免疫</div>
+                        <div class="buff-desc">炸弹无法对你造成伤害</div>
+                    </div>
+                </div>
+                <div class="buff-item" data-buff="找到晶球的几率更高#$action AddBuff dwarfStatue_4 900000  0">
+                    <div class="buff-icon"><i class="fas fa-dice-d20"></i></div>
+                    <div class="buff-info">
+                        <div class="buff-name">晶球祝福</div>
+                        <div class="buff-desc">更容易找到晶球</div>
+                    </div>
+                </div>
+                <div class="buff-item" data-buff="速度祝福#$action AddBuff statue_of_blessings_0 900000  0">
+                    <div class="buff-icon"><i class="fas fa-tachometer-alt"></i></div>
+                    <div class="buff-info">
+                        <div class="buff-name">速度祝福</div>
+                        <div class="buff-desc">增加移动和工作速度</div>
+                    </div>
+                </div>
+                <div class="buff-item" data-buff="幸运祝福#$action AddBuff statue_of_blessings_1 900000  0">
+                    <div class="buff-icon"><i class="fas fa-lucky-charm"></i></div>
+                    <div class="buff-info">
+                        <div class="buff-name">幸运祝福</div>
+                        <div class="buff-desc">增加幸运值</div>
+                    </div>
+                </div>
+                <div class="buff-item" data-buff="能量祝福#$action AddBuff statue_of_blessings_2 900000  0">
+                    <div class="buff-icon"><i class="fas fa-bolt"></i></div>
+                    <div class="buff-info">
+                        <div class="buff-name">能量祝福</div>
+                        <div class="buff-desc">增加能量恢复速度</div>
+                    </div>
+                </div>
+                <div class="buff-item" data-buff="水域祝福#$action AddBuff statue_of_blessings_3 900000  0">
+                    <div class="buff-icon"><i class="fas fa-water"></i></div>
+                    <div class="buff-info">
+                        <div class="buff-name">水域祝福</div>
+                        <div class="buff-desc">增加钓鱼和捕蟹效率</div>
+                    </div>
+                </div>
+                <div class="buff-item" data-buff="友谊祝福#$action AddBuff statue_of_blessings_4 900000  0">
+                    <div class="buff-icon"><i class="fas fa-users"></i></div>
+                    <div class="buff-info">
+                        <div class="buff-name">友谊祝福</div>
+                        <div class="buff-desc">增加友谊点数获取</div>
+                    </div>
+                </div>
+                <div class="buff-item" data-buff="利齿祝福#$action AddBuff statue_of_blessings_5 900000  0">
+                    <div class="buff-icon"><i class="fas fa-paw"></i></div>
+                    <div class="buff-info">
+                        <div class="buff-name">利齿祝福</div>
+                        <div class="buff-desc">增加战斗效率</div>
+                    </div>
+                </div>
+                <div class="buff-item" data-buff="蝴蝶祝福#$action AddBuff statue_of_blessings_6 900000  0">
+                    <div class="buff-icon"><i class="fas fa-bug"></i></div>
+                    <div class="buff-info">
+                        <div class="buff-name">蝴蝶祝福</div>
+                        <div class="buff-desc">捕捉昆虫效率提高</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="selectedBuffs" class="selected-items"></div>
+    </div>
 </div>
 
+<!-- 添加这一行到body结束标签前 -->
+<script src="app.js"></script>
 </body>
 </html>
