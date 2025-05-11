@@ -260,8 +260,12 @@
                         3. 激活后，所有表单提交将直接发送到您的邮箱
                     -->
                     <form id="contactForm" action="https://formsubmit.co/huchi999@qq.com" method="POST">
-                        <!-- FormSubmit基础配置 - 首次请保持简单 -->
+                        <!-- FormSubmit基础配置 -->
                         <input type="hidden" name="_subject" value="个人作品集网站的新消息">
+                        <input type="hidden" name="_next" value="thanks.html">
+                        <input type="hidden" name="_template" value="table">
+                        <input type="hidden" name="_captcha" value="false">
+                        <input type="hidden" name="_autoresponse" value="感谢您的留言！我已收到您的消息，会尽快回复您。">
                         
                         <div class="form-group">
                             <input type="text" id="name" name="name" placeholder="您的姓名" required>
@@ -280,59 +284,10 @@
                                 <i class="fas fa-paper-plane"></i> 发送消息
                             </button>
                             <div class="submit-note">
-                                <strong>重要提示</strong>：首次提交后，请查收邮箱(huchi999@qq.com)中的确认邮件并点击链接激活表单
-                            </div>
-                            
-                            <!-- 测试按钮 - 部署前删除 -->
-                            <div class="test-buttons" style="margin-top: 15px; display: flex; gap: 10px; justify-content: center;">
-                                <button type="button" onclick="testFormSubmit()" class="btn secondary-btn" style="font-size: 0.8rem; padding: 8px 12px;">
-                                    测试直接提交
-                                </button>
-                                <a href="https://formsubmit.co/huchi999@qq.com" target="_blank" class="btn secondary-btn" style="font-size: 0.8rem; padding: 8px 12px;">
-                                    查看FormSubmit状态
-                                </a>
+                                <strong>重要提示</strong>：请确认邮箱是否正确，否则无法收到回复
                             </div>
                         </div>
                     </form>
-                    
-                    <script>
-                        // 测试函数 - 部署前删除
-                        function testFormSubmit() {
-                            // 创建一个临时表单并直接提交到FormSubmit
-                            const tempForm = document.createElement('form');
-                            tempForm.method = 'POST';
-                            tempForm.action = 'https://formsubmit.co/huchi999@qq.com';
-                            tempForm.target = '_blank';
-                            
-                            // 添加必要的字段
-                            const nameField = document.createElement('input');
-                            nameField.type = 'hidden';
-                            nameField.name = 'name';
-                            nameField.value = '测试用户';
-                            
-                            const emailField = document.createElement('input');
-                            emailField.type = 'hidden';
-                            emailField.name = 'email';
-                            emailField.value = 'test@example.com';
-                            
-                            const messageField = document.createElement('input');
-                            messageField.type = 'hidden';
-                            messageField.name = 'message';
-                            messageField.value = '这是一条测试消息，用于激活FormSubmit表单。';
-                            
-                            // 添加表单字段到临时表单
-                            tempForm.appendChild(nameField);
-                            tempForm.appendChild(emailField);
-                            tempForm.appendChild(messageField);
-                            
-                            // 添加表单到文档并提交
-                            document.body.appendChild(tempForm);
-                            tempForm.submit();
-                            document.body.removeChild(tempForm);
-                            
-                            alert('测试表单已提交，请查看新打开的页面');
-                        }
-                    </script>
                 </div>
             </div>
         </div>
