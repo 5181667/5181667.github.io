@@ -345,7 +345,7 @@ function loadProjects() {
             "image": "img/work-3.jpg",
             "technologies": ["Python", "Flask", "HTML5", "CSS3", "JavaScript"],
             "projectUrl": "https://www.zxyhc.top/zf.html"
-        }
+        },
         {
             "title": "AI生成图片",
             "category": "web",
