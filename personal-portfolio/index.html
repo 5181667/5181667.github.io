@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>个人作品集 | 设计与开发</title>
+    <title>welcome | 个人主页</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -102,7 +102,7 @@
                             <span class="stat-text">满意客户</span>
                         </div>
                     </div>
-                    <a href="#" class="btn primary-btn">下载简历</a>
+                    <a href="#" class="btn primary-btn">小工具链接</a>
                 </div>
             </div>
         </div>
@@ -245,26 +245,23 @@
                         </div>
                     </div>
                     <div class="social-links">
-                        <a href="#" class="social-link"><i class="fab fa-weixin"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-weibo"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-github"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-behance"></i></a>
+                        <a href="#" class="social-link" data-platform="weixin"><i class="fab fa-weixin"></i></a>
+                        <a href="#" class="social-link" data-platform="xiaohongshu"><i class="fas fa-heart"></i></a>
+                        <a href="#" class="social-link" data-platform="douyin"><i class="fas fa-music"></i></a>
+                        <a href="#" class="social-link" data-platform="qq"><i class="fab fa-qq"></i></a>
                     </div>
                 </div>
                 <div class="contact-form">
                     <h3>发送消息</h3>
                     <!-- 
-                        使用说明：
-                        1. 将below-your-email@example.com替换为您的实际电子邮件地址
-                        2. 将below-yoursite.github.io替换为您的GitHub Pages网站地址
-                        首次使用时，您需要通过邮件确认此表单
+                        FormSubmit使用说明：
+                        1. 首次提交表单时，FormSubmit会向huchi999@qq.com发送确认邮件
+                        2. 您必须点击确认邮件中的链接以激活表单
+                        3. 激活后，所有表单提交将直接发送到您的邮箱
                     -->
                     <form id="contactForm" action="https://formsubmit.co/huchi999@qq.com" method="POST">
-                        <!-- FormSubmit配置 -->
+                        <!-- FormSubmit基础配置 - 首次请保持简单 -->
                         <input type="hidden" name="_subject" value="个人作品集网站的新消息">
-                        <input type="hidden" name="_captcha" value="false">
-                        <input type="hidden" name="_next" value="https://5181667.github.io/thanks.html">
-                        <input type="hidden" name="_template" value="table">
                         
                         <div class="form-group">
                             <input type="text" id="name" name="name" placeholder="您的姓名" required>
@@ -278,8 +275,64 @@
                         <div class="form-group">
                             <textarea id="message" name="message" placeholder="您的消息" required></textarea>
                         </div>
-                        <button type="submit" class="btn primary-btn">发送消息</button>
+                        <div class="form-submit">
+                            <button type="submit" class="btn primary-btn">
+                                <i class="fas fa-paper-plane"></i> 发送消息
+                            </button>
+                            <div class="submit-note">
+                                <strong>重要提示</strong>：首次提交后，请查收邮箱(huchi999@qq.com)中的确认邮件并点击链接激活表单
+                            </div>
+                            
+                            <!-- 测试按钮 - 部署前删除 -->
+                            <div class="test-buttons" style="margin-top: 15px; display: flex; gap: 10px; justify-content: center;">
+                                <button type="button" onclick="testFormSubmit()" class="btn secondary-btn" style="font-size: 0.8rem; padding: 8px 12px;">
+                                    测试直接提交
+                                </button>
+                                <a href="https://formsubmit.co/huchi999@qq.com" target="_blank" class="btn secondary-btn" style="font-size: 0.8rem; padding: 8px 12px;">
+                                    查看FormSubmit状态
+                                </a>
+                            </div>
+                        </div>
                     </form>
+                    
+                    <script>
+                        // 测试函数 - 部署前删除
+                        function testFormSubmit() {
+                            // 创建一个临时表单并直接提交到FormSubmit
+                            const tempForm = document.createElement('form');
+                            tempForm.method = 'POST';
+                            tempForm.action = 'https://formsubmit.co/huchi999@qq.com';
+                            tempForm.target = '_blank';
+                            
+                            // 添加必要的字段
+                            const nameField = document.createElement('input');
+                            nameField.type = 'hidden';
+                            nameField.name = 'name';
+                            nameField.value = '测试用户';
+                            
+                            const emailField = document.createElement('input');
+                            emailField.type = 'hidden';
+                            emailField.name = 'email';
+                            emailField.value = 'test@example.com';
+                            
+                            const messageField = document.createElement('input');
+                            messageField.type = 'hidden';
+                            messageField.name = 'message';
+                            messageField.value = '这是一条测试消息，用于激活FormSubmit表单。';
+                            
+                            // 添加表单字段到临时表单
+                            tempForm.appendChild(nameField);
+                            tempForm.appendChild(emailField);
+                            tempForm.appendChild(messageField);
+                            
+                            // 添加表单到文档并提交
+                            document.body.appendChild(tempForm);
+                            tempForm.submit();
+                            document.body.removeChild(tempForm);
+                            
+                            alert('测试表单已提交，请查看新打开的页面');
+                        }
+                    </script>
                 </div>
             </div>
         </div>
@@ -318,6 +371,38 @@
             <div class="modal-body">
                 <div class="project-details">
                     <!-- 项目详情将通过JavaScript动态加载 -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 社交平台二维码模态框 -->
+    <div class="modal" id="qrcodeModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-body">
+                <div class="qrcode-container">
+                    <h3 class="qrcode-title">扫码关注</h3>
+                    <div class="qrcode-grid">
+                        <div class="qrcode-item" data-platform="xiaohongshu">
+                            <div class="qrcode-image">
+                                <img src="img/qrcode-xiaohongshu.jpg" alt="小红书二维码">
+                            </div>
+                            <p class="qrcode-label">小红书</p>
+                        </div>
+                        <div class="qrcode-item" data-platform="douyin">
+                            <div class="qrcode-image">
+                                <img src="img/qrcode-douyin.jpg" alt="抖音二维码">
+                            </div>
+                            <p class="qrcode-label">抖音</p>
+                        </div>
+                        <div class="qrcode-item" data-platform="qq">
+                            <div class="qrcode-image">
+                                <img src="img/qrcode-qq.jpg" alt="QQ二维码">
+                            </div>
+                            <p class="qrcode-label">QQ</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

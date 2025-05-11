@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initTypeWriter();
     initScrollAnimation();
     initContactForm();
+    initSocialQRCode(); // 初始化社交二维码功能
     
     // 可以取消注释下面的行来动态生成作品项
     // generateWorkItems();
@@ -565,7 +566,52 @@ function initScrollAnimation() {
 // 联系表单功能
 function initContactForm() {
     const contactForm = document.getElementById('contactForm');
-    const messagesKey = 'portfolio_messages';
+    const contactSection = document.querySelector('.contact-section');
+    
+    // 检查URL参数是否有感谢消息
+    function checkThankYouParam() {
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('thanks') === 'true') {
+            // 创建感谢消息
+            const thanksMessage = document.createElement('div');
+            thanksMessage.className = 'thanks-message';
+            thanksMessage.innerHTML = `
+                <h4>消息已发送！</h4>
+                <p>感谢您的留言，我会尽快回复您。</p>
+            `;
+            
+            // 插入感谢消息
+            const contactContent = contactSection.querySelector('.contact-content');
+            if (contactContent) {
+                contactContent.parentNode.insertBefore(thanksMessage, contactContent);
+                
+                // 显示感谢消息
+                setTimeout(() => {
+                    thanksMessage.classList.add('show');
+                    
+                    // 自动滚动到联系部分
+                    contactSection.scrollIntoView({ behavior: 'smooth' });
+                    
+                    // 清除URL参数
+                    if (history.pushState) {
+                        const newURL = window.location.pathname;
+                        window.history.pushState('', '', newURL);
+                    }
+                }, 300);
+                
+                // 5秒后自动隐藏感谢消息
+                setTimeout(() => {
+                    thanksMessage.classList.remove('show');
+                    setTimeout(() => {
+                        thanksMessage.remove();
+                    }, 500);
+                }, 5000);
+            }
+        }
+    }
+    
+    // 检查感谢参数
+    checkThankYouParam();
     
     // 仅在本地测试时保存消息到localStorage
     if (contactForm && window.location.protocol === 'file:') {
@@ -614,6 +660,12 @@ function initContactForm() {
             }
             
             // 如果验证通过，表单将正常提交到FormSubmit
+            // 添加提交确认过渡动画
+            const submitBtn = this.querySelector('button[type="submit"]');
+            if (submitBtn) {
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 正在发送...';
+                submitBtn.disabled = true;
+            }
         });
     }
     
@@ -624,6 +676,7 @@ function initContactForm() {
     
     // 保存消息函数 (仅用于本地测试)
     function saveMessage(messageData) {
+        const messagesKey = 'portfolio_messages';
         try {
             // 获取现有消息
             const messages = JSON.parse(localStorage.getItem(messagesKey)) || [];
@@ -714,4 +767,199 @@ function generateWorkItems() {
     // 重新初始化相关功能
     initWorkFilter();
     initProjectModal();
+}
+
+// 社交二维码功能
+function initSocialQRCode() {
+    const socialLinks = document.querySelectorAll('.social-links .social-link');
+    const qrcodeModal = document.getElementById('qrcodeModal');
+    const closeBtn = qrcodeModal.querySelector('.close-modal');
+    
+    // 为每个二维码项添加动画延迟属性
+    const qrcodeItems = qrcodeModal.querySelectorAll('.qrcode-item');
+    qrcodeItems.forEach((item, index) => {
+        item.style.setProperty('--i', index);
+        
+        // 添加点击二维码的互动效果
+        item.addEventListener('click', () => {
+            qrcodeItems.forEach(i => i.classList.remove('active'));
+            item.classList.add('active');
+            
+            // 添加3D旋转效果
+            const img = item.querySelector('img');
+            if (img) {
+                const rect = item.getBoundingClientRect();
+                const x = (window.innerWidth / 2 - (rect.left + rect.width / 2)) / 20;
+                const y = (window.innerHeight / 2 - (rect.top + rect.height / 2)) / 20;
+                
+                item.style.transform = `rotateY(${x}deg) rotateX(${-y}deg) scale(1.05)`;
+                
+                // 恢复原始状态的过渡
+                setTimeout(() => {
+                    item.style.transition = 'all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1)';
+                    item.style.transform = 'rotateY(0) rotateX(0) scale(1)';
+                }, 1000);
+            }
+        });
+    });
+    
+    // 鼠标悬停效果 - 3D卡片效果
+    qrcodeItems.forEach(item => {
+        item.addEventListener('mousemove', e => {
+            const rect = item.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            const angleX = (y - centerY) / 15;
+            const angleY = (centerX - x) / 15;
+            
+            item.style.transform = `rotateX(${angleX}deg) rotateY(${angleY}deg) scale(0.95)`;
+        });
+        
+        item.addEventListener('mouseleave', () => {
+            item.style.transform = item.classList.contains('active') ? 
+                'rotateX(0) rotateY(0) scale(1)' : 
+                'rotateX(0) rotateY(15deg) scale(0.85)';
+        });
+    });
+    
+    // 点击社交链接显示二维码
+    socialLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            
+            // 获取平台类型
+            const platform = link.getAttribute('data-platform');
+            
+            // 设置标题
+            let platformName = '';
+            switch(platform) {
+                case 'weixin':
+                    platformName = '微信';
+                    break;
+                case 'xiaohongshu':
+                    platformName = '小红书';
+                    break;
+                case 'douyin':
+                    platformName = '抖音';
+                    break;
+                case 'qq':
+                    platformName = 'QQ';
+                    break;
+                default:
+                    platformName = '社交平台';
+            }
+            
+            // 更新模态框标题
+            const titleElement = qrcodeModal.querySelector('.qrcode-title');
+            if (titleElement) {
+                titleElement.textContent = `扫码关注 - ${platformName}`;
+            }
+            
+            // 添加动画类
+            document.body.classList.add('modal-open');
+            
+            // 显示模态框
+            qrcodeModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            
+            // 重置所有二维码项的动画状态，重新触发动画
+            qrcodeItems.forEach(item => {
+                item.style.animation = 'none';
+                item.offsetHeight; // 强制重绘
+                item.style.animation = null;
+                item.classList.remove('active');
+                // 隐藏所有二维码
+                item.style.display = 'none';
+            });
+            
+            // 短暂延迟后显示对应的二维码
+            setTimeout(() => {
+                // 高亮显示点击的平台
+                const targetItem = Array.from(qrcodeItems).find(
+                    item => item.getAttribute('data-platform') === platform
+                );
+                
+                if (targetItem) {
+                    // 只显示当前平台的二维码
+                    targetItem.style.display = 'block';
+                    
+                    // 添加特效
+                    targetItem.classList.add('active');
+                    targetItem.style.transform = 'rotateY(0) rotateX(0) scale(1.1)';
+                    setTimeout(() => {
+                        targetItem.style.transform = 'rotateY(0) rotateX(0) scale(1)';
+                    }, 300);
+                } else {
+                    // 如果没找到匹配项，显示第一个二维码
+                    if (qrcodeItems.length > 0) {
+                        const firstItem = qrcodeItems[0];
+                        firstItem.style.display = 'block';
+                        firstItem.classList.add('active');
+                        firstItem.style.transform = 'rotateY(0) rotateX(0) scale(1.1)';
+                        setTimeout(() => {
+                            firstItem.style.transform = 'rotateY(0) rotateX(0) scale(1)';
+                        }, 300);
+                    }
+                }
+            }, 600); // 延迟以等待入场动画完成
+        });
+    });
+    
+    // 关闭模态框
+    closeBtn.addEventListener('click', () => {
+        closeQrcodeModal();
+    });
+    
+    // 点击模态框外部关闭
+    qrcodeModal.addEventListener('click', (e) => {
+        if (e.target === qrcodeModal) {
+            closeQrcodeModal();
+        }
+    });
+    
+    // 添加ESC键关闭功能
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && qrcodeModal.classList.contains('active')) {
+            closeQrcodeModal();
+        }
+    });
+    
+    // 关闭二维码模态框函数
+    function closeQrcodeModal() {
+        // 添加关闭动画
+        qrcodeItems.forEach((item, idx) => {
+            if (item.style.display === 'block') {
+                setTimeout(() => {
+                    item.classList.remove('active');
+                    item.style.opacity = '0';
+                    item.style.transform = 'scale(0.8) rotateY(45deg) translateY(30px)';
+                }, 100 * idx);
+            }
+        });
+        
+        // 延迟关闭模态框，等待动画完成
+        setTimeout(() => {
+            qrcodeModal.classList.remove('active');
+            document.body.style.overflow = '';
+            document.body.classList.remove('modal-open');
+            
+            // 恢复二维码项的初始状态
+            setTimeout(() => {
+                qrcodeItems.forEach(item => {
+                    item.style.opacity = '';
+                    item.style.transform = '';
+                    item.style.display = ''; // 恢复默认显示状态
+                });
+                
+                // 恢复默认标题
+                const titleElement = qrcodeModal.querySelector('.qrcode-title');
+                if (titleElement) {
+                    titleElement.textContent = '扫码关注';
+                }
+            }, 300);
+        }, 500);
+    }
 } 
