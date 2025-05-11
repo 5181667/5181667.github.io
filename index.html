@@ -1,247 +1,72 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh">
 <head>
     <meta charset="UTF-8">
-    <title>平安夜快乐</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="refresh" content="0;url=personal-portfolio/index.html">
+    <title>重定向到个人作品集</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         body {
-            margin: 0;
-            height: 100vh;
-            background: linear-gradient(to bottom, #041438 0%, #0B2956 100%);
-            overflow: hidden;
-            font-family: 'Arial', sans-serif;
-        }
-
-        /* 月亮 */
-        .moon {
-            position: fixed;
-            top: 80px;
-            right: 120px;
-            width: 100px;
-            height: 100px;
-            background: #FFF6E5;
-            border-radius: 50%;
-            box-shadow: 0 0 50px rgba(255, 246, 229, 0.5);
-        }
-
-        /* 流星 */
-        .shooting-star {
-            position: fixed;
-            width: 150px;
-            height: 2px;
-            background: linear-gradient(to right, transparent, #fff, transparent);
-            animation: shootingStar 2s linear infinite;
-            opacity: 0;
-        }
-
-        /* 祝福语容器 */
-        .message-container {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-            opacity: 0;
-            visibility: hidden;
-        }
-
-        /* 祝福语动画类 */
-        .show-message {
-            animation: messageAppear 2s forwards;
-            visibility: visible;
-        }
-
-        .name {
-            font-size: 82px;
-            margin-bottom: 30px;
-            background: linear-gradient(45deg, #5E9FFF, #85C1FF, #B5D9FF);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-shadow: 0 0 30px rgba(94, 159, 255, 0.5);
-        }
-
-        .wish {
-            font-size: 42px;
-            color: #fff;
-            text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
-            opacity: 0;
-            transform: translateY(20px);
-            animation: wishAppear 1s forwards;
-            animation-delay: 1s;
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
-
-        .wish:hover {
-            transform: scale(1.1);
-        }
-
-        .snow {
-            position: fixed;
-            color: #fff;
-            font-size: 20px;
-            animation: fall linear infinite;
-            opacity: 0.6;
-            z-index: 1;
-        }
-
-        @keyframes shootingStar {
-            0% {
-                transform: translateX(-100%) translateY(100px) rotate(-45deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translateX(100vw) translateY(-100vh) rotate(-45deg);
-                opacity: 0;
-            }
-        }
-
-        @keyframes fall {
-            0% {
-                transform: translateY(-100vh) rotate(0deg);
-            }
-            100% {
-                transform: translateY(100vh) rotate(360deg);
-            }
-        }
-
-        @keyframes messageAppear {
-            0% {
-                opacity: 0;
-                transform: translate(-50%, -30%);
-            }
-            100% {
-                opacity: 1;
-                transform: translate(-50%, -50%);
-            }
-        }
-
-        @keyframes wishAppear {
-            0% {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* 音乐控制按钮样式 */
-        .music-btn {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
+            font-family: 'Inter', 'Helvetica Neue', 'PingFang SC', 'Microsoft YaHei', sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
-            cursor: pointer;
-            z-index: 1000;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #2563eb 0%, #4f46e5 100%);
+            color: white;
+            text-align: center;
+        }
+        .loading {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top: 3px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+        h1 {
+            font-weight: 700;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        p {
+            font-weight: 400;
+            opacity: 0.8;
+        }
+        a {
+            color: white;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+            padding-bottom: 2px;
             transition: all 0.3s ease;
         }
-
-        .music-btn:hover {
-            transform: scale(1.1);
-            background: rgba(255, 255, 255, 0.3);
+        a:hover {
+            border-color: white;
         }
-
-        .music-btn.playing {
-            animation: rotate 3s linear infinite;
-        }
-
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
     </style>
 </head>
 <body>
-    <div class="moon"></div>
-    <div class="message-container">
-        <div class="name">ZXY</div>
-        <div class="wish" onclick="showChristmas()">Merry Christmas</div>
+    <div class="loading">
+        <div class="spinner"></div>
+        <h1>加载个人作品集</h1>
+        <p>如果您没有被自动重定向，请 <a href="personal-portfolio/index.html">点击这里</a></p>
     </div>
-
-    <div class="music-btn" onclick="toggleMusic()">🎵</div>
-    <audio id="bgMusic" loop>
-        <source src="christmas.mp3" type="audio/mpeg">
-    </audio>
-
-    <script>
-        // 创建流星
-        function createShootingStar() {
-            const star = document.createElement('div');
-            star.className = 'shooting-star';
-            star.style.top = Math.random() * window.innerHeight / 2 + 'px';
-            document.body.appendChild(star);
-            setTimeout(() => star.remove(), 2000);
-        }
-
-        // 创建雪花
-        function createSnow() {
-            const snow = document.createElement('div');
-            snow.className = 'snow';
-            snow.style.left = Math.random() * 100 + 'vw';
-            snow.style.animationDuration = Math.random() * 5 + 8 + 's';
-            snow.innerHTML = '❄';
-            document.body.appendChild(snow);
-            setTimeout(() => snow.remove(), 13000);
-        }
-
-        // 开始下雪
-        let snowInterval = setInterval(createSnow, 300);
-
-        // 5秒后显示祝福语
-        setTimeout(() => {
-            document.querySelector('.message-container').classList.add('show-message');
-        }, 5000);
-
-        // 开始创建流星
-        setInterval(createShootingStar, 4000);
-
-        // 音乐控制
-        const musicBtn = document.querySelector('.music-btn');
-        const bgMusic = document.getElementById('bgMusic');
-        let isPlaying = false;
-
-        function toggleMusic() {
-            if (isPlaying) {
-                bgMusic.pause();
-                musicBtn.classList.remove('playing');
-            } else {
-                bgMusic.play();
-                musicBtn.classList.add('playing');
-            }
-            isPlaying = !isPlaying;
-        }
-
-        // 页面加载完成后自动播放音乐
-        window.addEventListener('load', () => {
-            // 由于浏览器政策，需要用户交互后才能自动播放
-            document.addEventListener('click', function initMusic() {
-                if (!isPlaying) {
-                    bgMusic.play();
-                    musicBtn.classList.add('playing');
-                    isPlaying = true;
-                }
-                document.removeEventListener('click', initMusic);
-            });
-        });
-
-        // 添加点击跳转函数
-        function showChristmas() {
-            // 添加淡出效果
-            document.body.style.animation = 'fadeOut 1s forwards';
-            bgMusic.pause();
-            setTimeout(() => {
-                window.location.href = 'index1225.html';
-            }, 1000);
-        }
-    </script>
 </body>
 </html> 

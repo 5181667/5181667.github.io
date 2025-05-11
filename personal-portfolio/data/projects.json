@@ -1,0 +1,42 @@
+[
+    {
+        "title": "WKG",
+        "category": "app", 
+        "shortDesc": "网页设计 / UI",
+        "client": "IOS用户",
+        "date": "2025年5月",
+        "description": "专注时光是一款简约而强大的专注计时应用，专为渴望提高工作和学习效率的人设计。通过科学的时间管理方法，帮助您在这个充满干扰的世界中找回专注力。",
+        "image": "img/work-x.png", 
+        "technologies": ["Swift", "UI/UX/UX", "IOS"]
+    },
+    {
+        "title": "AI网页",
+        "category": "web",
+        "shortDesc": "网页设计 / UI/UX",
+        "client": "设计者/媒体工作者",
+        "date": "2025年4月",
+        "description": "AI网页是一款专注于设计者/媒体工作者的网页，它提供了一个简洁、易用的平台，让用户可以轻松地与朋友、家人和同事保持联系。",
+        "image": "img/work-2.jpg",
+        "technologies": ["HTML5", "CSS3", "JavaScript", "node.js","AI"]
+    },
+    {
+        "title": "旅行应用UI",
+        "category": "app",
+        "shortDesc": "应用设计 / UI",
+        "client": "旅游公司",
+        "date": "2023年3月",
+        "description": "为旅行应用设计的极简UI界面，注重用户体验和功能直观性。采用清晰的视觉层次和简约的色彩方案，让用户能够轻松规划旅行。",
+        "image": "img/work-1.jpg",
+        "technologies": ["Figma", "Adobe XD", "Prototyping"]
+    },
+    {
+        "title": "星露谷物语工具🔧",
+        "category": "web",
+        "shortDesc": "平面设计 / 标志",
+        "client": "星露谷玩家",
+        "date": "2024年12月",
+        "description": "为星露谷玩家提供一个便捷的查找代码，并生成可用的格式，并提供一个简洁的界面，让玩家可以轻松地查找代码，并生成可用的格式。",
+        "image": "img/work-3.jpg",
+        "technologies": ["Python", "Flask", "HTML5", "CSS3", "JavaScript"]
+    }
+] 

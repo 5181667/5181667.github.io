@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人作品集 | 设计与开发</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+</head>
+<body>
+    <!-- 加载动画 -->
+    <div class="loader">
+        <div class="loader-content">
+            <div class="loader-circle"></div>
+            <div class="loader-text">加载中</div>
+        </div>
+    </div>
+
+    <!-- 背景动画元素 -->
+    <div class="background-animation">
+        <div class="floating-shapes"></div>
+    </div>
+
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <span class="logo-text">ihcuH</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home" class="active">首页</a></li>
+                <li><a href="#about">关于</a></li>
+                <li><a href="#skills">技能</a></li>
+                <li><a href="#works">作品</a></li>
+                <li><a href="photos.html">相册</a></li>
+                <li><a href="#contact">联系</a></li>
+            </ul>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主页部分 -->
+    <section id="home" class="hero-section">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="animate-text">你好，我是<span class="highlight">huchi</span></h1>
+                    <h2 class="animate-text delay-1">我专注<span class="typing">创新工具</span></h2>
+                    <p class="animate-text delay-2">APP | 网页制作 | 工具开发🔧</p>
+                    <div class="hero-buttons animate-text delay-3">
+                        <a href="#works" class="btn primary-btn">查看作品</a>
+                        <a href="#contact" class="btn secondary-btn">联系我</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="image-container">
+                        <img src="img/hero-image.jpg" alt="个人形象">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <div class="mouse">
+                <div class="wheel"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 关于我部分 -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">关于我</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="about-content">
+                <div class="about-image">
+                    <div class="image-frame">
+                        <img src="img/about-image.jpg" alt="关于我">
+                    </div>
+                </div>
+                <div class="about-text">
+                    <h3>探索极简与功能的平衡</h3>
+                    <p>我是一名专注于简约现代设计的专业人士，致力于创造既美观又实用的数字体验。我相信好的设计应该是简单而有力的，能够直接传达信息并提供出色的用户体验。</p>
+                    <p>我的设计理念源于"少即是多"的原则，每一个项目都力求在简洁和功能性之间找到完美平衡点。</p>
+                    <div class="about-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">5+</span>
+                            <span class="stat-text">年经验</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">50+</span>
+                            <span class="stat-text">完成项目</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">30+</span>
+                            <span class="stat-text">满意客户</span>
+                        </div>
+                    </div>
+                    <a href="#" class="btn primary-btn">下载简历</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 技能部分 -->
+    <section id="skills" class="skills-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">我的技能</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="skills-content">
+                <div class="skills-category">
+                    <h3>设计</h3>
+                    <div class="skills-grid">
+                        <div class="skill-item">
+                            <div class="skill-icon"><i class="fas fa-palette"></i></div>
+                            <div class="skill-info">
+                                <h4>UI/UX 设计</h4>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-progress="90"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-icon"><i class="fas fa-bezier-curve"></i></div>
+                            <div class="skill-info">
+                                <h4>平面设计</h4>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-progress="85"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-icon"><i class="fas fa-pen-nib"></i></div>
+                            <div class="skill-info">
+                                <h4>创意构思</h4>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-progress="95"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="skills-category">
+                    <h3>开发</h3>
+                    <div class="skills-grid">
+                        <div class="skill-item">
+                            <div class="skill-icon"><i class="fas fa-code"></i></div>
+                            <div class="skill-info">
+                                <h4>HTML/CSS/JS</h4>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-progress="92"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-icon"><i class="fab fa-react"></i></div>
+                            <div class="skill-info">
+                                <h4>React</h4>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-progress="80"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-icon"><i class="fas fa-mobile-alt"></i></div>
+                            <div class="skill-info">
+                                <h4>响应式开发</h4>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-progress="88"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 作品部分 -->
+    <section id="works" class="works-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">我的作品</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="works-filter">
+                <button class="filter-btn active" data-filter="all">全部</button>
+                <button class="filter-btn" data-filter="web">网页设计</button>
+                <button class="filter-btn" data-filter="app">移动应用</button>
+                <button class="filter-btn" data-filter="graphic">平面设计</button>
+            </div>
+            <div class="works-grid">
+                <!-- 作品将从JSON动态加载 -->
+                <div class="loading-projects">
+                    <div class="spinner"></div>
+                    <p>加载作品中...</p>
+                </div>
+            </div>
+            <div class="works-more">
+                <a href="#" class="btn primary-btn">查看更多作品</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系部分 -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">联系我</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>与我联系</h3>
+                    <p>如果您对我的作品感兴趣，或者有任何问题，欢迎随时联系我。</p>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                            <div class="contact-text">
+                                <h4>邮箱</h4>
+                                <p>huchi999@qq.com</p>
+                            </div>
+                        </div>
+                        <!-- <div class="contact-item">
+                            <div class="contact-icon"><i class="fas fa-phone"></i></div>
+                            <div class="contact-text">
+                                <h4>电话</h4>
+                                <p>+86 123 4567 8901</p>
+                            </div>
+                        </div> -->
+                        <div class="contact-item">
+                            <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                            <div class="contact-text">
+                                <h4>地址</h4>
+                                <p>China</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-weixin"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-weibo"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-behance"></i></a>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <h3>发送消息</h3>
+                    <!-- 
+                        使用说明：
+                        1. 将below-your-email@example.com替换为您的实际电子邮件地址
+                        2. 将below-yoursite.github.io替换为您的GitHub Pages网站地址
+                        首次使用时，您需要通过邮件确认此表单
+                    -->
+                    <form id="contactForm" action="https://formsubmit.co/huchi999@qq.com" method="POST">
+                        <!-- FormSubmit配置 -->
+                        <input type="hidden" name="_subject" value="个人作品集网站的新消息">
+                        <input type="hidden" name="_captcha" value="false">
+                        <input type="hidden" name="_next" value="https://5181667.github.io/thanks.html">
+                        <input type="hidden" name="_template" value="table">
+                        
+                        <div class="form-group">
+                            <input type="text" id="name" name="name" placeholder="您的姓名" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="email" name="email" placeholder="您的邮箱" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="subject" name="subject" placeholder="主题" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="message" name="message" placeholder="您的消息" required></textarea>
+                        </div>
+                        <button type="submit" class="btn primary-btn">发送消息</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <span class="logo-text">ihcuH</span>
+                </div>
+                <div class="footer-nav">
+                    <a href="#home">首页</a>
+                    <a href="#about">关于</a>
+                    <a href="#skills">技能</a>
+                    <a href="#works">作品</a>
+                    <a href="#contact">联系</a>
+                </div>
+                <div class="footer-copy">
+                    <p>&copy; 2025 个人作品集. 保留所有权利.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 回到顶部按钮 -->
+    <div class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- 作品详情模态框 -->
+    <div class="modal" id="projectModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-body">
+                <div class="project-details">
+                    <!-- 项目详情将通过JavaScript动态加载 -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="js/main.js"></script>
+</body>
+</html> 
