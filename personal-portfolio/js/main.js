@@ -346,6 +346,17 @@ function loadProjects() {
             "technologies": ["Python", "Flask", "HTML5", "CSS3", "JavaScript"],
             "projectUrl": "https://www.zxyhc.top/zf.html"
         }
+        {
+            "title": "AI生成图片",
+            "category": "web",
+            "shortDesc": "平面设计 / app",
+            "client": "设计师",
+            "date": "2025年5月",
+            "description": "为希望AI生成图片的设计师提供一个便捷的工具，并提供一个简洁的界面，让设计师可以轻松地生成图片。",
+            "image": "img/work-4.jpg",
+            "technologies": ["Python", "Flask", "HTML5", "CSS3", "JavaScript"],
+            "projectUrl": "https://www.zxyhc.top/zf.html"
+        }
     ];
 
     try {
