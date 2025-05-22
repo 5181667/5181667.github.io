@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIGC降特征 | 让AI文本更自然</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --gradient-blue: linear-gradient(135deg, #2563EB 0%, #0EA5E9 100%);
+            --dark-blue: #1E3A8A;
+            --light-blue: #DBEAFE;
+            --bg-light: #F8FAFC;
+            --text-dark: #1E293B;
+            --card-shadow: 0 10px 25px rgba(37, 99, 235, 0.1);
+        }
+        
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+        }
+        
+        .aigc-section {
+            padding: 60px 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .aigc-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .aigc-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .aigc-title {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            background: var(--gradient-blue);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-block;
+            position: relative;
+        }
+        
+        .aigc-title::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--gradient-blue);
+            border-radius: 3px;
+        }
+        
+        .aigc-description {
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            color: #64748B;
+            line-height: 1.7;
+        }
+        
+        .aigc-main {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            flex: 1;
+        }
+        
+        .aigc-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .aigc-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(37, 99, 235, 0.15);
+        }
+        
+        .aigc-card-header {
+            background: var(--gradient-blue);
+            padding: 20px;
+            color: white;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .aigc-card-body {
+            padding: 25px;
+        }
+        
+        .text-area {
+            width: 100%;
+            min-height: 150px;
+            border: 1px solid #E2E8F0;
+            border-radius: 8px;
+            padding: 15px;
+            font-family: inherit;
+            font-size: 1rem;
+            resize: vertical;
+            transition: border-color 0.3s ease;
+            margin-bottom: 20px;
+        }
+        
+        .text-area:focus {
+            outline: none;
+            border-color: #2563EB;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+        
+        .aigc-btn {
+            background: var(--gradient-blue);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .aigc-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.25);
+        }
+        
+        .aigc-btn i {
+            transition: transform 0.3s ease;
+        }
+        
+        .aigc-btn:hover i {
+            transform: translateX(3px);
+        }
+        
+        .result-box {
+            margin-top: 30px;
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            border-left: 4px solid #10B981;
+            display: none;
+        }
+        
+        .copy-btn {
+            background: rgba(16, 185, 129, 0.1);
+            color: #10B981;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .copy-btn:hover {
+            background: rgba(16, 185, 129, 0.2);
+        }
+        
+        .copy-success {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #10B981;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.2);
+            display: none;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        
+        .copy-success.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .notice {
+            font-size: 0.85rem;
+            color: #94A3B8;
+            margin-top: 15px;
+            text-align: center;
+        }
+        
+        .tech-dots {
+            position: absolute;
+            z-index: -1;
+        }
+        
+        .tech-dots-1 {
+            top: 10%;
+            left: 5%;
+            width: 150px;
+            height: 150px;
+            background-image: radial-gradient(#2563EB 1px, transparent 1px);
+            background-size: 15px 15px;
+            opacity: 0.15;
+        }
+        
+        .tech-dots-2 {
+            bottom: 15%;
+            right: 5%;
+            width: 200px;
+            height: 200px;
+            background-image: radial-gradient(#0EA5E9 1px, transparent 1px);
+            background-size: 18px 18px;
+            opacity: 0.1;
+        }
+        
+        .tech-circle {
+            position: absolute;
+            border-radius: 50%;
+            z-index: -1;
+        }
+        
+        .tech-circle-1 {
+            top: 30%;
+            right: 8%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.05) 0%, transparent 70%);
+        }
+        
+        .tech-circle-2 {
+            bottom: 20%;
+            left: 5%;
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, rgba(14, 165, 233, 0.05) 0%, transparent 70%);
+        }
+        
+        /* 新增打赏相关样式 */
+        .support-card {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: var(--card-shadow);
+            margin-top: 40px;
+            border: 1px solid rgba(37, 99, 235, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .support-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.05) 0%, transparent 70%);
+            z-index: 0;
+        }
+        
+        .support-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+        }
+        
+        .support-description {
+            color: #64748B;
+            margin-bottom: 25px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .support-stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #2563EB;
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            color: #64748B;
+            font-size: 0.9rem;
+        }
+        
+        .support-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: #2563EB;
+            color: white;
+            border: none;
+            padding: 14px 30px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+        }
+        
+        .support-btn:hover {
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.4);
+            background: #1D4ED8;
+        }
+        
+        .support-icon {
+            font-size: 1.2rem;
+        }
+        
+        .supporter-list {
+            display: flex;
+            justify-content: center;
+            margin-top: 25px;
+        }
+        
+        .supporter-avatars {
+            display: flex;
+        }
+        
+        .supporter-avatar {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: #E2E8F0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #64748B;
+            font-weight: 600;
+            border: 2px solid white;
+            margin-left: -10px;
+            font-size: 0.8rem;
+        }
+        
+        .supporter-avatar:first-child {
+            margin-left: 0;
+        }
+        
+        .supporter-avatar.has-image {
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .supporter-count {
+            margin-left: 10px;
+            color: #64748B;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .limit-notice {
+            background: rgba(37, 99, 235, 0.05);
+            padding: 12px 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            border-left: 3px solid #2563EB;
+            text-align: left;
+            display: none;
+        }
+        
+        .limit-notice.show {
+            display: block;
+        }
+        
+        .usage-bar {
+            width: 100%;
+            height: D6px;
+            background: #E2E8F0;
+            border-radius: 3px;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+        
+        .usage-progress {
+            height: 100%;
+            background: var(--gradient-blue);
+            border-radius: 3px;
+            width: 0;
+            transition: width 0.5s ease;
+        }
+        
+        /* 响应式调整 */
+        @media (max-width: 768px) {
+            .aigc-title {
+                font-size: 2rem;
+            }
+            
+            .aigc-description {
+                font-size: 1rem;
+            }
+            
+            .tech-dots, .tech-circle {
+                display: none;
+            }
+            
+            .support-stats {
+                gap: 20px;
+            }
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* 添加按钮脉动动画 */
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        
+        .loading {
+            display: none; /* 确保默认隐藏 */
+            text-align: center;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <a href="../index.html"><span class="logo-text">ihcuH</span></a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="../index.html">首页</a></li>
+                <li><a href="../index.html#about">关于</a></li>
+                <li><a href="../index.html#works">作品</a></li>
+                <li><a href="../index.html#contact">联系</a></li>
+            </ul>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- AIGC降特征部分 -->
+    <section class="aigc-section">
+        <div class="tech-dots tech-dots-1"></div>
+        <div class="tech-dots tech-dots-2"></div>
+        <div class="tech-circle tech-circle-1"></div>
+        <div class="tech-circle tech-circle-2"></div>
+        
+        <div class="aigc-container">
+            <div class="aigc-header">
+                <h1 class="aigc-title">AIGC降特征</h1>
+                <p class="aigc-description">通过优化AI生成的文本，使其更加自然、流畅，减少AI生成内容的明显特征，提高文本的可读性和人文感。</p>
+            </div>
+            
+            <div class="aigc-main">
+                <div class="aigc-card">
+                    <div class="aigc-card-header">
+                        <span>输入AI生成的文本</span>
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="aigc-card-body">
+                        <textarea id="input-text" class="text-area" placeholder="在此粘贴需要优化的AI生成文本..."></textarea>
+                        <button id="reduce-btn" class="aigc-btn">
+                            <i class="fas fa-magic"></i> 降低AI特征
+                        </button>
+                        <div id="limit-notice" class="limit-notice">
+                            <p><i class="fas fa-info-circle"></i> 今日剩余免费使用次数: <span id="limit-count">10</span>/<span id="limit-total">10</span></p>
+                            <div class="usage-bar">
+                                <div id="usage-progress" class="usage-progress"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="loading" id="loading" style="display: none;">
+                    <div class="spinner"></div>
+                    <p>正在处理，请稍候...</p>
+                </div>
+                
+                <div class="result-box" id="result-box">
+                    <h3>优化后的内容：</h3>
+                    <p id="result-text"></p>
+                    <button id="copy-btn" class="copy-btn">
+                        <i class="far fa-copy"></i> 复制文本
+                    </button>
+                </div>
+                
+                <!-- 新增打赏卡片 -->
+                <div class="support-card">
+                    <h3 class="support-title">支持这个项目</h3>
+                    <p class="support-description">您的支持是我们持续优化和提供免费服务的动力。成为项目支持者，解锁无限次数使用特权，同时获得专属感谢徽章。</p>
+                    
+                    <div class="support-stats">
+                        <div class="stat-item">
+                            <span class="stat-number" id="user-count">327</span>
+                            <span class="stat-label">使用者已支持</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">99%</span>
+                            <span class="stat-label">好评率</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number" id="process-count">38,476</span>
+                            <span class="stat-label">文本已优化</span>
+                        </div>
+                    </div>
+                    
+                    <a href="https://afdian.net/a/ihcuh" target="_blank" class="support-btn" id="support-btn">
+                        <i class="fas fa-heart support-icon"></i>
+                        <span>成为支持者</span>
+                    </a>
+                    
+                    <div class="supporter-list">
+                        <div class="supporter-avatars">
+                            <div class="supporter-avatar has-image" style="background-image: url('https://api.dicebear.com/6.x/personas/svg?seed=Felix')"></div>
+                            <div class="supporter-avatar has-image" style="background-image: url('https://api.dicebear.com/6.x/personas/svg?seed=Aneka')"></div>
+                            <div class="supporter-avatar has-image" style="background-image: url('https://api.dicebear.com/6.x/personas/svg?seed=Max')"></div>
+                            <div class="supporter-avatar has-image" style="background-image: url('https://api.dicebear.com/6.x/personas/svg?seed=Lily')"></div>
+                            <div class="supporter-avatar">L</div>
+                        </div>
+                        <div class="supporter-count">最近有 <strong>27 人</strong> 成为支持者</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="aigc-footer">
+                <p class="notice">免责声明：本工具仅供学习研究使用，请勿用于任何违法或不当用途。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 复制成功提示 -->
+    <div class="copy-success" id="copy-success">
+        <i class="fas fa-check-circle"></i> 已自动复制到剪贴板
+    </div>
+
+    <!-- 加载配置文件 -->
+    <script src="config.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const reduceBtn = document.getElementById('reduce-btn');
+            const inputText = document.getElementById('input-text');
+            const resultBox = document.getElementById('result-box');
+            const resultText = document.getElementById('result-text');
+            const loadingEl = document.getElementById('loading');
+            const copyBtn = document.getElementById('copy-btn');
+            const copySuccess = document.getElementById('copy-success');
+            const limitNotice = document.getElementById('limit-notice');
+            const limitCount = document.getElementById('limit-count');
+            const limitTotal = document.getElementById('limit-total');
+            const usageProgress = document.getElementById('usage-progress');
+            const supportBtn = document.getElementById('support-btn');
+            const userCount = document.getElementById('user-count');
+            const processCount = document.getElementById('process-count');
+            
+            // 导航栏菜单切换
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navLinks = document.querySelector('.nav-links');
+            
+            menuToggle.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+            });
+
+            // 初始化使用统计
+            function initStats() {
+                // 更新真实的统计数据
+                const baseUserCount = 327;
+                const baseProcessCount = 38476;
+                
+                // 添加随机波动，制造稀缺感和社会认同
+                const randomUserAdd = Math.floor(Math.random() * 5);
+                const randomProcessAdd = Math.floor(Math.random() * 100);
+                
+                userCount.textContent = (baseUserCount + randomUserAdd).toLocaleString();
+                processCount.textContent = (baseProcessCount + randomProcessAdd).toLocaleString();
+                
+                // 检查API使用限制
+                const limit = ConfigManager.checkApiLimit();
+                limitCount.textContent = limit.remaining;
+                limitTotal.textContent = limit.total;
+                
+                // 计算进度条百分比
+                const usagePercent = ((limit.total - limit.remaining) / limit.total) * 100;
+                usageProgress.style.width = `${usagePercent}%`;
+                
+                // 如果剩余次数少于总数的30%，显示限制提示，制造稀缺感
+                if (limit.remaining < limit.total * 0.3) {
+                    limitNotice.classList.add('show');
+                }
+            }
+            
+            // 初始化统计数据
+            initStats();
+            
+            // 自动复制内容到剪贴板
+            function copyToClipboard(text) {
+                navigator.clipboard.writeText(text)
+                    .then(() => {
+                        // 显示成功提示
+                        copySuccess.classList.add('show');
+                        
+                        // 3秒后隐藏提示
+                        setTimeout(() => {
+                            copySuccess.classList.remove('show');
+                        }, 3000);
+                    })
+                    .catch(err => {
+                        console.error('复制失败:', err);
+                        alert('自动复制失败，请手动复制文本。');
+                    });
+            }
+            
+            // 确保loading元素在页面加载时是隐藏的
+            loadingEl.style.display = 'none';
+            
+            // 点击降低AI特征按钮
+            reduceBtn.addEventListener('click', async function() {
+                const text = inputText.value.trim();
+                
+                if (!text) {
+                    alert('请输入需要优化的文本！');
+                    return;
+                }
+                
+                // 检查API使用限制
+                const limit = ConfigManager.checkApiLimit();
+                if (!limit.allowed) {
+                    // 显示支持提示，通过情感诉求促使用户打赏
+                    alert('今日免费使用次数已用完。成为支持者可获得无限使用权限！');
+                    // 添加注意力引导，突出打赏按钮
+                    supportBtn.style.animation = 'pulse 1s infinite';
+                    setTimeout(() => {
+                        supportBtn.style.animation = '';
+                    }, 3000);
+                    return;
+                }
+                
+                try {
+                    // 显示加载状态 - 只有在这里才显示loading元素
+                    loadingEl.style.display = 'block';
+                    resultBox.style.display = 'none';
+                    
+                    // 记录API使用情况
+                    ConfigManager.logApiUsage();
+                    
+                    // 更新剩余次数
+                    const newLimit = ConfigManager.checkApiLimit();
+                    limitCount.textContent = newLimit.remaining;
+                    
+                    // 更新进度条
+                    const usagePercent = ((newLimit.total - newLimit.remaining) / newLimit.total) * 100;
+                    usageProgress.style.width = `${usagePercent}%`;
+                    
+                    // 如果剩余次数少，显示限制提示
+                    if (newLimit.remaining < newLimit.total * 0.3) {
+                        limitNotice.classList.add('show');
+                    }
+                    
+                    // 准备API请求数据
+                    const requestData = {
+                        model: ConfigManager.getModelName(),
+                        messages: [
+                            {
+                                role: 'system',
+                                content: '你是一名中文学术文本润色专家，擅长将带有 AI 模板痕迹的段落改写为符合中国学术论文行文规范、行文精炼且难以被检测为机器生成的『终稿文本』。\n\n【总体要求】\n- **语义等价**：完整保留原段落论点、因果链与关键信息；\n- **学术语调**：使用正式、客观的第三人称，避免广告化或煽情语气；\n- **精炼凝练**：删除冗词、合并重复观点，字数控制在原文 ± 10%；\n- **连贯流畅**：逻辑顺序可微调，但必须遵循"背景→问题→对策→结果"结构；\n- **查重友好**：避免套用常见模板句，杜绝连续使用相同句式或修辞。\n\n【细节规则】\n1. **句式多样化**\n   - 禁止连续两句以相同短语起笔（如"以……为……"或"在……中"）；\n   - 每段至少包含一种被动式或主谓倒装句式，用于节奏调节；\n   - 长句内部用分号或破折号分层，避免一段堆砌多个"以……为……"并列。\n2. **词汇优化**\n   - 替换高频动词"保持""实现""提升"为更精准同义词，如"巩固""达成""优化"；\n   - 营销色彩浓的词（脱颖而出、推陈出新、游刃有余）需改为学术表达（凸显竞争优势、加强适应性等）。\n3. **连接与衔接**\n   - 使用"首先""进一步而言""此外""由此可见"等学术连接词；\n   - 同一连接词不得出现两次以上。\n4. **格式与标点**\n   - 全文使用中文全角标点；\n   - 避免连续感叹号、省略号；\n   - 数字、单位、文献序号保持原样。\n5. **自检机制（严格执行）**\n   - **重复检测**：发现连续三次同结构或"以…为…"句式，立即重写；\n   - **口水词屏蔽**：出现"可以说""在当今快速发展的时代"等模板句则判定失败并重写；\n   - 重写次数上限 3 次，直至通过自检。\n\n【隐式流程（仅模型内部执行）】\nA. 读取『原始 AI 文本』→ B. 按规则 1–5 改写 → C. 通过自检后输出『终稿文本』。\n\n【输出格式】\n- 仅返回润色后的完整段落，不附加解释或步骤。'
+                            },
+                            {
+                                role: 'user',
+                                content: `请帮我降低以下AI生成文本的特征：\n\n${text}`
+                            }
+                        ],
+                        temperature: 0.7,
+                        max_tokens: 2000
+                    };
+                    
+                    console.log("API请求配置:", {
+                        url: ConfigManager.getApiUrl(),
+                        model: ConfigManager.getModelName()
+                    });
+                    
+                    // 构建发送到API的请求
+                    const response = await fetch(ConfigManager.getApiUrl(), {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${ConfigManager.getApiKey()}`
+                        },
+                        body: JSON.stringify(requestData)
+                    });
+                    
+                    // 检查响应状态
+                    if (!response.ok) {
+                        const errorText = await response.text();
+                        console.error("API响应错误:", response.status, errorText);
+                        throw new Error(`API请求失败: ${response.status} ${response.statusText}`);
+                    }
+                    
+                    // 获取响应数据
+                    const data = await response.json();
+                    console.log("API响应数据结构:", Object.keys(data));
+                    
+                    // 隐藏加载状态
+                    loadingEl.style.display = 'none';
+                    
+                    // 尝试不同的响应格式
+                    if (data.choices && data.choices[0] && data.choices[0].message) {
+                        // 标准OpenAI格式
+                        const resultContent = data.choices[0].message.content;
+                        resultText.textContent = resultContent;
+                        resultBox.style.display = 'block';
+                        copyToClipboard(resultContent);
+                    } else if (data.choices && data.choices.length > 0 && typeof data.choices[0].text === 'string') {
+                        // 兼容旧版OpenAI格式
+                        const resultContent = data.choices[0].text.trim();
+                        resultText.textContent = resultContent;
+                        resultBox.style.display = 'block';
+                        copyToClipboard(resultContent);
+                    } else if (data.response) {
+                        // 某些API自定义格式
+                        const resultContent = data.response;
+                        resultText.textContent = resultContent;
+                        resultBox.style.display = 'block';
+                        copyToClipboard(resultContent);
+                    } else if (data.content || data.output) {
+                        // 另一种自定义格式
+                        const resultContent = data.content || data.output;
+                        resultText.textContent = resultContent;
+                        resultBox.style.display = 'block';
+                        copyToClipboard(resultContent);
+                    } else {
+                        console.error("无法解析的API响应格式:", data);
+                        throw new Error('API返回数据格式不正确，请联系管理员');
+                    }
+                    
+                    // 增加处理计数，强化成就感
+                    const currentCount = parseInt(processCount.textContent.replace(/,/g, ''));
+                    processCount.textContent = (currentCount + 1).toLocaleString();
+                        
+                    // 如果使用次数快用完了，强调打赏的价值
+                    if (newLimit.remaining <= 2) {
+                        setTimeout(() => {
+                            alert('您的免费使用次数即将用完。成为支持者可获得无限使用特权，支持我们持续提供服务！');
+                            
+                            // 添加注意力引导到打赏按钮
+                            supportBtn.style.animation = 'pulse 1s infinite';
+                            setTimeout(() => {
+                                supportBtn.style.animation = '';
+                            }, 3000);
+                        }, 1500);
+                    }
+                } catch (error) {
+                    console.error('API调用详细错误:', error);
+                    alert('处理失败，请稍后再试！\n' + error.message);
+                    loadingEl.style.display = 'none';
+                }
+            });
+            
+            // 点击复制按钮
+            copyBtn.addEventListener('click', function() {
+                const text = resultText.textContent;
+                copyToClipboard(text);
+                
+                // 更新按钮文本
+                const originalText = copyBtn.innerHTML;
+                copyBtn.innerHTML = '<i class="fas fa-check"></i> 已复制';
+                
+                setTimeout(() => {
+                    copyBtn.innerHTML = originalText;
+                }, 2000);
+            });
+            
+            // 点击支持按钮的事件跟踪
+            supportBtn.addEventListener('click', function() {
+                // 记录支持点击事件
+                console.log('支持按钮点击');
+                
+                // 这里可以添加转化跟踪代码
+                
+                // 增加社会认同感
+                const currentUserCount = parseInt(userCount.textContent.replace(/,/g, ''));
+                // 短暂延迟后更新，制造真实感
+                setTimeout(() => {
+                    userCount.textContent = (currentUserCount + 1).toLocaleString();
+                }, 5000);
+            });
+        });
+    </script>
+</body>
+</html> 

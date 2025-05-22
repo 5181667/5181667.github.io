@@ -149,34 +149,33 @@ function initWorkFilter() {
             
             const filterValue = btn.getAttribute('data-filter').toLowerCase();
             
-            // 简化的筛选动画
+            // 简化过滤动画
             workItems.forEach(item => {
                 const itemCategory = item.getAttribute('data-category').toLowerCase();
+                
                 if (filterValue === 'all' || itemCategory === filterValue) {
-                    gsap.to(item, {
-                        opacity: 1,
-                        scale: 1,
-                        duration: 0.4,
-                        ease: 'power1.out',
-                        clearProps: 'all',
-                        onStart: () => {
-                            item.style.display = 'block';
-                        }
-                    });
+                    item.style.display = 'block';
+                    setTimeout(() => {
+                        item.style.opacity = '1';
+                    }, 50);
                 } else {
-                    gsap.to(item, {
-                        opacity: 0,
-                        scale: 0.95,
-                        duration: 0.3,
-                        ease: 'power1.in',
-                        onComplete: () => {
-                            item.style.display = 'none';
-                        }
-                    });
+                    item.style.opacity = '0';
+                    setTimeout(() => {
+                        item.style.display = 'none';
+                    }, 300);
                 }
             });
         });
     });
+    
+    // 初始化3D悬停效果
+    initProjects3DHover();
+}
+
+// 项目3D悬停效果
+function initProjects3DHover() {
+    // 移除3D悬停效果，避免页面卡顿
+    console.log('3D效果已禁用以提高性能');
 }
 
 // 项目模态框
@@ -303,6 +302,17 @@ function loadProjects() {
     // 由于本地文件访问限制，我们在这里硬编码项目数据
     const projectsData = [
         {
+            "title": "AIGC降特征工具",
+            "category": "web",
+            "shortDesc": "网页设计 / AI工具",
+            "client": "内容创作者",
+            "date": "2025年6月",
+            "description": "一款简约高级的AI文本优化工具，能让AI生成的内容更加自然流畅，减少AI特征。通过深度学习算法，该工具能有效优化AI生成文本的结构和表达方式，使其更像人类书写的内容，提高文本的可读性和自然度。",
+            "image": "img/aigc-reducer.jpg",
+            "technologies": ["HTML5", "CSS3", "JavaScript", "API", "DeepSeek"],
+            "projectUrl": "pages/reduce-aigc.html"
+        },
+        {
             "title": "WKG",
             "category": "app",
             "shortDesc": "网页设计 / UI",
@@ -353,7 +363,7 @@ function loadProjects() {
             "client": "设计师",
             "date": "2025年5月",
             "description": "为希望AI生成图片的设计师提供一个便捷的工具，并提供一个简洁的界面，让设计师可以轻松地生成图片。",
-            "image": "img/work-4.jpg",
+            "image": "img/work-.jpg",
             "technologies": ["Python", "Flask", "HTML5", "CSS3", "JavaScript"],
             "projectUrl": "https://www.zxyhc.top/zf.html"
         }
@@ -372,7 +382,7 @@ function loadProjects() {
         worksGrid.innerHTML = '';
         
         // 生成项目HTML
-        projectsData.forEach(project => {
+        projectsData.forEach((project, index) => {
             // 转换类别为小写以确保一致性
             const category = project.category.toLowerCase();
             
@@ -397,16 +407,18 @@ function loadProjects() {
             workItem.setAttribute('data-category', category);
             workItem.setAttribute('data-id', project.id);
             
+            // 添加新的HTML结构，包含分类标签和按钮图标
             workItem.innerHTML = `
                 <div class="work-image">
                     <img src="${project.image}" alt="${project.title}">
+                    <div class="work-category-label">${categoryText}</div>
                     <div class="work-overlay">
                         <div class="work-info">
                             <h3>${project.title}</h3>
                             <p>${project.shortDesc || categoryText}</p>
                             <div class="work-buttons">
-                                <a href="#" class="view-project">查看详情</a>
-                                <a href="${project.projectUrl}" class="visit-project" target="_blank">前往项目</a>
+                                <a href="#" class="view-project"><i class="fas fa-eye"></i> 查看详情</a>
+                                <a href="${project.projectUrl}" class="visit-project" target="_blank"><i class="fas fa-external-link-alt"></i> 前往项目</a>
                             </div>
                         </div>
                     </div>
@@ -414,21 +426,15 @@ function loadProjects() {
             `;
             
             worksGrid.appendChild(workItem);
+            
+            // 简化动画，直接显示
+            workItem.style.opacity = "1";
+            workItem.classList.add('loaded');
         });
         
         // 重新初始化项目相关功能
         initProjectModal();
         initWorkFilter(); // 移动到这里，确保在项目加载后初始化过滤器
-        
-        // 添加淡入动画
-        animateWorkItems();
-        
-        // 确保所有项目默认可见
-        const workItems = document.querySelectorAll('.work-item');
-        workItems.forEach(item => {
-            item.style.display = 'block';
-            item.style.opacity = '1';
-        });
         
         // 确保"全部"按钮处于激活状态
         const allFilterBtn = document.querySelector('.filter-btn[data-filter="all"]');
@@ -973,4 +979,89 @@ function initSocialQRCode() {
             }, 300);
         }, 500);
     }
+}
+
+// 打开项目详情模态框
+function openProjectModal(project) {
+    const modal = document.getElementById('projectModal');
+    const projectDetails = modal.querySelector('.project-details');
+    
+    // 先将内容替换
+    projectDetails.innerHTML = `
+        <div class="project-header">
+            <h2>${project.title}</h2>
+            <p class="project-category">${getCategoryName(project.category)}</p>
+        </div>
+        <div class="project-image">
+            <img src="${project.image}" alt="${project.title}">
+        </div>
+        <div class="project-info">
+            <div class="info-item">
+                <h4>客户</h4>
+                <p>${project.client}</p>
+            </div>
+            <div class="info-item">
+                <h4>日期</h4>
+                <p>${project.date}</p>
+            </div>
+            <div class="info-item">
+                <h4>技术</h4>
+                <div class="tech-tags">
+                    ${project.technologies.map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
+                </div>
+            </div>
+        </div>
+        <div class="project-description">
+            <h4>项目描述</h4>
+            <p>${project.description}</p>
+        </div>
+        <div class="project-actions">
+            <a href="${project.projectUrl}" class="btn primary-btn" target="_blank">前往项目 <i class="fas fa-external-link-alt"></i></a>
+        </div>
+    `;
+    
+    // 隐藏所有元素准备动画
+    const elements = projectDetails.querySelectorAll('.project-header, .project-image, .project-info, .project-description, .project-actions');
+    elements.forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(20px)';
+    });
+    
+    // 显示模态框
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    
+    // 添加进入动画
+    elements.forEach((el, index) => {
+        gsap.to(el, {
+            opacity: 1,
+            y: 0,
+            duration: 0.5,
+            delay: 0.2 + (index * 0.1),
+            ease: 'power2.out'
+        });
+    });
+    
+    // 为技术标签添加弹出动画
+    const techTags = projectDetails.querySelectorAll('.tech-tag');
+    techTags.forEach((tag, i) => {
+        gsap.from(tag, {
+            scale: 0,
+            opacity: 0,
+            duration: 0.4,
+            delay: 0.6 + (i * 0.05),
+            ease: 'back.out(1.7)'
+        });
+    });
+}
+
+// 获取分类名称
+function getCategoryName(category) {
+    const categories = {
+        'web': '网页设计',
+        'app': '移动应用',
+        'graphic': '平面设计'
+    };
+    
+    return categories[category] || '其他';
 } 
