@@ -28,21 +28,59 @@
             display: none;
         }
 
-        /* UI 面板 */
-        #ui-panel {
+        /* 通用圆形按钮样式 (设置 & 全屏) */
+        .icon-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 10px;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            backdrop-filter: blur(5px);
+        }
+        .icon-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        /* 设置开关按钮 */
+        #ui-toggle-btn {
             position: absolute;
             top: 20px;
             right: 20px;
+            z-index: 20;
+        }
+
+        /* UI 面板 */
+        #ui-panel {
+            position: absolute;
+            top: 70px; /* 下移以避开设置按钮 */
+            right: 20px;
             width: 280px;
-            background: rgba(20, 20, 30, 0.7);
-            backdrop-filter: blur(10px);
+            background: rgba(20, 20, 30, 0.75);
+            backdrop-filter: blur(15px);
             padding: 20px;
             border-radius: 15px;
             border: 1px solid rgba(255, 255, 255, 0.1);
             color: white;
             z-index: 10;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-            transition: transform 0.3s ease;
+            /* 动画过渡 */
+            transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease;
+            transform-origin: top right;
+        }
+
+        /* 面板隐藏状态 */
+        #ui-panel.closed {
+            transform: translateX(120%);
+            opacity: 0;
+            pointer-events: none;
         }
 
         h2 {
@@ -72,7 +110,7 @@
             gap: 10px;
         }
 
-        button {
+        button.shape-btn {
             background: rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.2);
             color: white;
@@ -83,12 +121,12 @@
             font-size: 13px;
         }
 
-        button:hover {
+        button.shape-btn:hover {
             background: rgba(255, 255, 255, 0.2);
             transform: translateY(-2px);
         }
 
-        button.active {
+        button.shape-btn.active {
             background: linear-gradient(45deg, #00d2ff, #3a7bd5);
             border-color: transparent;
             box-shadow: 0 0 15px rgba(0, 210, 255, 0.4);
@@ -164,17 +202,6 @@
             bottom: 20px;
             right: 20px;
             z-index: 10;
-            background: rgba(255,255,255,0.1);
-            border: none;
-            color: white;
-            padding: 10px;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
         /* 手势提示 */
@@ -217,6 +244,11 @@
         🙌 张开双手控制扩散 | 🤏 捏合手指控制缩放
     </div>
 
+    <!-- 设置开关按钮 -->
+    <button id="ui-toggle-btn" class="icon-btn" onclick="toggleUI()" title="显示/隐藏设置">
+        ⚙️
+    </button>
+
     <!-- UI 面板 -->
     <div id="ui-panel">
         <h2>粒子控制器</h2>
@@ -244,7 +276,10 @@
         </div>
     </div>
 
-    <button class="fullscreen-btn" onclick="toggleFullScreen()">⛶</button>
+    <!-- 全屏按钮 -->
+    <button class="fullscreen-btn icon-btn" onclick="toggleFullScreen()" title="全屏">
+        ⛶
+    </button>
 
     <!-- 引入库 -->
     <!-- Three.js -->
@@ -671,6 +706,12 @@
 
         // --- 5. UI 事件绑定 ---
         
+        // 面板显隐逻辑
+        function toggleUI() {
+            const panel = document.getElementById('ui-panel');
+            panel.classList.toggle('closed');
+        }
+
         // 形状按钮
         document.querySelectorAll('.shape-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
