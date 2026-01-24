@@ -1695,6 +1695,7 @@ body::before {
 @media (max-width: 768px) {
     .top-bar {
         padding: 0 var(--space-md);
+        height: 56px;
     }
     
     .logo-text {
@@ -1703,6 +1704,10 @@ body::before {
     
     .btn span {
         display: none;
+    }
+    
+    .btn {
+        padding: 10px 14px;
     }
     
     .sidebar-section {
@@ -1715,5 +1720,256 @@ body::before {
     
     .layout-btn span {
         display: none;
+    }
+    
+    .sidebar {
+        max-height: 40vh;
+    }
+    
+    .preview-area {
+        min-height: 50vh;
+    }
+    
+    .canvas-container {
+        padding: var(--space-md);
+    }
+    
+    .empty-state h2 {
+        font-size: 1.2rem;
+    }
+    
+    .empty-state p {
+        font-size: 0.85rem;
+    }
+    
+    .empty-state-illustration {
+        width: 140px;
+        height: 120px;
+    }
+    
+    .zoom-controls {
+        bottom: var(--space-md);
+        padding: var(--space-xs);
+    }
+    
+    .zoom-btn {
+        width: 32px;
+        height: 32px;
+    }
+    
+    .modal-content {
+        width: 95%;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+    
+    .modal-large {
+        max-width: 95%;
+    }
+}
+
+/* 超小屏幕（手机竖屏） */
+@media (max-width: 480px) {
+    :root {
+        --topbar-height: 50px;
+    }
+    
+    .top-bar {
+        height: var(--topbar-height);
+    }
+    
+    .logo-icon {
+        width: 30px;
+        height: 30px;
+    }
+    
+    .btn {
+        padding: 8px 12px;
+    }
+    
+    .btn svg {
+        width: 16px;
+        height: 16px;
+    }
+    
+    .sidebar {
+        max-height: 35vh;
+    }
+    
+    .sidebar-section {
+        padding: var(--space-sm) var(--space-md);
+    }
+    
+    .section-title {
+        font-size: 0.65rem;
+        margin-bottom: var(--space-sm);
+    }
+    
+    .layout-btn {
+        padding: var(--space-sm);
+    }
+    
+    .layout-btn svg {
+        width: 18px;
+        height: 18px;
+    }
+    
+    .grid-presets {
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--space-xs);
+    }
+    
+    .preset-btn {
+        padding: var(--space-xs) var(--space-sm);
+        font-size: 0.7rem;
+    }
+    
+    .custom-grid {
+        margin-top: var(--space-sm);
+        padding-top: var(--space-sm);
+    }
+    
+    .grid-input {
+        padding: 6px var(--space-sm);
+        font-size: 0.8rem;
+    }
+    
+    .select-input {
+        padding: 8px 12px;
+        font-size: 0.8rem;
+    }
+    
+    .control-group {
+        margin-bottom: var(--space-md);
+    }
+    
+    .control-group label {
+        font-size: 0.75rem;
+    }
+    
+    .upload-zone {
+        padding: var(--space-md);
+    }
+    
+    .upload-zone svg {
+        width: 28px;
+        height: 28px;
+    }
+    
+    .upload-zone p {
+        font-size: 0.75rem;
+    }
+    
+    .image-list {
+        max-height: 150px;
+    }
+    
+    .image-item {
+        padding: var(--space-xs);
+    }
+    
+    .image-item-thumb {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .image-item-name {
+        font-size: 0.75rem;
+    }
+    
+    .image-item-size {
+        font-size: 0.65rem;
+    }
+    
+    .empty-state {
+        padding: var(--space-lg);
+    }
+    
+    .empty-state-illustration {
+        width: 100px;
+        height: 80px;
+        margin-bottom: var(--space-md);
+    }
+    
+    .empty-state-illustration::before,
+    .empty-state-illustration::after {
+        width: 80px;
+        height: 60px;
+    }
+    
+    .empty-state svg {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .empty-state h2 {
+        font-size: 1rem;
+    }
+    
+    .empty-state p {
+        font-size: 0.75rem;
+        margin-bottom: var(--space-md);
+    }
+    
+    .btn-lg {
+        padding: 12px 20px;
+        font-size: 0.9rem;
+    }
+    
+    .zoom-controls {
+        gap: 2px;
+        padding: 4px;
+    }
+    
+    .zoom-btn {
+        width: 28px;
+        height: 28px;
+    }
+    
+    .zoom-level {
+        font-size: 0.7rem;
+        min-width: 40px;
+        padding: 0 4px;
+    }
+    
+    .modal-header {
+        padding: var(--space-md);
+    }
+    
+    .modal-header h2 {
+        font-size: 1rem;
+    }
+    
+    .modal-body {
+        padding: var(--space-md);
+    }
+    
+    .modal-footer {
+        padding: var(--space-md);
+        flex-wrap: wrap;
+    }
+    
+    .format-btns {
+        flex-wrap: wrap;
+    }
+    
+    .format-btn {
+        flex: 1 1 30%;
+        padding: 10px;
+        font-size: 0.75rem;
+    }
+    
+    .size-inputs {
+        flex-wrap: wrap;
+    }
+    
+    .size-input {
+        flex: 1 1 35%;
+        min-width: 60px;
+    }
+    
+    .toast {
+        font-size: 0.8rem;
+        padding: var(--space-sm) var(--space-md);
     }
 }
