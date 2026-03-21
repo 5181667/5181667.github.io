@@ -174,7 +174,7 @@
 <!-- ==================== 数据结构 ==================== -->
 <div class="section active" id="ds">
 <h2 class="category-title">数据结构 (DS)</h2>
-<p class="sub-title">共35题 · 涵盖线性表、树、图、查找、排序等核心知识点</p>
+<p class="sub-title">共37题 · 涵盖线性表、树、图、查找、排序等核心知识点（含真题）</p>
 
 <div class="card" ondblclick="toggleMaster(this)">
   <div class="card-header" onclick="toggleCard(this)">
@@ -450,6 +450,43 @@
 
 <div class="card" ondblclick="toggleMaster(this)">
   <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num real">真2</div>
+    <div class="q-text">介绍图那章的某一个算法（普利姆、克鲁斯卡尔、迪杰斯特拉、弗洛伊德）？<span class="tag tag-real">真题</span><span class="tag tag-hot">高频</span></div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p><strong>⚡ 面试建议：</strong>挑一个你最熟的讲清楚即可，推荐讲 <span class="key">Dijkstra</span>（迪杰斯特拉），因为思路清晰、容易讲明白。</p>
+    <hr style="opacity:0.2;margin:12px 0;">
+    <p><strong>① Prim（普利姆）—— 最小生成树</strong></p>
+    <ul>
+      <li><span class="key">思想：</span>贪心。从任意顶点出发，逐步扩展，每次选择连接已选集合与未选集合之间<span class="key">权值最小的边</span></li>
+      <li><span class="key">适用：</span>稠密图（邻接矩阵存储）</li>
+      <li><span class="key">时间复杂度：</span>O(V²)，堆优化可达 O(ElogV)</li>
+    </ul>
+    <p><strong>② Kruskal（克鲁斯卡尔）—— 最小生成树</strong></p>
+    <ul>
+      <li><span class="key">思想：</span>贪心。将所有边按权值从小到大排序，依次选边，若不构成环则加入（用<span class="key">并查集</span>判环）</li>
+      <li><span class="key">适用：</span>稀疏图（边集数组存储）</li>
+      <li><span class="key">时间复杂度：</span>O(ElogE)</li>
+    </ul>
+    <p><strong>③ Dijkstra（迪杰斯特拉）—— 单源最短路径 ⭐推荐</strong></p>
+    <ul>
+      <li><span class="key">思想：</span>贪心。维护两个集合 S（已确定最短路径）和 U（未确定），每次从 U 中选距离源点<span class="key">最近</span>的顶点加入 S，并更新相邻顶点距离</li>
+      <li><span class="key">限制：</span>不能处理<span class="key">负权边</span></li>
+      <li><span class="key">时间复杂度：</span>O(V²)，堆优化可达 O((V+E)logV)</li>
+      <li><span class="key">应用：</span>地图导航、网络路由协议（OSPF）</li>
+    </ul>
+    <p><strong>④ Floyd（弗洛伊德）—— 多源最短路径</strong></p>
+    <ul>
+      <li><span class="key">思想：</span>动态规划。三重循环，依次以每个顶点 k 作为中间节点，更新任意两点间距离：<code>dist[i][j] = min(dist[i][j], dist[i][k]+dist[k][j])</code></li>
+      <li><span class="key">特点：</span>可处理负权边（但不能有负权环），代码简洁</li>
+      <li><span class="key">时间复杂度：</span>O(V³)</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
     <div class="q-num">22</div>
     <div class="q-text">什么是拓扑排序？</div>
     <div class="arrow">▼</div>
@@ -649,6 +686,22 @@
       <li>递归排序：递归地对小于和大于基准值的子数组排序</li>
     </ul>
     <p>时间复杂度：最优 <span class="key">O(n log n)</span>，平均 O(n log n)，最坏 O(n²)</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num real">真1</div>
+    <div class="q-text">请描述4种数据存储的结构？<span class="tag tag-real">真题</span></div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <ul>
+      <li><span class="key">顺序存储结构：</span>数据元素存放在<span class="key">一组地址连续</span>的存储单元中，逻辑相邻的元素物理位置也相邻。例：数组</li>
+      <li><span class="key">链式存储结构：</span>数据元素存放在<span class="key">任意的存储单元</span>中，通过指针表示元素之间的逻辑关系。例：链表</li>
+      <li><span class="key">索引存储结构：</span>在存储数据的同时，建立<span class="key">索引表</span>（关键字+地址），通过索引表加速查找。例：数据库索引</li>
+      <li><span class="key">散列存储结构：</span>通过<span class="key">哈希函数</span>直接计算出数据元素的存储地址，实现快速存取。例：哈希表</li>
+    </ul>
   </div>
 </div>
 
@@ -1226,7 +1279,7 @@
 <!-- ==================== 计算机组成原理 ==================== -->
 <div class="section" id="co">
 <h2 class="category-title">计算机组成原理</h2>
-<p class="sub-title">共17题（含8道真题）· 涵盖冯诺依曼、存储器、中断、寻址等</p>
+<p class="sub-title">共18题（含9道真题）· 涵盖冯诺依曼、存储器、中断、寻址等</p>
 
 <div class="card" ondblclick="toggleMaster(this)">
   <div class="card-header" onclick="toggleCard(this)">
@@ -1317,17 +1370,17 @@
 <div class="card" ondblclick="toggleMaster(this)">
   <div class="card-header" onclick="toggleCard(this)">
     <div class="q-num real">真1</div>
-    <div class="q-text">常见的数据寻址方式有哪些？<span class="tag tag-real">23年真题</span></div>
+    <div class="q-text">请描述4种数据寻址的方式？<span class="tag tag-real">真题</span><span class="tag tag-hot">高频</span></div>
     <div class="arrow">▼</div>
   </div>
   <div class="card-body">
     <ul>
-      <li><span class="key">直接寻址：</span>指令中直接给出数据地址</li>
-      <li><span class="key">间接寻址：</span>指令给出的是指向数据地址的指针</li>
-      <li><span class="key">寄存器寻址：</span>数据在寄存器中</li>
-      <li><span class="key">寄存器间接寻址：</span>寄存器中存的是数据地址的指针</li>
-      <li><span class="key">相对寻址：</span>PC值 + 指令中的相对地址</li>
+      <li><span class="key">立即寻址：</span>操作数直接包含在指令中（形式地址=操作数），速度最快，但操作数范围受限</li>
+      <li><span class="key">直接寻址：</span>指令中直接给出操作数的<span class="key">内存地址</span>，一次访存即可取得操作数</li>
+      <li><span class="key">间接寻址：</span>指令给出的地址指向的存储单元中存放的是操作数的<span class="key">真正地址</span>，需要两次访存</li>
+      <li><span class="key">寄存器寻址：</span>操作数存放在<span class="key">寄存器</span>中，指令中给出寄存器编号，不需要访存，速度快</li>
     </ul>
+    <p>此外还有：<span class="key">寄存器间接寻址</span>（寄存器中存放操作数的地址）、<span class="key">相对寻址</span>（PC + 偏移量）、<span class="key">基址寻址</span>（基址寄存器 + 偏移量）、<span class="key">变址寻址</span>（变址寄存器 + 形式地址）等。</p>
   </div>
 </div>
 
@@ -1359,22 +1412,44 @@
   </div>
 </div>
 
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num real">真4</div>
+    <div class="q-text">叙述一下二进制和十进制之间的转换过程？<span class="tag tag-real">真题</span></div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p><strong>十进制 → 二进制：</strong></p>
+    <ul>
+      <li><span class="key">整数部分：</span>除2取余法。反复除以2，记录余数，<span class="key">从下往上读</span></li>
+      <li>例：13 → 13÷2=6余<span class="key">1</span>，6÷2=3余<span class="key">0</span>，3÷2=1余<span class="key">1</span>，1÷2=0余<span class="key">1</span> → 结果：<span class="key">1101</span></li>
+      <li><span class="key">小数部分：</span>乘2取整法。反复乘以2，记录整数部分，<span class="key">从上往下读</span></li>
+      <li>例：0.625 → 0.625×2=<span class="key">1</span>.25，0.25×2=<span class="key">0</span>.5，0.5×2=<span class="key">1</span>.0 → 结果：<span class="key">0.101</span></li>
+    </ul>
+    <p><strong>二进制 → 十进制：</strong></p>
+    <ul>
+      <li><span class="key">按权展开求和</span>：每一位乘以 2 的对应次幂，然后相加</li>
+      <li>例：1101 = 1×2³ + 1×2² + 0×2¹ + 1×2⁰ = 8+4+0+1 = <span class="key">13</span></li>
+    </ul>
+  </div>
 </div>
 
-<!-- ==================== 英语口语 ==================== -->
+</div>
 <div class="section" id="eng">
 <h2 class="category-title">英语口语面试</h2>
-<p class="sub-title">共33题 · 涵盖自我介绍、专业、学校、兴趣、规划等常见话题</p>
+<p class="sub-title">共47题 · 涵盖自我介绍、专业、学校、兴趣、规划等常见话题（含真题）</p>
 
 <div class="card" ondblclick="toggleMaster(this)">
   <div class="card-header" onclick="toggleCard(this)">
     <div class="q-num real">1</div>
-    <div class="q-text">Introduce yourself in English? <span class="tag tag-real">23年真题</span></div>
+    <div class="q-text">Please introduce yourself in English. <span class="tag tag-real">真题</span><span class="tag tag-hot">高频</span></div>
     <div class="arrow">▼</div>
   </div>
   <div class="card-body">
-    <p class="eng">准备一段1-2分钟的英文自我介绍，涵盖：姓名、本科院校、专业、项目/科研经历、考研动机、未来规划。</p>
-    <p>万能开头：Thank you for giving me this opportunity. My name is..., I graduated from...</p>
+    <p class="eng">Good morning/afternoon, dear professors. Thank you for giving me this opportunity. My name is Hu Chi. I graduated from Zhengzhou University of Light Industry, majoring in Computer Science and Technology.</p>
+    <p class="eng">During my undergraduate years, I actively participated in algorithm competitions and won several awards, including the <span class="key">National Second Prize in the Lanqiao Cup</span>, an <span class="key">ICPC Silver Medal</span> in Henan Province, and a <span class="key">CCPC Bronze Medal</span>. These experiences sharpened my logical thinking and problem-solving skills.</p>
+    <p class="eng">I also developed several full-stack projects independently. For example, I built an <span class="key">intelligent Q&A system based on LLM and RAG technology</span> and a <span class="key">cryptography teaching simulation system</span> for a graduate supervisor. These projects deepened my understanding of AI applications and software engineering.</p>
+    <p class="eng">I chose to apply for the Master's program at MUC because I want to further explore the intersection of <span class="key">artificial intelligence and information security</span>. I believe MUC's excellent faculty and research environment will help me grow as a researcher. Thank you!</p>
   </div>
 </div>
 
@@ -1535,6 +1610,20 @@
 <div class="card" ondblclick="toggleMaster(this)">
   <div class="card-header" onclick="toggleCard(this)">
     <div class="q-num">16</div>
+    <div class="q-text">What's your favorite professional class?<span class="tag tag-real">真题</span></div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p class="eng">My favorite professional class is <span class="key">Data Structure and Algorithm</span>. This course taught me how to organize and process data efficiently, such as using trees for fast searching and graphs for finding shortest paths.</p>
+    <p class="eng">I found it very interesting because it is closely related to algorithm competitions, which I'm passionate about. Through this course, I developed <span class="key">strong problem-solving skills</span> and learned to choose the right data structure for different scenarios.</p>
+    <p class="eng">It also laid a solid foundation for my later projects. For example, when I built the intelligent Q&A system, I applied concepts like hash tables and tree-based indexing for efficient retrieval.</p>
+    <p><strong>💡 中文思路：</strong>选自己最有底气的课，结合竞赛/项目经历展开，展现深度理解而非泛泛而谈。推荐选「数据结构与算法」或「C语言程序设计」。</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">17</div>
     <div class="q-text">万能回答模板</div>
     <div class="arrow">▼</div>
   </div>
@@ -1545,12 +1634,155 @@
   </div>
 </div>
 
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">18</div>
+    <div class="q-text">What kind of people do you think are difficult to get along with?</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p class="eng">I think people who are dishonest or always negative are difficult to get along with. I prefer to be around people who are sincere and supportive. But I always try to be understanding and patient with everyone.</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">19</div>
+    <div class="q-text">Please introduce your family / friend / college?</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p class="eng">There are three people in my family — my father, my mother, and me. My parents have always supported my education and encouraged me to pursue my dreams. I'm grateful for their love and sacrifice.</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">20</div>
+    <div class="q-text">Talk about the person or book which has the greatest influence on you.</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p class="eng">The book that influenced me the most is "Introduction to Algorithms". It opened my eyes to the beauty of algorithmic thinking and inspired me to participate in programming competitions, which became a defining part of my undergraduate life.</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">21</div>
+    <div class="q-text">If you can't find a satisfactory job after graduation, what are you going to do?</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p class="eng">I will continue to improve my professional skills and keep looking for opportunities. I believe that with a solid foundation in computer science, persistence, and a positive attitude, I will eventually find a satisfactory position.</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">22</div>
+    <div class="q-text">Why do you think you could succeed in this interview?</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p class="eng">I believe I can succeed because I have a strong foundation in algorithms, proven by my awards in national programming competitions. I also have practical project experience and a genuine passion for research in AI and computer science.</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">23</div>
+    <div class="q-text">Talk about your unforgettable things.</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p class="eng">One of my most unforgettable experiences was winning the National Second Prize in the Lanqiao Cup. After months of hard practice, seeing my name on the award list was an incredibly rewarding moment that motivated me to keep pushing my limits.</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">24</div>
+    <div class="q-text">Talk about your favorite place.</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p class="eng">My favorite place is Beijing. As the capital of China, it has a rich history, numerous famous landmarks, and top universities. It is also one of the reasons why I chose to pursue my graduate studies at MUC.</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">25</div>
+    <div class="q-text">Talk about your favorite movie.</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p class="eng">My favorite movie is "The Imitation Game", which tells the story of Alan Turing and how he invented the computer to break the Enigma code. As a computer science student, I find his contributions truly inspiring.</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">26</div>
+    <div class="q-text">Talk about your best friend.</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p class="eng">My best friend is my college classmate. We studied together, prepared for exams together, and encouraged each other during difficult times. He is a loyal and supportive person, and our friendship means a lot to me.</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">27</div>
+    <div class="q-text">Why do you think it is difficult for college students to get a job?</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p class="eng">I think it's because the job market is very competitive and there are many graduates every year. Also, some students may lack practical experience during college. That's why I focused on developing real projects and participating in competitions.</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">28</div>
+    <div class="q-text">How do you know MUC (Minzu University of China)?</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p class="eng">I learned about MUC through the experience shared by a senior student from my undergraduate school. After researching its programs and faculty, I was attracted by its excellent research environment and strong faculty in computer science.</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">29</div>
+    <div class="q-text">Could you tell us your greatest weakness? And how do you deal with it?</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p class="eng">My greatest weakness is that my English skills still need improvement, as I haven't passed CET-4 yet. But I've been actively working on it by reading English technical documentation, watching English tutorials, and practicing listening every day.</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">30</div>
+    <div class="q-text">What contribution did you make to your previous school? What can you bring to us?</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p class="eng">I participated in several algorithm competitions and won awards including the Lanqiao Cup National Second Prize and ICPC Silver Medal, which brought honor to my school. If admitted, I will continue to work hard, contribute to research projects, and earn honors for MUC as well.</p>
+  </div>
+</div>
+
 </div>
 
 <!-- ==================== 综合问答 ==================== -->
 <div class="section" id="other">
 <h2 class="category-title">综合问答</h2>
-<p class="sub-title">共23题 · 涵盖CNN、软件工程、AI、数据库、工具框架等扩展知识</p>
+<p class="sub-title">共38题 · 涵盖CNN、软件工程、AI、数据库、机器学习、数据模型、工具框架等扩展知识（含学长真题）</p>
 
 <div class="card" ondblclick="toggleMaster(this)">
   <div class="card-header" onclick="toggleCard(this)">
@@ -1612,12 +1844,26 @@
 <div class="card" ondblclick="toggleMaster(this)">
   <div class="card-header" onclick="toggleCard(this)">
     <div class="q-num">5</div>
-    <div class="q-text">对人工智能有什么看法？</div>
+    <div class="q-text">关于人工智能，你了解多少？<span class="tag tag-real">真题</span></div>
     <div class="arrow">▼</div>
   </div>
   <div class="card-body">
-    <p>AI是强大的工具，将更加普及，应用于自动驾驶、智能机器人、医疗诊断、智能家居等领域。</p>
-    <p>需要注意：就业变革、隐私保护、伦理道德问题。</p>
+    <p><strong>人工智能（AI）</strong>是研究如何让计算机模拟人类智能行为的学科，是计算机科学的重要分支。</p>
+    <p><strong>核心方向：</strong></p>
+    <ul>
+      <li><span class="key">机器学习（ML）：</span>让计算机从数据中自动学习规律，包括监督学习、无监督学习、强化学习</li>
+      <li><span class="key">深度学习（DL）：</span>基于多层神经网络，如CNN（图像识别）、RNN/LSTM（序列处理）、Transformer（NLP革命性架构）</li>
+      <li><span class="key">自然语言处理（NLP）：</span>让计算机理解和生成人类语言，当前最火的是以GPT为代表的<span class="key">大语言模型（LLM）</span></li>
+      <li><span class="key">计算机视觉（CV）：</span>让计算机理解图像和视频，应用于人脸识别、自动驾驶等</li>
+    </ul>
+    <p><strong>最新趋势：</strong></p>
+    <ul>
+      <li><span class="key">大模型时代：</span>GPT、通义千问等大语言模型展现出强大的通用能力</li>
+      <li><span class="key">RAG技术：</span>检索增强生成，结合知识库让AI回答更精准（我在图书馆智能问答项目中有实践）</li>
+      <li><span class="key">AI Agent：</span>让AI具备自主规划和执行任务的能力</li>
+      <li><span class="key">AIGC：</span>AI生成内容，包括文本、图像、代码等</li>
+    </ul>
+    <p>AI 是强大的工具，将更加普及，应用于自动驾驶、智能医疗、智能教育等领域。同时也需关注就业变革、数据隐私、伦理道德等问题。</p>
     <p>个人周围已有应用：智能语音助手、推荐系统等。</p>
   </div>
 </div>
@@ -1713,12 +1959,27 @@
 <div class="card" ondblclick="toggleMaster(this)">
   <div class="card-header" onclick="toggleCard(this)">
     <div class="q-num">12</div>
-    <div class="q-text">什么是支持向量机（SVM）？</div>
+    <div class="q-text">介绍一下支持向量机（SVM）？<span class="tag tag-real">学长真题</span><span class="tag tag-hot">高频</span></div>
     <div class="arrow">▼</div>
   </div>
   <div class="card-body">
-    <p>监督学习模型，找到<span class="key">最优超平面</span>分隔不同类别数据点，使边界到超平面的距离<span class="key">最大化</span>。</p>
-    <p>特点：有效处理高维数据，通过<span class="key">核函数</span>解决非线性分类问题。</p>
+    <p><span class="key">SVM（Support Vector Machine）</span>是一种经典的<span class="key">监督学习</span>分类算法。</p>
+    <p><strong>核心思想：</strong></p>
+    <ul>
+      <li>在特征空间中找到一个<span class="key">最优超平面</span>，使得两类数据之间的<span class="key">间隔（margin）最大化</span></li>
+      <li>距离超平面最近的样本点称为<span class="key">支持向量</span>，它们决定了超平面的位置</li>
+    </ul>
+    <p><strong>核函数（处理非线性问题）：</strong></p>
+    <ul>
+      <li>当数据线性不可分时，通过<span class="key">核函数</span>将数据映射到<span class="key">高维空间</span>，使其变得线性可分</li>
+      <li>常用核函数：线性核、<span class="key">RBF（高斯核）</span>、多项式核、Sigmoid核</li>
+    </ul>
+    <p><strong>优缺点：</strong></p>
+    <ul>
+      <li>优点：对<span class="key">小样本</span>、高维数据效果好；泛化能力强；有严格的数学理论支撑</li>
+      <li>缺点：大规模数据训练慢；对核函数和参数选择敏感；对缺失数据敏感</li>
+    </ul>
+    <p><strong>应用：</strong>文本分类、图像识别、生物信息学、人脸检测等。</p>
   </div>
 </div>
 
@@ -1733,9 +1994,265 @@
   </div>
 </div>
 
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num real">学</div>
+    <div class="q-text">为什么要用 Linux？好处在哪？<span class="tag tag-real">学长真题</span><span class="tag tag-hot">高频</span></div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p>💡 <em>学长提醒：老师在自由提问环节常问此题，尤其是当前面回答不理想时。</em></p>
+    <ul>
+      <li><span class="key">开源免费：</span>源代码开放，任何人可以自由使用、修改和分发</li>
+      <li><span class="key">稳定性高：</span>运行稳定，适合作为服务器长期运行，很少需要重启</li>
+      <li><span class="key">安全性强：</span>权限管理严格（用户/组/其他），病毒少，社区漏洞修复快</li>
+      <li><span class="key">强大的命令行：</span>Shell脚本可以高效完成自动化运维、批量操作</li>
+      <li><span class="key">丰富的开发环境：</span>天然支持各种编程语言和开发工具（GCC、Python、Git等）</li>
+      <li><span class="key">服务器主流：</span>全球绝大多数服务器、云平台、超级计算机都运行Linux</li>
+      <li><span class="key">容器化基础：</span>Docker、Kubernetes等容器技术均基于Linux内核</li>
+    </ul>
+    <p><strong>结合自身经验：</strong>我将 AuraTest 项目部署在阿里云 ECS 服务器上，使用的就是 Linux 系统，配合 Nginx 反向代理和 PM2 进程管理，体会到了 Linux 在服务器部署方面的稳定性和便捷性。</p>
+  </div>
 </div>
 
-<!-- ==================== Python 基础 ==================== -->
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num real">学</div>
+    <div class="q-text">介绍一下你项目的开发过程是什么样的？<span class="tag tag-real">学长真题</span><span class="tag tag-hot">高频</span></div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p>💡 <em>学长提醒：老师自由提问时必问项目的开发流程，一定要熟悉大体过程。</em></p>
+    <p><strong>以 LLM+RAG 图书馆智能问答系统为例：</strong></p>
+    <ul>
+      <li><span class="key">① 需求分析：</span>明确图书馆场景下的智能问答需求，确定系统功能范围（文档管理、智能检索、多轮对话等）</li>
+      <li><span class="key">② 技术选型：</span>前端 Vue 3，后端 FastAPI，数据库 PostgreSQL + pgvector，LLM 接入通义千问 API，编排框架 LangChain</li>
+      <li><span class="key">③ 系统设计：</span>设计数据库表结构、API接口、RAG检索流程（文档分块→向量化→检索→生成）</li>
+      <li><span class="key">④ 迭代开发：</span>先搭建基础框架，再逐步实现核心功能（文档上传→向量存储→问答检索→权限控制）</li>
+      <li><span class="key">⑤ 测试优化：</span>调整分块策略和检索参数（Top-K），优化回答质量和响应速度</li>
+      <li><span class="key">⑥ 部署上线：</span>部署到服务器，配置环境，进行实际使用测试</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num real">学</div>
+    <div class="q-text">你为什么要做这个项目？你在其中担任什么角色？<span class="tag tag-real">学长真题</span><span class="tag tag-hot">高频</span></div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p>💡 <em>学长提醒：老师必问动机和角色，回答要真实自然。</em></p>
+    <p><strong>密码学仿真系统：</strong></p>
+    <ul>
+      <li>动机：受本科学校研究生导师委托，需要一个用于密码学课程教学的可视化仿真工具</li>
+      <li>角色：<span class="key">独立完成</span>系统的需求分析、架构设计和全栈开发</li>
+    </ul>
+    <p><strong>图书馆智能问答系统：</strong></p>
+    <ul>
+      <li>动机：对大语言模型和RAG技术感兴趣，想通过实际项目探索AI在知识检索场景中的应用</li>
+      <li>角色：<span class="key">独立开发</span>全部功能，从技术选型到系统实现</li>
+    </ul>
+    <p><strong>AuraTest 心理测试平台：</strong></p>
+    <ul>
+      <li>动机：希望将心理学测评与AI分析结合，做一个有实际用户的线上产品</li>
+      <li>角色：<span class="key">独立开发并部署</span>，注册公司完成ICP备案，实际运营</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num real">学</div>
+    <div class="q-text">什么是过拟合和欠拟合？如何解决？<span class="tag tag-key">重点</span></div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <ul>
+      <li><span class="key">过拟合（Overfitting）：</span>模型在训练集上表现很好，但在新数据上表现差。原因：模型太复杂，学到了噪声</li>
+      <li><span class="key">欠拟合（Underfitting）：</span>模型在训练集上就表现差。原因：模型太简单，无法捕捉数据规律</li>
+    </ul>
+    <p><strong>解决过拟合：</strong></p>
+    <ul>
+      <li>增加训练数据量</li>
+      <li><span class="key">正则化</span>（L1/L2，限制模型复杂度）</li>
+      <li><span class="key">Dropout</span>（随机丢弃神经元，深度学习中常用）</li>
+      <li>早停（Early Stopping）</li>
+      <li>交叉验证选择合适的模型复杂度</li>
+    </ul>
+    <p><strong>解决欠拟合：</strong>增加模型复杂度、增加特征、减小正则化强度。</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num real">学</div>
+    <div class="q-text">什么是决策树？它的优缺点？<span class="tag tag-key">重点</span></div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p><span class="key">决策树</span>是一种基于树结构的监督学习算法，通过一系列特征判断条件将数据逐步分类。</p>
+    <p><strong>关键概念：</strong></p>
+    <ul>
+      <li><span class="key">信息增益（ID3）：</span>选择使信息熵下降最多的特征作为分裂节点</li>
+      <li><span class="key">增益比（C4.5）：</span>对信息增益做归一化，避免偏向多值特征</li>
+      <li><span class="key">基尼指数（CART）：</span>选择基尼不纯度最小的特征，生成二叉树</li>
+    </ul>
+    <p><strong>优点：</strong>可解释性强、不需要特征归一化、能处理连续和离散特征。</p>
+    <p><strong>缺点：</strong>容易过拟合 → 解决：<span class="key">剪枝</span>（预剪枝/后剪枝）或使用<span class="key">随机森林</span>（集成多棵决策树）。</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">24</div>
+    <div class="q-text">数据库系统的特点？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <ul>
+      <li><span class="key">数据结构化：</span>数据以表格形式进行结构化存储，便于组织和管理</li>
+      <li><span class="key">共享性高、冗余度低且易扩充：</span>减少数据冗余，便于扩展和升级</li>
+      <li><span class="key">数据独立性高：</span>实现了数据的逻辑独立性和物理独立性</li>
+      <li><span class="key">统一管理和控制：</span>DBMS 提供数据安全、完整性、并发控制等功能</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">25</div>
+    <div class="q-text">介绍一下数据模型？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p>数据模型是数据库系统的核心和基础，分为两类：</p>
+    <ul>
+      <li><span class="key">概念模型：</span>也称高层数据模型，描述用户对数据的观念和需求，如<span class="key">E-R 模型</span>（实体-联系模型）</li>
+      <li><span class="key">逻辑模型和物理模型：</span>逻辑模型描述数据在计算机中的存储方式和结构（如关系模型、网络模型、层次模型）；物理模型描述数据在存储介质上的具体存储方式</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">26</div>
+    <div class="q-text">数据库中常用的数据模型有哪些？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <ul>
+      <li><span class="key">层次模型：</span>数据以树状结构组织，每个记录有一个父节点和零个或多个子节点</li>
+      <li><span class="key">网状模型：</span>数据以网状结构组织，允许一个记录有多个父节点，适合描述复杂关系</li>
+      <li><span class="key">关系模型：</span>数据以表格形式组织，使用行和列表示数据，是最常用的数据模型</li>
+      <li><span class="key">面向对象数据模型：</span>数据以对象形式组织，支持面向对象的数据建模和操作</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">27</div>
+    <div class="q-text">什么是数据库中的数据冗余？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p><span class="key">数据冗余</span>是指数据库中存储了重复的数据，即同一份数据出现了多次。</p>
+    <p>可能导致的问题：<span class="key">数据不一致性</span>、更新异常、存储空间浪费。</p>
+    <p>解决方法：通过<span class="key">规范化</span>（数据库范式设计）来减少数据冗余，确保数据的一致性和完整性。</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">28</div>
+    <div class="q-text">写数据库和写日志的区别？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <ul>
+      <li><span class="key">数据库：</span>用于保存数据，是结构化的数据存储系统，可进行增删改查操作，通常有严格的权限控制</li>
+      <li><span class="key">日志文件：</span>用于记录一系列操作，方便回溯和检查。记录系统的活动、错误、警告等信息，便于故障排查</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">29</div>
+    <div class="q-text">什么是特征图（Feature Map）？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p><span class="key">特征图</span>是卷积神经网络（CNN）中卷积层输出的二维（或更高维）数组，是对输入数据进行特征提取后得到的结果。</p>
+    <ul>
+      <li>每个<span class="key">卷积核</span>会生成一个特征图，不同卷积核提取不同的特征</li>
+      <li>特征图可以捕捉输入数据中的<span class="key">局部空间结构</span>，使网络对平移不变性更强</li>
+      <li>是网络学习和识别数据特征的基础，为后续分类和识别提供重要信息</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">30</div>
+    <div class="q-text">编程需要什么硬件或者软件？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p><strong>硬件：</strong>计算机、键盘和鼠标、显示器、互联网连接。</p>
+    <p><strong>软件：</strong></p>
+    <ul>
+      <li><span class="key">IDE：</span>Visual Studio、Eclipse、IntelliJ IDEA 等集成开发环境</li>
+      <li><span class="key">文本编辑器：</span>VS Code、Sublime Text 等</li>
+      <li><span class="key">编译器/解释器：</span>GCC（C/C++）、Python 解释器、JDK（Java）等</li>
+      <li><span class="key">版本控制：</span>Git</li>
+      <li><span class="key">操作系统：</span>Windows、macOS、Linux</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">31</div>
+    <div class="q-text">Tiny4412 是什么？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p><span class="key">Tiny4412</span> 是一个功能强大且灵活的嵌入式开发板，基于 <span class="key">ARM 架构</span>（Samsung Exynos 4412 四核处理器），适合对 ARM 架构和嵌入式系统开发感兴趣的开发者或学习者。</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">32</div>
+    <div class="q-text">什么是 qmake？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p><span class="key">qmake</span> 是 Qt 框架提供的构建工具，主要用于自动化生成 Makefile 文件。根据 .pro 配置文件，自动创建适合特定平台和编译器的 Makefile，实现跨平台构建。</p>
+    <p>特点：跨平台支持、自动处理依赖关系、支持 Visual Studio、适用于 GUI 和非 GUI 项目。</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">33</div>
+    <div class="q-text">Retrofit 的优势？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p><span class="key">Retrofit</span> 是一个高效的 Android 网络访问框架。优势：</p>
+    <ul>
+      <li>简洁的 API（通过注解定义网络请求接口）</li>
+      <li>类型安全、灵活的配置</li>
+      <li>解耦设计（与 OkHttp 等库配合）</li>
+      <li>支持 JSON/XML 等多种序列化工具</li>
+    </ul>
+  </div>
+</div>
+
+</div>
 <div class="section" id="python">
 <h2 class="category-title">Python 基础速查</h2>
 <p class="sub-title">共20题 · 你PPT上写了Python"熟练"，老师大概率会抽查基础知识，这些必须答得出来</p>
@@ -2113,7 +2630,47 @@
 <!-- ==================== 技术栈面试（项目+框架+部署） ==================== -->
 <div class="section" id="tech">
 <h2 class="category-title">技术栈面试（项目 · 框架 · 部署）</h2>
-<p class="sub-title">共30题 · 针对你PPT上的三个项目和技术背景，老师最可能追问的技术细节</p>
+<p class="sub-title">共31题 · 针对你PPT上的三个项目和技术背景，老师最可能追问的技术细节</p>
+
+<h3 style="font-size:16px;color:#e94560;margin:24px 0 12px 8px;">▎ C++ 核心概念</h3>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num real">真</div>
+    <div class="q-text">介绍一下C++的多态？<span class="tag tag-real">真题</span><span class="tag tag-hot">高频</span></div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p><span class="key">多态</span>是面向对象三大特性之一（封装、继承、多态），指<span class="key">同一个接口，不同的实现</span>。</p>
+    <p><strong>两种多态：</strong></p>
+    <ul>
+      <li><span class="key">编译时多态（静态多态）：</span>通过<span class="key">函数重载</span>和<span class="key">模板</span>实现，在编译期确定调用哪个函数</li>
+      <li><span class="key">运行时多态（动态多态）：</span>通过<span class="key">虚函数（virtual）+ 继承</span>实现，在运行期根据对象的实际类型决定调用哪个函数</li>
+    </ul>
+    <p><strong>实现机制（虚函数表）：</strong></p>
+    <ul>
+      <li>含虚函数的类会生成一张<span class="key">虚函数表（vtable）</span>，每个对象持有一个指向该表的<span class="key">虚表指针（vptr）</span></li>
+      <li>通过<span class="key">基类指针/引用</span>调用虚函数时，运行时查虚表找到实际调用的函数 → 实现动态绑定</li>
+    </ul>
+    <p><strong>示例：</strong></p>
+    <pre style="background:#1a1a2e;padding:12px;border-radius:8px;overflow-x:auto;font-size:13px;color:#e0e0e0;"><code>class Animal {
+public:
+    virtual void speak() { cout &lt;&lt; "Animal" &lt;&lt; endl; }
+};
+class Dog : public Animal {
+public:
+    void speak() override { cout &lt;&lt; "Woof!" &lt;&lt; endl; }
+};
+Animal* p = new Dog();
+p-&gt;speak();  // 输出 "Woof!" → 运行时多态</code></pre>
+    <p><strong>关键概念：</strong></p>
+    <ul>
+      <li><span class="key">纯虚函数：</span><code>virtual void func() = 0;</code> 含纯虚函数的类是<span class="key">抽象类</span>，不能实例化</li>
+      <li><span class="key">虚析构函数：</span>基类析构函数应声明为 virtual，防止通过基类指针 delete 派生类对象时只调用基类析构</li>
+      <li><span class="key">override 关键字：</span>C++11 引入，显式标记重写虚函数，防止签名不一致导致隐藏</li>
+    </ul>
+  </div>
+</div>
 
 <h3 style="font-size:16px;color:#e94560;margin:24px 0 12px 8px;">▎ RAG 与大语言模型（LLM+RAG 智能问答系统）</h3>
 
