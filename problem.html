@@ -1,0 +1,2751 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>中央民族大学 复试问答题总结</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+    background: #f0f2f5;
+    color: #1a1a2e;
+    line-height: 1.7;
+  }
+  .header {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    color: #fff;
+    padding: 40px 20px;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  }
+  .header h1 { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+  .header p { font-size: 14px; opacity: 0.8; }
+  .stats {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+  }
+  .stat-item {
+    background: rgba(255,255,255,0.1);
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 13px;
+  }
+  .stat-item strong { color: #e94560; font-size: 18px; }
+  .nav {
+    background: #fff;
+    padding: 16px 20px;
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    border-bottom: 1px solid #e0e0e0;
+    position: sticky;
+    top: 0;
+    z-index: 99;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .nav-btn {
+    padding: 8px 18px;
+    border: 2px solid #e0e0e0;
+    border-radius: 25px;
+    background: #fff;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s;
+    white-space: nowrap;
+  }
+  .nav-btn:hover, .nav-btn.active { background: #1a1a2e; color: #fff; border-color: #1a1a2e; }
+  .nav-btn.active { box-shadow: 0 2px 10px rgba(26,26,46,0.3); }
+  .container { max-width: 960px; margin: 0 auto; padding: 20px; }
+  .section { display: none; }
+  .section.active { display: block; }
+  .category-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin: 30px 0 16px;
+    padding-left: 16px;
+    border-left: 4px solid #e94560;
+  }
+  .sub-title {
+    font-size: 16px;
+    color: #666;
+    margin: -8px 0 20px 20px;
+  }
+  .card {
+    background: #fff;
+    border-radius: 12px;
+    margin-bottom: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    overflow: hidden;
+    transition: box-shadow 0.3s;
+  }
+  .card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.12); }
+  .card-header {
+    padding: 16px 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    user-select: none;
+  }
+  .card-header:hover { background: #f8f9fa; }
+  .q-num {
+    min-width: 32px;
+    height: 32px;
+    background: linear-gradient(135deg, #e94560, #c23152);
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .q-num.real { background: linear-gradient(135deg, #f59e0b, #d97706); }
+  .q-text { font-weight: 600; font-size: 15px; flex: 1; }
+  .arrow {
+    font-size: 12px;
+    color: #999;
+    transition: transform 0.3s;
+    flex-shrink: 0;
+  }
+  .card.open .arrow { transform: rotate(180deg); }
+  .card-body {
+    display: none;
+    padding: 0 20px 20px 64px;
+    font-size: 14px;
+    color: #444;
+  }
+  .card.open .card-body { display: block; }
+  .card-body p { margin-bottom: 8px; }
+  .card-body ul { padding-left: 20px; margin-bottom: 8px; }
+  .card-body li { margin-bottom: 4px; }
+  .key { color: #e94560; font-weight: 600; }
+  .tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    margin-left: 8px;
+    vertical-align: middle;
+  }
+  .tag-hot { background: #fef2f2; color: #dc2626; }
+  .tag-real { background: #fffbeb; color: #d97706; }
+  .tag-key { background: #eff6ff; color: #2563eb; }
+  .eng { color: #0f3460; font-style: italic; }
+  .search-box {
+    width: 100%;
+    max-width: 500px;
+    margin: 16px auto 0;
+    display: block;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 25px;
+    font-size: 14px;
+    outline: none;
+    background: rgba(255,255,255,0.15);
+    color: #fff;
+  }
+  .search-box::placeholder { color: rgba(255,255,255,0.5); }
+  .progress-bar {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #1a1a2e;
+    color: #fff;
+    padding: 12px 20px;
+    border-radius: 25px;
+    font-size: 13px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    z-index: 200;
+    cursor: pointer;
+  }
+  .progress-bar span { color: #e94560; font-weight: 700; }
+  .mastered { opacity: 0.4; }
+  .mastered .card-header { text-decoration: line-through; }
+  @media (max-width: 768px) {
+    .header h1 { font-size: 22px; }
+    .card-body { padding-left: 20px; }
+    .stats { gap: 12px; }
+    .stat-item { padding: 6px 14px; font-size: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>中央民族大学 · 复试问答题总结</h1>
+  <p>计算机专业 · 面试 + 笔试核心知识点速览</p>
+  <div class="stats">
+    <div class="stat-item">数据结构 <strong>35</strong> 题</div>
+    <div class="stat-item">操作系统 <strong>43</strong> 题</div>
+    <div class="stat-item">计算机网络 <strong>36</strong> 题</div>
+    <div class="stat-item">计算机组成原理 <strong>17</strong> 题</div>
+    <div class="stat-item">英语口语 <strong>33</strong> 题</div>
+    <div class="stat-item">综合问答 <strong>23</strong> 题</div>
+    <div class="stat-item" style="background:rgba(233,69,96,0.3);font-weight:600;">技术栈面试 <strong>30</strong> 题</div>
+    <div class="stat-item" style="background:rgba(46,204,113,0.2);font-weight:600;">Python基础 <strong>20</strong> 题</div>
+  </div>
+  <input type="text" class="search-box" placeholder="搜索题目关键词..." id="searchInput" oninput="searchQuestions(this.value)">
+</div>
+
+<div class="nav" id="nav">
+  <button class="nav-btn active" onclick="switchTab('ds')">数据结构</button>
+  <button class="nav-btn" onclick="switchTab('os')">操作系统</button>
+  <button class="nav-btn" onclick="switchTab('net')">计算机网络</button>
+  <button class="nav-btn" onclick="switchTab('co')">计算机组成原理</button>
+  <button class="nav-btn" onclick="switchTab('eng')">英语口语</button>
+  <button class="nav-btn" onclick="switchTab('other')">综合问答</button>
+  <button class="nav-btn" onclick="switchTab('tech')" style="background:linear-gradient(135deg,#e94560,#c23152);color:#fff;border-color:#e94560;">技术栈面试</button>
+  <button class="nav-btn" onclick="switchTab('python')" style="background:linear-gradient(135deg,#2ecc71,#27ae60);color:#fff;border-color:#2ecc71;">Python基础</button>
+</div>
+
+<div class="container">
+
+<!-- ==================== 数据结构 ==================== -->
+<div class="section active" id="ds">
+<h2 class="category-title">数据结构 (DS)</h2>
+<p class="sub-title">共35题 · 涵盖线性表、树、图、查找、排序等核心知识点</p>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">1</div>
+    <div class="q-text">什么是线性表？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p>具有<span class="key">相同数据类型</span>的若干数据元素的<span class="key">有限序列</span>。</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">2</div>
+    <div class="q-text">什么是时间复杂度？<span class="tag tag-hot">高频</span></div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p>用于估算算法运行时间的一种指标，描述了算法所需执行的<span class="key">基本运算步骤的数量</span>。</p>
+    <ul>
+      <li>使用<span class="key">大O表示法</span>（渐近性）</li>
+      <li>忽略常数项和低阶项</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">3</div>
+    <div class="q-text">顺序表和链表的优缺点对比？<span class="tag tag-hot">高频</span></div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p><span class="key">顺序表优点：</span>存取快、空间利用率高、实现简单<br>
+    <span class="key">顺序表缺点：</span>插入/删除效率低、扩容繁琐</p>
+    <p><span class="key">链表优点：</span>插入/删除效率高、动态扩容<br>
+    <span class="key">链表缺点：</span>查找效率低</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">4</div>
+    <div class="q-text">循环队列中为什么要空一个位置？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p>因为队空时首尾指针指向同一位置。若入队速度快于出队速度，可能首尾指针也指向同一位置（队满），无法区分队空和队满。</p>
+    <p>解决方案：<span class="key">空出一个位置</span>，队头指针在队尾指针的下一位置时为满；也可增设元素个数变量或tag变量。</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">5</div>
+    <div class="q-text">栈和队列的区别？<span class="tag tag-hot">高频</span></div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p>栈：<span class="key">后进先出</span>（LIFO）<br>
+    队列：<span class="key">先进先出</span>（FIFO）</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">6</div>
+    <div class="q-text">循环比递归效率高吗？栈可以模拟递归吗？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p>多数情况下<span class="key">循环比递归效率高</span>（时间空间消耗更少）。</p>
+    <p>递归的优势：代码简洁、适合处理复杂场景。</p>
+    <p>递归的精髓：将原始问题转化为<span class="key">属性相同但规模较小</span>的问题。</p>
+    <p><span class="key">栈可以模拟递归</span>，因为递归本质上就是使用系统栈。</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">7</div>
+    <div class="q-text">顺序队列的特征？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <ul>
+      <li>顺序存储</li>
+      <li>两个指针：头指针、尾指针</li>
+      <li>可能出现<span class="key">假溢出</span>问题</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">8</div>
+    <div class="q-text">什么是串？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p>由<span class="key">零或多个字符</span>组成的<span class="key">有限序列</span>。</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">9</div>
+    <div class="q-text">KMP算法的原理？<span class="tag tag-key">重点</span></div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p>一种<span class="key">高效的字符串匹配算法</span>，通过避免不必要的比较来提高匹配效率。</p>
+    <ul>
+      <li>预处理模式串 → 生成<span class="key">next数组</span></li>
+      <li>初始化 → 字符串匹配 → 状态转移 → 重复</li>
+      <li>时间复杂度：<span class="key">O(m+n)</span></li>
+    </ul>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">10</div>
+    <div class="q-text">什么是二叉树？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p>一种特殊的<span class="key">树形结构</span>，每个结点<span class="key">至多只有两棵子树</span>，且子树有左右之分，次序不能任意颠倒。</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">11</div>
+    <div class="q-text">什么是完全二叉树？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p>除最后一层外，其他层节点都有两个子节点，最后一层节点<span class="key">向左连续排列</span>。</p>
+    <p>特点：适合用<span class="key">数组存储</span>，叶子节点只出现在最后两层。</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">12</div>
+    <div class="q-text">什么是循环队列？有什么好处？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p>利用数组实现的队列结构，通过将数组首尾相连来模拟队列行为。</p>
+    <p>好处：<span class="key">空间利用率高</span>、高效的随机访问。应用场景：OS任务调度、数据缓冲、循环播放等。</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">13</div>
+    <div class="q-text">二叉树的存储结构有哪些？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <ul>
+      <li><span class="key">顺序存储结构</span>（数组）</li>
+      <li><span class="key">链式存储结构</span>（指针）</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">14</div>
+    <div class="q-text">什么是哈夫曼树？<span class="tag tag-key">重点</span></div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p>带权路径长度最短的二叉树，也称<span class="key">最优二叉树</span>。</p>
+    <ul>
+      <li>特点：带权路径最短、无前缀编码</li>
+      <li>构造：使用<span class="key">贪心算法</span></li>
+      <li>应用：数据压缩、优化存储、信息编码</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">15</div>
+    <div class="q-text">无向完全图和有向完全图的区别？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p><span class="key">无向完全图：</span>任意两个顶点之间都存在一条边。边数 = n(n-1)/2</p>
+    <p><span class="key">有向完全图：</span>任意两个顶点之间都存在方向互为相反的两条弧。弧数 = n(n-1)</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">16</div>
+    <div class="q-text">图的存储方式有哪些？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <ul>
+      <li><span class="key">邻接矩阵法</span></li>
+      <li><span class="key">邻接表法</span></li>
+      <li>十字链表法</li>
+      <li>邻接多重表</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">17</div>
+    <div class="q-text">DFS和BFS的原理及区别？<span class="tag tag-hot">高频</span></div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p><span class="key">DFS（深度优先搜索）：</span>选择起始点 → 访问节点 → 选择未访问的邻接点深入 → 无法继续时回溯。使用<span class="key">栈</span>。适合深入探索的问题。</p>
+    <p><span class="key">BFS（广度优先搜索）：</span>选择起始点 → 访问节点加入队列 → 取出节点访问其所有未访邻接点加入队列 → 直到队列为空。使用<span class="key">队列</span>。适合找最短路径或层次遍历。</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">18</div>
+    <div class="q-text">什么是最小生成树？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p>在给定的连通图中，寻找一个包含<span class="key">所有顶点</span>且<span class="key">总权值最小</span>的生成树。</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">19</div>
+    <div class="q-text">Prim和Kruskal算法的区别？<span class="tag tag-key">重点</span></div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p><span class="key">Prim（基于顶点）：</span>贪心算法，从一个顶点开始，逐步扩展已选取的顶点集合，每次选择连接已选和未选集合的<span class="key">最小边</span>。适合<span class="key">稠密图</span>。</p>
+    <p><span class="key">Kruskal（基于边）：</span>将所有边按权重从小到大排序，依次考虑每条边，如果不会形成环则加入。适合<span class="key">稀疏图</span>。</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">20</div>
+    <div class="q-text">Dijkstra算法的原理？<span class="tag tag-key">重点</span></div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p>用于在加权图中找到从<span class="key">单一源点</span>到所有其他节点的<span class="key">最短路径</span>。核心：贪心算法。</p>
+    <p>使用两个集合S和U，S记录已求出最短路径的顶点，U记录未求出的。不断从U中找距离最小的顶点加入S，并更新U中其他顶点距离。</p>
+    <p>时间复杂度：<span class="key">O(n²)</span>。应用：网络路由、地图导航。</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">21</div>
+    <div class="q-text">Floyd算法的原理？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p>也称插点法，利用<span class="key">动态规划</span>思想寻找给定加权图中<span class="key">多源点之间的最短路径</span>。</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">22</div>
+    <div class="q-text">什么是拓扑排序？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p>对<span class="key">有向无环图（DAG）</span>的所有顶点进行排序，使得对于图中任意一条从A到B的边，A都排在B之前。</p>
+    <p>只有无环的图才能保证存在这样的线性排列。</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">23</div>
+    <div class="q-text">二叉排序树（BST）的定义和操作？<span class="tag tag-hot">高频</span></div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p>特殊的二叉树：<span class="key">左 &lt; 根 &lt; 右</span></p>
+    <ul>
+      <li><span class="key">插入：</span>递归插入</li>
+      <li><span class="key">查询：</span>递归查询</li>
+      <li><span class="key">删除：</span>无子节点→直接删；一个子节点→父节点连子节点；两个子节点→用后继/前驱替换</li>
+    </ul>
+    <p>应用：数据库索引、内存管理。</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">24</div>
+    <div class="q-text">什么是平衡二叉树？什么是平衡因子？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p>特殊的二叉排序树，每个节点的左右子树<span class="key">高度差的绝对值不超过1</span>。</p>
+    <p>平衡因子 = <span class="key">左子树深度 - 右子树深度</span>（取值：-1, 0, 1）。</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">25</div>
+    <div class="q-text">什么是红黑树？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p>一种<span class="key">自平衡的二叉查找树</span>。特性：根和叶子（NIL节点）都是黑色的。</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">26</div>
+    <div class="q-text">B树和B+树的区别？<span class="tag tag-key">重点</span></div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p><span class="key">B树：</span>每个节点包含关键字和数据指针，内部节点也存储实际记录。</p>
+    <p><span class="key">B+树：</span>非叶子节点仅用作索引，所有实际记录和指针都在<span class="key">叶子节点</span>中，叶子节点按顺序链接形成有序链表。</p>
+    <p>B+树更适合数据库索引和文件系统（叶子链表结构可高效进行<span class="key">范围查询</span>，减少磁盘I/O次数）。</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">27</div>
+    <div class="q-text">折半查找的思想、适用范围和时间复杂度？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p>思想：将有序数组的查找范围<span class="key">不断缩小一半</span>，直到找到或确定不存在。</p>
+    <p>适用范围：<span class="key">有序数组</span>或静态查找表。</p>
+    <p>时间复杂度：<span class="key">O(log n)</span></p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">28</div>
+    <div class="q-text">什么是哈希冲突？如何解决？<span class="tag tag-hot">高频</span></div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p>不同数据项通过哈希函数计算后得到<span class="key">相同的地址</span>。</p>
+    <p>解决方法：</p>
+    <ul>
+      <li><span class="key">开放定址法</span>（线性探测法）</li>
+      <li><span class="key">链地址法</span></li>
+      <li>再哈希法</li>
+      <li>建立公共溢出区</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">29</div>
+    <div class="q-text">散列表查找效率取决于哪些因素？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <ul>
+      <li><span class="key">散列函数</span></li>
+      <li><span class="key">处理冲突的方法</span></li>
+      <li><span class="key">装填因子 α</span> = 表中记录数 / 散列表长度</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">30</div>
+    <div class="q-text">常见查找算法的时间复杂度对比？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <ul>
+      <li>顺序查找：<span class="key">O(n)</span></li>
+      <li>折半查找：<span class="key">O(log n)</span></li>
+      <li>二叉排序树查找：<span class="key">O(log n)</span>~O(n)</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">31</div>
+    <div class="q-text">各种排序算法的时间复杂度？<span class="tag tag-hot">高频</span></div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <ul>
+      <li>直接插入排序：O(n²)</li>
+      <li>折半插入排序：O(n²)</li>
+      <li>希尔排序：O(n^1.3)</li>
+      <li>冒泡排序：O(n²)</li>
+      <li><span class="key">快速排序：O(n log n)</span></li>
+      <li>简单选择排序：O(n²)</li>
+      <li><span class="key">堆排序：O(n log n)</span></li>
+      <li><span class="key">归并排序：O(n log n)</span></li>
+      <li>基数排序：O(d(n+r))</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">32</div>
+    <div class="q-text">什么是堆？有什么作用？<span class="tag tag-key">重点</span></div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p>特殊类型的<span class="key">完全二叉树</span>数据结构，本质上是一个可以被看做树的<span class="key">数组对象</span>。</p>
+    <p>每个父节点的值总是 ≥ 或 ≤ 其子节点的值（大根堆/小根堆）。</p>
+    <p>用途：<span class="key">堆排序</span>、<span class="key">优先队列</span>、动态内存管理。</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">33</div>
+    <div class="q-text">C语言中有哪几种数据结构？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <ul>
+      <li><span class="key">数组</span></li>
+      <li><span class="key">结构体</span>（struct）</li>
+      <li><span class="key">联合</span>（union）：所有成员共享同一块内存，某时间点只能保存一个成员的值</li>
+      <li><span class="key">枚举</span>（enum）：一组命名的整数常量，提高代码可读性</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">34</div>
+    <div class="q-text">C语言的三种控制结构？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p><span class="key">顺序结构</span>、<span class="key">选择结构</span>、<span class="key">循环结构</span></p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">35</div>
+    <div class="q-text">简述快速排序的过程和时间复杂度？<span class="tag tag-hot">高频</span></div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p>基于<span class="key">分治策略</span>：</p>
+    <ul>
+      <li>选择基准值</li>
+      <li>分区操作：重新排列数组</li>
+      <li>递归排序：递归地对小于和大于基准值的子数组排序</li>
+    </ul>
+    <p>时间复杂度：最优 <span class="key">O(n log n)</span>，平均 O(n log n)，最坏 O(n²)</p>
+  </div>
+</div>
+
+</div>
+
+<!-- ==================== 操作系统 ==================== -->
+<div class="section" id="os">
+<h2 class="category-title">操作系统 (OS)</h2>
+<p class="sub-title">共43题（含6道真题）· 涵盖进程、内存管理、死锁、调度算法等</p>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">1</div>
+    <div class="q-text">进程和线程的区别？<span class="tag tag-hot">高频</span><span class="tag tag-real">真题</span></div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <ul>
+      <li><span class="key">内存空间：</span>进程有独立内存空间，线程共享进程内存</li>
+      <li><span class="key">执行方式：</span>进程是独立程序实例，线程是进程的执行单元</li>
+      <li><span class="key">通信方式：</span>进程需IPC（管道/信号/消息队列），线程可直接访问共享内存</li>
+      <li><span class="key">开销：</span>进程创建销毁开销大，线程小</li>
+      <li><span class="key">调度：</span>进程由OS调度，线程由进程调度</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">2</div>
+    <div class="q-text">什么是微内核？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p>只实现OS基本功能（<span class="key">进程管理、内存管理、进程间通信</span>）的内核，其他服务移交给用户空间。</p>
+    <p>优点：模块化、安全性高、可扩展、可移植。缺点：性能稍差、设计复杂。</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">3</div>
+    <div class="q-text">什么是DMA？什么是中断？区别？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p><span class="key">DMA：</span>允许外围设备直接访问内存，无需通过CPU，速度快。</p>
+    <p><span class="key">中断：</span>特定事件触发信号，暂停当前程序，CPU执行中断处理程序。</p>
+    <p>区别：DMA用于数据传输，中断用于事件处理；DMA无需CPU参与，中断需要CPU。</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">4</div>
+    <div class="q-text">硬中断和软中断的区别？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p><span class="key">硬中断：</span>外部事件触发（硬件/I/O），优先级高，必须立即处理。</p>
+    <p><span class="key">软中断：</span>软件事件触发（系统调用/异常），优先级低，可稍后处理。</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">5</div>
+    <div class="q-text">页面置换算法有哪些？<span class="tag tag-hot">高频</span></div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <ul>
+      <li><span class="key">FIFO：</span>先进先出</li>
+      <li><span class="key">LRU：</span>最近最少使用</li>
+      <li><span class="key">LFU：</span>最不经常使用</li>
+      <li><span class="key">OPT：</span>最优（理想算法，不可实现）</li>
+      <li><span class="key">时钟置换算法：</span>使用时钟指针循环</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">6</div>
+    <div class="q-text">什么是LRU？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p>最近最少使用（Least Recently Used），将<span class="key">最长时间未被访问</span>的页面置换出内存。优点：命中率高。缺点：需维护访问历史，开销大。近似方案：Clock算法。</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">7</div>
+    <div class="q-text">信号量及PV操作？<span class="tag tag-key">重点</span></div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p>信号量用于实现<span class="key">进程同步和互斥</span>。</p>
+    <p><span class="key">P操作（等待）：</span>资源可用则信号量-1，不可用则进程等待。</p>
+    <p><span class="key">V操作（释放）：</span>信号量+1，唤醒等待进程。</p>
+    <p>两种类型：整型信号量（非负整数）、记录型信号量（含等待进程列表）。PV操作是<span class="key">原子操作</span>。</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">8</div>
+    <div class="q-text">什么是操作系统？操作系统的组成？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p>系统软件，管理和协调计算机资源，提供用户和硬件之间的接口。</p>
+    <p>五大组成：<span class="key">处理器管理</span>、<span class="key">内存管理</span>、<span class="key">设备管理</span>、<span class="key">文件管理</span>、<span class="key">用户接口</span></p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">9</div>
+    <div class="q-text">OS中用到了哪些数据结构？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <ul>
+      <li><span class="key">队列：</span>进程调度（就绪队列、阻塞队列）</li>
+      <li><span class="key">树：</span>文件系统的目录树</li>
+      <li><span class="key">链表：</span>管理空闲内存块、PCB</li>
+      <li><span class="key">哈希表：</span>快速查找PCB</li>
+      <li><span class="key">堆栈：</span>函数调用、中断处理</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">10</div>
+    <div class="q-text">系统调用过程？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p>用户程序发起系统调用 → <span class="key">切换到内核模式</span> → 系统调用处理（参数检查、资源分配、权限验证）→ 返回结果 → <span class="key">切换回用户模式</span></p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">11</div>
+    <div class="q-text">虚拟存储器及相关算法？<span class="tag tag-key">重点</span></div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p>允许程序访问比实际物理内存更大的地址空间。核心：部分在内存，其余在磁盘，按需交换。</p>
+    <p>相关算法：页面置换算法（FIFO/LRU/LFU/OPT）、<span class="key">分页系统</span>、<span class="key">分段系统</span>。</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">12</div>
+    <div class="q-text">什么是TLB？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p>Translation Lookaside Buffer，<span class="key">快表</span>，高速缓存，存储虚拟地址到物理地址的映射。加速地址转换，避免每次都访问页表。</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">13</div>
+    <div class="q-text">什么是原子操作？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p><span class="key">不可中断</span>的操作，要么全部执行成功，要么全部不执行。用于保证对共享资源操作的完整性，避免竞态条件。</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">14</div>
+    <div class="q-text">内部碎片和外部碎片？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p><span class="key">内部碎片：</span>分配给进程的内存 > 实际需要，多余部分闲置。</p>
+    <p><span class="key">外部碎片：</span>内存中有很多小的不连续空闲区域，总和足够但无法分配给大进程。</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">15</div>
+    <div class="q-text">动态分区分配算法有哪些？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <ul>
+      <li><span class="key">首次适应（First Fit）：</span>找第一个够大的分区，简单但碎片多</li>
+      <li><span class="key">最佳适应（Best Fit）：</span>找最接近大小的分区，碎片少但搜索开销大</li>
+      <li><span class="key">最差适应（Worst Fit）：</span>找最大分区，减少外部碎片</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">16</div>
+    <div class="q-text">什么是页表？什么是段寄存器？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p><span class="key">页表：</span>将进程虚拟地址空间映射到物理内存的数据结构。</p>
+    <p><span class="key">段寄存器：</span>存储段基址的寄存器，用于内存地址计算和访问控制。</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">17</div>
+    <div class="q-text">进程的三个状态及转换？<span class="tag tag-hot">高频</span></div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <ul>
+      <li><span class="key">就绪态：</span>具备运行条件，等待被调度</li>
+      <li><span class="key">运行态：</span>正在CPU上执行</li>
+      <li><span class="key">阻塞态：</span>等待I/O或资源，暂时无法执行</li>
+    </ul>
+    <p>转换：就绪→运行（被调度）、运行→阻塞（等待I/O）、阻塞→就绪（I/O完成）、运行→就绪（时间片用完）</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">18</div>
+    <div class="q-text">进程调度算法有哪些？<span class="tag tag-hot">高频</span></div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <ul>
+      <li><span class="key">FCFS：</span>先来先服务（非抢占）</li>
+      <li><span class="key">SJF：</span>最短作业优先（非抢占）</li>
+      <li><span class="key">SRTF：</span>最短剩余时间优先（抢占）</li>
+      <li><span class="key">优先级调度：</span>按优先级执行（可抢占/非抢占）</li>
+      <li><span class="key">轮转调度（RR）：</span>按时间片轮转（抢占）</li>
+      <li><span class="key">多级反馈队列：</span>多个优先级队列，进程可在队列间移动（抢占）</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">19</div>
+    <div class="q-text">什么是死锁？产生条件？<span class="tag tag-hot">高频</span></div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p>两个或多个进程互相等待对方占有的资源，都无法继续执行。</p>
+    <p>四个<span class="key">必要条件</span>（同时满足才会死锁）：</p>
+    <ul>
+      <li><span class="key">互斥：</span>资源排它性使用</li>
+      <li><span class="key">请求与保持：</span>持有资源同时请求新资源</li>
+      <li><span class="key">不剥夺：</span>已获得资源不能被强行剥夺</li>
+      <li><span class="key">循环等待：</span>存在进程循环等待链</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">20</div>
+    <div class="q-text">处理死锁的基本方法？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <ul>
+      <li><span class="key">预防：</span>破坏必要条件（如资源有序分配破坏循环等待）</li>
+      <li><span class="key">避免：</span>银行家算法，判断安全状态</li>
+      <li><span class="key">检测：</span>周期性检测是否存在死锁</li>
+      <li><span class="key">解除：</span>资源剥夺、进程终止、撤销进程</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">21</div>
+    <div class="q-text">银行家算法？<span class="tag tag-key">重点</span></div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p>Dijkstra提出的<span class="key">避免死锁</span>的资源分配算法。</p>
+    <p>原理：维护每种资源的总量、已分配量、可用量，以及每个进程的最大需求量。分配前模拟运行，判断是否存在<span class="key">安全序列</span>。安全则分配，否则拒绝。</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">22</div>
+    <div class="q-text">死锁和饥饿的区别？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p><span class="key">死锁：</span>多个进程互相等待，所有进程都无法执行。</p>
+    <p><span class="key">饥饿：</span>单个进程因资源分配不公平/优先级低，长时间无法获得资源。</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">23</div>
+    <div class="q-text">分段和分页的区别？<span class="tag tag-key">重点</span></div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <ul>
+      <li><span class="key">基本单位：</span>分页用固定大小的页（4KB/8KB），分段用可变大小的段</li>
+      <li><span class="key">碎片：</span>分页有内部碎片，分段有外部碎片</li>
+      <li><span class="key">映射：</span>分页用页表，分段用段表</li>
+      <li><span class="key">适用：</span>分页适合内存共享保护和大块连续空间；分段适合逻辑结构不同的模块</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num real">真1</div>
+    <div class="q-text">解释进程及其特性？<span class="tag tag-real">真题</span></div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p>程序执行的实例，是OS进行资源分配和调度的基本单位。</p>
+    <p>特性：<span class="key">独立性</span>、拥有独立内存空间和资源、可并发执行、通信需IPC、创建销毁开销大。</p>
+    <p>三个组成部分：<span class="key">程序代码</span>、<span class="key">数据</span>、<span class="key">进程控制块（PCB）</span></p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num real">真2</div>
+    <div class="q-text">静态内存和动态内存的区别？<span class="tag tag-real">真题</span></div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <ul>
+      <li><span class="key">分配时间：</span>静态在编译时，动态在运行时</li>
+      <li><span class="key">生存周期：</span>静态伴随程序整个运行期，动态可动态分配释放</li>
+      <li><span class="key">管理方式：</span>静态由编译器管理，动态由程序员管理（malloc/free）</li>
+      <li><span class="key">灵活性：</span>静态不灵活，动态更灵活</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num real">真3</div>
+    <div class="q-text">磁盘调度算法有哪些？<span class="tag tag-real">真题</span></div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <ul>
+      <li><span class="key">FCFS：</span>按请求到达顺序处理</li>
+      <li><span class="key">SSTF：</span>最短寻道时间优先</li>
+      <li><span class="key">SCAN（电梯算法）：</span>按一个方向扫描，到边界后改方向</li>
+      <li><span class="key">C-SCAN：</span>到边界后直接返回另一端</li>
+      <li><span class="key">LOOK / C-LOOK：</span>到最远请求处返回（而非边界）</li>
+    </ul>
+  </div>
+</div>
+
+</div>
+
+<!-- ==================== 计算机网络 ==================== -->
+<div class="section" id="net">
+<h2 class="category-title">计算机网络</h2>
+<p class="sub-title">共36题 · 涵盖OSI模型、TCP/UDP、路由协议、网络安全等</p>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">1</div>
+    <div class="q-text">TCP三次握手？<span class="tag tag-hot">高频</span></div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p>TCP建立连接的过程：</p>
+    <ul>
+      <li>①客户端发送<span class="key">SYN</span>报文（序列号X）</li>
+      <li>②服务器返回<span class="key">SYN+ACK</span>报文（ACK=X+1，序列号Y）</li>
+      <li>③客户端发送<span class="key">ACK</span>报文（ACK=Y+1），连接建立</li>
+    </ul>
+    <p>作用：确保双方具备收发能力，同步序列号和确认号，交换窗口大小，防止旧的重复连接。</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">2</div>
+    <div class="q-text">TCP与UDP的区别及适用情况？<span class="tag tag-hot">高频</span></div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <ul>
+      <li><span class="key">TCP：</span>面向连接、可靠传输、一对一、首部20字节、面向字节流</li>
+      <li><span class="key">UDP：</span>无连接、尽最大努力交付（不保证可靠）、支持一对多、首部8字节、面向报文、实时性好</li>
+    </ul>
+    <p>UDP适用于高速传输和实时性要求高的场景（视频、语音、游戏）。</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">3</div>
+    <div class="q-text">路由器与交换机的区别？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p><span class="key">路由器：</span>工作在网络层（第3层），基于IP地址转发，连接不同网络。</p>
+    <p><span class="key">交换机：</span>工作在数据链路层（第2层），基于MAC地址转发，连接同一网络内设备。</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">4</div>
+    <div class="q-text">OSI七层网络结构？<span class="tag tag-hot">高频</span></div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <ul>
+      <li>1.<span class="key">物理层：</span>传输比特流，物理连接</li>
+      <li>2.<span class="key">数据链路层：</span>成帧、错误检测纠正、MAC</li>
+      <li>3.<span class="key">网络层：</span>路由、寻址（IP）</li>
+      <li>4.<span class="key">传输层：</span>端到端可靠传输、流控（TCP/UDP）</li>
+      <li>5.<span class="key">会话层：</span>建立管理终止会话</li>
+      <li>6.<span class="key">表示层：</span>数据格式化、加密解密</li>
+      <li>7.<span class="key">应用层：</span>应用程序服务（HTTP/FTP/SMTP）</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">5</div>
+    <div class="q-text">IPv4和IPv6的区别？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <ul>
+      <li><span class="key">地址长度：</span>IPv4为32位，IPv6为128位</li>
+      <li><span class="key">地址表示：</span>IPv4点分十进制，IPv6十六进制</li>
+      <li>IPv6提供更大地址空间、增强安全性和移动性支持</li>
+      <li>IPv6无分段，支持扩展头</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">6</div>
+    <div class="q-text">单工、半双工、全双工的区别？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <ul>
+      <li><span class="key">单工：</span>单向通信（对讲机、电视广播）</li>
+      <li><span class="key">半双工：</span>双向但不能同时（步话机）</li>
+      <li><span class="key">全双工：</span>双向同时通信（电话、视频会议）</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">7</div>
+    <div class="q-text">网络通信的过程？<span class="tag tag-hot">高频</span></div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p>URL解析 → <span class="key">DNS域名解析</span> → <span class="key">TCP三次握手</span> → 发送HTTP请求 → 服务器处理并返回HTTP响应 → 客户端渲染 → <span class="key">TCP四次挥手</span>断开连接</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">8</div>
+    <div class="q-text">应用层有什么协议？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p><span class="key">HTTP/HTTPS</span>（网页传输）、<span class="key">FTP</span>（文件传输）、<span class="key">SMTP</span>（发送邮件）、<span class="key">POP3/IMAP</span>（接收邮件）、<span class="key">DNS</span>（域名解析）、<span class="key">DHCP</span>（动态IP分配）</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">9</div>
+    <div class="q-text">什么是滑动窗口协议？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p>流量控制技术，允许发送方在未收到确认的情况下发送多个数据包。使用<span class="key">发送窗口</span>和<span class="key">接收窗口</span>控制流量，防止拥塞。TCP即使用此协议。</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">10</div>
+    <div class="q-text">什么是网络拥塞？拥塞控制的4种算法？<span class="tag tag-key">重点</span></div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p>网络中数据包传输速率超过网络容量。</p>
+    <p>四种算法：</p>
+    <ul>
+      <li><span class="key">慢开始：</span>从少量数据包逐渐增加发送速率</li>
+      <li><span class="key">拥塞避免：</span>收到ACK则增大窗口，收到拥塞信号则窗口减半</li>
+      <li><span class="key">快速重传：</span>检测到丢包立即重传，无需等待超时</li>
+      <li><span class="key">快速恢复：</span>收到3个重复ACK，窗口减半后以较高速率恢复</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">11</div>
+    <div class="q-text">CSMA/CD协议原理？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p>载波侦听多路访问/冲突检测。口诀：<span class="key">先听后发，边发边听，冲突停发，随机延迟后重发</span></p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">12</div>
+    <div class="q-text">什么是非对称加密？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p>使用一对数学上关联的密钥（<span class="key">公钥</span>和<span class="key">私钥</span>）。公钥加密，只有对应的私钥才能解密。</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">13</div>
+    <div class="q-text">时延和带宽的概念？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p><span class="key">时延：</span>数据包从源到目标所需时间（传播时延+处理时延+排队时延），单位ms。</p>
+    <p><span class="key">带宽：</span>网络在给定时间内传输数据的速率，单位bps。</p>
+    <p>两者通常相互制约，增加带宽可减少时延但增加成本。</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">14</div>
+    <div class="q-text">二层交换机和三层交换机的区别？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p><span class="key">二层交换机：</span>数据链路层，基于MAC地址，速度快延迟低，连接同一LAN。</p>
+    <p><span class="key">三层交换机：</span>网络层，基于IP地址，有路由功能，可连接不同LAN，支持VLAN和ACL。</p>
+  </div>
+</div>
+
+</div>
+
+<!-- ==================== 计算机组成原理 ==================== -->
+<div class="section" id="co">
+<h2 class="category-title">计算机组成原理</h2>
+<p class="sub-title">共17题（含8道真题）· 涵盖冯诺依曼、存储器、中断、寻址等</p>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">1</div>
+    <div class="q-text">冯诺依曼计算机体系结构？<span class="tag tag-hot">高频</span><span class="tag tag-real">真题</span></div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p>将程序指令和数据存储在<span class="key">同一存储器</span>中的计算机结构。</p>
+    <ul>
+      <li>存储器统一性（存储程序概念）</li>
+      <li>指令和数据的<span class="key">二进制表示</span></li>
+      <li>指令<span class="key">顺序执行</span></li>
+      <li>五大部件：<span class="key">控制器 + 运算器(ALU) + 存储器 + 输入设备 + 输出设备</span></li>
+    </ul>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">2</div>
+    <div class="q-text">RAM和ROM的区别？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p><span class="key">RAM：</span>随机存取，可读写，<span class="key">易失性</span>（断电数据丢失），速度快，临时存储。</p>
+    <p><span class="key">ROM：</span>只读，<span class="key">非易失性</span>（断电数据保持），存储固定程序（启动程序、固件）。</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">3</div>
+    <div class="q-text">SRAM和DRAM的区别？<span class="tag tag-real">真题</span></div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <ul>
+      <li><span class="key">SRAM：</span>触发器存储，不需刷新，速度快，功耗高，成本高，密度低 → 用于<span class="key">Cache</span></li>
+      <li><span class="key">DRAM：</span>电容存储，需定期刷新，速度较慢，功耗低，成本低，密度高 → 用于<span class="key">主存</span></li>
+    </ul>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">4</div>
+    <div class="q-text">Cache和主存的映射方式？<span class="tag tag-real">真题</span></div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <ul>
+      <li><span class="key">直接映射：</span>每个主存块只能映射到Cache的特定位置，简单但冲突多</li>
+      <li><span class="key">全相联映射：</span>主存块可映射到Cache任意位置，冲突少但比较开销大</li>
+      <li><span class="key">组相联映射：</span>折中方案，Cache分组，主存块映射到某组内任意位置</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">5</div>
+    <div class="q-text">中断的软件实行过程？什么是中断？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p>外部设备发送中断信号 → CPU停止当前程序 → <span class="key">保存现场</span>（PC、寄存器状态）→ 跳转到<span class="key">中断处理程序</span> → 执行完毕 → <span class="key">恢复现场</span> → 继续执行</p>
+    <p>可屏蔽中断 vs 非屏蔽中断。</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">6</div>
+    <div class="q-text">指令周期、时钟周期、总线周期的关系？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <ul>
+      <li><span class="key">时钟周期：</span>最基本时间单位，由系统时钟控制</li>
+      <li><span class="key">总线周期：</span>CPU与总线进行一次数据传输的时间</li>
+      <li><span class="key">指令周期：</span>执行一条完整指令的时间（取指+译码+执行+访存+写回）</li>
+    </ul>
+    <p>关系：一个指令周期 = 多个总线周期 = 更多个时钟周期</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num real">真1</div>
+    <div class="q-text">常见的数据寻址方式有哪些？<span class="tag tag-real">23年真题</span></div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <ul>
+      <li><span class="key">直接寻址：</span>指令中直接给出数据地址</li>
+      <li><span class="key">间接寻址：</span>指令给出的是指向数据地址的指针</li>
+      <li><span class="key">寄存器寻址：</span>数据在寄存器中</li>
+      <li><span class="key">寄存器间接寻址：</span>寄存器中存的是数据地址的指针</li>
+      <li><span class="key">相对寻址：</span>PC值 + 指令中的相对地址</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num real">真2</div>
+    <div class="q-text">组成原理和体系结构有什么区别？<span class="tag tag-real">真题</span></div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p><span class="key">组成原理：</span>关注硬件组件的功能、连接、数据传输路径的设计和实现（硬件层面）。</p>
+    <p><span class="key">体系结构：</span>侧重整体结构、工作原理，包括指令集、数据通路、存储器层次等，以及<span class="key">硬件与软件之间的接口</span>。</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num real">真3</div>
+    <div class="q-text">反码、补码、原码的关系？<span class="tag tag-real">真题</span></div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <ul>
+      <li><span class="key">原码：</span>最高位为符号位（0正1负），其余为绝对值</li>
+      <li><span class="key">反码：</span>正数=原码，负数=原码除符号位外取反</li>
+      <li><span class="key">补码：</span>正数=原码，负数=反码+1</li>
+    </ul>
+    <p>计算机中通常使用<span class="key">补码</span>表示有符号整数，简化加减运算，只有一个零。</p>
+  </div>
+</div>
+
+</div>
+
+<!-- ==================== 英语口语 ==================== -->
+<div class="section" id="eng">
+<h2 class="category-title">英语口语面试</h2>
+<p class="sub-title">共33题 · 涵盖自我介绍、专业、学校、兴趣、规划等常见话题</p>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num real">1</div>
+    <div class="q-text">Introduce yourself in English? <span class="tag tag-real">23年真题</span></div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p class="eng">准备一段1-2分钟的英文自我介绍，涵盖：姓名、本科院校、专业、项目/科研经历、考研动机、未来规划。</p>
+    <p>万能开头：Thank you for giving me this opportunity. My name is..., I graduated from...</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num real">2</div>
+    <div class="q-text">介绍你的家乡（气候）？<span class="tag tag-real">23年真题</span></div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p class="eng">My hometown is Langfang City, Hebei Province. It has four distinct seasons: spring is refreshing, summer is hot, autumn is cool, and winter is cold. It's close to Beijing and Tianjin, with very convenient transportation.</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">3</div>
+    <div class="q-text">介绍你的专业？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p class="eng">My major is computer science and technology. I mainly studied courses related to computers, such as data structure, operating system, computer networks, and C programming.</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">4</div>
+    <div class="q-text">为什么报考民大？/ Why do you choose this university?</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p class="eng">Because it is located in Beijing, which is the capital of China, and MUC is a prestigious 985 university with excellent teachers. I believe studying here will help me make great progress in my academic career.</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">5</div>
+    <div class="q-text">如果考研失败有何打算？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p class="eng">If I fail in the postgraduate entrance exam, I will sum up my experience, analyze my weaknesses, and continue to work hard for the next attempt.</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">6</div>
+    <div class="q-text">What is your advantage/weakness?</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p class="eng">My strength is that I like to help others and I'm passionate about learning new things. My weakness is that I can be a little impatient sometimes, but I'm working on improving it by taking deep breaths and staying calm.</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">7</div>
+    <div class="q-text">What do you usually do in your spare time?</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p class="eng">In my spare time, I enjoy listening to music and reading professional books. My favorite professional book is "Big Talk Data Structure", which describes algorithms in an easy-to-understand way using illustrations.</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">8</div>
+    <div class="q-text">Why do you choose this major?</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p class="eng">I chose computer science because I'm genuinely interested in technology and programming. The field is rapidly evolving and has great potential for innovation. I want to contribute to this field through my graduate studies.</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">9</div>
+    <div class="q-text">If you are accepted, what are your plans for graduate life?</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p class="eng">During the first year, I will focus on building a solid foundation of knowledge. In the second year, I plan to participate in research projects and internships. In the third year, I will complete my graduation thesis.</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">10</div>
+    <div class="q-text">How much do you know about MUC?</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p class="eng">Minzu University of China is a prestigious 985 university located in Beijing. Its motto emphasizes sharing beauty and unity of knowledge and practice. I learned about MUC through a senior student from my undergraduate school.</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">11</div>
+    <div class="q-text">Introduce your undergraduate school?</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p class="eng">My undergraduate school is Shijiazhuang Railway University, which is the only university in China named after a railway. It has a strong engineering background.</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">12</div>
+    <div class="q-text">What do you think of artificial intelligence?</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p class="eng">Artificial intelligence is a rapidly growing field that includes machine learning, deep learning, and natural language processing. I believe AI will continue to transform many industries and create new opportunities.</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">13</div>
+    <div class="q-text">Why should we give you the offer?</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p class="eng">I believe my solid foundation in computer science, my passion for learning, and my determination make me a strong candidate. I'm committed to contributing to the research community at MUC.</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">14</div>
+    <div class="q-text">Do you think English is important for your future?</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p class="eng">Yes, English is very important. We need to read foreign literature and academic papers, and the programming environment is also in English. Good English skills are essential for international academic communication.</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">15</div>
+    <div class="q-text">How many research fields about CS do you know? Which is your favorite?</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p class="eng">Computer vision, natural language processing, large language models, etc. My favorite is computer vision, because it enables computers to understand visual information like humans, and I'm very interested in this area.</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">16</div>
+    <div class="q-text">万能回答模板</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p class="eng">Thank you for your question.<br>
+    When it comes to my [topic], I'd like to mention [key point]. For example, [specific example]...<br>
+    That concludes my answer, thank you.</p>
+  </div>
+</div>
+
+</div>
+
+<!-- ==================== 综合问答 ==================== -->
+<div class="section" id="other">
+<h2 class="category-title">综合问答</h2>
+<p class="sub-title">共23题 · 涵盖CNN、软件工程、AI、数据库、工具框架等扩展知识</p>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">1</div>
+    <div class="q-text">谈谈卷积神经网络（CNN）的认识？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p>一种深度学习模型，主要用于处理图像和视频等网格结构数据。</p>
+    <ul>
+      <li><span class="key">卷积层：</span>提取局部空间特征，对平移不变性强</li>
+      <li><span class="key">池化层：</span>降采样，减少计算量，保留重要特征</li>
+      <li><span class="key">全连接层：</span>将特征映射到输出类别</li>
+    </ul>
+    <p>应用：图像识别、目标检测、人脸识别、NLP、语音识别。</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">2</div>
+    <div class="q-text">软件工程方法学有哪些？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <ul>
+      <li><span class="key">瀑布模型：</span>线性顺序（需求→设计→实现→测试→部署→维护）</li>
+      <li><span class="key">增量模型：</span>分多个增量阶段</li>
+      <li><span class="key">原型模型：</span>快速构建原型验证需求</li>
+      <li><span class="key">螺旋模型：</span>迭代+风险分析</li>
+      <li><span class="key">敏捷开发：</span>迭代、快速响应需求变化</li>
+      <li><span class="key">TDD：</span>先写测试再写代码</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">3</div>
+    <div class="q-text">软件的生命周期？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p><span class="key">需求分析</span> → <span class="key">系统设计</span> → <span class="key">实现</span> → <span class="key">测试</span> → <span class="key">部署</span> → <span class="key">维护</span> → 退役</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">4</div>
+    <div class="q-text">未来的计算机会是什么样？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p>趋势：<span class="key">量子计算</span>、AI集成、生物计算、<span class="key">边缘计算</span>、量子通信、可穿戴计算、生物识别技术、可持续性。</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">5</div>
+    <div class="q-text">对人工智能有什么看法？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p>AI是强大的工具，将更加普及，应用于自动驾驶、智能机器人、医疗诊断、智能家居等领域。</p>
+    <p>需要注意：就业变革、隐私保护、伦理道德问题。</p>
+    <p>个人周围已有应用：智能语音助手、推荐系统等。</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">6</div>
+    <div class="q-text">机器学习常见算法？<span class="tag tag-key">重点</span></div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <ul>
+      <li><span class="key">监督学习：</span>线性回归、逻辑回归、决策树、SVM、朴素贝叶斯、KNN</li>
+      <li><span class="key">无监督学习：</span>K-Means、DBSCAN、PCA、t-SNE</li>
+      <li><span class="key">强化学习：</span>Q-Learning、Sarsa、深度强化学习</li>
+      <li><span class="key">集成学习：</span>随机森林、梯度提升树、AdaBoost</li>
+      <li><span class="key">深度学习：</span>CNN、RNN、GAN</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">7</div>
+    <div class="q-text">数据库的四个基本概念？<span class="tag tag-key">重点</span></div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <ul>
+      <li><span class="key">数据：</span>描述事物的符号记录</li>
+      <li><span class="key">数据库：</span>长期存储、有组织、可共享的数据集合</li>
+      <li><span class="key">DBMS：</span>数据库管理系统，管理数据的软件</li>
+      <li><span class="key">数据库系统：</span>数据库 + DBMS + 应用程序</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">8</div>
+    <div class="q-text">数据库的三级模式结构？<span class="tag tag-hot">高频</span></div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <ul>
+      <li><span class="key">内部模式（存储模式）：</span>描述数据物理存储方式</li>
+      <li><span class="key">概念模式（逻辑模式）：</span>数据库的全局逻辑视图</li>
+      <li><span class="key">外部模式（用户模式）：</span>用户看到的局部视图</li>
+    </ul>
+    <p>意义：物理存储与用户视图分离，提高<span class="key">数据独立性</span>和安全性。</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">9</div>
+    <div class="q-text">数据库的二级映像与数据独立性？<span class="tag tag-hot">高频</span></div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p><span class="key">逻辑数据独立性：</span>应用程序与数据逻辑结构相互独立。</p>
+    <p><span class="key">物理数据独立性：</span>应用程序与数据物理存储结构相互独立。</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">10</div>
+    <div class="q-text">什么是ER图？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p>实体-关系图，用于描述数据库中实体之间的关系。实体用<span class="key">矩形</span>，关系用<span class="key">菱形</span>，联系用线条。</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">11</div>
+    <div class="q-text">SQL语言的作用？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <ul>
+      <li><span class="key">数据查询：</span>SELECT</li>
+      <li><span class="key">数据操作：</span>INSERT, UPDATE, DELETE</li>
+      <li><span class="key">数据定义：</span>CREATE, ALTER, DROP</li>
+      <li><span class="key">访问控制：</span>GRANT, REVOKE</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">12</div>
+    <div class="q-text">什么是支持向量机（SVM）？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p>监督学习模型，找到<span class="key">最优超平面</span>分隔不同类别数据点，使边界到超平面的距离<span class="key">最大化</span>。</p>
+    <p>特点：有效处理高维数据，通过<span class="key">核函数</span>解决非线性分类问题。</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">13</div>
+    <div class="q-text">Spring Boot的优势？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p>快速构建、简化配置（约定优于配置）、<span class="key">内嵌服务器</span>（Tomcat）、无配置集成、微服务支持、兼容现有Spring应用。</p>
+  </div>
+</div>
+
+</div>
+
+<!-- ==================== Python 基础 ==================== -->
+<div class="section" id="python">
+<h2 class="category-title">Python 基础速查</h2>
+<p class="sub-title">共20题 · 你PPT上写了Python"熟练"，老师大概率会抽查基础知识，这些必须答得出来</p>
+
+<h3 style="font-size:16px;color:#2ecc71;margin:24px 0 12px 8px;">▎ 语言特性与基础语法</h3>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">1</div>
+    <div class="q-text">Python 的特点？为什么选择 Python？<span class="tag tag-hot">高频</span></div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <ul>
+      <li><span class="key">解释型语言：</span>逐行解释执行，无需编译</li>
+      <li><span class="key">动态类型：</span>变量不需要声明类型，运行时确定</li>
+      <li><span class="key">强类型：</span>不允许隐式类型转换（"1" + 1 会报错，不像 JS）</li>
+      <li><span class="key">缩进语法：</span>用缩进代替大括号表示代码块</li>
+      <li><span class="key">丰富的库生态：</span>科学计算（NumPy）、Web（Django/Flask）、AI（PyTorch/TensorFlow）</li>
+      <li><span class="key">GIL（全局解释器锁）：</span>同一时刻只有一个线程执行 Python 字节码，CPU密集型任务多线程效果差</li>
+    </ul>
+    <p>面试话术："Python 开发效率高，生态丰富，特别适合快速原型开发和 AI/数据科学领域。"</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">2</div>
+    <div class="q-text">Python 的可变类型和不可变类型？<span class="tag tag-hot">高频</span></div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p><span class="key">不可变类型：</span>int、float、str、tuple、frozenset、bool</p>
+    <p><span class="key">可变类型：</span>list、dict、set</p>
+    <p>区别：不可变类型的值一旦创建就不能修改（修改实际上是创建新对象）；可变类型可以原地修改。</p>
+    <p>影响：</p>
+    <ul>
+      <li>不可变类型可以作为<span class="key">字典的 key</span>，可变类型不行</li>
+      <li>函数传参时，不可变类型类似"值传递"，可变类型类似"引用传递"</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">3</div>
+    <div class="q-text">列表（list）和元组（tuple）的区别？<span class="tag tag-hot">高频</span></div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <ul>
+      <li><span class="key">可变性：</span>list 可变（可增删改），tuple 不可变</li>
+      <li><span class="key">语法：</span>list 用 []，tuple 用 ()</li>
+      <li><span class="key">性能：</span>tuple 比 list 快（不可变 → 内存更紧凑 → 可缓存）</li>
+      <li><span class="key">用途：</span>list 用于需要修改的集合，tuple 用于固定数据（如函数返回多个值、字典的 key）</li>
+      <li><span class="key">哈希：</span>tuple 可哈希（可作为 dict 的 key），list 不行</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">4</div>
+    <div class="q-text">Python 中 == 和 is 的区别？<span class="tag tag-key">重点</span></div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p><span class="key">==</span>：比较两个对象的<span class="key">值</span>是否相等（调用 __eq__ 方法）</p>
+    <p><span class="key">is</span>：比较两个对象的<span class="key">内存地址（id）</span>是否相同，即是否是同一个对象</p>
+    <p>例子：</p>
+    <p>a = [1,2,3]; b = [1,2,3]<br>
+    a == b → <span class="key">True</span>（值相等）<br>
+    a is b → <span class="key">False</span>（不同对象）</p>
+    <p>注意：Python 对小整数（-5~256）和短字符串有<span class="key">缓存机制</span>，此时 is 可能为 True。</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">5</div>
+    <div class="q-text">Python 的深拷贝和浅拷贝？<span class="tag tag-key">重点</span></div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p><span class="key">浅拷贝（copy.copy）：</span>创建新对象，但内部的子对象仍然是<span class="key">引用</span>（共享同一块内存）</p>
+    <p><span class="key">深拷贝（copy.deepcopy）：</span>递归地创建所有子对象的副本，完全<span class="key">独立</span></p>
+    <p>例子：</p>
+    <p>a = [[1,2], [3,4]]<br>
+    b = copy.copy(a) → b[0] is a[0] 为 True（共享内层列表）<br>
+    c = copy.deepcopy(a) → c[0] is a[0] 为 False（完全独立）</p>
+    <p>常见浅拷贝方式：list.copy()、切片 [:]、list() 构造。</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">6</div>
+    <div class="q-text">列表推导式是什么？举个例子？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p>一种简洁的创建列表的语法：<span class="key">[表达式 for 变量 in 可迭代对象 if 条件]</span></p>
+    <p>例子：</p>
+    <ul>
+      <li>squares = <span class="key">[x**2 for x in range(10)]</span> → [0,1,4,9,16,25,36,49,64,81]</li>
+      <li>evens = <span class="key">[x for x in range(20) if x % 2 == 0]</span> → [0,2,4,...,18]</li>
+    </ul>
+    <p>类似语法还有：字典推导式 {k:v for ...}、集合推导式 {x for ...}、生成器表达式 (x for ...)。</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">7</div>
+    <div class="q-text">*args 和 **kwargs 是什么？<span class="tag tag-hot">高频</span></div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p><span class="key">*args：</span>接收任意数量的<span class="key">位置参数</span>，打包为 tuple</p>
+    <p><span class="key">**kwargs：</span>接收任意数量的<span class="key">关键字参数</span>，打包为 dict</p>
+    <p>例子：</p>
+    <p>def func(*args, **kwargs):<br>
+    &nbsp;&nbsp;print(args)&nbsp;&nbsp;# (1, 2, 3)<br>
+    &nbsp;&nbsp;print(kwargs)&nbsp;&nbsp;# {'name': 'Tom', 'age': 20}<br>
+    func(1, 2, 3, name='Tom', age=20)</p>
+    <p>用途：写通用函数、装饰器、继承时传递参数。</p>
+  </div>
+</div>
+
+<h3 style="font-size:16px;color:#2ecc71;margin:24px 0 12px 8px;">▎ 面向对象与高级特性</h3>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">8</div>
+    <div class="q-text">Python 面向对象的三大特性？<span class="tag tag-hot">高频</span></div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <ul>
+      <li><span class="key">封装：</span>将数据和方法包装在类中，通过访问控制隐藏内部细节。Python 用 _ 表示保护、__ 表示私有（名称修饰）</li>
+      <li><span class="key">继承：</span>子类继承父类的属性和方法，可以重写。Python 支持<span class="key">多继承</span>，使用 MRO（方法解析顺序，C3线性化）</li>
+      <li><span class="key">多态：</span>不同类的对象可以用相同的接口调用，Python 天然支持（鸭子类型：不关心对象类型，只关心它有没有对应的方法）</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">9</div>
+    <div class="q-text">什么是装饰器（Decorator）？<span class="tag tag-key">重点</span></div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p>装饰器是一个<span class="key">接收函数作为参数并返回新函数</span>的高阶函数，用于在不修改原函数代码的前提下增加功能。</p>
+    <p>语法：使用 <span class="key">@decorator</span> 语法糖</p>
+    <p>例子：</p>
+    <p>def timer(func):<br>
+    &nbsp;&nbsp;def wrapper(*args, **kwargs):<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;start = time.time()<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;result = func(*args, **kwargs)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;print(f"耗时: {time.time()-start}s")<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;return result<br>
+    &nbsp;&nbsp;return wrapper</p>
+    <p>@timer 等价于 func = timer(func)</p>
+    <p>常见应用：日志记录、权限验证、缓存、Flask/FastAPI 的路由（@app.route）。</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">10</div>
+    <div class="q-text">什么是生成器（Generator）？和迭代器的区别？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p><span class="key">生成器：</span>使用 <span class="key">yield</span> 关键字的函数，调用时返回一个生成器对象。每次调用 next() 执行到 yield 处暂停并返回值。</p>
+    <p><span class="key">迭代器：</span>实现了 __iter__() 和 __next__() 方法的对象。</p>
+    <p>关系：生成器是迭代器的一种<span class="key">简便实现方式</span>。</p>
+    <p>优势：<span class="key">惰性求值</span>，不一次性生成所有数据，节省内存。适合处理大数据集。</p>
+    <p>例子：def fib():<br>
+    &nbsp;&nbsp;a, b = 0, 1<br>
+    &nbsp;&nbsp;while True:<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;yield a<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;a, b = b, a+b</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">11</div>
+    <div class="q-text">lambda 表达式是什么？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p><span class="key">匿名函数</span>，用于创建简单的一行函数。</p>
+    <p>语法：<span class="key">lambda 参数: 表达式</span></p>
+    <p>例子：</p>
+    <ul>
+      <li>square = lambda x: x**2</li>
+      <li>sorted(students, key=<span class="key">lambda s: s['score']</span>, reverse=True)</li>
+      <li>list(map(lambda x: x*2, [1,2,3])) → [2,4,6]</li>
+    </ul>
+    <p>限制：只能包含一个表达式，不能有复杂逻辑。复杂场景应使用 def 定义函数。</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">12</div>
+    <div class="q-text">Python 的异常处理机制？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p>使用 <span class="key">try-except-else-finally</span> 结构：</p>
+    <p>try:<br>
+    &nbsp;&nbsp;# 可能出错的代码<br>
+    except ValueError as e:<br>
+    &nbsp;&nbsp;# 处理特定异常<br>
+    except Exception as e:<br>
+    &nbsp;&nbsp;# 处理其他异常<br>
+    else:<br>
+    &nbsp;&nbsp;# try成功时执行<br>
+    finally:<br>
+    &nbsp;&nbsp;# 无论如何都执行（清理资源）</p>
+    <p>常见异常：<span class="key">TypeError</span>、<span class="key">ValueError</span>、<span class="key">KeyError</span>、<span class="key">IndexError</span>、<span class="key">FileNotFoundError</span>。</p>
+    <p>自定义异常：继承 Exception 类。</p>
+  </div>
+</div>
+
+<h3 style="font-size:16px;color:#2ecc71;margin:24px 0 12px 8px;">▎ 数据结构与内置函数</h3>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">13</div>
+    <div class="q-text">字典（dict）的底层实现？查找时间复杂度？<span class="tag tag-key">重点</span></div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p>底层使用<span class="key">哈希表</span>实现。</p>
+    <p>查找/插入/删除平均时间复杂度：<span class="key">O(1)</span></p>
+    <p>工作原理：对 key 计算哈希值 → 映射到数组下标 → 发生冲突时使用<span class="key">开放定址法</span>解决。</p>
+    <p>要求 key 必须是<span class="key">可哈希的</span>（不可变类型），因此 list 不能作为 dict 的 key。</p>
+    <p>Python 3.7+ 字典是<span class="key">有序的</span>（按插入顺序）。</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">14</div>
+    <div class="q-text">Python 常用的内置函数？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <ul>
+      <li><span class="key">map(func, iterable)：</span>对每个元素应用函数 → map(int, ["1","2"]) → [1,2]</li>
+      <li><span class="key">filter(func, iterable)：</span>过滤元素 → filter(lambda x: x>0, [-1,2,-3,4]) → [2,4]</li>
+      <li><span class="key">zip(a, b)：</span>将多个可迭代对象打包为元组列表</li>
+      <li><span class="key">enumerate(iterable)：</span>返回 (索引, 元素) 对</li>
+      <li><span class="key">sorted(iterable, key, reverse)：</span>排序，返回新列表</li>
+      <li><span class="key">isinstance(obj, type)：</span>判断对象类型</li>
+      <li><span class="key">len / range / type / print / input</span></li>
+    </ul>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">15</div>
+    <div class="q-text">Python 的字符串是不可变的，那字符串拼接怎么高效？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p>字符串不可变，每次 + 拼接都会创建新对象，大量拼接时效率低（O(n²)）。</p>
+    <p>高效方式：</p>
+    <ul>
+      <li><span class="key">str.join()：</span>"".join(list_of_strings) — 最推荐，O(n)</li>
+      <li><span class="key">f-string：</span>f"Hello {name}" — Python 3.6+，简洁高效</li>
+      <li><span class="key">io.StringIO：</span>类似文件的缓冲区写入</li>
+    </ul>
+  </div>
+</div>
+
+<h3 style="font-size:16px;color:#2ecc71;margin:24px 0 12px 8px;">▎ 并发与实际应用</h3>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">16</div>
+    <div class="q-text">什么是 GIL？Python 的多线程有用吗？<span class="tag tag-hot">高频</span></div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p><span class="key">GIL（Global Interpreter Lock）：</span>CPython 解释器中的全局锁，同一时刻只允许<span class="key">一个线程</span>执行 Python 字节码。</p>
+    <p>影响：</p>
+    <ul>
+      <li><span class="key">CPU 密集型任务：</span>多线程基本无加速效果 → 应使用<span class="key">多进程（multiprocessing）</span></li>
+      <li><span class="key">I/O 密集型任务：</span>多线程仍有效（线程在等待 I/O 时会释放 GIL）→ 也可用<span class="key">异步（asyncio）</span></li>
+    </ul>
+    <p>面试话术："GIL 限制了 CPU 密集型任务的多线程效率，但对 I/O 密集型任务（如网络请求、文件读写），多线程和异步编程仍然很有价值。"</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">17</div>
+    <div class="q-text">Python 中 with 语句的作用？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p><span class="key">上下文管理器</span>，确保资源在使用后被正确释放（无论是否发生异常）。</p>
+    <p>例子：</p>
+    <p>with open("file.txt", "r") as f:<br>
+    &nbsp;&nbsp;data = f.read()<br>
+    # 退出 with 块时自动调用 f.close()</p>
+    <p>原理：对象实现 <span class="key">__enter__</span> 和 <span class="key">__exit__</span> 方法。</p>
+    <p>应用：文件操作、数据库连接、锁的获取与释放、网络连接。</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">18</div>
+    <div class="q-text">Python 2 和 Python 3 的主要区别？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <ul>
+      <li><span class="key">print：</span>Python 2 是语句 print "hello"；Python 3 是函数 print("hello")</li>
+      <li><span class="key">除法：</span>Python 2 中 3/2=1（整数除法）；Python 3 中 3/2=1.5（真除法），整数除法用 //</li>
+      <li><span class="key">字符串：</span>Python 3 默认 Unicode（str），Python 2 默认 ASCII</li>
+      <li><span class="key">range：</span>Python 3 的 range() 返回迭代器（省内存），Python 2 返回列表</li>
+      <li><span class="key">输入：</span>Python 3 用 input()，Python 2 用 raw_input()</li>
+    </ul>
+    <p>目前 Python 2 已停止维护（2020年），所有新项目都应使用 Python 3。</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">19</div>
+    <div class="q-text">Python 的虚拟环境是什么？为什么要用？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p><span class="key">虚拟环境</span>是一个隔离的 Python 运行环境，拥有独立的第三方包集合。</p>
+    <p>为什么需要：</p>
+    <ul>
+      <li>不同项目可能依赖<span class="key">同一个包的不同版本</span>（项目A要Django 3.x，项目B要Django 4.x）</li>
+      <li>避免污染系统 Python 环境</li>
+      <li>方便导出依赖：<span class="key">pip freeze > requirements.txt</span></li>
+    </ul>
+    <p>创建方式：<span class="key">python -m venv .venv</span>（标准库自带），或使用 conda。</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">20</div>
+    <div class="q-text">Python 和 C/C++ 的主要区别？<span class="tag tag-hot">高频</span></div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <ul>
+      <li><span class="key">类型系统：</span>Python 动态类型 + 强类型；C/C++ 静态类型 + 强类型</li>
+      <li><span class="key">执行方式：</span>Python 解释执行；C/C++ 编译执行 → C/C++ <span class="key">运行速度远快于 Python</span></li>
+      <li><span class="key">内存管理：</span>Python 自动垃圾回收（引用计数 + 分代GC）；C/C++ 手动管理（malloc/free, new/delete）</li>
+      <li><span class="key">指针：</span>Python 没有指针概念；C/C++ 有指针和引用</li>
+      <li><span class="key">开发效率：</span>Python 代码量少、开发快；C/C++ 代码量大但性能高</li>
+    </ul>
+    <p>面试话术："C/C++ 追求性能极致，适合系统编程和竞赛；Python 追求开发效率，适合 AI 和快速原型开发。我根据场景选择合适的语言。"</p>
+  </div>
+</div>
+
+</div>
+
+<!-- ==================== 技术栈面试（项目+框架+部署） ==================== -->
+<div class="section" id="tech">
+<h2 class="category-title">技术栈面试（项目 · 框架 · 部署）</h2>
+<p class="sub-title">共30题 · 针对你PPT上的三个项目和技术背景，老师最可能追问的技术细节</p>
+
+<h3 style="font-size:16px;color:#e94560;margin:24px 0 12px 8px;">▎ RAG 与大语言模型（LLM+RAG 智能问答系统）</h3>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">1</div>
+    <div class="q-text">什么是 RAG？为什么需要 RAG？<span class="tag tag-hot">高频</span></div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p><span class="key">RAG（Retrieval-Augmented Generation）</span>= 检索增强生成。</p>
+    <p>核心思路：用户提问 → 先从知识库中<span class="key">检索</span>相关文档片段 → 将文档片段 + 用户问题拼接成 Prompt → 发给大模型生成回答。</p>
+    <p>为什么需要：纯大模型存在<span class="key">幻觉问题</span>（编造不存在的信息），RAG 通过引入真实文档约束输出，保证回答的<span class="key">准确性和可溯源性</span>。</p>
+    <p><strong>面试话术：</strong>"RAG 的本质是让大模型'开卷考试'，不靠记忆而靠检索到的真实资料来回答问题。"</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">2</div>
+    <div class="q-text">什么是大语言模型（LLM）？<span class="tag tag-hot">高频</span></div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p>基于 <span class="key">Transformer 架构</span>的超大规模预训练语言模型，通过海量文本数据训练，具备理解和生成自然语言的能力。</p>
+    <p>代表：GPT 系列（OpenAI）、通义千问（阿里）、LLaMA（Meta）、DeepSeek 等。</p>
+    <p>核心特点：<span class="key">上下文学习</span>（In-Context Learning）、<span class="key">涌现能力</span>（Emergent Abilities）、<span class="key">指令跟随</span>（Instruction Following）。</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">3</div>
+    <div class="q-text">什么是 Embedding（文本向量化）？<span class="tag tag-key">重点</span></div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p>将文本（词、句子、段落）转化为<span class="key">高维稠密向量</span>的过程。</p>
+    <p>核心性质：<span class="key">语义相近的文本，向量距离也近</span>（余弦相似度高）。</p>
+    <p>在 RAG 系统中的作用：将知识库文档和用户问题都转为向量，通过<span class="key">向量相似度检索</span>找到最相关的文档片段。</p>
+    <p>常用模型：OpenAI text-embedding-ada-002、阿里 DashScope embedding 等。</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">4</div>
+    <div class="q-text">什么是 pgvector？为什么选它而不是专用向量数据库？<span class="tag tag-key">重点</span></div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p><span class="key">pgvector</span> 是 PostgreSQL 的向量扩展插件，能在关系型数据库中直接存储和检索高维向量。</p>
+    <p>选择理由：</p>
+    <ul>
+      <li><span class="key">架构简洁：</span>无需额外引入 Milvus、Pinecone 等独立向量数据库，减少系统复杂度</li>
+      <li><span class="key">统一存储：</span>结构化数据（用户、文档元信息）和向量数据在同一数据库中管理</li>
+      <li><span class="key">性能足够：</span>对于图书馆知识库的数据规模（数千到数万条文档），pgvector 完全胜任</li>
+    </ul>
+    <p>支持的相似度计算：<span class="key">余弦距离</span>、欧氏距离、内积。</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">5</div>
+    <div class="q-text">LangChain 是什么？在你的项目中起什么作用？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p><span class="key">LangChain</span> 是一个用于构建 LLM 应用的开源框架，提供了 LLM 调用、文档加载、文本分割、向量存储、检索链等模块化组件。</p>
+    <p>在项目中的作用：</p>
+    <ul>
+      <li><span class="key">文档加载与分块：</span>将上传的 PDF/文档切分为语义合理的小段</li>
+      <li><span class="key">向量存储集成：</span>将文档向量存入 pgvector</li>
+      <li><span class="key">检索链编排：</span>将检索 → 拼接 Prompt → 调用 LLM 的完整流程串联起来</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">6</div>
+    <div class="q-text">RAG 系统的完整工作流程？<span class="tag tag-hot">高频</span></div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p><strong>离线阶段（文档入库）：</strong></p>
+    <p>上传文档 → <span class="key">文档分块</span>（按段落/固定长度/语义切分）→ 通过 Embedding 模型<span class="key">向量化</span> → 存入 pgvector 向量数据库</p>
+    <p><strong>在线阶段（用户问答）：</strong></p>
+    <p>用户提问 → 问题<span class="key">向量化</span> → 在 pgvector 中进行<span class="key">相似度检索</span>（Top-K）→ 取出最相关的文档片段 → 拼接为 Prompt（系统指令 + 检索结果 + 用户问题）→ 发给<span class="key">通义千问 LLM</span> → 返回基于文档的回答</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">7</div>
+    <div class="q-text">什么是大模型的幻觉问题？如何缓解？<span class="tag tag-key">重点</span></div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p><span class="key">幻觉（Hallucination）：</span>大模型生成看似合理但实际不存在/错误的信息。</p>
+    <p>原因：模型基于概率生成文本，而非真正"理解"事实。</p>
+    <p>缓解方法：</p>
+    <ul>
+      <li><span class="key">RAG：</span>引入外部知识库约束输出（本项目的核心方案）</li>
+      <li><span class="key">Prompt 工程：</span>指令中要求"仅基于提供的资料回答，不确定时说不知道"</li>
+      <li><span class="key">微调（Fine-tuning）：</span>使用领域特定数据微调模型</li>
+      <li><span class="key">后处理验证：</span>对生成内容进行事实核查</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">8</div>
+    <div class="q-text">文档分块（Chunking）策略有哪些？为什么要分块？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p>为什么分块：①大模型有<span class="key">上下文长度限制</span>；②小段文本检索精度更高；③避免无关信息干扰回答。</p>
+    <p>常见策略：</p>
+    <ul>
+      <li><span class="key">固定长度分块：</span>按字符/Token 数切分，简单高效</li>
+      <li><span class="key">按段落/句子分块：</span>保持语义完整性</li>
+      <li><span class="key">递归分割：</span>先按段落，段落太长再按句子，层层切分</li>
+      <li><span class="key">重叠分块：</span>相邻块之间有重叠部分，避免关键信息被切断</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">9</div>
+    <div class="q-text">Transformer 架构的核心机制是什么？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p>核心是 <span class="key">Self-Attention（自注意力机制）</span>：</p>
+    <p>对输入序列中的每个位置，计算它与所有其他位置的关联权重，从而捕获<span class="key">长距离依赖关系</span>。</p>
+    <p>公式：Attention(Q,K,V) = softmax(QK<sup>T</sup>/√d<sub>k</sub>)V</p>
+    <p>优势：①可<span class="key">并行计算</span>（比 RNN 快）；②能建模任意距离的依赖关系；③通过多头注意力捕获不同维度的语义信息。</p>
+  </div>
+</div>
+
+<h3 style="font-size:16px;color:#e94560;margin:24px 0 12px 8px;">▎ AuraTest 心理测试平台（全栈 + 部署 + AI）</h3>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">10</div>
+    <div class="q-text">Next.js 是什么？和纯 React 有什么区别？<span class="tag tag-key">重点</span></div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p><span class="key">Next.js</span> 是基于 React 的全栈框架，由 Vercel 开发。</p>
+    <p>核心区别：</p>
+    <ul>
+      <li><span class="key">渲染方式：</span>React 默认客户端渲染（CSR），Next.js 支持服务端渲染（SSR）、静态生成（SSG）、增量静态再生（ISR）</li>
+      <li><span class="key">路由：</span>React 需要 react-router，Next.js 内置<span class="key">文件系统路由</span>（App Router）</li>
+      <li><span class="key">全栈能力：</span>Next.js 内置 API Routes，可直接编写后端接口</li>
+      <li><span class="key">SEO：</span>SSR/SSG 对搜索引擎更友好</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">11</div>
+    <div class="q-text">什么是 WebSocket？Socket.io 有什么优势？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p><span class="key">WebSocket：</span>一种全双工通信协议，允许客户端和服务器之间建立<span class="key">持久连接</span>，双方可以随时主动发送数据。</p>
+    <p>与 HTTP 的区别：HTTP 是请求-响应模式（客户端主动），WebSocket 是双向实时通信。</p>
+    <p><span class="key">Socket.io</span> 的优势：</p>
+    <ul>
+      <li>自动降级：WebSocket 不可用时自动切换到 HTTP 长轮询</li>
+      <li>内置<span class="key">房间</span>和<span class="key">命名空间</span>功能</li>
+      <li>自动重连机制</li>
+      <li>支持广播、事件驱动编程</li>
+    </ul>
+    <p>项目应用：AuraTest 的实时好友聊天和在线状态显示。</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">12</div>
+    <div class="q-text">什么是 ORM？Prisma 是什么？<span class="tag tag-key">重点</span></div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p><span class="key">ORM（Object-Relational Mapping）：</span>将数据库表映射为编程语言中的对象，无需手写 SQL 即可操作数据库。</p>
+    <p><span class="key">Prisma</span> 是 Node.js/TypeScript 生态中的现代 ORM：</p>
+    <ul>
+      <li><span class="key">Schema 声明式：</span>用 .prisma 文件定义数据模型，自动生成数据库迁移</li>
+      <li><span class="key">类型安全：</span>自动生成 TypeScript 类型，编译时即可发现错误</li>
+      <li><span class="key">查询构建器：</span>链式调用，支持关联查询、分页、过滤</li>
+    </ul>
+    <p>对比 SQLAlchemy（Python 生态 ORM）：SQLAlchemy 更灵活但配置更复杂，Prisma 更现代但限于 Node.js。</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">13</div>
+    <div class="q-text">什么是 MBTI 和大五人格？你的系统如何做 AI 人格分析？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p><span class="key">MBTI：</span>基于4个维度（内向/外向、感觉/直觉、思维/情感、判断/感知）划分16种人格类型。</p>
+    <p><span class="key">大五人格（OCEAN）：</span>开放性、尽责性、外向性、亲和性、神经质，用连续分数而非二分法描述人格。</p>
+    <p>系统实现：用户完成量表测试 → 系统计算各维度得分 → 将分数数据传给大语言模型 → LLM 根据得分分布<span class="key">生成个性化的深度人格分析报告</span> → 前端用雷达图可视化展示。</p>
+    <p>相比传统固定模板，AI 分析能给出更有针对性和个性化的解读。</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">14</div>
+    <div class="q-text">项目部署到阿里云的完整流程？<span class="tag tag-hot">高频</span></div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p>完整流程：</p>
+    <ul>
+      <li>① 购买阿里云 ECS 服务器（Linux 系统）</li>
+      <li>② 配置安全组规则（开放 80/443 端口）</li>
+      <li>③ 安装运行环境（Node.js、PostgreSQL、Nginx）</li>
+      <li>④ 上传代码（Git clone 或 scp）</li>
+      <li>⑤ 安装依赖、构建项目（npm install && npm run build）</li>
+      <li>⑥ 配置 <span class="key">Nginx 反向代理</span>（将域名请求转发到应用端口）</li>
+      <li>⑦ 使用 <span class="key">PM2</span> 进程管理器保持应用持续运行</li>
+      <li>⑧ 注册域名 + ICP 备案 + 配置 SSL 证书（HTTPS）</li>
+    </ul>
+    <p>注册公司原因：国内域名备案要求<span class="key">企业或个人实名认证</span>，注册公司可以进行企业备案。</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">15</div>
+    <div class="q-text">什么是 Nginx？为什么需要反向代理？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p><span class="key">Nginx</span> 是高性能的 Web 服务器和反向代理服务器。</p>
+    <p><span class="key">反向代理</span>的作用：</p>
+    <ul>
+      <li><span class="key">端口转发：</span>将 80/443 端口的请求转发到应用的 3000 端口</li>
+      <li><span class="key">SSL 终止：</span>在 Nginx 层处理 HTTPS，应用层只需处理 HTTP</li>
+      <li><span class="key">负载均衡：</span>多实例时可以分发请求</li>
+      <li><span class="key">静态文件服务：</span>直接返回静态资源，减轻应用服务器压力</li>
+    </ul>
+  </div>
+</div>
+
+<h3 style="font-size:16px;color:#e94560;margin:24px 0 12px 8px;">▎ 密码学仿真系统</h3>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">16</div>
+    <div class="q-text">对称加密和非对称加密的区别？<span class="tag tag-hot">高频</span></div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <ul>
+      <li><span class="key">对称加密：</span>加密和解密使用<span class="key">同一个密钥</span>。速度快，适合大量数据加密。代表：DES、3DES、AES</li>
+      <li><span class="key">非对称加密：</span>使用<span class="key">公钥加密、私钥解密</span>（或反之）。速度慢但安全性高。代表：RSA、ECC</li>
+    </ul>
+    <p>实际应用（如 HTTPS）：用非对称加密交换对称密钥，再用对称密钥加密数据，<span class="key">兼顾安全性和效率</span>。</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">17</div>
+    <div class="q-text">DES、AES、RSA 各自的特点？<span class="tag tag-key">重点</span></div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <ul>
+      <li><span class="key">DES：</span>对称加密，64位分组、56位密钥，Feistel 结构，16轮迭代。已被认为不够安全（密钥太短）</li>
+      <li><span class="key">AES：</span>对称加密，128位分组，支持 128/192/256位密钥，SP 网络结构，目前最广泛使用的对称加密标准</li>
+      <li><span class="key">RSA：</span>非对称加密，基于<span class="key">大整数分解</span>的数学难题。密钥通常2048位以上。用于数字签名和密钥交换</li>
+    </ul>
+    <p>仿真系统中实现了这些算法的<span class="key">可视化加密/解密流程</span>，帮助学生理解算法内部的每一轮变换。</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">18</div>
+    <div class="q-text">什么是哈希函数？有什么特点？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p>将<span class="key">任意长度</span>的输入映射为<span class="key">固定长度</span>的输出（哈希值/摘要）。</p>
+    <p>特点：</p>
+    <ul>
+      <li><span class="key">单向性：</span>无法从哈希值反推原文</li>
+      <li><span class="key">抗碰撞性：</span>很难找到两个不同输入产生相同哈希值</li>
+      <li><span class="key">雪崩效应：</span>输入微小变化导致输出巨大变化</li>
+    </ul>
+    <p>常见算法：MD5（已不安全）、SHA-1（已不推荐）、<span class="key">SHA-256</span>（目前主流）。</p>
+    <p>应用：密码存储、数据完整性校验、数字签名、区块链。</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">19</div>
+    <div class="q-text">HTTPS 的工作原理？<span class="tag tag-hot">高频</span></div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p>HTTPS = HTTP + <span class="key">TLS/SSL</span> 加密层。</p>
+    <p>握手过程：</p>
+    <ul>
+      <li>① 客户端发送支持的加密算法列表</li>
+      <li>② 服务器返回数字证书（含公钥）</li>
+      <li>③ 客户端验证证书 → 用公钥加密随机数发送</li>
+      <li>④ 双方用随机数生成<span class="key">对称会话密钥</span></li>
+      <li>⑤ 后续通信使用对称密钥加密</li>
+    </ul>
+    <p>本质：用<span class="key">非对称加密交换密钥</span>，用<span class="key">对称加密传输数据</span>。</p>
+  </div>
+</div>
+
+<h3 style="font-size:16px;color:#e94560;margin:24px 0 12px 8px;">▎ Web 开发框架对比</h3>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">20</div>
+    <div class="q-text">Django 和 Flask 的区别？<span class="tag tag-hot">高频</span></div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <ul>
+      <li><span class="key">Django：</span>"全能型"框架，自带 ORM、Admin 后台、认证系统、模板引擎。适合大型项目，<span class="key">约定优于配置</span></li>
+      <li><span class="key">Flask：</span>"微框架"，核心轻量，功能通过扩展插件按需引入。适合小型项目或需要高度定制的场景</li>
+    </ul>
+    <p>选择建议：需要快速开发完整系统 → Django；需要灵活性和轻量级 → Flask。</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">21</div>
+    <div class="q-text">FastAPI 的特点？为什么 RAG 项目用它？<span class="tag tag-key">重点</span></div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p><span class="key">FastAPI</span> 是基于 Python 的高性能 Web 框架。</p>
+    <p>核心特点：</p>
+    <ul>
+      <li><span class="key">高性能：</span>基于 ASGI（异步服务器网关），性能接近 Node.js 和 Go</li>
+      <li><span class="key">类型提示：</span>利用 Python 的 Type Hints 自动校验请求参数</li>
+      <li><span class="key">自动文档：</span>内置 Swagger UI 和 ReDoc，自动生成 API 文档</li>
+      <li><span class="key">异步支持：</span>原生支持 async/await，适合 I/O 密集型任务</li>
+    </ul>
+    <p>RAG 项目选它的原因：LLM 调用是<span class="key">I/O 密集型</span>的（等待 API 响应），FastAPI 的异步特性可以高效处理并发请求。</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">22</div>
+    <div class="q-text">Vue 和 React 的区别？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <ul>
+      <li><span class="key">模板语法：</span>Vue 使用 HTML 模板（template），React 使用 JSX（JavaScript + HTML 混写）</li>
+      <li><span class="key">响应式原理：</span>Vue 使用<span class="key">数据劫持</span>（Proxy）自动追踪依赖；React 使用<span class="key">虚拟 DOM diff</span> + setState 触发重渲染</li>
+      <li><span class="key">学习曲线：</span>Vue 更平缓，上手快；React 需要理解 Hooks、状态管理等概念</li>
+      <li><span class="key">生态：</span>React 生态更庞大（Next.js、React Native）；Vue 生态更统一（Nuxt、Vite）</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">23</div>
+    <div class="q-text">什么是 RESTful API？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p>一种 Web API 设计风格，使用 HTTP 方法操作资源：</p>
+    <ul>
+      <li><span class="key">GET</span> → 查询资源</li>
+      <li><span class="key">POST</span> → 创建资源</li>
+      <li><span class="key">PUT/PATCH</span> → 更新资源</li>
+      <li><span class="key">DELETE</span> → 删除资源</li>
+    </ul>
+    <p>核心原则：<span class="key">无状态</span>（每个请求包含所有信息）、<span class="key">统一接口</span>（URL 代表资源）、<span class="key">分层系统</span>。</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">24</div>
+    <div class="q-text">PostgreSQL 和 MySQL 的区别？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <ul>
+      <li><span class="key">标准兼容性：</span>PostgreSQL 更严格遵循 SQL 标准</li>
+      <li><span class="key">扩展性：</span>PostgreSQL 支持自定义类型、扩展插件（如 pgvector）、JSON/JSONB 原生支持</li>
+      <li><span class="key">并发控制：</span>PostgreSQL 使用 <span class="key">MVCC</span>（多版本并发控制），高并发写入性能更好</li>
+      <li><span class="key">适用场景：</span>PostgreSQL 适合复杂查询和数据分析；MySQL 简单场景下配置更简便</li>
+    </ul>
+    <p>选用 PostgreSQL 原因：需要 pgvector 向量检索扩展 + 更强的 JSON 支持。</p>
+  </div>
+</div>
+
+<h3 style="font-size:16px;color:#e94560;margin:24px 0 12px 8px;">▎ 算法与编程基础</h3>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">25</div>
+    <div class="q-text">动态规划的基本思想？与贪心的区别？<span class="tag tag-hot">高频</span></div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p><span class="key">动态规划（DP）：</span>将原问题分解为<span class="key">重叠子问题</span>，通过记录子问题的解（记忆化）避免重复计算，自底向上求解。</p>
+    <p>三要素：<span class="key">最优子结构</span>、<span class="key">重叠子问题</span>、<span class="key">状态转移方程</span>。</p>
+    <p><span class="key">贪心算法：</span>每一步都选择<span class="key">局部最优</span>，不回溯。</p>
+    <p>区别：DP 考虑全局最优（所有子问题的组合），贪心只看当前最优。贪心不一定能得到全局最优解，DP 可以。</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">26</div>
+    <div class="q-text">C++ 的指针和引用的区别？<span class="tag tag-key">重点</span></div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <ul>
+      <li><span class="key">指针：</span>存储内存地址的变量，可以为 NULL，可以重新指向其他对象，需要用 * 解引用</li>
+      <li><span class="key">引用：</span>变量的别名，<span class="key">必须在定义时初始化</span>，之后不能改变指向，不能为 NULL</li>
+    </ul>
+    <p>底层：引用通常由编译器实现为 const 指针，但语法上更安全、更简洁。</p>
+    <p>使用场景：函数参数传递优先用引用（避免拷贝），需要动态内存管理时用指针。</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">27</div>
+    <div class="q-text">C++ 中的 STL 容器你常用哪些？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p>竞赛中常用：</p>
+    <ul>
+      <li><span class="key">vector：</span>动态数组，随机访问 O(1)，尾部插入 O(1)</li>
+      <li><span class="key">map/set：</span>基于红黑树，有序，查找/插入 O(log n)</li>
+      <li><span class="key">unordered_map/set：</span>基于哈希表，无序，平均查找 O(1)</li>
+      <li><span class="key">priority_queue：</span>堆实现的优先队列</li>
+      <li><span class="key">stack / queue / deque：</span>适配器容器</li>
+    </ul>
+    <p>选择原则：需要有序 → map/set；需要最快查找 → unordered_map；需要排序/Top-K → priority_queue。</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">28</div>
+    <div class="q-text">什么是图论中的最短路算法？你最熟悉哪个？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p>常见最短路算法：</p>
+    <ul>
+      <li><span class="key">Dijkstra：</span>单源最短路，贪心策略，不支持负权边，O(n²) 或 O((V+E)logV)</li>
+      <li><span class="key">Bellman-Ford：</span>单源，支持负权边，可检测负环，O(VE)</li>
+      <li><span class="key">SPFA：</span>Bellman-Ford 的队列优化，平均更快但最坏仍 O(VE)</li>
+      <li><span class="key">Floyd：</span>多源最短路，DP 思想，O(n³)</li>
+    </ul>
+    <p>竞赛中最常用：<span class="key">Dijkstra + 堆优化</span>（非负权图）和 <span class="key">SPFA</span>（有负权时）。</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">29</div>
+    <div class="q-text">什么是 Git？你如何使用版本控制？</div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p><span class="key">Git</span> 是分布式版本控制系统，记录代码的每一次变更。</p>
+    <p>核心概念：</p>
+    <ul>
+      <li><span class="key">仓库（Repository）：</span>存放项目代码和版本历史</li>
+      <li><span class="key">分支（Branch）：</span>并行开发不同功能</li>
+      <li><span class="key">提交（Commit）：</span>保存一次代码变更快照</li>
+      <li><span class="key">合并（Merge）：</span>将分支的修改合并到主分支</li>
+    </ul>
+    <p>工作流：git add → git commit → git push。多人协作通过 Pull Request / Merge Request。</p>
+  </div>
+</div>
+
+<div class="card" ondblclick="toggleMaster(this)">
+  <div class="card-header" onclick="toggleCard(this)">
+    <div class="q-num">30</div>
+    <div class="q-text">你如何看待 AI 辅助编程工具？<span class="tag tag-hot">高频</span></div>
+    <div class="arrow">▼</div>
+  </div>
+  <div class="card-body">
+    <p><strong>面试标准回答：</strong></p>
+    <p>"AI 辅助编程工具（如 Cursor、GitHub Copilot）本质上是一种<span class="key">效率工具</span>，就像 IDE 的代码补全和调试器一样。"</p>
+    <p>我的使用体会：</p>
+    <ul>
+      <li>AI 生成的代码<span class="key">不能直接用</span>，需要理解逻辑、调试错误、根据需求修改</li>
+      <li>使用 AI 的前提是<span class="key">你能判断生成代码的正确性</span>，否则反而增加 bug</li>
+      <li>AI 无法替代对算法和数据结构的深层理解（<span class="key">竞赛中不能用 AI</span>）</li>
+      <li>善用工具是工程师的基本素养，<span class="key">核心竞争力在于问题分析和架构设计能力</span></li>
+    </ul>
+  </div>
+</div>
+
+</div>
+
+</div>
+
+<div class="progress-bar" onclick="showProgress()">
+  已掌握 <span id="masteredCount">0</span> / <span id="totalCount">0</span> 题
+</div>
+
+<script>
+function switchTab(tabId) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(tabId).classList.add('active');
+  event.target.classList.add('active');
+}
+
+function toggleCard(header) {
+  header.parentElement.classList.toggle('open');
+}
+
+function toggleMaster(card) {
+  card.classList.toggle('mastered');
+  updateProgress();
+  localStorage.setItem('mastered_' + getCardId(card), card.classList.contains('mastered'));
+}
+
+function getCardId(card) {
+  const section = card.closest('.section').id;
+  const idx = Array.from(card.closest('.section').querySelectorAll('.card')).indexOf(card);
+  return section + '_' + idx;
+}
+
+function updateProgress() {
+  const total = document.querySelectorAll('.card').length;
+  const mastered = document.querySelectorAll('.card.mastered').length;
+  document.getElementById('masteredCount').textContent = mastered;
+  document.getElementById('totalCount').textContent = total;
+}
+
+function showProgress() {
+  const total = document.querySelectorAll('.card').length;
+  const mastered = document.querySelectorAll('.card.mastered').length;
+  alert(`复习进度：${mastered} / ${total} 题已掌握 (${Math.round(mastered/total*100)}%)`);
+}
+
+function searchQuestions(keyword) {
+  if (!keyword) {
+    document.querySelectorAll('.card').forEach(c => c.style.display = '');
+    return;
+  }
+  document.querySelectorAll('.section').forEach(s => s.classList.add('active'));
+  document.querySelectorAll('.card').forEach(card => {
+    const text = card.textContent.toLowerCase();
+    card.style.display = text.includes(keyword.toLowerCase()) ? '' : 'none';
+  });
+}
+
+// Restore mastered state
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.card').forEach(card => {
+    const id = getCardId(card);
+    if (localStorage.getItem('mastered_' + id) === 'true') {
+      card.classList.add('mastered');
+    }
+  });
+  updateProgress();
+});
+</script>
+
+</body>
+</html>
