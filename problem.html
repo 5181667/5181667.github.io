@@ -5,210 +5,168 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>中央民族大学 复试问答题总结</title>
 <style>
+  :root { --c-primary: #1a1a2e; --c-accent: #e94560; --c-bg: #f4f5f7; --c-card: #fff; --c-text: #1a1a2e; --c-sub: #666; --safe-bottom: env(safe-area-inset-bottom, 0px); }
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
-    background: #f0f2f5;
-    color: #1a1a2e;
-    line-height: 1.7;
-  }
-  .header {
-    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-    color: #fff;
-    padding: 40px 20px;
-    text-align: center;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-  }
-  .header h1 { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
-  .header p { font-size: 14px; opacity: 0.8; }
-  .stats {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    margin-top: 16px;
-    flex-wrap: wrap;
-  }
-  .stat-item {
-    background: rgba(255,255,255,0.1);
-    padding: 8px 20px;
-    border-radius: 20px;
-    font-size: 13px;
-  }
-  .stat-item strong { color: #e94560; font-size: 18px; }
-  .nav {
-    background: #fff;
-    padding: 16px 20px;
-    display: flex;
-    gap: 10px;
-    overflow-x: auto;
-    border-bottom: 1px solid #e0e0e0;
-    position: sticky;
-    top: 0;
-    z-index: 99;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-  .nav-btn {
-    padding: 8px 18px;
-    border: 2px solid #e0e0e0;
-    border-radius: 25px;
-    background: #fff;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 500;
-    transition: all 0.3s;
-    white-space: nowrap;
-  }
-  .nav-btn:hover, .nav-btn.active { background: #1a1a2e; color: #fff; border-color: #1a1a2e; }
-  .nav-btn.active { box-shadow: 0 2px 10px rgba(26,26,46,0.3); }
-  .container { max-width: 960px; margin: 0 auto; padding: 20px; }
+  html { scroll-behavior: smooth; -webkit-tap-highlight-color: transparent; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif; background: var(--c-bg); color: var(--c-text); line-height: 1.7; padding-bottom: calc(64px + var(--safe-bottom)); }
+
+  /* ===== Header ===== */
+  .header { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); color: #fff; padding: 24px 16px 16px; text-align: center; }
+  .header h1 { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
+  .header p { font-size: 12px; opacity: 0.7; }
+  .stats { display: none; }
+  .search-wrap { position: relative; max-width: 480px; margin: 12px auto 0; }
+  .search-box { width: 100%; padding: 10px 40px 10px 16px; border: none; border-radius: 10px; font-size: 14px; outline: none; background: rgba(255,255,255,0.15); color: #fff; backdrop-filter: blur(4px); }
+  .search-box::placeholder { color: rgba(255,255,255,0.45); }
+  .search-clear { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; color: rgba(255,255,255,0.5); font-size: 18px; cursor: pointer; display: none; line-height: 1; }
+
+  /* ===== Section Progress ===== */
+  .sec-progress { display: flex; align-items: center; gap: 8px; margin: 0 0 16px 20px; font-size: 12px; color: var(--c-sub); }
+  .sec-progress-bar { flex: 1; max-width: 200px; height: 6px; background: #e5e7eb; border-radius: 3px; overflow: hidden; }
+  .sec-progress-fill { height: 100%; background: var(--c-accent); border-radius: 3px; transition: width 0.4s ease; }
+
+  /* ===== Nav ===== */
+  .nav { background: var(--c-card); padding: 10px 12px; display: flex; gap: 8px; overflow-x: auto; -webkit-overflow-scrolling: touch; border-bottom: 1px solid #e5e7eb; position: sticky; top: 0; z-index: 99; scrollbar-width: none; }
+  .nav::-webkit-scrollbar { display: none; }
+  .nav-btn { padding: 7px 16px; border: 1.5px solid #ddd; border-radius: 20px; background: var(--c-card); cursor: pointer; font-size: 13px; font-weight: 500; transition: all 0.25s; white-space: nowrap; flex-shrink: 0; }
+  .nav-btn:hover, .nav-btn.active { background: var(--c-primary); color: #fff; border-color: var(--c-primary); }
+  .nav-btn.active { box-shadow: 0 2px 8px rgba(26,26,46,0.25); }
+
+  /* ===== Filter Bar ===== */
+  .filter-bar { background: var(--c-card); padding: 8px 12px; display: flex; gap: 6px; align-items: center; border-bottom: 1px solid #eee; overflow-x: auto; scrollbar-width: none; }
+  .filter-bar::-webkit-scrollbar { display: none; }
+  .filter-chip { padding: 4px 12px; border-radius: 14px; border: 1.5px solid #ddd; background: #fff; font-size: 12px; cursor: pointer; white-space: nowrap; transition: all 0.2s; flex-shrink: 0; }
+  .filter-chip.on { background: var(--c-accent); color: #fff; border-color: var(--c-accent); }
+
+  /* ===== Container ===== */
+  .container { max-width: 720px; margin: 0 auto; padding: 12px; }
   .section { display: none; }
   .section.active { display: block; }
-  .category-title {
-    font-size: 22px;
-    font-weight: 700;
-    color: #1a1a2e;
-    margin: 30px 0 16px;
-    padding-left: 16px;
-    border-left: 4px solid #e94560;
-  }
-  .sub-title {
-    font-size: 16px;
-    color: #666;
-    margin: -8px 0 20px 20px;
-  }
-  .card {
-    background: #fff;
-    border-radius: 12px;
-    margin-bottom: 12px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-    overflow: hidden;
-    transition: box-shadow 0.3s;
-  }
-  .card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.12); }
-  .card-header {
-    padding: 16px 20px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    user-select: none;
-  }
-  .card-header:hover { background: #f8f9fa; }
-  .q-num {
-    min-width: 32px;
-    height: 32px;
-    background: linear-gradient(135deg, #e94560, #c23152);
-    color: #fff;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 13px;
-    font-weight: 700;
-    flex-shrink: 0;
-  }
+  .category-title { font-size: 18px; font-weight: 700; color: var(--c-text); margin: 20px 0 6px; padding-left: 14px; border-left: 4px solid var(--c-accent); }
+  .sub-title { font-size: 13px; color: var(--c-sub); margin: 0 0 12px 18px; }
+
+  /* ===== Cards ===== */
+  .card { background: var(--c-card); border-radius: 12px; margin-bottom: 10px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); overflow: hidden; transition: all 0.3s; border-left: 3px solid transparent; }
+  .card.open { border-left-color: var(--c-accent); box-shadow: 0 2px 12px rgba(0,0,0,0.1); }
+  .card-header { padding: 12px 14px; cursor: pointer; display: flex; align-items: center; gap: 10px; user-select: none; -webkit-user-select: none; position: relative; }
+  .card-header:active { background: #f3f4f6; }
+  .q-num { min-width: 28px; height: 28px; background: linear-gradient(135deg, #e94560, #c23152); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; flex-shrink: 0; }
   .q-num.real { background: linear-gradient(135deg, #f59e0b, #d97706); }
-  .q-text { font-weight: 600; font-size: 15px; flex: 1; }
-  .arrow {
-    font-size: 12px;
-    color: #999;
-    transition: transform 0.3s;
-    flex-shrink: 0;
-  }
-  .card.open .arrow { transform: rotate(180deg); }
-  .card-body {
-    display: none;
-    padding: 0 20px 20px 64px;
-    font-size: 14px;
-    color: #444;
-  }
-  .card.open .card-body { display: block; }
-  .card-body p { margin-bottom: 8px; }
-  .card-body ul { padding-left: 20px; margin-bottom: 8px; }
-  .card-body li { margin-bottom: 4px; }
-  .key { color: #e94560; font-weight: 600; }
-  .tag {
-    display: inline-block;
-    padding: 2px 8px;
-    border-radius: 4px;
-    font-size: 11px;
-    font-weight: 600;
-    margin-left: 8px;
-    vertical-align: middle;
-  }
+  .q-text { font-weight: 600; font-size: 14px; flex: 1; line-height: 1.5; }
+  .arrow { font-size: 10px; color: #bbb; transition: transform 0.3s; flex-shrink: 0; }
+  .card.open .arrow { transform: rotate(180deg); color: var(--c-accent); }
+  .master-btn { width: 28px; height: 28px; border-radius: 50%; border: 2px solid #ddd; background: transparent; cursor: pointer; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 14px; transition: all 0.25s; color: transparent; }
+  .master-btn:hover { border-color: #22c55e; }
+  .card.mastered .master-btn { background: #22c55e; border-color: #22c55e; color: #fff; }
+
+  .card-body { max-height: 0; overflow: hidden; padding: 0 14px 0 52px; font-size: 13px; color: #444; transition: max-height 0.35s ease, padding 0.35s ease; }
+  .card.open .card-body { max-height: 2000px; padding: 0 14px 14px 52px; }
+  .card-body p { margin-bottom: 6px; }
+  .card-body ul { padding-left: 18px; margin-bottom: 6px; }
+  .card-body li { margin-bottom: 3px; }
+  .key { color: var(--c-accent); font-weight: 600; }
+  .tag { display: inline-block; padding: 1px 7px; border-radius: 4px; font-size: 10px; font-weight: 600; margin-left: 6px; vertical-align: middle; }
   .tag-hot { background: #fef2f2; color: #dc2626; }
   .tag-real { background: #fffbeb; color: #d97706; }
   .tag-key { background: #eff6ff; color: #2563eb; }
   .eng { color: #0f3460; font-style: italic; }
-  .search-box {
-    width: 100%;
-    max-width: 500px;
-    margin: 16px auto 0;
-    display: block;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 25px;
-    font-size: 14px;
-    outline: none;
-    background: rgba(255,255,255,0.15);
-    color: #fff;
+
+  .card.mastered { opacity: 0.45; }
+  .card.mastered .q-text { text-decoration: line-through; }
+  .card.filtered-out { display: none !important; }
+
+  /* ===== Bottom Toolbar ===== */
+  .toolbar { position: fixed; bottom: 0; left: 0; right: 0; background: var(--c-card); border-top: 1px solid #e5e7eb; padding: 6px 8px calc(6px + var(--safe-bottom)); display: flex; justify-content: space-around; align-items: center; z-index: 200; box-shadow: 0 -2px 10px rgba(0,0,0,0.06); }
+  .tb-btn { display: flex; flex-direction: column; align-items: center; gap: 2px; background: none; border: none; cursor: pointer; color: var(--c-sub); font-size: 10px; padding: 4px 8px; border-radius: 8px; transition: all 0.2s; }
+  .tb-btn:active { background: #f3f4f6; }
+  .tb-btn .tb-icon { font-size: 20px; line-height: 1; }
+  .tb-btn.active { color: var(--c-accent); }
+  .tb-progress-ring { width: 36px; height: 36px; position: relative; }
+  .tb-progress-ring svg { transform: rotate(-90deg); }
+  .tb-progress-ring .ring-bg { fill: none; stroke: #e5e7eb; stroke-width: 3; }
+  .tb-progress-ring .ring-fill { fill: none; stroke: var(--c-accent); stroke-width: 3; stroke-linecap: round; transition: stroke-dashoffset 0.5s ease; }
+  .tb-progress-text { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 700; color: var(--c-text); }
+
+  /* ===== Flashcard Mode ===== */
+  body.flashcard-mode .card-body { max-height: 0 !important; padding: 0 14px 0 52px !important; }
+  body.flashcard-mode .card.open .card-body { max-height: 2000px !important; padding: 0 14px 14px 52px !important; }
+  body.flashcard-mode .arrow { display: none; }
+  body.flashcard-mode .card { border-left-color: #3b82f6; }
+  body.flashcard-mode .card-header::after { content: "点击翻转"; position: absolute; right: 14px; font-size: 10px; color: #bbb; font-weight: 400; }
+  body.flashcard-mode .card.open .card-header::after { content: ""; }
+
+  /* ===== Subheadings in tech/python ===== */
+  h3 { font-size: 14px !important; }
+
+  /* ===== Desktop ===== */
+  @media (min-width: 769px) {
+    .header { padding: 32px 20px 20px; }
+    .header h1 { font-size: 24px; }
+    .stats { display: flex; justify-content: center; gap: 12px; margin-top: 14px; flex-wrap: wrap; }
+    .stat-item { background: rgba(255,255,255,0.1); padding: 5px 16px; border-radius: 16px; font-size: 12px; }
+    .stat-item strong { color: var(--c-accent); font-size: 16px; }
+    .nav { justify-content: center; padding: 12px 20px; gap: 10px; }
+    .container { padding: 16px 20px; }
+    .card-header { padding: 14px 18px; }
+    .q-text { font-size: 15px; }
+    .card-body { font-size: 14px; }
+    .card.open .card-body { padding-left: 56px; }
+    .toolbar { max-width: 480px; left: 50%; transform: translateX(-50%); border-radius: 16px 16px 0 0; }
   }
-  .search-box::placeholder { color: rgba(255,255,255,0.5); }
-  .progress-bar {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: #1a1a2e;
-    color: #fff;
-    padding: 12px 20px;
-    border-radius: 25px;
-    font-size: 13px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-    z-index: 200;
-    cursor: pointer;
+
+  /* ===== Small phones ===== */
+  @media (max-width: 380px) {
+    .header h1 { font-size: 17px; }
+    .nav-btn { padding: 6px 12px; font-size: 12px; }
+    .q-text { font-size: 13px; }
+    .card-body { font-size: 12px; }
   }
-  .progress-bar span { color: #e94560; font-weight: 700; }
-  .mastered { opacity: 0.4; }
-  .mastered .card-header { text-decoration: line-through; }
-  @media (max-width: 768px) {
-    .header h1 { font-size: 22px; }
-    .card-body { padding-left: 20px; }
-    .stats { gap: 12px; }
-    .stat-item { padding: 6px 14px; font-size: 12px; }
-  }
+
+  /* ===== Animation ===== */
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  .section.active .card { animation: fadeIn 0.25s ease forwards; }
 </style>
 </head>
 <body>
 
 <div class="header">
-  <h1>中央民族大学 · 复试问答题总结</h1>
-  <p>计算机专业 · 面试 + 笔试核心知识点速览</p>
+  <h1>复试问答题速查</h1>
+  <p>中央民族大学 · 计算机专业 · 共 237 题</p>
   <div class="stats">
-    <div class="stat-item">数据结构 <strong>35</strong> 题</div>
-    <div class="stat-item">操作系统 <strong>43</strong> 题</div>
-    <div class="stat-item">计算机网络 <strong>36</strong> 题</div>
-    <div class="stat-item">计算机组成原理 <strong>17</strong> 题</div>
-    <div class="stat-item">英语口语 <strong>33</strong> 题</div>
-    <div class="stat-item">综合问答 <strong>23</strong> 题</div>
-    <div class="stat-item" style="background:rgba(233,69,96,0.3);font-weight:600;">技术栈面试 <strong>30</strong> 题</div>
-    <div class="stat-item" style="background:rgba(46,204,113,0.2);font-weight:600;">Python基础 <strong>20</strong> 题</div>
+    <div class="stat-item">数据结构 <strong>35</strong></div>
+    <div class="stat-item">操作系统 <strong>43</strong></div>
+    <div class="stat-item">计网 <strong>36</strong></div>
+    <div class="stat-item">组成原理 <strong>17</strong></div>
+    <div class="stat-item">英语 <strong>33</strong></div>
+    <div class="stat-item">综合 <strong>23</strong></div>
+    <div class="stat-item" style="background:rgba(233,69,96,0.3);">技术栈 <strong>30</strong></div>
+    <div class="stat-item" style="background:rgba(46,204,113,0.2);">Python <strong>20</strong></div>
   </div>
-  <input type="text" class="search-box" placeholder="搜索题目关键词..." id="searchInput" oninput="searchQuestions(this.value)">
+  <div class="search-wrap">
+    <input type="text" class="search-box" placeholder="搜索关键词..." id="searchInput" oninput="searchQuestions(this.value)">
+    <button class="search-clear" id="searchClear" onclick="clearSearch()">&times;</button>
+  </div>
 </div>
 
 <div class="nav" id="nav">
-  <button class="nav-btn active" onclick="switchTab('ds')">数据结构</button>
-  <button class="nav-btn" onclick="switchTab('os')">操作系统</button>
-  <button class="nav-btn" onclick="switchTab('net')">计算机网络</button>
-  <button class="nav-btn" onclick="switchTab('co')">计算机组成原理</button>
-  <button class="nav-btn" onclick="switchTab('eng')">英语口语</button>
-  <button class="nav-btn" onclick="switchTab('other')">综合问答</button>
-  <button class="nav-btn" onclick="switchTab('tech')" style="background:linear-gradient(135deg,#e94560,#c23152);color:#fff;border-color:#e94560;">技术栈面试</button>
-  <button class="nav-btn" onclick="switchTab('python')" style="background:linear-gradient(135deg,#2ecc71,#27ae60);color:#fff;border-color:#2ecc71;">Python基础</button>
+  <button class="nav-btn active" data-tab="ds">数据结构</button>
+  <button class="nav-btn" data-tab="os">操作系统</button>
+  <button class="nav-btn" data-tab="net">计算机网络</button>
+  <button class="nav-btn" data-tab="co">组成原理</button>
+  <button class="nav-btn" data-tab="eng">英语口语</button>
+  <button class="nav-btn" data-tab="other">综合问答</button>
+  <button class="nav-btn" data-tab="tech" style="background:linear-gradient(135deg,#e94560,#c23152);color:#fff;border-color:#e94560;">技术栈</button>
+  <button class="nav-btn" data-tab="python" style="background:linear-gradient(135deg,#2ecc71,#27ae60);color:#fff;border-color:#2ecc71;">Python</button>
+</div>
+
+<div class="filter-bar" id="filterBar">
+  <span style="font-size:11px;color:#999;white-space:nowrap;">筛选：</span>
+  <button class="filter-chip on" data-filter="all">全部</button>
+  <button class="filter-chip" data-filter="hot">高频</button>
+  <button class="filter-chip" data-filter="key">重点</button>
+  <button class="filter-chip" data-filter="real">真题</button>
+  <button class="filter-chip" data-filter="unmastered">未掌握</button>
+  <button class="filter-chip" data-filter="mastered">已掌握</button>
 </div>
 
 <div class="container">
@@ -2682,69 +2640,209 @@
 
 </div>
 
-<div class="progress-bar" onclick="showProgress()">
-  已掌握 <span id="masteredCount">0</span> / <span id="totalCount">0</span> 题
+<div class="toolbar" id="toolbar">
+  <button class="tb-btn" id="tbRandom" title="随机抽题"><span class="tb-icon">🎲</span>随机抽题</button>
+  <button class="tb-btn" id="tbFlashcard" title="闪卡模式"><span class="tb-icon">🃏</span>闪卡模式</button>
+  <button class="tb-btn" id="tbCollapseAll" title="收起全部"><span class="tb-icon">📂</span>收起全部</button>
+  <div class="tb-progress-ring" id="tbProgress" title="学习进度">
+    <svg viewBox="0 0 36 36"><circle class="ring-bg" cx="18" cy="18" r="15.5"/><circle class="ring-fill" id="ringFill" cx="18" cy="18" r="15.5" stroke-dasharray="97.4" stroke-dashoffset="97.4"/></svg>
+    <div class="tb-progress-text" id="ringText">0%</div>
+  </div>
+  <button class="tb-btn" id="tbTop" title="回到顶部"><span class="tb-icon">⬆</span>回顶部</button>
 </div>
 
 <script>
-function switchTab(tabId) {
-  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById(tabId).classList.add('active');
-  event.target.classList.add('active');
-}
+(function(){
+  const $ = s => document.querySelector(s);
+  const $$ = s => document.querySelectorAll(s);
 
-function toggleCard(header) {
-  header.parentElement.classList.toggle('open');
-}
+  // === Tab switching ===
+  const navBtns = $$('.nav-btn');
+  const sections = $$('.section');
+  let activeTab = 'ds';
 
-function toggleMaster(card) {
-  card.classList.toggle('mastered');
-  updateProgress();
-  localStorage.setItem('mastered_' + getCardId(card), card.classList.contains('mastered'));
-}
-
-function getCardId(card) {
-  const section = card.closest('.section').id;
-  const idx = Array.from(card.closest('.section').querySelectorAll('.card')).indexOf(card);
-  return section + '_' + idx;
-}
-
-function updateProgress() {
-  const total = document.querySelectorAll('.card').length;
-  const mastered = document.querySelectorAll('.card.mastered').length;
-  document.getElementById('masteredCount').textContent = mastered;
-  document.getElementById('totalCount').textContent = total;
-}
-
-function showProgress() {
-  const total = document.querySelectorAll('.card').length;
-  const mastered = document.querySelectorAll('.card.mastered').length;
-  alert(`复习进度：${mastered} / ${total} 题已掌握 (${Math.round(mastered/total*100)}%)`);
-}
-
-function searchQuestions(keyword) {
-  if (!keyword) {
-    document.querySelectorAll('.card').forEach(c => c.style.display = '');
-    return;
-  }
-  document.querySelectorAll('.section').forEach(s => s.classList.add('active'));
-  document.querySelectorAll('.card').forEach(card => {
-    const text = card.textContent.toLowerCase();
-    card.style.display = text.includes(keyword.toLowerCase()) ? '' : 'none';
+  navBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const tab = btn.dataset.tab;
+      if (!tab) return;
+      activeTab = tab;
+      sections.forEach(s => s.classList.remove('active'));
+      navBtns.forEach(b => {
+        b.classList.remove('active');
+        if (!b.dataset.tab) return;
+        if (['tech','python'].includes(b.dataset.tab)) {
+          b.style.color = b.dataset.tab === tab ? '#fff' : '#fff';
+        }
+      });
+      document.getElementById(tab).classList.add('active');
+      btn.classList.add('active');
+      btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      updateSectionProgress();
+      applyFilter();
+    });
   });
-}
 
-// Restore mastered state
-document.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('.card').forEach(card => {
+  // === Card toggle ===
+  document.addEventListener('click', e => {
+    const header = e.target.closest('.card-header');
+    if (!header) return;
+    if (e.target.closest('.master-btn')) return;
+    header.parentElement.classList.toggle('open');
+  });
+
+  // === Master button (injected dynamically) ===
+  $$('.card').forEach(card => {
+    const header = card.querySelector('.card-header');
+    if (!header) return;
+    const btn = document.createElement('button');
+    btn.className = 'master-btn';
+    btn.innerHTML = '✓';
+    btn.title = '标记已掌握';
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      card.classList.toggle('mastered');
+      const id = getCardId(card);
+      localStorage.setItem('mastered_' + id, card.classList.contains('mastered'));
+      updateProgress();
+      updateSectionProgress();
+    });
+    const arrow = header.querySelector('.arrow');
+    if (arrow) header.insertBefore(btn, arrow);
+    else header.appendChild(btn);
+  });
+
+  // Remove old ondblclick attributes
+  $$('.card[ondblclick]').forEach(c => c.removeAttribute('ondblclick'));
+  $$('.card-header[onclick]').forEach(h => h.removeAttribute('onclick'));
+
+  // === Card ID ===
+  function getCardId(card) {
+    const section = card.closest('.section');
+    if (!section) return 'x_0';
+    const idx = Array.from(section.querySelectorAll('.card')).indexOf(card);
+    return section.id + '_' + idx;
+  }
+
+  // === Progress ===
+  function updateProgress() {
+    const total = $$('.card').length;
+    const mastered = $$('.card.mastered').length;
+    const pct = total ? Math.round(mastered / total * 100) : 0;
+    const circumference = 97.4;
+    const offset = circumference - (circumference * pct / 100);
+    $('#ringFill').style.strokeDashoffset = offset;
+    $('#ringText').textContent = pct + '%';
+  }
+
+  // === Section Progress ===
+  function updateSectionProgress() {
+    $$('.section').forEach(sec => {
+      let bar = sec.querySelector('.sec-progress');
+      const cards = sec.querySelectorAll('.card');
+      if (cards.length === 0) return;
+      const mastered = sec.querySelectorAll('.card.mastered').length;
+      const pct = Math.round(mastered / cards.length * 100);
+      if (!bar) {
+        bar = document.createElement('div');
+        bar.className = 'sec-progress';
+        bar.innerHTML = '<div class="sec-progress-bar"><div class="sec-progress-fill"></div></div><span class="sec-pct"></span>';
+        const title = sec.querySelector('.sub-title') || sec.querySelector('.category-title');
+        if (title && title.nextSibling) title.parentNode.insertBefore(bar, title.nextSibling);
+        else sec.prepend(bar);
+      }
+      bar.querySelector('.sec-progress-fill').style.width = pct + '%';
+      bar.querySelector('.sec-pct').textContent = mastered + '/' + cards.length + ' 已掌握 (' + pct + '%)';
+    });
+  }
+
+  // === Search ===
+  window.searchQuestions = function(kw) {
+    const clear = $('#searchClear');
+    clear.style.display = kw ? 'block' : 'none';
+    if (!kw) {
+      $$('.card').forEach(c => c.style.display = '');
+      sections.forEach(s => s.classList.remove('active'));
+      document.getElementById(activeTab).classList.add('active');
+      return;
+    }
+    sections.forEach(s => s.classList.add('active'));
+    $$('.card').forEach(card => {
+      const text = card.textContent.toLowerCase();
+      card.style.display = text.includes(kw.toLowerCase()) ? '' : 'none';
+    });
+  };
+  window.clearSearch = function() {
+    $('#searchInput').value = '';
+    searchQuestions('');
+    $('#searchInput').focus();
+  };
+
+  // === Filter ===
+  const filterChips = $$('.filter-chip');
+  let currentFilter = 'all';
+
+  filterChips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      filterChips.forEach(c => c.classList.remove('on'));
+      chip.classList.add('on');
+      currentFilter = chip.dataset.filter;
+      applyFilter();
+    });
+  });
+
+  function applyFilter() {
+    const sec = document.getElementById(activeTab);
+    if (!sec) return;
+    const cards = sec.querySelectorAll('.card');
+    cards.forEach(card => {
+      card.classList.remove('filtered-out');
+      if (currentFilter === 'all') return;
+      if (currentFilter === 'mastered') { if (!card.classList.contains('mastered')) card.classList.add('filtered-out'); return; }
+      if (currentFilter === 'unmastered') { if (card.classList.contains('mastered')) card.classList.add('filtered-out'); return; }
+      const tagMap = { hot: 'tag-hot', key: 'tag-key', real: 'tag-real' };
+      const cls = tagMap[currentFilter];
+      if (cls && !card.querySelector('.' + cls)) card.classList.add('filtered-out');
+    });
+  }
+
+  // === Toolbar actions ===
+  $('#tbRandom').addEventListener('click', () => {
+    const sec = document.getElementById(activeTab);
+    if (!sec) return;
+    const cards = Array.from(sec.querySelectorAll('.card:not(.mastered):not(.filtered-out)'));
+    if (cards.length === 0) { alert('当前分类下没有未掌握的题目了！'); return; }
+    $$('.card.open').forEach(c => c.classList.remove('open'));
+    const pick = cards[Math.floor(Math.random() * cards.length)];
+    pick.classList.add('open');
+    pick.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  });
+
+  let flashcardOn = false;
+  $('#tbFlashcard').addEventListener('click', () => {
+    flashcardOn = !flashcardOn;
+    document.body.classList.toggle('flashcard-mode', flashcardOn);
+    $('#tbFlashcard').classList.toggle('active', flashcardOn);
+    $$('.card.open').forEach(c => c.classList.remove('open'));
+  });
+
+  $('#tbCollapseAll').addEventListener('click', () => {
+    $$('.card.open').forEach(c => c.classList.remove('open'));
+  });
+
+  $('#tbTop').addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // === Restore mastered state ===
+  $$('.card').forEach(card => {
     const id = getCardId(card);
     if (localStorage.getItem('mastered_' + id) === 'true') {
       card.classList.add('mastered');
     }
   });
   updateProgress();
-});
+  updateSectionProgress();
+})();
 </script>
 
 </body>
