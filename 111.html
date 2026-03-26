@@ -1,0 +1,2643 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>机试模拟题 · 数据结构全算法</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, 'PingFang SC', 'Courier New', monospace;
+    background: #f5f5f5;
+    color: #333;
+    line-height: 1.8;
+    padding: 16px;
+  }
+  .container { max-width: 800px; margin: 0 auto; }
+  h1 { text-align: center; font-size: 24px; color: #c0392b; margin-bottom: 4px; }
+  .subtitle { text-align: center; color: #888; font-size: 13px; margin-bottom: 24px; }
+  .problem {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+  .problem-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+  .problem-num {
+    background: #c0392b;
+    color: #fff;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 700; flex-shrink: 0;
+  }
+  .problem-title { font-size: 17px; font-weight: 700; }
+  .tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    margin-left: 8px;
+  }
+  .tag-stack { background: #fff1f0; color: #c0392b; }
+  .tag-queue { background: #f0f5ff; color: #1d39c4; }
+  .tag-list { background: #f6ffed; color: #389e0d; }
+  .tag-real { background: #fff7e6; color: #d46b08; }
+  .desc { font-size: 14px; margin-bottom: 12px; color: #555; }
+  .example {
+    background: #f8f8f8;
+    border-left: 3px solid #ddd;
+    padding: 10px 14px;
+    font-size: 13px;
+    margin: 10px 0;
+    border-radius: 0 6px 6px 0;
+    white-space: pre-wrap;
+    font-family: 'Courier New', monospace;
+  }
+  .hint-btn {
+    background: #f0f0f0;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 13px;
+    cursor: pointer;
+    margin-top: 8px;
+    color: #666;
+  }
+  .hint-btn:hover { background: #e0e0e0; }
+  .hint {
+    display: none;
+    background: #fffbe6;
+    border: 1px solid #ffe58f;
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-top: 10px;
+    font-size: 13px;
+    color: #8c6d1f;
+  }
+  .hint.show { display: block; }
+  .code-block {
+    display: none;
+    background: #1e1e1e;
+    color: #d4d4d4;
+    padding: 16px;
+    border-radius: 8px;
+    margin-top: 10px;
+    font-size: 13px;
+    overflow-x: auto;
+    white-space: pre;
+    font-family: 'Courier New', monospace;
+    line-height: 1.6;
+  }
+  .code-block.show { display: block; }
+  .code-block .kw { color: #569cd6; }
+  .code-block .fn { color: #dcdcaa; }
+  .code-block .cm { color: #6a9955; }
+  .code-block .str { color: #ce9178; }
+  .code-block .num { color: #b5cea8; }
+  .difficulty {
+    font-size: 11px;
+    color: #999;
+    margin-top: 4px;
+  }
+  .diff-easy { color: #389e0d; }
+  .diff-mid { color: #d46b08; }
+  .diff-hard { color: #c0392b; }
+  .ref {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    margin-top: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+  .ref h2 { font-size: 16px; color: #c0392b; margin-bottom: 10px; }
+  .ref-item { font-size: 14px; margin-bottom: 6px; }
+</style>
+<style>
+html{scroll-behavior:smooth;scroll-padding-top:20px}
+body{background:#f0f2f5!important;padding:0!important;font-family:-apple-system,'PingFang SC','Helvetica Neue',sans-serif!important;color:#2c3e50}
+.container{display:contents!important}
+
+.progress-bar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,#c0392b,#e67e22,#27ae60,#1565c0,#8e44ad);z-index:1000;width:0;pointer-events:none;transition:width .12s}
+
+.sidebar{position:fixed;left:0;top:3px;bottom:0;width:280px;background:#fff;box-shadow:2px 0 16px rgba(0,0,0,.03);overflow-y:auto;z-index:100;transition:transform .3s cubic-bezier(.4,0,.2,1)}
+.sidebar::-webkit-scrollbar{width:4px}
+.sidebar::-webkit-scrollbar-thumb{background:#e0e0e0;border-radius:2px}
+.sidebar-header{position:sticky;top:0;background:#fff;padding:20px 20px 14px;border-bottom:1px solid rgba(0,0,0,.06);z-index:1}
+.sidebar-title{font-size:16px;font-weight:700;color:#2c3e50;display:flex;align-items:center;gap:6px}
+.sidebar-stats{display:flex;align-items:center;gap:8px;margin-top:10px;font-size:12px;color:#7f8c8d}
+.stats-bar{flex:1;height:4px;background:#eee;border-radius:2px;overflow:hidden}
+.stats-bar-fill{height:100%;background:linear-gradient(90deg,#27ae60,#2ecc71);border-radius:2px;transition:width .4s;width:0}
+
+.toc-section{padding:6px 0 0}
+.toc-section-label{padding:8px 20px 4px;font-size:11px;font-weight:700;letter-spacing:1px;color:#aaa;display:flex;align-items:center;gap:6px;cursor:default}
+.toc-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.toc-count{margin-left:auto;font-weight:400;font-size:10px;color:#ccc;background:#f5f5f5;padding:1px 6px;border-radius:8px}
+
+.toc-item{display:flex;align-items:center;gap:6px;padding:4px 16px 4px 28px;font-size:12px;color:#999;text-decoration:none;border-left:3px solid transparent;transition:all .12s;cursor:pointer}
+.toc-item:hover{background:#f8f9fa;color:#555}
+.toc-item.active{background:#eef3ff;color:#1565c0;border-left-color:#1565c0;font-weight:600}
+.toc-item.done .toc-label{text-decoration:line-through;color:#ccc}
+
+.toc-check{width:14px;height:14px;border:1.5px solid #ddd;border-radius:3px;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:9px;color:transparent;transition:all .15s;background:transparent;line-height:1}
+.toc-check.checked{background:#27ae60;border-color:#27ae60;color:#fff}
+.toc-check:hover{border-color:#27ae60}
+.toc-badge{min-width:22px;height:18px;border-radius:4px;display:inline-flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;flex-shrink:0;padding:0 3px}
+.toc-label{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1}
+
+.sidebar-toggle{display:none;position:fixed;top:10px;left:10px;z-index:200;width:42px;height:42px;border-radius:12px;background:#fff;border:none;box-shadow:0 2px 12px rgba(0,0,0,.12);font-size:20px;cursor:pointer;align-items:center;justify-content:center;color:#2c3e50}
+.sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.3);z-index:90}
+.sidebar-overlay.show{display:block}
+
+@media(max-width:960px){
+  .sidebar{transform:translateX(-100%);box-shadow:none}
+  .sidebar.open{transform:translateX(0);box-shadow:4px 0 24px rgba(0,0,0,.12)}
+  .sidebar-toggle{display:flex}
+  .main-content{margin-left:0!important;padding:56px 16px 80px!important}
+}
+
+.main-content{margin-left:280px;padding:20px 32px 80px;max-width:1140px}
+.page-header{text-align:center;padding:4px 0 24px}
+.page-header h1{font-size:26px;color:#c0392b;margin-bottom:2px}
+.page-header .subtitle{color:#7f8c8d;font-size:13px}
+
+.problem{border-radius:14px!important;padding:20px 24px!important;margin-bottom:14px!important;box-shadow:0 1px 3px rgba(0,0,0,.04)!important;border:1px solid rgba(0,0,0,.05);transition:box-shadow .2s,transform .15s;scroll-margin-top:20px}
+.problem:hover{box-shadow:0 4px 16px rgba(0,0,0,.07)!important;transform:translateY(-1px)}
+.problem-num{min-width:32px!important;padding:0 4px;font-size:12px!important}
+.problem-title{font-size:16px!important}
+.tag{margin-left:6px}
+
+.example{background:#f8f9fa!important;border-left-color:#e0e0e0!important;border-radius:0 8px 8px 0!important;font-family:'SF Mono','Courier New',monospace!important;color:#555}
+.hint-btn{background:#f5f5f5!important;border:1px solid #e8e8e8!important;border-radius:8px!important;margin-right:6px;transition:all .15s}
+.hint-btn:hover{background:#eee!important;border-color:#ddd!important}
+.hint{border-radius:10px!important}
+.hint.show,.code-block.show{animation:fadeSlide .2s}
+
+.code-block{background:#1e1e2e!important;color:#cdd6f4!important;border-radius:10px!important;padding:16px 18px!important;font-family:'SF Mono','Courier New',monospace!important;line-height:1.65!important}
+.code-block .kw{color:#89b4fa!important}
+.code-block .fn{color:#f9e2af!important}
+.code-block .cm{color:#6c7086!important}
+.code-block .str{color:#a6e3a1!important}
+.code-block .num{color:#fab387!important}
+
+@keyframes fadeSlide{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
+
+.ref{border-radius:14px!important;border:1px solid rgba(0,0,0,.05);box-shadow:0 1px 3px rgba(0,0,0,.04)!important;padding:24px!important;scroll-margin-top:20px}
+
+.back-top{position:fixed;bottom:24px;right:24px;width:44px;height:44px;border-radius:50%;background:#fff;border:1px solid rgba(0,0,0,.06);box-shadow:0 2px 12px rgba(0,0,0,.1);font-size:20px;cursor:pointer;display:none;align-items:center;justify-content:center;transition:all .2s;color:#2c3e50;z-index:50}
+.back-top:hover{transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,0,0,.15)}
+.back-top.show{display:flex}
+</style>
+</head>
+<body>
+<div class="progress-bar" id="progressBar"></div>
+<button class="sidebar-toggle" id="sidebarToggle" onclick="toggleSidebar()">☰</button>
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-title">📋 目录导航</div>
+    <div class="sidebar-stats">
+      <span id="statsText">0 / 41 已练习</span>
+      <div class="stats-bar"><div class="stats-bar-fill" id="statsFill"></div></div>
+    </div>
+  </div>
+  <div id="tocBody"></div>
+</nav>
+
+<div class="main-content" id="mainContent">
+<div class="page-header">
+  <h1>机试模拟练习题</h1>
+  <div class="subtitle">数据结构全算法 · 栈/队列/链表/树/图/排序/查找/串 · C 语言实现</div>
+</div>
+
+<div class="container">
+
+<!-- ===== 题目0 真题 ===== -->
+<div class="problem">
+  <div class="problem-header">
+    <div class="problem-num" style="background:#d46b08;">真</div>
+    <div>
+      <div class="problem-title">递归求杨辉三角 <span class="tag tag-real">递归</span><span class="tag tag-real">去年真题</span></div>
+      <div class="difficulty diff-mid">难度：★★★☆☆</div>
+    </div>
+  </div>
+  <div class="desc">
+    使用<b>递归</b>求杨辉三角第 i 行第 j 列的值，并输出前 N 行。递归公式：C(i,j) = C(i-1,j-1) + C(i-1,j)，其中 C(i,0) = C(i,i) = 1。
+  </div>
+  <div class="example">输入：N = 5
+输出：
+1
+1 1
+1 2 1
+1 3 3 1
+1 4 6 4 1</div>
+  <button class="hint-btn" onclick="toggle(this,'hint0')">💡 思路提示</button>
+  <button class="hint-btn" onclick="toggle(this,'code0')">📝 参考代码</button>
+  <div class="hint" id="hint0">
+    <b>思路：</b>定义递归函数 C(i,j)：当 j==0 或 j==i 时返回 1（边界），否则返回 C(i-1,j-1) + C(i-1,j)。主函数用双重循环输出前 N 行。<br><br>
+    <b>优化：</b>纯递归会有大量重复计算，可以用<b>记忆化</b>（二维数组存已算过的值）来加速。面试时提一句"可以用记忆化优化"会加分。
+  </div>
+  <div class="code-block" id="code0"><span class="cm">// 递归求杨辉三角</span>
+<span class="kw">#include</span> &lt;stdio.h&gt;
+
+<span class="kw">int</span> memo[<span class="num">50</span>][<span class="num">50</span>]; <span class="cm">// 记忆化数组</span>
+
+<span class="kw">int</span> <span class="fn">C</span>(<span class="kw">int</span> i, <span class="kw">int</span> j) {
+    <span class="kw">if</span> (j == <span class="num">0</span> || j == i) <span class="kw">return</span> <span class="num">1</span>;
+    <span class="kw">if</span> (memo[i][j] != <span class="num">0</span>) <span class="kw">return</span> memo[i][j]; <span class="cm">// 已算过直接返回</span>
+    memo[i][j] = C(i - <span class="num">1</span>, j - <span class="num">1</span>) + C(i - <span class="num">1</span>, j);
+    <span class="kw">return</span> memo[i][j];
+}
+
+<span class="kw">int</span> <span class="fn">main</span>() {
+    <span class="kw">int</span> n, i, j;
+    scanf(<span class="str">"%d"</span>, &n);
+
+    <span class="kw">for</span> (i = <span class="num">0</span>; i < n; i++) {
+        <span class="kw">for</span> (j = <span class="num">0</span>; j <= i; j++)
+            printf(<span class="str">"%d "</span>, C(i, j));
+        printf(<span class="str">"\n"</span>);
+    }
+    <span class="kw">return</span> <span class="num">0</span>;
+}</div>
+</div>
+
+<!-- ===== 题目1 ===== -->
+<div class="problem">
+  <div class="problem-header">
+    <div class="problem-num">1</div>
+    <div>
+      <div class="problem-title">用栈实现进制转换 <span class="tag tag-stack">栈</span></div>
+      <div class="difficulty diff-easy">难度：★★☆☆☆</div>
+    </div>
+  </div>
+  <div class="desc">
+    输入一个十进制正整数 N 和目标进制 R（2≤R≤16），使用<b>栈</b>将 N 转换为 R 进制并输出。
+  </div>
+  <div class="example">输入：N=100, R=8
+输出：144
+
+输入：N=255, R=16
+输出：FF</div>
+  <button class="hint-btn" onclick="toggle(this,'hint1')">💡 思路提示</button>
+  <button class="hint-btn" onclick="toggle(this,'code1')">📝 参考代码</button>
+  <div class="hint" id="hint1">
+    <b>思路：</b>反复对 N 取余 R，余数压栈。N 除以 R 后继续。最后依次弹栈输出即可（栈的后进先出恰好实现了逆序输出）。16 进制时余数 10-15 用 A-F 表示。
+  </div>
+  <div class="code-block" id="code1"><span class="kw">#include</span> &lt;stdio.h&gt;
+
+<span class="kw">#define</span> MAXN 100
+<span class="kw">int</span> stack[MAXN], top = -<span class="num">1</span>;
+
+<span class="kw">int</span> <span class="fn">main</span>() {
+    <span class="kw">int</span> n, r;
+    scanf(<span class="str">"%d%d"</span>, &n, &r);
+
+    <span class="kw">char</span> digits[] = <span class="str">"0123456789ABCDEF"</span>;
+
+    <span class="kw">while</span> (n > <span class="num">0</span>) {
+        stack[++top] = n % r;
+        n /= r;
+    }
+
+    <span class="kw">while</span> (top >= <span class="num">0</span>)
+        printf(<span class="str">"%c"</span>, digits[stack[top--]]);
+    printf(<span class="str">"\n"</span>);
+
+    <span class="kw">return</span> <span class="num">0</span>;
+}</div>
+</div>
+
+<!-- ===== 题目2 ===== -->
+<div class="problem">
+  <div class="problem-header">
+    <div class="problem-num">2</div>
+    <div>
+      <div class="problem-title">用栈判断回文字符串 <span class="tag tag-stack">栈</span></div>
+      <div class="difficulty diff-easy">难度：★★☆☆☆</div>
+    </div>
+  </div>
+  <div class="desc">
+    输入一个字符串，使用<b>栈</b>判断它是否为回文字符串。输出 "Yes" 或 "No"。
+  </div>
+  <div class="example">输入：abcba
+输出：Yes
+
+输入：abcde
+输出：No</div>
+  <button class="hint-btn" onclick="toggle(this,'hint2')">💡 思路提示</button>
+  <div class="hint" id="hint2">
+    <b>思路：</b>将字符串的前半部分依次压栈，然后从字符串的后半部分开始逐个与弹栈元素比较。如果全部匹配则是回文。注意奇偶长度的处理：奇数长度时中间字符跳过。
+  </div>
+</div>
+
+<!-- ===== 题目3 ===== -->
+<div class="problem">
+  <div class="problem-header">
+    <div class="problem-num">3</div>
+    <div>
+      <div class="problem-title">用栈计算后缀表达式 <span class="tag tag-stack">栈</span></div>
+      <div class="difficulty diff-mid">难度：★★★☆☆</div>
+    </div>
+  </div>
+  <div class="desc">
+    输入一个后缀表达式（逆波兰表达式），每个元素用空格隔开，使用<b>栈</b>计算并输出结果。支持 +、-、*、/ 四种运算。
+  </div>
+  <div class="example">输入：3 4 + 5 * 2 -
+计算过程：(3+4)*5-2 = 33
+输出：33</div>
+  <button class="hint-btn" onclick="toggle(this,'hint3')">💡 思路提示</button>
+  <button class="hint-btn" onclick="toggle(this,'code3')">📝 参考代码</button>
+  <div class="hint" id="hint3">
+    <b>思路：</b>遍历表达式：遇到数字则压栈；遇到运算符则弹出栈顶两个数，先弹的是右操作数，后弹的是左操作数，计算后将结果压回栈。最终栈中唯一元素即为结果。
+  </div>
+  <div class="code-block" id="code3"><span class="kw">#include</span> &lt;stdio.h&gt;
+<span class="kw">#include</span> &lt;string.h&gt;
+<span class="kw">#include</span> &lt;stdlib.h&gt;
+
+<span class="kw">int</span> stack[<span class="num">100</span>], top = -<span class="num">1</span>;
+
+<span class="kw">int</span> <span class="fn">main</span>() {
+    <span class="kw">char</span> token[<span class="num">20</span>];
+
+    <span class="kw">while</span> (scanf(<span class="str">"%s"</span>, token) != EOF) {
+        <span class="kw">if</span> (token[<span class="num">0</span>] >= <span class="str">'0'</span> && token[<span class="num">0</span>] <= <span class="str">'9'</span> ||
+            (token[<span class="num">0</span>] == <span class="str">'-'</span> && strlen(token) > <span class="num">1</span>)) {
+            stack[++top] = atoi(token);
+        } <span class="kw">else</span> {
+            <span class="kw">int</span> b = stack[top--];
+            <span class="kw">int</span> a = stack[top--];
+            <span class="kw">switch</span> (token[<span class="num">0</span>]) {
+                <span class="kw">case</span> <span class="str">'+'</span>: stack[++top] = a + b; <span class="kw">break</span>;
+                <span class="kw">case</span> <span class="str">'-'</span>: stack[++top] = a - b; <span class="kw">break</span>;
+                <span class="kw">case</span> <span class="str">'*'</span>: stack[++top] = a * b; <span class="kw">break</span>;
+                <span class="kw">case</span> <span class="str">'/'</span>: stack[++top] = a / b; <span class="kw">break</span>;
+            }
+        }
+    }
+    printf(<span class="str">"%d\n"</span>, stack[top]);
+    <span class="kw">return</span> <span class="num">0</span>;
+}</div>
+</div>
+
+<!-- ===== 题目4 ===== -->
+<div class="problem">
+  <div class="problem-header">
+    <div class="problem-num">4</div>
+    <div>
+      <div class="problem-title">用队列模拟约瑟夫环 <span class="tag tag-queue">队列</span></div>
+      <div class="difficulty diff-mid">难度：★★★☆☆</div>
+    </div>
+  </div>
+  <div class="desc">
+    N 个人围成一圈，从第 1 个人开始报数，报到 M 的人出列，然后从下一个人重新开始报数。使用<b>队列</b>模拟这个过程，按出列顺序输出每个人的编号。
+  </div>
+  <div class="example">输入：N=7, M=3
+输出：3 6 2 7 5 1 4</div>
+  <button class="hint-btn" onclick="toggle(this,'hint4')">💡 思路提示</button>
+  <button class="hint-btn" onclick="toggle(this,'code4')">📝 参考代码</button>
+  <div class="hint" id="hint4">
+    <b>思路：</b>先将 1~N 入队。然后循环：出队 M-1 个人并重新入队（模拟跳过），第 M 个人出队并输出（淘汰）。重复直到队列为空。队列的先进先出特性完美模拟了"围圈报数"。
+  </div>
+  <div class="code-block" id="code4"><span class="kw">#include</span> &lt;stdio.h&gt;
+
+<span class="kw">int</span> queue[<span class="num">1000</span>], front = <span class="num">0</span>, rear = <span class="num">0</span>;
+
+<span class="kw">void</span> <span class="fn">enqueue</span>(<span class="kw">int</span> x) { queue[rear++] = x; }
+<span class="kw">int</span>  <span class="fn">dequeue</span>() { <span class="kw">return</span> queue[front++]; }
+<span class="kw">int</span>  <span class="fn">size</span>() { <span class="kw">return</span> rear - front; }
+
+<span class="kw">int</span> <span class="fn">main</span>() {
+    <span class="kw">int</span> n, m, i;
+    scanf(<span class="str">"%d%d"</span>, &n, &m);
+
+    <span class="kw">for</span> (i = <span class="num">1</span>; i <= n; i++)
+        enqueue(i);
+
+    <span class="kw">while</span> (size() > <span class="num">0</span>) {
+        <span class="kw">for</span> (i = <span class="num">1</span>; i < m; i++)
+            enqueue(dequeue());  <span class="cm">// 前 M-1 个重新入队</span>
+        printf(<span class="str">"%d "</span>, dequeue()); <span class="cm">// 第 M 个淘汰</span>
+    }
+    printf(<span class="str">"\n"</span>);
+    <span class="kw">return</span> <span class="num">0</span>;
+}</div>
+</div>
+
+<!-- ===== 题目5 ===== -->
+<div class="problem">
+  <div class="problem-header">
+    <div class="problem-num">5</div>
+    <div>
+      <div class="problem-title">用栈括号匹配 <span class="tag tag-stack">栈</span></div>
+      <div class="difficulty diff-easy">难度：★★☆☆☆</div>
+    </div>
+  </div>
+  <div class="desc">
+    输入一个只包含 ()[]{}  的字符串，使用<b>栈</b>判断括号是否合法匹配。输出 "Yes" 或 "No"。
+  </div>
+  <div class="example">输入：{[()]}
+输出：Yes
+
+输入：{[(])}
+输出：No</div>
+  <button class="hint-btn" onclick="toggle(this,'hint5')">💡 思路提示</button>
+  <div class="hint" id="hint5">
+    <b>思路：</b>遍历字符串：遇到左括号压栈；遇到右括号时弹栈，检查弹出的左括号是否与当前右括号匹配。最终栈为空则匹配成功。注意边界：右括号多余（栈已空还要弹）和左括号多余（遍历完栈不空）。
+  </div>
+</div>
+
+<!-- ===== 题目6 ===== -->
+<div class="problem">
+  <div class="problem-header">
+    <div class="problem-num">6</div>
+    <div>
+      <div class="problem-title">用队列模拟层次遍历二叉树 <span class="tag tag-queue">队列</span></div>
+      <div class="difficulty diff-mid">难度：★★★☆☆</div>
+    </div>
+  </div>
+  <div class="desc">
+    给定一棵二叉树（用数组存储，1 为根，节点 i 的左子为 2i，右子为 2i+1），使用<b>队列</b>实现层次遍历（BFS），逐层输出节点值。
+  </div>
+  <div class="example">输入：树数组 [_, 1, 2, 3, 4, 5, 6, 7]（下标从1开始）
+输出：
+Level 1: 1
+Level 2: 2 3
+Level 3: 4 5 6 7</div>
+  <button class="hint-btn" onclick="toggle(this,'hint6')">💡 思路提示</button>
+  <div class="hint" id="hint6">
+    <b>思路：</b>根节点入队。每次处理一层：记录当前队列长度 len，循环 len 次，每次出队一个节点并输出，将其左右子节点入队（如果存在）。一层处理完后换行。
+  </div>
+</div>
+
+<!-- ===== 题目7 ===== -->
+<div class="problem">
+  <div class="problem-header">
+    <div class="problem-num">7</div>
+    <div>
+      <div class="problem-title">用两个栈实现队列 <span class="tag tag-stack">栈</span></div>
+      <div class="difficulty diff-mid">难度：★★★☆☆</div>
+    </div>
+  </div>
+  <div class="desc">
+    使用<b>两个栈</b>来模拟队列的 enqueue（入队）和 dequeue（出队）操作。处理 Q 条操作命令，每次 dequeue 时输出出队的元素。
+  </div>
+  <div class="example">操作序列：
+enqueue 1
+enqueue 2
+enqueue 3
+dequeue    → 输出 1
+dequeue    → 输出 2
+enqueue 4
+dequeue    → 输出 3</div>
+  <button class="hint-btn" onclick="toggle(this,'hint7')">💡 思路提示</button>
+  <div class="hint" id="hint7">
+    <b>思路：</b>栈A负责入队（push），栈B负责出队（pop）。入队时直接压入A。出队时：如果B不空，直接从B弹出；如果B空了，把A中所有元素逐个弹出并压入B，再从B弹出。这样通过两次反转实现了先进先出。<br><br>
+    <b>这是经典面试题，务必掌握！</b>
+  </div>
+</div>
+
+<!-- ===== 题目8 ===== -->
+<div class="problem">
+  <div class="problem-header">
+    <div class="problem-num">8</div>
+    <div>
+      <div class="problem-title">用栈模拟斐波那契数列 <span class="tag tag-stack">栈</span></div>
+      <div class="difficulty diff-mid">难度：★★★☆☆</div>
+    </div>
+  </div>
+  <div class="desc">
+    使用<b>栈</b>来生成斐波那契数列的前 N 项。栈中始终维护最近的两个数，利用栈顶元素计算下一个数。输出完整数列。
+  </div>
+  <div class="example">输入：N = 10
+输出：1 1 2 3 5 8 13 21 34 55</div>
+  <button class="hint-btn" onclick="toggle(this,'hint8')">💡 思路提示</button>
+  <div class="hint" id="hint8">
+    <b>思路：</b>初始压入 1, 1。每次弹出栈顶两个元素 a 和 b，计算 c = a + b，输出 c，然后将 b 和 c 压回栈（保持栈中有最新的两个数）。重复 N-2 次。<br><br>
+    <b>和杨辉三角真题非常类似</b>——都是"用某种数据结构辅助递推/迭代过程"。
+  </div>
+</div>
+
+<!-- ===== 参考 ===== -->
+<div style="text-align:center;color:#c0392b;font-size:20px;font-weight:700;margin:30px 0 16px;letter-spacing:4px;">── 递归专题 ──</div>
+
+<!-- ===== 递归1 ===== -->
+<div class="problem">
+  <div class="problem-header">
+    <div class="problem-num" style="background:#e67e22;">R1</div>
+    <div>
+      <div class="problem-title">递归求斐波那契数列 <span class="tag tag-real">递归</span></div>
+      <div class="difficulty diff-easy">难度：★★☆☆☆</div>
+    </div>
+  </div>
+  <div class="desc">
+    用<b>递归</b>求斐波那契数列第 N 项。F(1)=F(2)=1，F(n)=F(n-1)+F(n-2)。要求同时输出递归调用次数。
+  </div>
+  <div class="example">输入：N = 10
+输出：F(10) = 55</div>
+  <button class="hint-btn" onclick="toggle(this,'hintR1')">💡 思路提示</button>
+  <button class="hint-btn" onclick="toggle(this,'codeR1')">📝 参考代码</button>
+  <div class="hint" id="hintR1">
+    <b>思路：</b>直接翻译递推公式。边界：n≤2 返回 1。递归：返回 fib(n-1) + fib(n-2)。<br>
+    <b>进阶：</b>面试可能问"递归效率低怎么办"→ 答：记忆化递归或改用循环。
+  </div>
+  <div class="code-block" id="codeR1"><span class="kw">#include</span> &lt;stdio.h&gt;
+
+<span class="kw">int</span> cnt = <span class="num">0</span>;
+
+<span class="kw">int</span> <span class="fn">fib</span>(<span class="kw">int</span> n) {
+    cnt++;
+    <span class="kw">if</span> (n <= <span class="num">2</span>) <span class="kw">return</span> <span class="num">1</span>;
+    <span class="kw">return</span> fib(n - <span class="num">1</span>) + fib(n - <span class="num">2</span>);
+}
+
+<span class="kw">int</span> <span class="fn">main</span>() {
+    <span class="kw">int</span> n;
+    scanf(<span class="str">"%d"</span>, &n);
+    printf(<span class="str">"F(%d) = %d\n"</span>, n, fib(n));
+    printf(<span class="str">"递归调用次数: %d\n"</span>, cnt);
+    <span class="kw">return</span> <span class="num">0</span>;
+}</div>
+</div>
+
+<!-- ===== 递归2 ===== -->
+<div class="problem">
+  <div class="problem-header">
+    <div class="problem-num" style="background:#e67e22;">R2</div>
+    <div>
+      <div class="problem-title">递归求阶乘 + 组合数 <span class="tag tag-real">递归</span></div>
+      <div class="difficulty diff-easy">难度：★★☆☆☆</div>
+    </div>
+  </div>
+  <div class="desc">
+    (1) 用递归求 N 的阶乘。<br>
+    (2) 利用阶乘函数，计算组合数 C(n,k) = n! / (k! × (n-k)!)
+  </div>
+  <div class="example">输入：N=5, K=2
+输出：5! = 120, C(5,2) = 10</div>
+  <button class="hint-btn" onclick="toggle(this,'hintR2')">💡 思路提示</button>
+  <button class="hint-btn" onclick="toggle(this,'codeR2')">📝 参考代码</button>
+  <div class="hint" id="hintR2">
+    <b>思路：</b>阶乘递归：fact(0) = 1，fact(n) = n × fact(n-1)。组合数直接调用阶乘函数计算。<br>
+    <b>注意：</b>N 大了会溢出，用 long long。面试可能问"递归求阶乘的时间和空间复杂度"→ 答：O(n) 时间，O(n) 栈空间。
+  </div>
+  <div class="code-block" id="codeR2"><span class="kw">#include</span> &lt;stdio.h&gt;
+
+<span class="kw">long long</span> <span class="fn">fact</span>(<span class="kw">int</span> n) {
+    <span class="kw">if</span> (n <= <span class="num">1</span>) <span class="kw">return</span> <span class="num">1</span>;
+    <span class="kw">return</span> n * fact(n - <span class="num">1</span>);
+}
+
+<span class="kw">int</span> <span class="fn">main</span>() {
+    <span class="kw">int</span> n, k;
+    scanf(<span class="str">"%d%d"</span>, &n, &k);
+    printf(<span class="str">"%d! = %lld\n"</span>, n, fact(n));
+    printf(<span class="str">"C(%d,%d) = %lld\n"</span>, n, k, fact(n) / (fact(k) * fact(n - k)));
+    <span class="kw">return</span> <span class="num">0</span>;
+}</div>
+</div>
+
+<!-- ===== 递归3 ===== -->
+<div class="problem">
+  <div class="problem-header">
+    <div class="problem-num" style="background:#e67e22;">R3</div>
+    <div>
+      <div class="problem-title">递归求汉诺塔 <span class="tag tag-real">递归</span></div>
+      <div class="difficulty diff-mid">难度：★★★☆☆</div>
+    </div>
+  </div>
+  <div class="desc">
+    经典汉诺塔问题：将 N 个盘子从柱 A 移到柱 C，借助柱 B。用<b>递归</b>输出每一步的移动过程，并统计总步数。
+  </div>
+  <div class="example">输入：N = 3
+输出：
+A -> C
+A -> B
+C -> B
+A -> C
+B -> A
+B -> C
+A -> C
+总步数：7</div>
+  <button class="hint-btn" onclick="toggle(this,'hintR3')">💡 思路提示</button>
+  <button class="hint-btn" onclick="toggle(this,'codeR3')">📝 参考代码</button>
+  <div class="hint" id="hintR3">
+    <b>思路：</b>hanoi(n, from, to, via)：<br>
+    ① 把上面 n-1 个盘从 from 移到 via（借助 to）<br>
+    ② 把最大的盘从 from 移到 to（输出这一步）<br>
+    ③ 把 n-1 个盘从 via 移到 to（借助 from）<br>
+    边界：n==1 时直接 from→to。总步数 = 2^n - 1。<br><br>
+    <b>经典递归题，务必掌握！面试笔试都可能出。</b>
+  </div>
+  <div class="code-block" id="codeR3"><span class="kw">#include</span> &lt;stdio.h&gt;
+
+<span class="kw">int</span> cnt = <span class="num">0</span>;
+
+<span class="kw">void</span> <span class="fn">hanoi</span>(<span class="kw">int</span> n, <span class="kw">char</span> from, <span class="kw">char</span> to, <span class="kw">char</span> via) {
+    <span class="kw">if</span> (n == <span class="num">1</span>) {
+        printf(<span class="str">"%c -> %c\n"</span>, from, to);
+        cnt++;
+        <span class="kw">return</span>;
+    }
+    hanoi(n - <span class="num">1</span>, from, via, to);
+    printf(<span class="str">"%c -> %c\n"</span>, from, to);
+    cnt++;
+    hanoi(n - <span class="num">1</span>, via, to, from);
+}
+
+<span class="kw">int</span> <span class="fn">main</span>() {
+    <span class="kw">int</span> n;
+    scanf(<span class="str">"%d"</span>, &n);
+    hanoi(n, <span class="str">'A'</span>, <span class="str">'C'</span>, <span class="str">'B'</span>);
+    printf(<span class="str">"总步数：%d\n"</span>, cnt);
+    <span class="kw">return</span> <span class="num">0</span>;
+}</div>
+</div>
+
+<!-- ===== 递归4 ===== -->
+<div class="problem">
+  <div class="problem-header">
+    <div class="problem-num" style="background:#e67e22;">R4</div>
+    <div>
+      <div class="problem-title">递归求最大公约数（GCD）<span class="tag tag-real">递归</span></div>
+      <div class="difficulty diff-easy">难度：★★☆☆☆</div>
+    </div>
+  </div>
+  <div class="desc">
+    用<b>递归</b>实现欧几里得算法求两个正整数的最大公约数。然后利用 GCD 求最小公倍数 LCM。
+  </div>
+  <div class="example">输入：A=12, B=8
+输出：GCD = 4, LCM = 24</div>
+  <button class="hint-btn" onclick="toggle(this,'hintR4')">💡 思路提示</button>
+  <button class="hint-btn" onclick="toggle(this,'codeR4')">📝 参考代码</button>
+  <div class="hint" id="hintR4">
+    <b>思路：</b>gcd(a, b)：如果 b==0 返回 a，否则返回 gcd(b, a%b)。LCM = a × b / GCD。<br>
+    <b>这是最简洁优美的递归之一，两行代码，务必记住。</b>
+  </div>
+  <div class="code-block" id="codeR4"><span class="kw">#include</span> &lt;stdio.h&gt;
+
+<span class="kw">int</span> <span class="fn">gcd</span>(<span class="kw">int</span> a, <span class="kw">int</span> b) {
+    <span class="kw">if</span> (b == <span class="num">0</span>) <span class="kw">return</span> a;
+    <span class="kw">return</span> gcd(b, a % b);
+}
+
+<span class="kw">int</span> <span class="fn">main</span>() {
+    <span class="kw">int</span> a, b;
+    scanf(<span class="str">"%d%d"</span>, &a, &b);
+    <span class="kw">int</span> g = gcd(a, b);
+    printf(<span class="str">"GCD = %d, LCM = %d\n"</span>, g, a / g * b);
+    <span class="kw">return</span> <span class="num">0</span>;
+}</div>
+</div>
+
+<!-- ===== 递归5 ===== -->
+<div class="problem">
+  <div class="problem-header">
+    <div class="problem-num" style="background:#e67e22;">R5</div>
+    <div>
+      <div class="problem-title">递归实现快速幂 <span class="tag tag-real">递归</span></div>
+      <div class="difficulty diff-mid">难度：★★★☆☆</div>
+    </div>
+  </div>
+  <div class="desc">
+    用<b>递归</b>计算 a 的 n 次方（a^n），要求时间复杂度 O(log n)，不能用循环乘 n 次。
+  </div>
+  <div class="example">输入：a=2, n=10
+输出：1024</div>
+  <button class="hint-btn" onclick="toggle(this,'hintR5')">💡 思路提示</button>
+  <button class="hint-btn" onclick="toggle(this,'codeR5')">📝 参考代码</button>
+  <div class="hint" id="hintR5">
+    <b>思路：</b>power(a, n)：<br>
+    n==0 → 返回 1<br>
+    n 是偶数 → half = power(a, n/2)，返回 half × half<br>
+    n 是奇数 → 返回 a × power(a, n-1)<br>
+    <b>关键：</b>偶数时不要写 power(a,n/2) × power(a,n/2)，这样会算两遍。要先存变量再相乘。
+  </div>
+  <div class="code-block" id="codeR5"><span class="kw">#include</span> &lt;stdio.h&gt;
+
+<span class="kw">long long</span> <span class="fn">power</span>(<span class="kw">int</span> a, <span class="kw">int</span> n) {
+    <span class="kw">if</span> (n == <span class="num">0</span>) <span class="kw">return</span> <span class="num">1</span>;
+    <span class="kw">if</span> (n % <span class="num">2</span> == <span class="num">0</span>) {
+        <span class="kw">long long</span> half = power(a, n / <span class="num">2</span>);
+        <span class="kw">return</span> half * half;
+    }
+    <span class="kw">return</span> a * power(a, n - <span class="num">1</span>);
+}
+
+<span class="kw">int</span> <span class="fn">main</span>() {
+    <span class="kw">int</span> a, n;
+    scanf(<span class="str">"%d%d"</span>, &a, &n);
+    printf(<span class="str">"%d^%d = %lld\n"</span>, a, n, power(a, n));
+    <span class="kw">return</span> <span class="num">0</span>;
+}</div>
+</div>
+
+<!-- ===== 递归6 ===== -->
+<div class="problem">
+  <div class="problem-header">
+    <div class="problem-num" style="background:#e67e22;">R6</div>
+    <div>
+      <div class="problem-title">递归实现二分查找 <span class="tag tag-real">递归</span></div>
+      <div class="difficulty diff-mid">难度：★★★☆☆</div>
+    </div>
+  </div>
+  <div class="desc">
+    给定一个有序数组和目标值，用<b>递归</b>实现二分查找，返回目标值的下标。若不存在返回 -1。
+  </div>
+  <div class="example">输入：数组 [1, 3, 5, 7, 9, 11, 13], 目标 = 7
+输出：下标 = 3</div>
+  <button class="hint-btn" onclick="toggle(this,'hintR6')">💡 思路提示</button>
+  <button class="hint-btn" onclick="toggle(this,'codeR6')">📝 参考代码</button>
+  <div class="hint" id="hintR6">
+    <b>思路：</b>bsearch(arr, left, right, target)：<br>
+    left > right → 返回 -1<br>
+    mid = (left+right)/2<br>
+    arr[mid] == target → 返回 mid<br>
+    target < arr[mid] → 递归搜索左半<br>
+    target > arr[mid] → 递归搜索右半
+  </div>
+  <div class="code-block" id="codeR6"><span class="kw">#include</span> &lt;stdio.h&gt;
+
+<span class="kw">int</span> <span class="fn">bsearch</span>(<span class="kw">int</span> arr[], <span class="kw">int</span> left, <span class="kw">int</span> right, <span class="kw">int</span> target) {
+    <span class="kw">if</span> (left > right) <span class="kw">return</span> -<span class="num">1</span>;
+    <span class="kw">int</span> mid = (left + right) / <span class="num">2</span>;
+    <span class="kw">if</span> (arr[mid] == target) <span class="kw">return</span> mid;
+    <span class="kw">if</span> (target < arr[mid])
+        <span class="kw">return</span> bsearch(arr, left, mid - <span class="num">1</span>, target);
+    <span class="kw">return</span> bsearch(arr, mid + <span class="num">1</span>, right, target);
+}
+
+<span class="kw">int</span> <span class="fn">main</span>() {
+    <span class="kw">int</span> arr[] = {<span class="num">1,3,5,7,9,11,13</span>};
+    <span class="kw">int</span> n = <span class="num">7</span>, target = <span class="num">7</span>;
+    printf(<span class="str">"下标 = %d\n"</span>, bsearch(arr, <span class="num">0</span>, n-<span class="num">1</span>, target));
+    <span class="kw">return</span> <span class="num">0</span>;
+}</div>
+</div>
+
+<!-- ===== 递归7 ===== -->
+<div class="problem">
+  <div class="problem-header">
+    <div class="problem-num" style="background:#e67e22;">R7</div>
+    <div>
+      <div class="problem-title">递归反转字符串 <span class="tag tag-real">递归</span></div>
+      <div class="difficulty diff-easy">难度：★★☆☆☆</div>
+    </div>
+  </div>
+  <div class="desc">
+    用<b>递归</b>将一个字符串反转。不能使用额外数组，要求原地交换。
+  </div>
+  <div class="example">输入：hello
+输出：olleh</div>
+  <button class="hint-btn" onclick="toggle(this,'hintR7')">💡 思路提示</button>
+  <button class="hint-btn" onclick="toggle(this,'codeR7')">📝 参考代码</button>
+  <div class="hint" id="hintR7">
+    <b>思路：</b>reverse(str, left, right)：交换 str[left] 和 str[right]，然后递归 reverse(str, left+1, right-1)。边界：left >= right 时停止。
+  </div>
+  <div class="code-block" id="codeR7"><span class="kw">#include</span> &lt;stdio.h&gt;
+<span class="kw">#include</span> &lt;string.h&gt;
+
+<span class="kw">void</span> <span class="fn">reverse</span>(<span class="kw">char</span> s[], <span class="kw">int</span> l, <span class="kw">int</span> r) {
+    <span class="kw">if</span> (l >= r) <span class="kw">return</span>;
+    <span class="kw">char</span> tmp = s[l];
+    s[l] = s[r];
+    s[r] = tmp;
+    reverse(s, l + <span class="num">1</span>, r - <span class="num">1</span>);
+}
+
+<span class="kw">int</span> <span class="fn">main</span>() {
+    <span class="kw">char</span> s[<span class="num">100</span>];
+    scanf(<span class="str">"%s"</span>, s);
+    reverse(s, <span class="num">0</span>, strlen(s) - <span class="num">1</span>);
+    printf(<span class="str">"%s\n"</span>, s);
+    <span class="kw">return</span> <span class="num">0</span>;
+}</div>
+</div>
+
+<!-- ===== 递归8 ===== -->
+<div class="problem">
+  <div class="problem-header">
+    <div class="problem-num" style="background:#e67e22;">R8</div>
+    <div>
+      <div class="problem-title">递归求全排列 <span class="tag tag-real">递归</span></div>
+      <div class="difficulty diff-hard">难度：★★★★☆</div>
+    </div>
+  </div>
+  <div class="desc">
+    输入 N 个不同的数字，用<b>递归</b>输出它们的所有排列组合。
+  </div>
+  <div class="example">输入：N=3, 数组 [1, 2, 3]
+输出：
+1 2 3
+1 3 2
+2 1 3
+2 3 1
+3 1 2
+3 2 1</div>
+  <button class="hint-btn" onclick="toggle(this,'hintR8')">💡 思路提示</button>
+  <button class="hint-btn" onclick="toggle(this,'codeR8')">📝 参考代码</button>
+  <div class="hint" id="hintR8">
+    <b>思路：</b>perm(arr, start, end)：<br>
+    start == end → 输出整个数组（一种排列）<br>
+    否则：依次将 arr[start] 与 arr[i]（i从start到end）交换，递归 perm(arr, start+1, end)，然后交换回来（回溯）。<br><br>
+    <b>这就是经典的回溯法，ACM 选手必备技能。</b>
+  </div>
+  <div class="code-block" id="codeR8"><span class="kw">#include</span> &lt;stdio.h&gt;
+
+<span class="kw">void</span> <span class="fn">swap</span>(<span class="kw">int</span> *a, <span class="kw">int</span> *b) {
+    <span class="kw">int</span> t = *a; *a = *b; *b = t;
+}
+
+<span class="kw">void</span> <span class="fn">perm</span>(<span class="kw">int</span> arr[], <span class="kw">int</span> start, <span class="kw">int</span> end) {
+    <span class="kw">if</span> (start == end) {
+        <span class="kw">int</span> i;
+        <span class="kw">for</span> (i = <span class="num">0</span>; i <= end; i++)
+            printf(<span class="str">"%d "</span>, arr[i]);
+        printf(<span class="str">"\n"</span>);
+        <span class="kw">return</span>;
+    }
+    <span class="kw">int</span> i;
+    <span class="kw">for</span> (i = start; i <= end; i++) {
+        swap(&arr[start], &arr[i]);
+        perm(arr, start + <span class="num">1</span>, end);
+        swap(&arr[start], &arr[i]); <span class="cm">// 回溯</span>
+    }
+}
+
+<span class="kw">int</span> <span class="fn">main</span>() {
+    <span class="kw">int</span> arr[] = {<span class="num">1, 2, 3</span>};
+    perm(arr, <span class="num">0</span>, <span class="num">2</span>);
+    <span class="kw">return</span> <span class="num">0</span>;
+}</div>
+</div>
+
+<!-- ===== 树专题 ===== -->
+<div style="text-align:center;color:#27ae60;font-size:20px;font-weight:700;margin:30px 0 16px;letter-spacing:4px;">── 二叉树专题 ──</div>
+
+<!-- ===== 树1 ===== -->
+<div class="problem">
+  <div class="problem-header">
+    <div class="problem-num" style="background:#27ae60;">T1</div>
+    <div>
+      <div class="problem-title">递归建树 + 三种遍历 <span class="tag" style="background:#f6ffed;color:#389e0d;">树</span><span class="tag" style="background:#fff7e6;color:#d46b08;">必会</span></div>
+      <div class="difficulty diff-mid">难度：★★★☆☆</div>
+    </div>
+  </div>
+  <div class="desc">
+    按<b>先序输入</b>建立二叉树（-1 表示空节点），分别输出先序、中序、后序遍历结果。
+  </div>
+  <div class="example">输入：1 2 4 -1 -1 5 -1 -1 3 -1 -1
+对应的树：
+      1
+     / \
+    2   3
+   / \
+  4   5
+
+输出：
+先序: 1 2 4 5 3
+中序: 4 2 5 1 3
+后序: 4 5 2 3 1</div>
+  <button class="hint-btn" onclick="toggle(this,'hintT1')">💡 思路提示</button>
+  <button class="hint-btn" onclick="toggle(this,'codeT1')">📝 参考代码</button>
+  <div class="hint" id="hintT1">
+    <b>建树思路：</b>读一个数，如果是 -1 返回 NULL；否则创建节点，递归建左子树，递归建右子树。<br>
+    <b>遍历思路：</b>三种遍历只有 printf 位置不同——先序放最前，中序放中间，后序放最后。<br><br>
+    <b>记忆口诀：</b>"先中后"说的是<b>根</b>的访问时机。左右顺序永远先左后右。
+  </div>
+  <div class="code-block" id="codeT1"><span class="kw">#include</span> &lt;stdio.h&gt;
+<span class="kw">#include</span> &lt;stdlib.h&gt;
+
+<span class="kw">struct</span> Node {
+    <span class="kw">int</span> data;
+    <span class="kw">struct</span> Node *left, *right;
+};
+
+<span class="kw">struct</span> Node* <span class="fn">newNode</span>(<span class="kw">int</span> val) {
+    <span class="kw">struct</span> Node* p = (<span class="kw">struct</span> Node*)malloc(<span class="kw">sizeof</span>(<span class="kw">struct</span> Node));
+    p->data = val;
+    p->left = p->right = NULL;
+    <span class="kw">return</span> p;
+}
+
+<span class="cm">/* 按先序输入建树，-1 表示空 */</span>
+<span class="kw">struct</span> Node* <span class="fn">buildTree</span>() {
+    <span class="kw">int</span> val;
+    scanf(<span class="str">"%d"</span>, &val);
+    <span class="kw">if</span> (val == -<span class="num">1</span>) <span class="kw">return</span> NULL;
+    <span class="kw">struct</span> Node* node = newNode(val);
+    node->left  = buildTree();
+    node->right = buildTree();
+    <span class="kw">return</span> node;
+}
+
+<span class="kw">void</span> <span class="fn">preorder</span>(<span class="kw">struct</span> Node* r) {
+    <span class="kw">if</span> (!r) <span class="kw">return</span>;
+    printf(<span class="str">"%d "</span>, r->data);  <span class="cm">// 先访问根</span>
+    preorder(r->left);
+    preorder(r->right);
+}
+
+<span class="kw">void</span> <span class="fn">inorder</span>(<span class="kw">struct</span> Node* r) {
+    <span class="kw">if</span> (!r) <span class="kw">return</span>;
+    inorder(r->left);
+    printf(<span class="str">"%d "</span>, r->data);  <span class="cm">// 中间访问根</span>
+    inorder(r->right);
+}
+
+<span class="kw">void</span> <span class="fn">postorder</span>(<span class="kw">struct</span> Node* r) {
+    <span class="kw">if</span> (!r) <span class="kw">return</span>;
+    postorder(r->left);
+    postorder(r->right);
+    printf(<span class="str">"%d "</span>, r->data);  <span class="cm">// 最后访问根</span>
+}
+
+<span class="kw">int</span> <span class="fn">main</span>() {
+    <span class="kw">struct</span> Node* root = buildTree();
+    printf(<span class="str">"先序: "</span>); preorder(root);  printf(<span class="str">"\n"</span>);
+    printf(<span class="str">"中序: "</span>); inorder(root);   printf(<span class="str">"\n"</span>);
+    printf(<span class="str">"后序: "</span>); postorder(root); printf(<span class="str">"\n"</span>);
+    <span class="kw">return</span> <span class="num">0</span>;
+}</div>
+</div>
+
+<!-- ===== 树2 ===== -->
+<div class="problem">
+  <div class="problem-header">
+    <div class="problem-num" style="background:#27ae60;">T2</div>
+    <div>
+      <div class="problem-title">求树的高度 + 节点数 + 叶子数 <span class="tag" style="background:#f6ffed;color:#389e0d;">树</span></div>
+      <div class="difficulty diff-easy">难度：★★☆☆☆</div>
+    </div>
+  </div>
+  <div class="desc">
+    按先序输入建立二叉树，求树的<b>高度</b>、<b>节点总数</b>、<b>叶子节点数</b>。
+  </div>
+  <div class="example">输入：1 2 4 -1 -1 5 -1 -1 3 -1 -1
+树：
+      1
+     / \
+    2   3
+   / \
+  4   5
+
+输出：
+高度: 3
+节点数: 5
+叶子数: 3</div>
+  <button class="hint-btn" onclick="toggle(this,'hintT2')">💡 思路提示</button>
+  <button class="hint-btn" onclick="toggle(this,'codeT2')">📝 参考代码</button>
+  <div class="hint" id="hintT2">
+    <b>高度：</b>空树返回 0，否则 = max(左子树高度, 右子树高度) + 1<br>
+    <b>节点数：</b>空树返回 0，否则 = 左子树节点数 + 右子树节点数 + 1<br>
+    <b>叶子数：</b>空树返回 0，左右都为空返回 1，否则 = 左叶子数 + 右叶子数<br><br>
+    <b>规律：</b>所有树的递归题都是同一个模式 ① 判空返回 ② 递归左 ③ 递归右 ④ 合并结果
+  </div>
+  <div class="code-block" id="codeT2"><span class="kw">#include</span> &lt;stdio.h&gt;
+<span class="kw">#include</span> &lt;stdlib.h&gt;
+
+<span class="kw">struct</span> Node {
+    <span class="kw">int</span> data;
+    <span class="kw">struct</span> Node *left, *right;
+};
+
+<span class="kw">struct</span> Node* <span class="fn">newNode</span>(<span class="kw">int</span> val) {
+    <span class="kw">struct</span> Node* p = (<span class="kw">struct</span> Node*)malloc(<span class="kw">sizeof</span>(<span class="kw">struct</span> Node));
+    p->data = val; p->left = p->right = NULL;
+    <span class="kw">return</span> p;
+}
+
+<span class="kw">struct</span> Node* <span class="fn">buildTree</span>() {
+    <span class="kw">int</span> val; scanf(<span class="str">"%d"</span>, &val);
+    <span class="kw">if</span> (val == -<span class="num">1</span>) <span class="kw">return</span> NULL;
+    <span class="kw">struct</span> Node* node = newNode(val);
+    node->left = buildTree();
+    node->right = buildTree();
+    <span class="kw">return</span> node;
+}
+
+<span class="kw">int</span> <span class="fn">height</span>(<span class="kw">struct</span> Node* r) {
+    <span class="kw">if</span> (!r) <span class="kw">return</span> <span class="num">0</span>;
+    <span class="kw">int</span> lh = height(r->left);
+    <span class="kw">int</span> rh = height(r->right);
+    <span class="kw">return</span> (lh > rh ? lh : rh) + <span class="num">1</span>;
+}
+
+<span class="kw">int</span> <span class="fn">countNodes</span>(<span class="kw">struct</span> Node* r) {
+    <span class="kw">if</span> (!r) <span class="kw">return</span> <span class="num">0</span>;
+    <span class="kw">return</span> countNodes(r->left) + countNodes(r->right) + <span class="num">1</span>;
+}
+
+<span class="kw">int</span> <span class="fn">countLeaves</span>(<span class="kw">struct</span> Node* r) {
+    <span class="kw">if</span> (!r) <span class="kw">return</span> <span class="num">0</span>;
+    <span class="kw">if</span> (!r->left && !r->right) <span class="kw">return</span> <span class="num">1</span>;
+    <span class="kw">return</span> countLeaves(r->left) + countLeaves(r->right);
+}
+
+<span class="kw">int</span> <span class="fn">main</span>() {
+    <span class="kw">struct</span> Node* root = buildTree();
+    printf(<span class="str">"高度: %d\n"</span>, height(root));
+    printf(<span class="str">"节点数: %d\n"</span>, countNodes(root));
+    printf(<span class="str">"叶子数: %d\n"</span>, countLeaves(root));
+    <span class="kw">return</span> <span class="num">0</span>;
+}</div>
+</div>
+
+<!-- ===== 树3 ===== -->
+<div class="problem">
+  <div class="problem-header">
+    <div class="problem-num" style="background:#27ae60;">T3</div>
+    <div>
+      <div class="problem-title">由先序+中序还原树，输出后序 <span class="tag" style="background:#f6ffed;color:#389e0d;">树</span><span class="tag" style="background:#fff1f0;color:#c0392b;">高频</span></div>
+      <div class="difficulty diff-hard">难度：★★★★☆</div>
+    </div>
+  </div>
+  <div class="desc">
+    给定一棵二叉树的<b>先序遍历</b>和<b>中序遍历</b>序列，还原这棵二叉树，输出<b>后序遍历</b>。
+  </div>
+  <div class="example">输入：
+节点数 N = 5
+先序: 1 2 4 5 3
+中序: 4 2 5 1 3
+
+输出：
+后序: 4 5 2 3 1</div>
+  <button class="hint-btn" onclick="toggle(this,'hintT3')">💡 思路提示</button>
+  <button class="hint-btn" onclick="toggle(this,'codeT3')">📝 参考代码</button>
+  <div class="hint" id="hintT3">
+    <b>核心思路：</b><br>
+    ① 先序的<b>第一个元素</b>一定是当前子树的根<br>
+    ② 在中序中<b>找到这个根</b>，它左边的是左子树，右边的是右子树<br>
+    ③ 算出左子树有多少个节点（leftSize），用来在先序中切分左右子树<br>
+    ④ 递归处理左子树和右子树<br><br>
+    <b>这是数据结构考试最经典的树题，务必掌握！</b>
+  </div>
+  <div class="code-block" id="codeT3"><span class="kw">#include</span> &lt;stdio.h&gt;
+<span class="kw">#include</span> &lt;stdlib.h&gt;
+
+<span class="kw">int</span> pre[<span class="num">100</span>], in[<span class="num">100</span>];
+
+<span class="kw">struct</span> Node {
+    <span class="kw">int</span> data;
+    <span class="kw">struct</span> Node *left, *right;
+};
+
+<span class="kw">struct</span> Node* <span class="fn">newNode</span>(<span class="kw">int</span> val) {
+    <span class="kw">struct</span> Node* p = (<span class="kw">struct</span> Node*)malloc(<span class="kw">sizeof</span>(<span class="kw">struct</span> Node));
+    p->data = val; p->left = p->right = NULL;
+    <span class="kw">return</span> p;
+}
+
+<span class="cm">/* preL~preR: 先序区间, inL~inR: 中序区间 */</span>
+<span class="kw">struct</span> Node* <span class="fn">build</span>(<span class="kw">int</span> preL, <span class="kw">int</span> preR, <span class="kw">int</span> inL, <span class="kw">int</span> inR) {
+    <span class="kw">if</span> (preL > preR) <span class="kw">return</span> NULL;
+
+    <span class="kw">struct</span> Node* root = newNode(pre[preL]); <span class="cm">// 先序第一个是根</span>
+
+    <span class="kw">int</span> k; <span class="cm">// 在中序中找根的位置</span>
+    <span class="kw">for</span> (k = inL; k <= inR; k++)
+        <span class="kw">if</span> (in[k] == pre[preL]) <span class="kw">break</span>;
+
+    <span class="kw">int</span> leftSize = k - inL; <span class="cm">// 左子树节点数</span>
+
+    root->left  = build(preL + <span class="num">1</span>, preL + leftSize, inL, k - <span class="num">1</span>);
+    root->right = build(preL + leftSize + <span class="num">1</span>, preR, k + <span class="num">1</span>, inR);
+    <span class="kw">return</span> root;
+}
+
+<span class="kw">void</span> <span class="fn">postorder</span>(<span class="kw">struct</span> Node* r) {
+    <span class="kw">if</span> (!r) <span class="kw">return</span>;
+    postorder(r->left);
+    postorder(r->right);
+    printf(<span class="str">"%d "</span>, r->data);
+}
+
+<span class="kw">int</span> <span class="fn">main</span>() {
+    <span class="kw">int</span> n, i;
+    scanf(<span class="str">"%d"</span>, &n);
+    <span class="kw">for</span> (i = <span class="num">0</span>; i < n; i++) scanf(<span class="str">"%d"</span>, &pre[i]);
+    <span class="kw">for</span> (i = <span class="num">0</span>; i < n; i++) scanf(<span class="str">"%d"</span>, &in[i]);
+
+    <span class="kw">struct</span> Node* root = build(<span class="num">0</span>, n-<span class="num">1</span>, <span class="num">0</span>, n-<span class="num">1</span>);
+    printf(<span class="str">"后序: "</span>);
+    postorder(root);
+    printf(<span class="str">"\n"</span>);
+    <span class="kw">return</span> <span class="num">0</span>;
+}</div>
+</div>
+
+<!-- ===== 树4 ===== -->
+<div class="problem">
+  <div class="problem-header">
+    <div class="problem-num" style="background:#27ae60;">T4</div>
+    <div>
+      <div class="problem-title">二叉排序树（BST）的插入与查找 <span class="tag" style="background:#f6ffed;color:#389e0d;">树</span></div>
+      <div class="difficulty diff-mid">难度：★★★☆☆</div>
+    </div>
+  </div>
+  <div class="desc">
+    依次读入 N 个整数，逐个<b>插入</b>到一棵空的二叉排序树中，然后输出中序遍历（应为升序）。再读入一个查找值，输出查找路径。
+  </div>
+  <div class="example">输入：
+N = 6
+插入序列: 5 3 7 1 4 6
+查找: 4
+
+输出：
+中序: 1 3 4 5 6 7
+查找 4 的路径: 5 -> 3 -> 4 (找到)</div>
+  <button class="hint-btn" onclick="toggle(this,'hintT4')">💡 思路提示</button>
+  <button class="hint-btn" onclick="toggle(this,'codeT4')">📝 参考代码</button>
+  <div class="hint" id="hintT4">
+    <b>BST 核心规则：</b>左 < 根 < 右<br>
+    <b>插入：</b>从根出发，比当前小往左走，比当前大往右走，走到空位就插入。<br>
+    <b>查找：</b>同理，比较后选择左或右，沿途打印经过的节点。<br>
+    <b>BST 的中序遍历一定是升序的！</b>这是最常考的性质。
+  </div>
+  <div class="code-block" id="codeT4"><span class="kw">#include</span> &lt;stdio.h&gt;
+<span class="kw">#include</span> &lt;stdlib.h&gt;
+
+<span class="kw">struct</span> Node {
+    <span class="kw">int</span> data;
+    <span class="kw">struct</span> Node *left, *right;
+};
+
+<span class="kw">struct</span> Node* <span class="fn">newNode</span>(<span class="kw">int</span> val) {
+    <span class="kw">struct</span> Node* p = (<span class="kw">struct</span> Node*)malloc(<span class="kw">sizeof</span>(<span class="kw">struct</span> Node));
+    p->data = val; p->left = p->right = NULL;
+    <span class="kw">return</span> p;
+}
+
+<span class="cm">/* BST 插入（递归写法） */</span>
+<span class="kw">struct</span> Node* <span class="fn">insert</span>(<span class="kw">struct</span> Node* root, <span class="kw">int</span> val) {
+    <span class="kw">if</span> (!root) <span class="kw">return</span> newNode(val); <span class="cm">// 找到空位，插入</span>
+    <span class="kw">if</span> (val < root->data)
+        root->left = insert(root->left, val);  <span class="cm">// 小于根，往左</span>
+    <span class="kw">else</span>
+        root->right = insert(root->right, val); <span class="cm">// 大于根，往右</span>
+    <span class="kw">return</span> root;
+}
+
+<span class="kw">void</span> <span class="fn">inorder</span>(<span class="kw">struct</span> Node* r) {
+    <span class="kw">if</span> (!r) <span class="kw">return</span>;
+    inorder(r->left);
+    printf(<span class="str">"%d "</span>, r->data);
+    inorder(r->right);
+}
+
+<span class="kw">void</span> <span class="fn">search</span>(<span class="kw">struct</span> Node* root, <span class="kw">int</span> target) {
+    <span class="kw">while</span> (root) {
+        printf(<span class="str">"%d"</span>, root->data);
+        <span class="kw">if</span> (root->data == target) { printf(<span class="str">" (找到)\n"</span>); <span class="kw">return</span>; }
+        printf(<span class="str">" -> "</span>);
+        root = (target < root->data) ? root->left : root->right;
+    }
+    printf(<span class="str">"未找到\n"</span>);
+}
+
+<span class="kw">int</span> <span class="fn">main</span>() {
+    <span class="kw">int</span> n, val, target, i;
+    scanf(<span class="str">"%d"</span>, &n);
+    <span class="kw">struct</span> Node* root = NULL;
+    <span class="kw">for</span> (i = <span class="num">0</span>; i < n; i++) {
+        scanf(<span class="str">"%d"</span>, &val);
+        root = insert(root, val);
+    }
+    printf(<span class="str">"中序: "</span>); inorder(root); printf(<span class="str">"\n"</span>);
+    scanf(<span class="str">"%d"</span>, &target);
+    printf(<span class="str">"查找 %d 的路径: "</span>, target);
+    search(root, target);
+    <span class="kw">return</span> <span class="num">0</span>;
+}</div>
+</div>
+
+<!-- ===== 树5 ===== -->
+<div class="problem">
+  <div class="problem-header">
+    <div class="problem-num" style="background:#27ae60;">T5</div>
+    <div>
+      <div class="problem-title">层次遍历（BFS）<span class="tag" style="background:#f6ffed;color:#389e0d;">树</span><span class="tag" style="background:#f0f5ff;color:#1d39c4;">队列</span></div>
+      <div class="difficulty diff-mid">难度：★★★☆☆</div>
+    </div>
+  </div>
+  <div class="desc">
+    按先序输入建立二叉树，用<b>队列</b>实现层次遍历，逐层输出节点值。
+  </div>
+  <div class="example">输入：1 2 4 -1 -1 5 -1 -1 3 -1 -1
+树：
+      1
+     / \
+    2   3
+   / \
+  4   5
+
+输出：
+Level 1: 1
+Level 2: 2 3
+Level 3: 4 5</div>
+  <button class="hint-btn" onclick="toggle(this,'hintT5')">💡 思路提示</button>
+  <button class="hint-btn" onclick="toggle(this,'codeT5')">📝 参考代码</button>
+  <div class="hint" id="hintT5">
+    <b>思路：</b>根节点入队。每一层的处理：先记下当前队列长度 len，然后出队 len 次（这 len 个就是同一层），每次出队时把左右孩子入队。一层结束后换行。<br><br>
+    <b>层次遍历 = BFS，唯一不用递归的遍历方式</b>（用队列）。你竞赛做 BFS 用的 queue 就是这个。
+  </div>
+  <div class="code-block" id="codeT5"><span class="kw">#include</span> &lt;stdio.h&gt;
+<span class="kw">#include</span> &lt;stdlib.h&gt;
+
+<span class="kw">struct</span> Node {
+    <span class="kw">int</span> data;
+    <span class="kw">struct</span> Node *left, *right;
+};
+
+<span class="kw">struct</span> Node* <span class="fn">newNode</span>(<span class="kw">int</span> val) {
+    <span class="kw">struct</span> Node* p = (<span class="kw">struct</span> Node*)malloc(<span class="kw">sizeof</span>(<span class="kw">struct</span> Node));
+    p->data = val; p->left = p->right = NULL;
+    <span class="kw">return</span> p;
+}
+
+<span class="kw">struct</span> Node* <span class="fn">buildTree</span>() {
+    <span class="kw">int</span> val; scanf(<span class="str">"%d"</span>, &val);
+    <span class="kw">if</span> (val == -<span class="num">1</span>) <span class="kw">return</span> NULL;
+    <span class="kw">struct</span> Node* node = newNode(val);
+    node->left = buildTree();
+    node->right = buildTree();
+    <span class="kw">return</span> node;
+}
+
+<span class="kw">struct</span> Node* queue[<span class="num">1000</span>];
+<span class="kw">int</span> front = <span class="num">0</span>, rear = <span class="num">0</span>;
+
+<span class="kw">int</span> <span class="fn">main</span>() {
+    <span class="kw">struct</span> Node* root = buildTree();
+    <span class="kw">if</span> (!root) <span class="kw">return</span> <span class="num">0</span>;
+
+    queue[rear++] = root;
+    <span class="kw">int</span> level = <span class="num">1</span>;
+
+    <span class="kw">while</span> (front < rear) {
+        <span class="kw">int</span> len = rear - front; <span class="cm">// 当前层的节点数</span>
+        printf(<span class="str">"Level %d: "</span>, level++);
+        <span class="kw">int</span> i;
+        <span class="kw">for</span> (i = <span class="num">0</span>; i < len; i++) {
+            <span class="kw">struct</span> Node* cur = queue[front++];
+            printf(<span class="str">"%d "</span>, cur->data);
+            <span class="kw">if</span> (cur->left)  queue[rear++] = cur->left;
+            <span class="kw">if</span> (cur->right) queue[rear++] = cur->right;
+        }
+        printf(<span class="str">"\n"</span>);
+    }
+    <span class="kw">return</span> <span class="num">0</span>;
+}</div>
+</div>
+
+<!-- ===== 链表专题 ===== -->
+<div style="text-align:center;color:#8e44ad;font-size:20px;font-weight:700;margin:30px 0 16px;letter-spacing:4px;">── 链表专题 ──</div>
+
+<!-- L1 -->
+<div class="problem">
+  <div class="problem-header">
+    <div class="problem-num" style="background:#8e44ad;">L1</div>
+    <div>
+      <div class="problem-title">单链表创建、遍历与逆转 <span class="tag" style="background:#f3e5f5;color:#8e44ad;">链表</span><span class="tag" style="background:#fff7e6;color:#d46b08;">必会</span></div>
+      <div class="difficulty diff-mid">难度：★★★☆☆</div>
+    </div>
+  </div>
+  <div class="desc">读入 N 个整数，用<b>尾插法</b>创建单链表并遍历输出，然后将链表<b>原地逆转</b>并输出。</div>
+  <div class="example">输入：5
+1 2 3 4 5
+输出：
+原链表: 1 2 3 4 5
+逆转后: 5 4 3 2 1</div>
+  <button class="hint-btn" onclick="toggle(this,'hintL1')">💡 思路提示</button>
+  <button class="hint-btn" onclick="toggle(this,'codeL1')">📝 参考代码</button>
+  <div class="hint" id="hintL1">
+    <b>尾插法：</b>维护 tail 指针，新节点接到 tail 后面。<br>
+    <b>逆转（三指针法）：</b>用 prev、curr、next 三个指针，依次把每个节点的 next 指向前一个。<br>
+    <b>链表逆转是最高频的链表题，必须掌握！</b>
+  </div>
+  <div class="code-block" id="codeL1"><span class="kw">#include</span> &lt;stdio.h&gt;
+<span class="kw">#include</span> &lt;stdlib.h&gt;
+
+<span class="kw">struct</span> Node {
+    <span class="kw">int</span> data;
+    <span class="kw">struct</span> Node *next;
+};
+
+<span class="kw">struct</span> Node* <span class="fn">createList</span>(<span class="kw">int</span> n) {
+    <span class="kw">struct</span> Node *head = NULL, *tail = NULL;
+    <span class="kw">int</span> i, val;
+    <span class="kw">for</span> (i = <span class="num">0</span>; i &lt; n; i++) {
+        scanf(<span class="str">"%d"</span>, &amp;val);
+        <span class="kw">struct</span> Node *p = (<span class="kw">struct</span> Node*)malloc(<span class="kw">sizeof</span>(<span class="kw">struct</span> Node));
+        p-&gt;data = val; p-&gt;next = NULL;
+        <span class="kw">if</span> (!head) head = tail = p;
+        <span class="kw">else</span> { tail-&gt;next = p; tail = p; }
+    }
+    <span class="kw">return</span> head;
+}
+
+<span class="kw">void</span> <span class="fn">printList</span>(<span class="kw">struct</span> Node *h) {
+    <span class="kw">while</span> (h) { printf(<span class="str">"%d "</span>, h-&gt;data); h = h-&gt;next; }
+    printf(<span class="str">"\n"</span>);
+}
+
+<span class="cm">/* 三指针法逆转 */</span>
+<span class="kw">struct</span> Node* <span class="fn">reverseList</span>(<span class="kw">struct</span> Node *head) {
+    <span class="kw">struct</span> Node *prev = NULL, *curr = head, *next;
+    <span class="kw">while</span> (curr) {
+        next = curr-&gt;next;
+        curr-&gt;next = prev;
+        prev = curr;
+        curr = next;
+    }
+    <span class="kw">return</span> prev;
+}
+
+<span class="kw">int</span> <span class="fn">main</span>() {
+    <span class="kw">int</span> n;
+    scanf(<span class="str">"%d"</span>, &amp;n);
+    <span class="kw">struct</span> Node *list = createList(n);
+    printf(<span class="str">"原链表: "</span>); printList(list);
+    list = reverseList(list);
+    printf(<span class="str">"逆转后: "</span>); printList(list);
+    <span class="kw">return</span> <span class="num">0</span>;
+}</div>
+</div>
+
+<!-- L2 -->
+<div class="problem">
+  <div class="problem-header">
+    <div class="problem-num" style="background:#8e44ad;">L2</div>
+    <div>
+      <div class="problem-title">合并两个有序链表 <span class="tag" style="background:#f3e5f5;color:#8e44ad;">链表</span></div>
+      <div class="difficulty diff-mid">难度：★★★☆☆</div>
+    </div>
+  </div>
+  <div class="desc">输入两个<b>升序</b>链表，将它们合并为一个新的升序链表并输出。</div>
+  <div class="example">链表A: 1 3 5 7
+链表B: 2 4 6 8
+合并后: 1 2 3 4 5 6 7 8</div>
+  <button class="hint-btn" onclick="toggle(this,'hintL2')">💡 思路提示</button>
+  <button class="hint-btn" onclick="toggle(this,'codeL2')">📝 参考代码</button>
+  <div class="hint" id="hintL2">
+    <b>思路：</b>用一个 dummy 头节点，比较两个链表头部，谁小就接上去，直到某个链表遍历完，把剩余的直接接上。<br>
+    <b>关键：</b>dummy 头节点技巧可以避免处理头节点为空的特殊情况。
+  </div>
+  <div class="code-block" id="codeL2"><span class="kw">#include</span> &lt;stdio.h&gt;
+<span class="kw">#include</span> &lt;stdlib.h&gt;
+
+<span class="kw">struct</span> Node { <span class="kw">int</span> data; <span class="kw">struct</span> Node *next; };
+
+<span class="kw">struct</span> Node* <span class="fn">createList</span>(<span class="kw">int</span> n) {
+    <span class="kw">struct</span> Node *head = NULL, *tail = NULL;
+    <span class="kw">int</span> i, val;
+    <span class="kw">for</span> (i = <span class="num">0</span>; i &lt; n; i++) {
+        scanf(<span class="str">"%d"</span>, &amp;val);
+        <span class="kw">struct</span> Node *p = (<span class="kw">struct</span> Node*)malloc(<span class="kw">sizeof</span>(<span class="kw">struct</span> Node));
+        p-&gt;data = val; p-&gt;next = NULL;
+        <span class="kw">if</span> (!head) head = tail = p;
+        <span class="kw">else</span> { tail-&gt;next = p; tail = p; }
+    }
+    <span class="kw">return</span> head;
+}
+
+<span class="kw">struct</span> Node* <span class="fn">merge</span>(<span class="kw">struct</span> Node *a, <span class="kw">struct</span> Node *b) {
+    <span class="kw">struct</span> Node dummy; dummy.next = NULL;
+    <span class="kw">struct</span> Node *tail = &amp;dummy;
+    <span class="kw">while</span> (a &amp;&amp; b) {
+        <span class="kw">if</span> (a-&gt;data &lt;= b-&gt;data) { tail-&gt;next = a; a = a-&gt;next; }
+        <span class="kw">else</span> { tail-&gt;next = b; b = b-&gt;next; }
+        tail = tail-&gt;next;
+    }
+    tail-&gt;next = a ? a : b;
+    <span class="kw">return</span> dummy.next;
+}
+
+<span class="kw">int</span> <span class="fn">main</span>() {
+    <span class="kw">int</span> n1, n2;
+    scanf(<span class="str">"%d"</span>, &amp;n1); <span class="kw">struct</span> Node *a = createList(n1);
+    scanf(<span class="str">"%d"</span>, &amp;n2); <span class="kw">struct</span> Node *b = createList(n2);
+    <span class="kw">struct</span> Node *m = merge(a, b);
+    <span class="kw">while</span> (m) { printf(<span class="str">"%d "</span>, m-&gt;data); m = m-&gt;next; }
+    <span class="kw">return</span> <span class="num">0</span>;
+}</div>
+</div>
+
+<!-- ===== 排序专题 ===== -->
+<div style="text-align:center;color:#00897b;font-size:20px;font-weight:700;margin:30px 0 16px;letter-spacing:4px;">── 排序专题 ──</div>
+
+<!-- S1 -->
+<div class="problem">
+  <div class="problem-header">
+    <div class="problem-num" style="background:#00897b;">S1</div>
+    <div>
+      <div class="problem-title">冒泡排序 <span class="tag" style="background:#e0f2f1;color:#00897b;">排序</span></div>
+      <div class="difficulty diff-easy">难度：★★☆☆☆</div>
+    </div>
+  </div>
+  <div class="desc">用<b>冒泡排序</b>对 N 个整数升序排列。要求加入<b>提前终止优化</b>（某趟无交换则已有序）。</div>
+  <div class="example">输入：6
+5 3 8 1 2 7
+输出：1 2 3 5 7 8</div>
+  <button class="hint-btn" onclick="toggle(this,'hintS1')">💡 思路提示</button>
+  <button class="hint-btn" onclick="toggle(this,'codeS1')">📝 参考代码</button>
+  <div class="hint" id="hintS1">
+    <b>思路：</b>外层 n-1 趟，内层相邻两两比较并交换。每趟把最大元素"冒泡"到末尾。<br>
+    <b>优化：</b>如果某趟内层循环无交换，说明已有序，提前退出。<br>
+    <b>时间：</b>最坏 O(n²)，最好 O(n)（已有序时）。<b>稳定排序。</b>
+  </div>
+  <div class="code-block" id="codeS1"><span class="kw">#include</span> &lt;stdio.h&gt;
+
+<span class="kw">void</span> <span class="fn">bubbleSort</span>(<span class="kw">int</span> a[], <span class="kw">int</span> n) {
+    <span class="kw">int</span> i, j, tmp, swapped;
+    <span class="kw">for</span> (i = <span class="num">0</span>; i &lt; n - <span class="num">1</span>; i++) {
+        swapped = <span class="num">0</span>;
+        <span class="kw">for</span> (j = <span class="num">0</span>; j &lt; n - <span class="num">1</span> - i; j++) {
+            <span class="kw">if</span> (a[j] &gt; a[j+<span class="num">1</span>]) {
+                tmp = a[j]; a[j] = a[j+<span class="num">1</span>]; a[j+<span class="num">1</span>] = tmp;
+                swapped = <span class="num">1</span>;
+            }
+        }
+        <span class="kw">if</span> (!swapped) <span class="kw">break</span>;
+    }
+}
+
+<span class="kw">int</span> <span class="fn">main</span>() {
+    <span class="kw">int</span> n, a[<span class="num">100</span>], i;
+    scanf(<span class="str">"%d"</span>, &amp;n);
+    <span class="kw">for</span> (i = <span class="num">0</span>; i &lt; n; i++) scanf(<span class="str">"%d"</span>, &amp;a[i]);
+    bubbleSort(a, n);
+    <span class="kw">for</span> (i = <span class="num">0</span>; i &lt; n; i++) printf(<span class="str">"%d "</span>, a[i]);
+    <span class="kw">return</span> <span class="num">0</span>;
+}</div>
+</div>
+
+<!-- S2 -->
+<div class="problem">
+  <div class="problem-header">
+    <div class="problem-num" style="background:#00897b;">S2</div>
+    <div>
+      <div class="problem-title">直接插入排序 <span class="tag" style="background:#e0f2f1;color:#00897b;">排序</span></div>
+      <div class="difficulty diff-easy">难度：★★☆☆☆</div>
+    </div>
+  </div>
+  <div class="desc">用<b>直接插入排序</b>对 N 个整数升序排列。</div>
+  <div class="example">输入：6
+5 3 8 1 2 7
+输出：1 2 3 5 7 8</div>
+  <button class="hint-btn" onclick="toggle(this,'hintS2')">💡 思路提示</button>
+  <button class="hint-btn" onclick="toggle(this,'codeS2')">📝 参考代码</button>
+  <div class="hint" id="hintS2">
+    <b>思路：</b>像打扑克牌——每次拿一张牌(a[i])，在已排好的前 i-1 张中找到合适位置插入。<br>
+    <b>操作：</b>暂存 key=a[i]，从 j=i-1 开始往前比较，比 key 大的元素后移，找到位置后放入 key。<br>
+    <b>时间：</b>最坏 O(n²)，最好 O(n)。<b>稳定排序。</b>
+  </div>
+  <div class="code-block" id="codeS2"><span class="kw">#include</span> &lt;stdio.h&gt;
+
+<span class="kw">void</span> <span class="fn">insertSort</span>(<span class="kw">int</span> a[], <span class="kw">int</span> n) {
+    <span class="kw">int</span> i, j, key;
+    <span class="kw">for</span> (i = <span class="num">1</span>; i &lt; n; i++) {
+        key = a[i];
+        j = i - <span class="num">1</span>;
+        <span class="kw">while</span> (j &gt;= <span class="num">0</span> &amp;&amp; a[j] &gt; key) {
+            a[j+<span class="num">1</span>] = a[j];
+            j--;
+        }
+        a[j+<span class="num">1</span>] = key;
+    }
+}
+
+<span class="kw">int</span> <span class="fn">main</span>() {
+    <span class="kw">int</span> n, a[<span class="num">100</span>], i;
+    scanf(<span class="str">"%d"</span>, &amp;n);
+    <span class="kw">for</span> (i = <span class="num">0</span>; i &lt; n; i++) scanf(<span class="str">"%d"</span>, &amp;a[i]);
+    insertSort(a, n);
+    <span class="kw">for</span> (i = <span class="num">0</span>; i &lt; n; i++) printf(<span class="str">"%d "</span>, a[i]);
+    <span class="kw">return</span> <span class="num">0</span>;
+}</div>
+</div>
+
+<!-- S3 -->
+<div class="problem">
+  <div class="problem-header">
+    <div class="problem-num" style="background:#00897b;">S3</div>
+    <div>
+      <div class="problem-title">简单选择排序 <span class="tag" style="background:#e0f2f1;color:#00897b;">排序</span></div>
+      <div class="difficulty diff-easy">难度：★★☆☆☆</div>
+    </div>
+  </div>
+  <div class="desc">用<b>简单选择排序</b>对 N 个整数升序排列。</div>
+  <div class="example">输入：6
+5 3 8 1 2 7
+输出：1 2 3 5 7 8</div>
+  <button class="hint-btn" onclick="toggle(this,'hintS3')">💡 思路提示</button>
+  <button class="hint-btn" onclick="toggle(this,'codeS3')">📝 参考代码</button>
+  <div class="hint" id="hintS3">
+    <b>思路：</b>每趟从未排序部分找<b>最小值</b>，和未排序部分的第一个交换。<br>
+    <b>时间：</b>始终 O(n²)，无论数据是否有序。<b>不稳定排序。</b>
+  </div>
+  <div class="code-block" id="codeS3"><span class="kw">#include</span> &lt;stdio.h&gt;
+
+<span class="kw">void</span> <span class="fn">selectSort</span>(<span class="kw">int</span> a[], <span class="kw">int</span> n) {
+    <span class="kw">int</span> i, j, minIdx, tmp;
+    <span class="kw">for</span> (i = <span class="num">0</span>; i &lt; n - <span class="num">1</span>; i++) {
+        minIdx = i;
+        <span class="kw">for</span> (j = i + <span class="num">1</span>; j &lt; n; j++)
+            <span class="kw">if</span> (a[j] &lt; a[minIdx]) minIdx = j;
+        <span class="kw">if</span> (minIdx != i) {
+            tmp = a[i]; a[i] = a[minIdx]; a[minIdx] = tmp;
+        }
+    }
+}
+
+<span class="kw">int</span> <span class="fn">main</span>() {
+    <span class="kw">int</span> n, a[<span class="num">100</span>], i;
+    scanf(<span class="str">"%d"</span>, &amp;n);
+    <span class="kw">for</span> (i = <span class="num">0</span>; i &lt; n; i++) scanf(<span class="str">"%d"</span>, &amp;a[i]);
+    selectSort(a, n);
+    <span class="kw">for</span> (i = <span class="num">0</span>; i &lt; n; i++) printf(<span class="str">"%d "</span>, a[i]);
+    <span class="kw">return</span> <span class="num">0</span>;
+}</div>
+</div>
+
+<!-- S4 -->
+<div class="problem">
+  <div class="problem-header">
+    <div class="problem-num" style="background:#00897b;">S4</div>
+    <div>
+      <div class="problem-title">快速排序 <span class="tag" style="background:#e0f2f1;color:#00897b;">排序</span><span class="tag" style="background:#fff1f0;color:#c0392b;">重点</span></div>
+      <div class="difficulty diff-mid">难度：★★★☆☆</div>
+    </div>
+  </div>
+  <div class="desc">用<b>快速排序</b>对 N 个整数升序排列。要求手写 partition + 递归。</div>
+  <div class="example">输入：8
+6 1 2 7 9 3 4 5
+输出：1 2 3 4 5 6 7 9</div>
+  <button class="hint-btn" onclick="toggle(this,'hintS4')">💡 思路提示</button>
+  <button class="hint-btn" onclick="toggle(this,'codeS4')">📝 参考代码</button>
+  <div class="hint" id="hintS4">
+    <b>思路：</b>选一个基准(pivot)，把数组分成"比 pivot 小"和"比 pivot 大"两部分，递归排序两部分。<br>
+    <b>partition 过程：</b>取 a[low] 为 pivot，用 i/j 双指针从两端向中间扫描，j 先动找小的放左边，i 再动找大的放右边，直到 i==j，把 pivot 放到 i 的位置。<br>
+    <b>时间：</b>平均 O(n log n)，最坏 O(n²)。<b>不稳定排序。</b><br>
+    <b>快速排序是考试最高频的排序算法，必须能默写！</b>
+  </div>
+  <div class="code-block" id="codeS4"><span class="kw">#include</span> &lt;stdio.h&gt;
+
+<span class="kw">void</span> <span class="fn">quickSort</span>(<span class="kw">int</span> a[], <span class="kw">int</span> low, <span class="kw">int</span> high) {
+    <span class="kw">if</span> (low &gt;= high) <span class="kw">return</span>;
+    <span class="kw">int</span> pivot = a[low];
+    <span class="kw">int</span> i = low, j = high;
+    <span class="kw">while</span> (i &lt; j) {
+        <span class="kw">while</span> (i &lt; j &amp;&amp; a[j] &gt;= pivot) j--;
+        a[i] = a[j];
+        <span class="kw">while</span> (i &lt; j &amp;&amp; a[i] &lt;= pivot) i++;
+        a[j] = a[i];
+    }
+    a[i] = pivot;
+    quickSort(a, low, i - <span class="num">1</span>);
+    quickSort(a, i + <span class="num">1</span>, high);
+}
+
+<span class="kw">int</span> <span class="fn">main</span>() {
+    <span class="kw">int</span> n, a[<span class="num">100</span>], i;
+    scanf(<span class="str">"%d"</span>, &amp;n);
+    <span class="kw">for</span> (i = <span class="num">0</span>; i &lt; n; i++) scanf(<span class="str">"%d"</span>, &amp;a[i]);
+    quickSort(a, <span class="num">0</span>, n - <span class="num">1</span>);
+    <span class="kw">for</span> (i = <span class="num">0</span>; i &lt; n; i++) printf(<span class="str">"%d "</span>, a[i]);
+    <span class="kw">return</span> <span class="num">0</span>;
+}</div>
+</div>
+
+<!-- S5 -->
+<div class="problem">
+  <div class="problem-header">
+    <div class="problem-num" style="background:#00897b;">S5</div>
+    <div>
+      <div class="problem-title">归并排序 <span class="tag" style="background:#e0f2f1;color:#00897b;">排序</span><span class="tag" style="background:#fff7e6;color:#d46b08;">分治</span></div>
+      <div class="difficulty diff-mid">难度：★★★☆☆</div>
+    </div>
+  </div>
+  <div class="desc">用<b>归并排序</b>对 N 个整数升序排列。体会"分治"思想：先拆分，再合并。</div>
+  <div class="example">输入：8
+6 1 2 7 9 3 4 5
+输出：1 2 3 4 5 6 7 9</div>
+  <button class="hint-btn" onclick="toggle(this,'hintS5')">💡 思路提示</button>
+  <button class="hint-btn" onclick="toggle(this,'codeS5')">📝 参考代码</button>
+  <div class="hint" id="hintS5">
+    <b>思路：</b>① 递归拆分数组为两半 ② 递归排序左半和右半 ③ 将两个有序半部分合并为一个有序数组<br>
+    <b>合并操作：</b>双指针依次比较两个有序子数组，小的先放入临时数组，最后拷贝回原数组。<br>
+    <b>时间：</b>始终 O(n log n)。<b>稳定排序。</b>需要 O(n) 额外空间。
+  </div>
+  <div class="code-block" id="codeS5"><span class="kw">#include</span> &lt;stdio.h&gt;
+
+<span class="kw">int</span> tmp[<span class="num">100</span>];
+
+<span class="kw">void</span> <span class="fn">merge</span>(<span class="kw">int</span> a[], <span class="kw">int</span> l, <span class="kw">int</span> mid, <span class="kw">int</span> r) {
+    <span class="kw">int</span> i = l, j = mid + <span class="num">1</span>, k = l;
+    <span class="kw">while</span> (i &lt;= mid &amp;&amp; j &lt;= r) {
+        <span class="kw">if</span> (a[i] &lt;= a[j]) tmp[k++] = a[i++];
+        <span class="kw">else</span> tmp[k++] = a[j++];
+    }
+    <span class="kw">while</span> (i &lt;= mid) tmp[k++] = a[i++];
+    <span class="kw">while</span> (j &lt;= r)   tmp[k++] = a[j++];
+    <span class="kw">for</span> (i = l; i &lt;= r; i++) a[i] = tmp[i];
+}
+
+<span class="kw">void</span> <span class="fn">mergeSort</span>(<span class="kw">int</span> a[], <span class="kw">int</span> l, <span class="kw">int</span> r) {
+    <span class="kw">if</span> (l &gt;= r) <span class="kw">return</span>;
+    <span class="kw">int</span> mid = (l + r) / <span class="num">2</span>;
+    mergeSort(a, l, mid);
+    mergeSort(a, mid + <span class="num">1</span>, r);
+    merge(a, l, mid, r);
+}
+
+<span class="kw">int</span> <span class="fn">main</span>() {
+    <span class="kw">int</span> n, a[<span class="num">100</span>], i;
+    scanf(<span class="str">"%d"</span>, &amp;n);
+    <span class="kw">for</span> (i = <span class="num">0</span>; i &lt; n; i++) scanf(<span class="str">"%d"</span>, &amp;a[i]);
+    mergeSort(a, <span class="num">0</span>, n - <span class="num">1</span>);
+    <span class="kw">for</span> (i = <span class="num">0</span>; i &lt; n; i++) printf(<span class="str">"%d "</span>, a[i]);
+    <span class="kw">return</span> <span class="num">0</span>;
+}</div>
+</div>
+
+<!-- S6 -->
+<div class="problem">
+  <div class="problem-header">
+    <div class="problem-num" style="background:#00897b;">S6</div>
+    <div>
+      <div class="problem-title">堆排序 <span class="tag" style="background:#e0f2f1;color:#00897b;">排序</span><span class="tag" style="background:#fff1f0;color:#c0392b;">重点</span></div>
+      <div class="difficulty diff-hard">难度：★★★★☆</div>
+    </div>
+  </div>
+  <div class="desc">用<b>堆排序</b>对 N 个整数升序排列。需要实现建大根堆和堆调整过程。</div>
+  <div class="example">输入：8
+6 1 2 7 9 3 4 5
+输出：1 2 3 4 5 6 7 9</div>
+  <button class="hint-btn" onclick="toggle(this,'hintS6')">💡 思路提示</button>
+  <button class="hint-btn" onclick="toggle(this,'codeS6')">📝 参考代码</button>
+  <div class="hint" id="hintS6">
+    <b>核心操作 heapify(a, n, i)：</b>让节点 i 满足大根堆性质——如果左/右孩子比它大，就交换，然后递归调整被交换的孩子。<br>
+    <b>建堆：</b>从最后一个非叶节点(n/2-1)开始，到 0 结束，逐个 heapify。<br>
+    <b>排序：</b>每次把堆顶(最大值)和末尾交换，堆大小减 1，然后 heapify(0) 恢复堆。<br>
+    <b>时间：</b>O(n log n)。<b>不稳定排序。</b><br>
+    <b>堆排序 = 建堆 + n 次取最大值，一定要理解 heapify 过程！</b>
+  </div>
+  <div class="code-block" id="codeS6"><span class="kw">#include</span> &lt;stdio.h&gt;
+
+<span class="kw">void</span> <span class="fn">heapify</span>(<span class="kw">int</span> a[], <span class="kw">int</span> n, <span class="kw">int</span> i) {
+    <span class="kw">int</span> largest = i;
+    <span class="kw">int</span> l = <span class="num">2</span> * i + <span class="num">1</span>, r = <span class="num">2</span> * i + <span class="num">2</span>;
+    <span class="kw">if</span> (l &lt; n &amp;&amp; a[l] &gt; a[largest]) largest = l;
+    <span class="kw">if</span> (r &lt; n &amp;&amp; a[r] &gt; a[largest]) largest = r;
+    <span class="kw">if</span> (largest != i) {
+        <span class="kw">int</span> tmp = a[i]; a[i] = a[largest]; a[largest] = tmp;
+        heapify(a, n, largest);
+    }
+}
+
+<span class="kw">void</span> <span class="fn">heapSort</span>(<span class="kw">int</span> a[], <span class="kw">int</span> n) {
+    <span class="kw">int</span> i, tmp;
+    <span class="kw">for</span> (i = n / <span class="num">2</span> - <span class="num">1</span>; i &gt;= <span class="num">0</span>; i--)  <span class="cm">// 建大根堆</span>
+        heapify(a, n, i);
+    <span class="kw">for</span> (i = n - <span class="num">1</span>; i &gt; <span class="num">0</span>; i--) {       <span class="cm">// 排序</span>
+        tmp = a[<span class="num">0</span>]; a[<span class="num">0</span>] = a[i]; a[i] = tmp;
+        heapify(a, i, <span class="num">0</span>);
+    }
+}
+
+<span class="kw">int</span> <span class="fn">main</span>() {
+    <span class="kw">int</span> n, a[<span class="num">100</span>], i;
+    scanf(<span class="str">"%d"</span>, &amp;n);
+    <span class="kw">for</span> (i = <span class="num">0</span>; i &lt; n; i++) scanf(<span class="str">"%d"</span>, &amp;a[i]);
+    heapSort(a, n);
+    <span class="kw">for</span> (i = <span class="num">0</span>; i &lt; n; i++) printf(<span class="str">"%d "</span>, a[i]);
+    <span class="kw">return</span> <span class="num">0</span>;
+}</div>
+</div>
+
+<!-- ===== 图论专题 ===== -->
+<div style="text-align:center;color:#1565c0;font-size:20px;font-weight:700;margin:30px 0 16px;letter-spacing:4px;">── 图论专题 ──</div>
+
+<!-- G1 -->
+<div class="problem">
+  <div class="problem-header">
+    <div class="problem-num" style="background:#1565c0;">G1</div>
+    <div>
+      <div class="problem-title">图的 DFS 与 BFS（邻接矩阵）<span class="tag" style="background:#e3f2fd;color:#1565c0;">图</span><span class="tag" style="background:#fff7e6;color:#d46b08;">必会</span></div>
+      <div class="difficulty diff-mid">难度：★★★☆☆</div>
+    </div>
+  </div>
+  <div class="desc">输入无向图的邻接矩阵，分别用<b>DFS</b>（递归）和<b>BFS</b>（队列）从顶点 0 出发遍历图。</div>
+  <div class="example">输入：
+顶点数 5, 边数 6
+边: 0-1, 0-2, 1-3, 1-4, 2-4, 3-4
+DFS: 0 1 3 4 2
+BFS: 0 1 2 3 4</div>
+  <button class="hint-btn" onclick="toggle(this,'hintG1')">💡 思路提示</button>
+  <button class="hint-btn" onclick="toggle(this,'codeG1')">📝 参考代码</button>
+  <div class="hint" id="hintG1">
+    <b>DFS（递归）：</b>访问当前节点 → 标记已访问 → 遍历所有邻接点 → 未访问的递归进入。<br>
+    <b>BFS（队列）：</b>起点入队 → 循环出队一个节点 → 遍历其邻接点 → 未访问的入队。<br>
+    <b>你竞赛做的 DFS/BFS 和这个本质一样，只是存图方式从邻接表变成了邻接矩阵。</b>
+  </div>
+  <div class="code-block" id="codeG1"><span class="kw">#include</span> &lt;stdio.h&gt;
+<span class="kw">#include</span> &lt;string.h&gt;
+
+<span class="kw">int</span> G[<span class="num">100</span>][<span class="num">100</span>], n, vis[<span class="num">100</span>];
+
+<span class="kw">void</span> <span class="fn">dfs</span>(<span class="kw">int</span> v) {
+    printf(<span class="str">"%d "</span>, v);
+    vis[v] = <span class="num">1</span>;
+    <span class="kw">int</span> i;
+    <span class="kw">for</span> (i = <span class="num">0</span>; i &lt; n; i++)
+        <span class="kw">if</span> (G[v][i] &amp;&amp; !vis[i]) dfs(i);
+}
+
+<span class="kw">void</span> <span class="fn">bfs</span>(<span class="kw">int</span> start) {
+    <span class="kw">int</span> queue[<span class="num">100</span>], front = <span class="num">0</span>, rear = <span class="num">0</span>;
+    <span class="kw">int</span> v2[<span class="num">100</span>]; memset(v2, <span class="num">0</span>, <span class="kw">sizeof</span>(v2));
+    queue[rear++] = start; v2[start] = <span class="num">1</span>;
+    <span class="kw">while</span> (front &lt; rear) {
+        <span class="kw">int</span> v = queue[front++];
+        printf(<span class="str">"%d "</span>, v);
+        <span class="kw">int</span> i;
+        <span class="kw">for</span> (i = <span class="num">0</span>; i &lt; n; i++)
+            <span class="kw">if</span> (G[v][i] &amp;&amp; !v2[i]) { queue[rear++] = i; v2[i] = <span class="num">1</span>; }
+    }
+}
+
+<span class="kw">int</span> <span class="fn">main</span>() {
+    <span class="kw">int</span> m, u, v, i;
+    scanf(<span class="str">"%d%d"</span>, &amp;n, &amp;m);
+    <span class="kw">for</span> (i = <span class="num">0</span>; i &lt; m; i++) {
+        scanf(<span class="str">"%d%d"</span>, &amp;u, &amp;v);
+        G[u][v] = G[v][u] = <span class="num">1</span>;
+    }
+    memset(vis, <span class="num">0</span>, <span class="kw">sizeof</span>(vis));
+    printf(<span class="str">"DFS: "</span>); dfs(<span class="num">0</span>); printf(<span class="str">"\n"</span>);
+    printf(<span class="str">"BFS: "</span>); bfs(<span class="num">0</span>); printf(<span class="str">"\n"</span>);
+    <span class="kw">return</span> <span class="num">0</span>;
+}</div>
+</div>
+
+<!-- G2 -->
+<div class="problem">
+  <div class="problem-header">
+    <div class="problem-num" style="background:#1565c0;">G2</div>
+    <div>
+      <div class="problem-title">Dijkstra 最短路径 <span class="tag" style="background:#e3f2fd;color:#1565c0;">图</span><span class="tag" style="background:#fff1f0;color:#c0392b;">重点</span></div>
+      <div class="difficulty diff-hard">难度：★★★★☆</div>
+    </div>
+  </div>
+  <div class="desc">给定一个有向带权图和源点，用<b>Dijkstra 算法</b>求源点到所有顶点的最短路径长度。</div>
+  <div class="example">输入：
+5 个顶点, 7 条边
+0→1:10, 0→3:5, 1→2:1, 1→3:2, 2→4:4, 3→1:3, 3→2:9
+源点: 0
+输出：
+dist[0]=0, dist[1]=8, dist[2]=9, dist[3]=5, dist[4]=13</div>
+  <button class="hint-btn" onclick="toggle(this,'hintG2')">💡 思路提示</button>
+  <button class="hint-btn" onclick="toggle(this,'codeG2')">📝 参考代码</button>
+  <div class="hint" id="hintG2">
+    <b>思路（贪心）：</b><br>
+    ① 初始化：源点 dist=0，其余 dist=∞<br>
+    ② 每次从未确定的顶点中选 dist 最小的 u（贪心选择）<br>
+    ③ 标记 u 为已确定，用 u 更新所有邻接点的 dist（松弛操作）<br>
+    ④ 重复 n 次<br>
+    <b>松弛：</b>if (dist[u] + w(u,v) &lt; dist[v]) → dist[v] = dist[u] + w(u,v)<br>
+    <b>你竞赛学过 Dijkstra，考试写法只是用邻接矩阵，不需要优先队列。</b>
+  </div>
+  <div class="code-block" id="codeG2"><span class="kw">#include</span> &lt;stdio.h&gt;
+<span class="kw">#include</span> &lt;string.h&gt;
+
+<span class="kw">#define</span> N <span class="num">100</span>
+<span class="kw">#define</span> INF <span class="num">0x3f3f3f3f</span>
+
+<span class="kw">int</span> G[N][N], dist[N], done[N], n;
+
+<span class="kw">void</span> <span class="fn">dijkstra</span>(<span class="kw">int</span> src) {
+    <span class="kw">int</span> i, j;
+    memset(done, <span class="num">0</span>, <span class="kw">sizeof</span>(done));
+    <span class="kw">for</span> (i = <span class="num">0</span>; i &lt; n; i++) dist[i] = INF;
+    dist[src] = <span class="num">0</span>;
+
+    <span class="kw">for</span> (i = <span class="num">0</span>; i &lt; n; i++) {
+        <span class="kw">int</span> u = -<span class="num">1</span>, mn = INF;
+        <span class="kw">for</span> (j = <span class="num">0</span>; j &lt; n; j++)
+            <span class="kw">if</span> (!done[j] &amp;&amp; dist[j] &lt; mn) { mn = dist[j]; u = j; }
+        <span class="kw">if</span> (u == -<span class="num">1</span>) <span class="kw">break</span>;
+        done[u] = <span class="num">1</span>;
+        <span class="kw">for</span> (j = <span class="num">0</span>; j &lt; n; j++)
+            <span class="kw">if</span> (G[u][j] &amp;&amp; !done[j] &amp;&amp; dist[u] + G[u][j] &lt; dist[j])
+                dist[j] = dist[u] + G[u][j];
+    }
+}
+
+<span class="kw">int</span> <span class="fn">main</span>() {
+    <span class="kw">int</span> m, u, v, w, i, src;
+    scanf(<span class="str">"%d%d"</span>, &amp;n, &amp;m);
+    memset(G, <span class="num">0</span>, <span class="kw">sizeof</span>(G));
+    <span class="kw">for</span> (i = <span class="num">0</span>; i &lt; m; i++) {
+        scanf(<span class="str">"%d%d%d"</span>, &amp;u, &amp;v, &amp;w);
+        G[u][v] = w;
+    }
+    scanf(<span class="str">"%d"</span>, &amp;src);
+    dijkstra(src);
+    <span class="kw">for</span> (i = <span class="num">0</span>; i &lt; n; i++)
+        printf(<span class="str">"dist[%d] = %d\n"</span>, i, dist[i]);
+    <span class="kw">return</span> <span class="num">0</span>;
+}</div>
+</div>
+
+<!-- G3 -->
+<div class="problem">
+  <div class="problem-header">
+    <div class="problem-num" style="background:#1565c0;">G3</div>
+    <div>
+      <div class="problem-title">Prim 最小生成树 <span class="tag" style="background:#e3f2fd;color:#1565c0;">图</span></div>
+      <div class="difficulty diff-hard">难度：★★★★☆</div>
+    </div>
+  </div>
+  <div class="desc">给定无向带权连通图，用<b>Prim 算法</b>求最小生成树的总权值。</div>
+  <div class="example">输入：
+4 个顶点, 5 条边
+0-1:1, 0-2:4, 0-3:3, 1-2:2, 2-3:5
+输出：MST总权值 = 6 (选边 0-1:1, 1-2:2, 0-3:3)</div>
+  <button class="hint-btn" onclick="toggle(this,'hintG3')">💡 思路提示</button>
+  <button class="hint-btn" onclick="toggle(this,'codeG3')">📝 参考代码</button>
+  <div class="hint" id="hintG3">
+    <b>思路：</b>从顶点 0 出发，维护 lowcost[] 数组表示"未加入的点到已加入集合的最小边权"。<br>
+    每次选 lowcost 最小的未加入顶点加入，然后更新其邻接点的 lowcost。<br>
+    <b>和 Dijkstra 结构非常像！</b>区别：Dijkstra 更新的是 dist[v]=dist[u]+w，Prim 更新的是 lowcost[v]=w。
+  </div>
+  <div class="code-block" id="codeG3"><span class="kw">#include</span> &lt;stdio.h&gt;
+<span class="kw">#include</span> &lt;string.h&gt;
+
+<span class="kw">#define</span> N <span class="num">100</span>
+<span class="kw">#define</span> INF <span class="num">0x3f3f3f3f</span>
+
+<span class="kw">int</span> G[N][N], lowcost[N], done[N], n;
+
+<span class="kw">int</span> <span class="fn">prim</span>() {
+    <span class="kw">int</span> i, j, total = <span class="num">0</span>;
+    memset(done, <span class="num">0</span>, <span class="kw">sizeof</span>(done));
+    <span class="kw">for</span> (i = <span class="num">0</span>; i &lt; n; i++) lowcost[i] = INF;
+    lowcost[<span class="num">0</span>] = <span class="num">0</span>;
+
+    <span class="kw">for</span> (i = <span class="num">0</span>; i &lt; n; i++) {
+        <span class="kw">int</span> u = -<span class="num">1</span>, mn = INF;
+        <span class="kw">for</span> (j = <span class="num">0</span>; j &lt; n; j++)
+            <span class="kw">if</span> (!done[j] &amp;&amp; lowcost[j] &lt; mn) { mn = lowcost[j]; u = j; }
+        <span class="kw">if</span> (u == -<span class="num">1</span>) <span class="kw">break</span>;
+        done[u] = <span class="num">1</span>;
+        total += mn;
+        <span class="kw">for</span> (j = <span class="num">0</span>; j &lt; n; j++)
+            <span class="kw">if</span> (G[u][j] &amp;&amp; !done[j] &amp;&amp; G[u][j] &lt; lowcost[j])
+                lowcost[j] = G[u][j]; <span class="cm">// 注意：不是 dist[u]+w</span>
+    }
+    <span class="kw">return</span> total;
+}
+
+<span class="kw">int</span> <span class="fn">main</span>() {
+    <span class="kw">int</span> m, u, v, w, i;
+    scanf(<span class="str">"%d%d"</span>, &amp;n, &amp;m);
+    memset(G, <span class="num">0</span>, <span class="kw">sizeof</span>(G));
+    <span class="kw">for</span> (i = <span class="num">0</span>; i &lt; m; i++) {
+        scanf(<span class="str">"%d%d%d"</span>, &amp;u, &amp;v, &amp;w);
+        G[u][v] = G[v][u] = w;
+    }
+    printf(<span class="str">"MST总权值 = %d\n"</span>, prim());
+    <span class="kw">return</span> <span class="num">0</span>;
+}</div>
+</div>
+
+<!-- G4 -->
+<div class="problem">
+  <div class="problem-header">
+    <div class="problem-num" style="background:#1565c0;">G4</div>
+    <div>
+      <div class="problem-title">拓扑排序 <span class="tag" style="background:#e3f2fd;color:#1565c0;">图</span></div>
+      <div class="difficulty diff-mid">难度：★★★☆☆</div>
+    </div>
+  </div>
+  <div class="desc">给定有向无环图(DAG)，用<b>拓扑排序</b>输出一个合法的顶点序列。若有环则报告。</div>
+  <div class="example">输入：
+6 个顶点, 6 条边
+0→1, 0→2, 1→3, 2→3, 3→4, 3→5
+输出：0 1 2 3 4 5（或 0 2 1 3 4 5 等合法序列）</div>
+  <button class="hint-btn" onclick="toggle(this,'hintG4')">💡 思路提示</button>
+  <button class="hint-btn" onclick="toggle(this,'codeG4')">📝 参考代码</button>
+  <div class="hint" id="hintG4">
+    <b>思路：</b>① 计算所有顶点的入度 ② 入度为 0 的入队 ③ 出队一个顶点，删除它的所有出边（邻接点入度-1），新产生的入度为 0 的入队 ④ 重复直到队空。<br>
+    <b>判环：</b>如果输出的顶点数 &lt; n，说明图中有环。
+  </div>
+  <div class="code-block" id="codeG4"><span class="kw">#include</span> &lt;stdio.h&gt;
+<span class="kw">#include</span> &lt;string.h&gt;
+
+<span class="kw">#define</span> N <span class="num">100</span>
+<span class="kw">int</span> G[N][N], inDeg[N], n;
+
+<span class="kw">void</span> <span class="fn">topoSort</span>() {
+    <span class="kw">int</span> queue[N], front = <span class="num">0</span>, rear = <span class="num">0</span>;
+    <span class="kw">int</span> i, j, cnt = <span class="num">0</span>;
+    <span class="kw">for</span> (i = <span class="num">0</span>; i &lt; n; i++)
+        <span class="kw">if</span> (inDeg[i] == <span class="num">0</span>) queue[rear++] = i;
+    <span class="kw">while</span> (front &lt; rear) {
+        <span class="kw">int</span> v = queue[front++];
+        printf(<span class="str">"%d "</span>, v);
+        cnt++;
+        <span class="kw">for</span> (j = <span class="num">0</span>; j &lt; n; j++)
+            <span class="kw">if</span> (G[v][j]) {
+                inDeg[j]--;
+                <span class="kw">if</span> (inDeg[j] == <span class="num">0</span>) queue[rear++] = j;
+            }
+    }
+    <span class="kw">if</span> (cnt &lt; n) printf(<span class="str">"\n图中有环!"</span>);
+    printf(<span class="str">"\n"</span>);
+}
+
+<span class="kw">int</span> <span class="fn">main</span>() {
+    <span class="kw">int</span> m, u, v, i;
+    scanf(<span class="str">"%d%d"</span>, &amp;n, &amp;m);
+    memset(G, <span class="num">0</span>, <span class="kw">sizeof</span>(G));
+    memset(inDeg, <span class="num">0</span>, <span class="kw">sizeof</span>(inDeg));
+    <span class="kw">for</span> (i = <span class="num">0</span>; i &lt; m; i++) {
+        scanf(<span class="str">"%d%d"</span>, &amp;u, &amp;v);
+        G[u][v] = <span class="num">1</span>; inDeg[v]++;
+    }
+    topoSort();
+    <span class="kw">return</span> <span class="num">0</span>;
+}</div>
+</div>
+
+<!-- ===== 邻接表版图论 ===== -->
+<div style="text-align:center;color:#0d47a1;font-size:20px;font-weight:700;margin:30px 0 16px;letter-spacing:4px;">── 图论·邻接表版 ──</div>
+
+<!-- G5 -->
+<div class="problem">
+  <div class="problem-header">
+    <div class="problem-num" style="background:#0d47a1;">G5</div>
+    <div>
+      <div class="problem-title">DFS 与 BFS（邻接表）<span class="tag" style="background:#e3f2fd;color:#1565c0;">图</span><span class="tag" style="background:#e8eaf6;color:#283593;">邻接表</span></div>
+      <div class="difficulty diff-mid">难度：★★★☆☆</div>
+    </div>
+  </div>
+  <div class="desc">和 G1 相同的题目，改用<b>邻接表</b>存图。体会两种存储方式在遍历时的区别。</div>
+  <div class="example">邻接表结构：
+adj[0] → 1 → 2
+adj[1] → 0 → 3 → 4
+adj[2] → 0 → 4
+adj[3] → 1 → 4
+adj[4] → 1 → 2 → 3
+
+DFS: 0 1 3 4 2
+BFS: 0 1 2 3 4</div>
+  <button class="hint-btn" onclick="toggle(this,'hintG5')">💡 思路提示</button>
+  <button class="hint-btn" onclick="toggle(this,'codeG5')">📝 参考代码</button>
+  <div class="hint" id="hintG5">
+    <b>邻接表 vs 邻接矩阵：</b><br>
+    邻接矩阵：<code>for (j=0; j&lt;n; j++) if (G[v][j])</code> → 遍历所有 n 个顶点<br>
+    邻接表：<code>for (e=adj[v]; e; e=e-&gt;next)</code> → 只遍历 v 的邻接点<br>
+    <b>邻接表优势：</b>稀疏图效率高，空间 O(V+E)。邻接矩阵空间 O(V²)。<br>
+    <b>建表方法：</b>用链表，每条边 malloc 一个节点，头插法接到 adj[u] 上。
+  </div>
+  <div class="code-block" id="codeG5"><span class="kw">#include</span> &lt;stdio.h&gt;
+<span class="kw">#include</span> &lt;stdlib.h&gt;
+<span class="kw">#include</span> &lt;string.h&gt;
+
+<span class="kw">struct</span> Edge {
+    <span class="kw">int</span> to;
+    <span class="kw">struct</span> Edge *next;
+};
+
+<span class="kw">struct</span> Edge *adj[<span class="num">100</span>]; <span class="cm">// 邻接表</span>
+<span class="kw">int</span> n, vis[<span class="num">100</span>];
+
+<span class="cm">/* 头插法加边 */</span>
+<span class="kw">void</span> <span class="fn">addEdge</span>(<span class="kw">int</span> u, <span class="kw">int</span> v) {
+    <span class="kw">struct</span> Edge *e = (<span class="kw">struct</span> Edge*)malloc(<span class="kw">sizeof</span>(<span class="kw">struct</span> Edge));
+    e-&gt;to = v;
+    e-&gt;next = adj[u];
+    adj[u] = e;
+}
+
+<span class="kw">void</span> <span class="fn">dfs</span>(<span class="kw">int</span> v) {
+    printf(<span class="str">"%d "</span>, v);
+    vis[v] = <span class="num">1</span>;
+    <span class="kw">struct</span> Edge *e;
+    <span class="kw">for</span> (e = adj[v]; e; e = e-&gt;next) <span class="cm">// 只遍历邻接点</span>
+        <span class="kw">if</span> (!vis[e-&gt;to]) dfs(e-&gt;to);
+}
+
+<span class="kw">void</span> <span class="fn">bfs</span>(<span class="kw">int</span> start) {
+    <span class="kw">int</span> queue[<span class="num">100</span>], front = <span class="num">0</span>, rear = <span class="num">0</span>;
+    <span class="kw">int</span> v2[<span class="num">100</span>]; memset(v2, <span class="num">0</span>, <span class="kw">sizeof</span>(v2));
+    queue[rear++] = start; v2[start] = <span class="num">1</span>;
+    <span class="kw">while</span> (front &lt; rear) {
+        <span class="kw">int</span> v = queue[front++];
+        printf(<span class="str">"%d "</span>, v);
+        <span class="kw">struct</span> Edge *e;
+        <span class="kw">for</span> (e = adj[v]; e; e = e-&gt;next)
+            <span class="kw">if</span> (!v2[e-&gt;to]) { queue[rear++] = e-&gt;to; v2[e-&gt;to] = <span class="num">1</span>; }
+    }
+}
+
+<span class="kw">int</span> <span class="fn">main</span>() {
+    <span class="kw">int</span> m, u, v, i;
+    scanf(<span class="str">"%d%d"</span>, &amp;n, &amp;m);
+    memset(adj, <span class="num">0</span>, <span class="kw">sizeof</span>(adj));
+    <span class="kw">for</span> (i = <span class="num">0</span>; i &lt; m; i++) {
+        scanf(<span class="str">"%d%d"</span>, &amp;u, &amp;v);
+        addEdge(u, v);
+        addEdge(v, u); <span class="cm">// 无向图加两条</span>
+    }
+    memset(vis, <span class="num">0</span>, <span class="kw">sizeof</span>(vis));
+    printf(<span class="str">"DFS: "</span>); dfs(<span class="num">0</span>); printf(<span class="str">"\n"</span>);
+    printf(<span class="str">"BFS: "</span>); bfs(<span class="num">0</span>); printf(<span class="str">"\n"</span>);
+    <span class="kw">return</span> <span class="num">0</span>;
+}</div>
+</div>
+
+<!-- G6 -->
+<div class="problem">
+  <div class="problem-header">
+    <div class="problem-num" style="background:#0d47a1;">G6</div>
+    <div>
+      <div class="problem-title">Dijkstra 最短路径（邻接表）<span class="tag" style="background:#e3f2fd;color:#1565c0;">图</span><span class="tag" style="background:#e8eaf6;color:#283593;">邻接表</span></div>
+      <div class="difficulty diff-hard">难度：★★★★☆</div>
+    </div>
+  </div>
+  <div class="desc">和 G2 相同，改用<b>邻接表</b>存带权有向图，Dijkstra 求最短路径。</div>
+  <div class="example">输入格式同 G2
+区别：松弛操作只遍历 u 的邻接边，不用扫描整行</div>
+  <button class="hint-btn" onclick="toggle(this,'hintG6')">💡 思路提示</button>
+  <button class="hint-btn" onclick="toggle(this,'codeG6')">📝 参考代码</button>
+  <div class="hint" id="hintG6">
+    <b>对比邻接矩阵版：</b><br>
+    矩阵版松弛：<code>for (j=0; j&lt;n; j++) if (G[u][j] &amp;&amp; ...)</code> → O(V) 每轮<br>
+    邻接表版松弛：<code>for (e=adj[u]; e; e=e-&gt;next)</code> → 只遍历 u 的出边<br>
+    <b>其余逻辑完全一样。</b>选最小 dist 的过程不变（朴素版仍然 O(V) 扫描）。
+  </div>
+  <div class="code-block" id="codeG6"><span class="kw">#include</span> &lt;stdio.h&gt;
+<span class="kw">#include</span> &lt;stdlib.h&gt;
+<span class="kw">#include</span> &lt;string.h&gt;
+
+<span class="kw">#define</span> N <span class="num">100</span>
+<span class="kw">#define</span> INF <span class="num">0x3f3f3f3f</span>
+
+<span class="kw">struct</span> Edge {
+    <span class="kw">int</span> to, w;
+    <span class="kw">struct</span> Edge *next;
+};
+
+<span class="kw">struct</span> Edge *adj[N];
+<span class="kw">int</span> dist[N], done[N], n;
+
+<span class="kw">void</span> <span class="fn">addEdge</span>(<span class="kw">int</span> u, <span class="kw">int</span> v, <span class="kw">int</span> w) {
+    <span class="kw">struct</span> Edge *e = (<span class="kw">struct</span> Edge*)malloc(<span class="kw">sizeof</span>(<span class="kw">struct</span> Edge));
+    e-&gt;to = v; e-&gt;w = w;
+    e-&gt;next = adj[u]; adj[u] = e;
+}
+
+<span class="kw">void</span> <span class="fn">dijkstra</span>(<span class="kw">int</span> src) {
+    <span class="kw">int</span> i;
+    memset(done, <span class="num">0</span>, <span class="kw">sizeof</span>(done));
+    <span class="kw">for</span> (i = <span class="num">0</span>; i &lt; n; i++) dist[i] = INF;
+    dist[src] = <span class="num">0</span>;
+
+    <span class="kw">for</span> (i = <span class="num">0</span>; i &lt; n; i++) {
+        <span class="kw">int</span> u = -<span class="num">1</span>, mn = INF, j;
+        <span class="kw">for</span> (j = <span class="num">0</span>; j &lt; n; j++)
+            <span class="kw">if</span> (!done[j] &amp;&amp; dist[j] &lt; mn) { mn = dist[j]; u = j; }
+        <span class="kw">if</span> (u == -<span class="num">1</span>) <span class="kw">break</span>;
+        done[u] = <span class="num">1</span>;
+
+        <span class="kw">struct</span> Edge *e;
+        <span class="kw">for</span> (e = adj[u]; e; e = e-&gt;next) <span class="cm">// 只遍历 u 的出边</span>
+            <span class="kw">if</span> (!done[e-&gt;to] &amp;&amp; dist[u] + e-&gt;w &lt; dist[e-&gt;to])
+                dist[e-&gt;to] = dist[u] + e-&gt;w;
+    }
+}
+
+<span class="kw">int</span> <span class="fn">main</span>() {
+    <span class="kw">int</span> m, u, v, w, i, src;
+    scanf(<span class="str">"%d%d"</span>, &amp;n, &amp;m);
+    memset(adj, <span class="num">0</span>, <span class="kw">sizeof</span>(adj));
+    <span class="kw">for</span> (i = <span class="num">0</span>; i &lt; m; i++) {
+        scanf(<span class="str">"%d%d%d"</span>, &amp;u, &amp;v, &amp;w);
+        addEdge(u, v, w);
+    }
+    scanf(<span class="str">"%d"</span>, &amp;src);
+    dijkstra(src);
+    <span class="kw">for</span> (i = <span class="num">0</span>; i &lt; n; i++)
+        printf(<span class="str">"dist[%d] = %d\n"</span>, i, dist[i]);
+    <span class="kw">return</span> <span class="num">0</span>;
+}</div>
+</div>
+
+<!-- G7 -->
+<div class="problem">
+  <div class="problem-header">
+    <div class="problem-num" style="background:#0d47a1;">G7</div>
+    <div>
+      <div class="problem-title">Prim 最小生成树（邻接表）<span class="tag" style="background:#e3f2fd;color:#1565c0;">图</span><span class="tag" style="background:#e8eaf6;color:#283593;">邻接表</span></div>
+      <div class="difficulty diff-hard">难度：★★★★☆</div>
+    </div>
+  </div>
+  <div class="desc">和 G3 相同，改用<b>邻接表</b>存无向带权图，Prim 求最小生成树。</div>
+  <div class="example">输入格式同 G3
+区别：更新 lowcost 时只遍历 u 的邻接边</div>
+  <button class="hint-btn" onclick="toggle(this,'hintG7')">💡 思路提示</button>
+  <button class="hint-btn" onclick="toggle(this,'codeG7')">📝 参考代码</button>
+  <div class="hint" id="hintG7">
+    <b>和 Dijkstra 邻接表版一模一样的结构！</b><br>
+    唯一区别：松弛条件 <code>e-&gt;w &lt; lowcost[e-&gt;to]</code>（Prim），而非 <code>dist[u]+e-&gt;w &lt; dist[e-&gt;to]</code>（Dijkstra）。
+  </div>
+  <div class="code-block" id="codeG7"><span class="kw">#include</span> &lt;stdio.h&gt;
+<span class="kw">#include</span> &lt;stdlib.h&gt;
+<span class="kw">#include</span> &lt;string.h&gt;
+
+<span class="kw">#define</span> N <span class="num">100</span>
+<span class="kw">#define</span> INF <span class="num">0x3f3f3f3f</span>
+
+<span class="kw">struct</span> Edge { <span class="kw">int</span> to, w; <span class="kw">struct</span> Edge *next; };
+<span class="kw">struct</span> Edge *adj[N];
+<span class="kw">int</span> lowcost[N], done[N], n;
+
+<span class="kw">void</span> <span class="fn">addEdge</span>(<span class="kw">int</span> u, <span class="kw">int</span> v, <span class="kw">int</span> w) {
+    <span class="kw">struct</span> Edge *e = (<span class="kw">struct</span> Edge*)malloc(<span class="kw">sizeof</span>(<span class="kw">struct</span> Edge));
+    e-&gt;to = v; e-&gt;w = w; e-&gt;next = adj[u]; adj[u] = e;
+}
+
+<span class="kw">int</span> <span class="fn">prim</span>() {
+    <span class="kw">int</span> i, total = <span class="num">0</span>;
+    memset(done, <span class="num">0</span>, <span class="kw">sizeof</span>(done));
+    <span class="kw">for</span> (i = <span class="num">0</span>; i &lt; n; i++) lowcost[i] = INF;
+    lowcost[<span class="num">0</span>] = <span class="num">0</span>;
+
+    <span class="kw">for</span> (i = <span class="num">0</span>; i &lt; n; i++) {
+        <span class="kw">int</span> u = -<span class="num">1</span>, mn = INF, j;
+        <span class="kw">for</span> (j = <span class="num">0</span>; j &lt; n; j++)
+            <span class="kw">if</span> (!done[j] &amp;&amp; lowcost[j] &lt; mn) { mn = lowcost[j]; u = j; }
+        <span class="kw">if</span> (u == -<span class="num">1</span>) <span class="kw">break</span>;
+        done[u] = <span class="num">1</span>;
+        total += mn;
+        <span class="kw">struct</span> Edge *e;
+        <span class="kw">for</span> (e = adj[u]; e; e = e-&gt;next)
+            <span class="kw">if</span> (!done[e-&gt;to] &amp;&amp; e-&gt;w &lt; lowcost[e-&gt;to])
+                lowcost[e-&gt;to] = e-&gt;w; <span class="cm">// 注意：不加 dist[u]</span>
+    }
+    <span class="kw">return</span> total;
+}
+
+<span class="kw">int</span> <span class="fn">main</span>() {
+    <span class="kw">int</span> m, u, v, w, i;
+    scanf(<span class="str">"%d%d"</span>, &amp;n, &amp;m);
+    memset(adj, <span class="num">0</span>, <span class="kw">sizeof</span>(adj));
+    <span class="kw">for</span> (i = <span class="num">0</span>; i &lt; m; i++) {
+        scanf(<span class="str">"%d%d%d"</span>, &amp;u, &amp;v, &amp;w);
+        addEdge(u, v, w);
+        addEdge(v, u, w); <span class="cm">// 无向图</span>
+    }
+    printf(<span class="str">"MST总权值 = %d\n"</span>, prim());
+    <span class="kw">return</span> <span class="num">0</span>;
+}</div>
+</div>
+
+<!-- G8 -->
+<div class="problem">
+  <div class="problem-header">
+    <div class="problem-num" style="background:#0d47a1;">G8</div>
+    <div>
+      <div class="problem-title">拓扑排序（邻接表）<span class="tag" style="background:#e3f2fd;color:#1565c0;">图</span><span class="tag" style="background:#e8eaf6;color:#283593;">邻接表</span></div>
+      <div class="difficulty diff-mid">难度：★★★☆☆</div>
+    </div>
+  </div>
+  <div class="desc">和 G4 相同，改用<b>邻接表</b>存有向图，实现拓扑排序。</div>
+  <div class="example">输入格式同 G4
+区别：删边时遍历邻接表而非邻接矩阵的整行</div>
+  <button class="hint-btn" onclick="toggle(this,'hintG8')">💡 思路提示</button>
+  <button class="hint-btn" onclick="toggle(this,'codeG8')">📝 参考代码</button>
+  <div class="hint" id="hintG8">
+    <b>思路完全一样：</b>入度为 0 入队 → 出队删边 → 新入度为 0 入队。<br>
+    <b>区别：</b>删除 v 的出边时，遍历 <code>adj[v]</code> 链表，而非 <code>G[v][0..n-1]</code> 整行。
+  </div>
+  <div class="code-block" id="codeG8"><span class="kw">#include</span> &lt;stdio.h&gt;
+<span class="kw">#include</span> &lt;stdlib.h&gt;
+<span class="kw">#include</span> &lt;string.h&gt;
+
+<span class="kw">#define</span> N <span class="num">100</span>
+
+<span class="kw">struct</span> Edge { <span class="kw">int</span> to; <span class="kw">struct</span> Edge *next; };
+<span class="kw">struct</span> Edge *adj[N];
+<span class="kw">int</span> inDeg[N], n;
+
+<span class="kw">void</span> <span class="fn">addEdge</span>(<span class="kw">int</span> u, <span class="kw">int</span> v) {
+    <span class="kw">struct</span> Edge *e = (<span class="kw">struct</span> Edge*)malloc(<span class="kw">sizeof</span>(<span class="kw">struct</span> Edge));
+    e-&gt;to = v; e-&gt;next = adj[u]; adj[u] = e;
+}
+
+<span class="kw">void</span> <span class="fn">topoSort</span>() {
+    <span class="kw">int</span> queue[N], front = <span class="num">0</span>, rear = <span class="num">0</span>;
+    <span class="kw">int</span> i, cnt = <span class="num">0</span>;
+    <span class="kw">for</span> (i = <span class="num">0</span>; i &lt; n; i++)
+        <span class="kw">if</span> (inDeg[i] == <span class="num">0</span>) queue[rear++] = i;
+    <span class="kw">while</span> (front &lt; rear) {
+        <span class="kw">int</span> v = queue[front++];
+        printf(<span class="str">"%d "</span>, v);
+        cnt++;
+        <span class="kw">struct</span> Edge *e;
+        <span class="kw">for</span> (e = adj[v]; e; e = e-&gt;next) { <span class="cm">// 遍历链表</span>
+            inDeg[e-&gt;to]--;
+            <span class="kw">if</span> (inDeg[e-&gt;to] == <span class="num">0</span>) queue[rear++] = e-&gt;to;
+        }
+    }
+    <span class="kw">if</span> (cnt &lt; n) printf(<span class="str">"\n图中有环!"</span>);
+    printf(<span class="str">"\n"</span>);
+}
+
+<span class="kw">int</span> <span class="fn">main</span>() {
+    <span class="kw">int</span> m, u, v, i;
+    scanf(<span class="str">"%d%d"</span>, &amp;n, &amp;m);
+    memset(adj, <span class="num">0</span>, <span class="kw">sizeof</span>(adj));
+    memset(inDeg, <span class="num">0</span>, <span class="kw">sizeof</span>(inDeg));
+    <span class="kw">for</span> (i = <span class="num">0</span>; i &lt; m; i++) {
+        scanf(<span class="str">"%d%d"</span>, &amp;u, &amp;v);
+        addEdge(u, v);
+        inDeg[v]++;
+    }
+    topoSort();
+    <span class="kw">return</span> <span class="num">0</span>;
+}</div>
+</div>
+
+<!-- ===== 查找与串 ===== -->
+<div style="text-align:center;color:#795548;font-size:20px;font-weight:700;margin:30px 0 16px;letter-spacing:4px;">── 查找与串专题 ──</div>
+
+<!-- X1 -->
+<div class="problem">
+  <div class="problem-header">
+    <div class="problem-num" style="background:#795548;">X1</div>
+    <div>
+      <div class="problem-title">折半查找（迭代版）<span class="tag" style="background:#efebe9;color:#795548;">查找</span></div>
+      <div class="difficulty diff-easy">难度：★★☆☆☆</div>
+    </div>
+  </div>
+  <div class="desc">在<b>有序数组</b>中用迭代方式实现折半查找（二分查找），返回目标值的下标。</div>
+  <div class="example">输入：数组 [1, 3, 5, 7, 9, 11, 13], 查找 7
+输出：下标 = 3</div>
+  <button class="hint-btn" onclick="toggle(this,'hintX1')">💡 思路提示</button>
+  <button class="hint-btn" onclick="toggle(this,'codeX1')">📝 参考代码</button>
+  <div class="hint" id="hintX1">
+    <b>思路：</b>low=0, high=n-1，每次取 mid=(low+high)/2，和 target 比较，相等则找到，小了往右(low=mid+1)，大了往左(high=mid-1)。<br>
+    <b>注意：</b>前提是数组<b>有序</b>！时间 O(log n)。
+  </div>
+  <div class="code-block" id="codeX1"><span class="kw">#include</span> &lt;stdio.h&gt;
+
+<span class="kw">int</span> <span class="fn">binarySearch</span>(<span class="kw">int</span> a[], <span class="kw">int</span> n, <span class="kw">int</span> target) {
+    <span class="kw">int</span> low = <span class="num">0</span>, high = n - <span class="num">1</span>;
+    <span class="kw">while</span> (low &lt;= high) {
+        <span class="kw">int</span> mid = (low + high) / <span class="num">2</span>;
+        <span class="kw">if</span> (a[mid] == target) <span class="kw">return</span> mid;
+        <span class="kw">else if</span> (target &lt; a[mid]) high = mid - <span class="num">1</span>;
+        <span class="kw">else</span> low = mid + <span class="num">1</span>;
+    }
+    <span class="kw">return</span> -<span class="num">1</span>;
+}
+
+<span class="kw">int</span> <span class="fn">main</span>() {
+    <span class="kw">int</span> a[] = {<span class="num">1,3,5,7,9,11,13</span>};
+    <span class="kw">int</span> n = <span class="num">7</span>, target;
+    scanf(<span class="str">"%d"</span>, &amp;target);
+    <span class="kw">int</span> pos = binarySearch(a, n, target);
+    <span class="kw">if</span> (pos &gt;= <span class="num">0</span>) printf(<span class="str">"找到，下标 = %d\n"</span>, pos);
+    <span class="kw">else</span> printf(<span class="str">"未找到\n"</span>);
+    <span class="kw">return</span> <span class="num">0</span>;
+}</div>
+</div>
+
+<!-- X2 -->
+<div class="problem">
+  <div class="problem-header">
+    <div class="problem-num" style="background:#795548;">X2</div>
+    <div>
+      <div class="problem-title">哈希表（线性探测法）<span class="tag" style="background:#efebe9;color:#795548;">查找</span></div>
+      <div class="difficulty diff-mid">难度：★★★☆☆</div>
+    </div>
+  </div>
+  <div class="desc">用<b>除留余数法</b>作为哈希函数，<b>线性探测法</b>解决冲突，实现哈希表的插入和查找。</div>
+  <div class="example">哈希表大小 = 13
+插入: 16, 74, 60, 43, 54, 90, 46, 31, 29, 88
+H(key) = key % 13
+查找 46 → 位置 9，比较次数 4</div>
+  <button class="hint-btn" onclick="toggle(this,'hintX2')">💡 思路提示</button>
+  <button class="hint-btn" onclick="toggle(this,'codeX2')">📝 参考代码</button>
+  <div class="hint" id="hintX2">
+    <b>哈希函数：</b>H(key) = key % tableSize<br>
+    <b>线性探测：</b>冲突时 pos = (pos+1) % tableSize，直到找到空位。<br>
+    <b>查找：</b>从 H(key) 开始线性探测，直到找到 key 或遇到空位（未找到）。<br>
+    <b>考试常考：</b>给定哈希函数和数据，画出哈希表，算平均查找长度 ASL。
+  </div>
+  <div class="code-block" id="codeX2"><span class="kw">#include</span> &lt;stdio.h&gt;
+<span class="kw">#include</span> &lt;string.h&gt;
+
+<span class="kw">#define</span> SIZE <span class="num">13</span>
+<span class="kw">int</span> table[SIZE];
+<span class="kw">int</span> used[SIZE]; <span class="cm">// 0=空, 1=有数据</span>
+
+<span class="kw">void</span> <span class="fn">insert</span>(<span class="kw">int</span> key) {
+    <span class="kw">int</span> pos = key % SIZE;
+    <span class="kw">while</span> (used[pos])
+        pos = (pos + <span class="num">1</span>) % SIZE;
+    table[pos] = key;
+    used[pos] = <span class="num">1</span>;
+}
+
+<span class="kw">int</span> <span class="fn">search</span>(<span class="kw">int</span> key, <span class="kw">int</span> *cmpCnt) {
+    <span class="kw">int</span> pos = key % SIZE;
+    *cmpCnt = <span class="num">0</span>;
+    <span class="kw">while</span> (used[pos]) {
+        (*cmpCnt)++;
+        <span class="kw">if</span> (table[pos] == key) <span class="kw">return</span> pos;
+        pos = (pos + <span class="num">1</span>) % SIZE;
+    }
+    <span class="kw">return</span> -<span class="num">1</span>;
+}
+
+<span class="kw">int</span> <span class="fn">main</span>() {
+    memset(used, <span class="num">0</span>, <span class="kw">sizeof</span>(used));
+    <span class="kw">int</span> data[] = {<span class="num">16,74,60,43,54,90,46,31,29,88</span>};
+    <span class="kw">int</span> i;
+    <span class="kw">for</span> (i = <span class="num">0</span>; i &lt; <span class="num">10</span>; i++) insert(data[i]);
+
+    printf(<span class="str">"哈希表: "</span>);
+    <span class="kw">for</span> (i = <span class="num">0</span>; i &lt; SIZE; i++)
+        <span class="kw">if</span> (used[i]) printf(<span class="str">"[%d]=%d "</span>, i, table[i]);
+        <span class="kw">else</span> printf(<span class="str">"[%d]=空 "</span>, i);
+    printf(<span class="str">"\n"</span>);
+
+    <span class="kw">int</span> key, cnt;
+    scanf(<span class="str">"%d"</span>, &amp;key);
+    <span class="kw">int</span> pos = search(key, &amp;cnt);
+    <span class="kw">if</span> (pos &gt;= <span class="num">0</span>) printf(<span class="str">"找到 %d 在位置 %d，比较 %d 次\n"</span>, key, pos, cnt);
+    <span class="kw">else</span> printf(<span class="str">"未找到\n"</span>);
+    <span class="kw">return</span> <span class="num">0</span>;
+}</div>
+</div>
+
+<!-- K1 -->
+<div class="problem">
+  <div class="problem-header">
+    <div class="problem-num" style="background:#795548;">K1</div>
+    <div>
+      <div class="problem-title">KMP 字符串匹配 <span class="tag" style="background:#efebe9;color:#795548;">串</span><span class="tag" style="background:#fff1f0;color:#c0392b;">经典</span></div>
+      <div class="difficulty diff-hard">难度：★★★★☆</div>
+    </div>
+  </div>
+  <div class="desc">用<b>KMP 算法</b>在主串中查找模式串的位置。需要实现 next 数组的计算和匹配过程。</div>
+  <div class="example">主串: "ababababca"
+模式串: "ababc"
+next 数组: [-1, 0, 0, 1, 2]
+输出：匹配位置 = 4</div>
+  <button class="hint-btn" onclick="toggle(this,'hintK1')">💡 思路提示</button>
+  <button class="hint-btn" onclick="toggle(this,'codeK1')">📝 参考代码</button>
+  <div class="hint" id="hintK1">
+    <b>next[j] 的含义：</b>模式串前 j 个字符中，最长的相等前后缀长度。匹配失败时，j 跳到 next[j] 继续比较，避免主串指针回退。<br>
+    <b>求 next 数组：</b>类似自己和自己做 KMP 匹配。i 从 1 开始，j 从 -1 开始，匹配则 i++,j++,next[i]=j，不匹配则 j=next[j]。<br>
+    <b>KMP 的精髓：</b>利用已匹配的信息避免重复比较，时间 O(n+m)。
+  </div>
+  <div class="code-block" id="codeK1"><span class="kw">#include</span> &lt;stdio.h&gt;
+<span class="kw">#include</span> &lt;string.h&gt;
+
+<span class="kw">void</span> <span class="fn">getNext</span>(<span class="kw">char</span> *p, <span class="kw">int</span> next[]) {
+    <span class="kw">int</span> m = strlen(p);
+    next[<span class="num">0</span>] = -<span class="num">1</span>;
+    <span class="kw">int</span> i = <span class="num">0</span>, j = -<span class="num">1</span>;
+    <span class="kw">while</span> (i &lt; m - <span class="num">1</span>) {
+        <span class="kw">if</span> (j == -<span class="num">1</span> || p[i] == p[j]) {
+            i++; j++;
+            next[i] = j;
+        } <span class="kw">else</span> {
+            j = next[j];
+        }
+    }
+}
+
+<span class="kw">int</span> <span class="fn">kmp</span>(<span class="kw">char</span> *text, <span class="kw">char</span> *pattern) {
+    <span class="kw">int</span> n = strlen(text), m = strlen(pattern);
+    <span class="kw">int</span> next[<span class="num">100</span>];
+    getNext(pattern, next);
+    <span class="kw">int</span> i = <span class="num">0</span>, j = <span class="num">0</span>;
+    <span class="kw">while</span> (i &lt; n &amp;&amp; j &lt; m) {
+        <span class="kw">if</span> (j == -<span class="num">1</span> || text[i] == pattern[j]) {
+            i++; j++;
+        } <span class="kw">else</span> {
+            j = next[j];
+        }
+    }
+    <span class="kw">if</span> (j == m) <span class="kw">return</span> i - m;
+    <span class="kw">return</span> -<span class="num">1</span>;
+}
+
+<span class="kw">int</span> <span class="fn">main</span>() {
+    <span class="kw">char</span> text[<span class="num">1000</span>], pattern[<span class="num">100</span>];
+    scanf(<span class="str">"%s%s"</span>, text, pattern);
+    <span class="kw">int</span> pos = kmp(text, pattern);
+    <span class="kw">if</span> (pos &gt;= <span class="num">0</span>) printf(<span class="str">"匹配位置 = %d\n"</span>, pos);
+    <span class="kw">else</span> printf(<span class="str">"未找到匹配\n"</span>);
+    <span class="kw">return</span> <span class="num">0</span>;
+}</div>
+</div>
+
+<!-- ===== 参考 ===== -->
+<div class="ref">
+  <h2>📋 做题建议</h2>
+  <div class="ref-item" style="color:#c0392b;font-weight:600;">🔥 去年真题是<b>递归求杨辉三角</b>，递归 + 树 是绝对重点！</div>
+  <div class="ref-item" style="font-weight:600;">📌 练习优先级（时间紧请按顺序来）：</div>
+  <div class="ref-item">1. <b>真题（递归杨辉三角）</b>→ 确保能默写</div>
+  <div class="ref-item">2. <b>递归 R1-R4</b>（斐波那契、阶乘、汉诺塔、GCD）→ 递归基本功</div>
+  <div class="ref-item" style="color:#27ae60;font-weight:600;">3. 🌲 <b>二叉树 T1→T2→T4→T3</b>（建树+遍历 → 高度/节点数 → BST → 先序+中序还原）</div>
+  <div class="ref-item" style="color:#8e44ad;font-weight:600;">4. 🔗 <b>链表 L1→L2</b>（创建+逆转 → 合并有序链表）→ 三指针逆转是经典题</div>
+  <div class="ref-item" style="color:#00897b;font-weight:600;">5. 📊 <b>排序 S4（快排）→ S6（堆排序）→ S5（归并）→ S1-S3</b>（冒泡/插入/选择）</div>
+  <div class="ref-item" style="color:#1565c0;font-weight:600;">6. 🌐 <b>图 G1（DFS/BFS）→ G2（Dijkstra）→ G3（Prim）→ G4（拓扑排序）</b></div>
+  <div class="ref-item" style="color:#795548;font-weight:600;">7. 🔍 <b>查找 X1（折半查找）→ X2（哈希表）→ K1（KMP）</b></div>
+  <div class="ref-item">8. 栈/队列题（第1-8题）也要练，括号匹配、后缀表达式、约瑟夫环</div>
+  <div class="ref-item">9. 所有题目都用 <b>C 语言</b>写，不要用 STL，练习手写数据结构</div>
+  <div class="ref-item" style="color:#c0392b;font-weight:600;">10. 记住机试环境：VC 或 Dev-C++（小熊猫），提前熟悉编译运行快捷键</div>
+  <div class="ref-item" style="background:#fff3cd;padding:8px 12px;border-radius:6px;margin-top:8px;">
+    <b>递归三要素（面试也会问）：</b><br>
+    ① <b>边界条件</b>（什么时候停下来）<br>
+    ② <b>递归关系</b>（大问题怎么拆成小问题）<br>
+    ③ <b>返回值</b>（每层递归返回什么）
+  </div>
+  <div class="ref-item" style="background:#e8f5e9;padding:8px 12px;border-radius:6px;margin-top:8px;">
+    <b>树题万能模板：</b><br>
+    ① <code>if (!root) return ...</code> —— 空树边界<br>
+    ② 递归左子树<br>
+    ③ 递归右子树<br>
+    ④ 合并左右结果
+  </div>
+  <div class="ref-item" style="background:#e3f2fd;padding:8px 12px;border-radius:6px;margin-top:8px;">
+    <b>排序算法速记表：</b><br>
+    冒泡 O(n²) 稳定 | 插入 O(n²) 稳定 | 选择 O(n²) 不稳定<br>
+    快排 O(nlogn) 不稳定 | 归并 O(nlogn) 稳定 | 堆排 O(nlogn) 不稳定<br>
+    <b>口诀：</b>"快些（希尔）选堆" 不稳定，其余稳定
+  </div>
+  <div class="ref-item" style="background:#fce4ec;padding:8px 12px;border-radius:6px;margin-top:8px;">
+    <b>图算法对比：</b><br>
+    Dijkstra vs Prim：代码结构几乎一样！区别是 Dijkstra 更新 dist[v]=dist[u]+w，Prim 更新 lowcost[v]=w<br>
+    DFS 用递归（栈），BFS 用队列<br>
+    拓扑排序：入度为 0 的入队 → 出队删边 → 新入度为 0 的入队
+  </div>
+</div>
+
+</div>
+</div><!-- /main-content -->
+
+<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+function toggle(btn, id) {
+  const el = document.getElementById(id);
+  el.classList.toggle('show');
+  if (el.classList.contains('show')) {
+    btn.textContent = btn.textContent.includes('思路') ? '🔽 收起思路' : '🔽 收起代码';
+  } else {
+    btn.textContent = btn.textContent.includes('思路') ? '💡 思路提示' : '📝 参考代码';
+  }
+}
+
+const SECTIONS = [
+  { name: '🔥 真题', color: '#d46b08', start: 0, count: 1 },
+  { name: '📚 栈与队列', color: '#c0392b', start: 1, count: 8 },
+  { name: '🔄 递归', color: '#e67e22', start: 9, count: 8 },
+  { name: '🌲 二叉树', color: '#27ae60', start: 17, count: 5 },
+  { name: '🔗 链表', color: '#8e44ad', start: 22, count: 2 },
+  { name: '📊 排序', color: '#00897b', start: 24, count: 6 },
+  { name: '🌐 图·邻接矩阵', color: '#1565c0', start: 30, count: 4 },
+  { name: '🌐 图·邻接表', color: '#0d47a1', start: 34, count: 4 },
+  { name: '🔍 查找与串', color: '#795548', start: 38, count: 3 },
+];
+const TOTAL = 41;
+const KEY = 'ds-practice-v2';
+
+function loadDone() { try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch(e) { return {}; } }
+function saveDone(d) { localStorage.setItem(KEY, JSON.stringify(d)); }
+
+function buildTOC() {
+  const probs = document.querySelectorAll('.problem');
+  const toc = document.getElementById('tocBody');
+  const done = loadDone();
+
+  probs.forEach(function(p, i) { p.id = 'prob-' + i; });
+  var ref = document.querySelector('.ref');
+  if (ref) ref.id = 'ref-tips';
+
+  var html = '';
+  SECTIONS.forEach(function(sec) {
+    html += '<div class="toc-section">';
+    html += '<div class="toc-section-label"><span class="toc-dot" style="background:' + sec.color + '"></span>' + sec.name + '<span class="toc-count">' + sec.count + '</span></div>';
+    for (var i = sec.start; i < sec.start + sec.count && i < probs.length; i++) {
+      var titleEl = probs[i].querySelector('.problem-title');
+      var numEl = probs[i].querySelector('.problem-num');
+      var num = numEl ? numEl.textContent.trim() : '';
+      var t = titleEl ? titleEl.childNodes[0].textContent.trim() : '';
+      if (t.length > 14) t = t.substring(0, 14) + '\u2026';
+      var ck = done[i] ? ' checked' : '';
+      var dn = done[i] ? ' done' : '';
+      html += '<a class="toc-item' + dn + '" data-idx="' + i + '" href="#prob-' + i + '">'
+        + '<span class="toc-check' + ck + '" onclick="event.preventDefault();event.stopPropagation();toggleDone(' + i + ');">\u2713</span>'
+        + '<span class="toc-badge" style="background:' + sec.color + '">' + num + '</span>'
+        + '<span class="toc-label">' + t + '</span></a>';
+    }
+    html += '</div>';
+  });
+  html += '<div class="toc-section"><a class="toc-item" href="#ref-tips" style="padding-left:20px"><span>\uD83D\uDCCB</span><span class="toc-label" style="font-weight:600">做题建议</span></a></div>';
+  toc.innerHTML = html;
+  updateStats();
+}
+
+function toggleDone(idx) {
+  var done = loadDone();
+  done[idx] = !done[idx];
+  saveDone(done);
+  var item = document.querySelector('.toc-item[data-idx="' + idx + '"]');
+  if (item) {
+    item.querySelector('.toc-check').classList.toggle('checked');
+    item.classList.toggle('done');
+  }
+  updateStats();
+}
+
+function updateStats() {
+  var done = loadDone();
+  var c = 0;
+  for (var k in done) if (done[k]) c++;
+  document.getElementById('statsText').textContent = c + ' / ' + TOTAL + ' 已练习';
+  document.getElementById('statsFill').style.width = (c / TOTAL * 100).toFixed(1) + '%';
+}
+
+var spyTick = false;
+function onScroll() {
+  if (spyTick) return;
+  spyTick = true;
+  requestAnimationFrame(function() {
+    var st = window.scrollY || window.pageYOffset;
+    var dh = document.documentElement.scrollHeight - window.innerHeight;
+    document.getElementById('progressBar').style.width = (dh > 0 ? st / dh * 100 : 0) + '%';
+
+    var bt = document.getElementById('backTop');
+    if (st > 300) bt.classList.add('show'); else bt.classList.remove('show');
+
+    var active = -1;
+    var probs = document.querySelectorAll('.problem');
+    for (var i = 0; i < probs.length; i++) {
+      if (probs[i].getBoundingClientRect().top <= 120) active = i;
+    }
+
+    var items = document.querySelectorAll('.toc-item[data-idx]');
+    for (var j = 0; j < items.length; j++) items[j].classList.remove('active');
+    if (active >= 0) {
+      var ai = document.querySelector('.toc-item[data-idx="' + active + '"]');
+      if (ai) {
+        ai.classList.add('active');
+        var sb = document.getElementById('sidebar');
+        var ar = ai.getBoundingClientRect();
+        var sr = sb.getBoundingClientRect();
+        if (ar.top < sr.top + 80 || ar.bottom > sr.bottom - 20) {
+          ai.scrollIntoView({ block: 'nearest' });
+        }
+      }
+    }
+    spyTick = false;
+  });
+}
+
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('sidebarOverlay').classList.toggle('show');
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  buildTOC();
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+  document.getElementById('tocBody').addEventListener('click', function(e) {
+    if (e.target.closest('.toc-item') && window.innerWidth <= 960) {
+      setTimeout(toggleSidebar, 150);
+    }
+  });
+});
+</script>
+
+</body>
+</html>
