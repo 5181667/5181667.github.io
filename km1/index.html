@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#2563eb" />
+  <title>科目一 · 口诀手册 + 刷题器</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='26'%3E🚗%3C/text%3E%3C/svg%3E" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: { 50:'#eff6ff',100:'#dbeafe',500:'#2563eb',600:'#1d4ed8',700:'#1e40af' },
+            ok:'#16a34a', warn:'#f59e0b', bad:'#dc2626'
+          },
+          animation: {
+            'fade-in':'fadeIn .3s ease-out',
+            'slide-up':'slideUp .35s cubic-bezier(.2,.8,.2,1) both',
+            'pop':'pop .25s ease-out',
+          },
+          keyframes: {
+            fadeIn:{from:{opacity:0},to:{opacity:1}},
+            slideUp:{from:{opacity:0,transform:'translateY(14px)'},to:{opacity:1,transform:'translateY(0)'}},
+            pop:{'0%':{transform:'scale(.96)'},'60%':{transform:'scale(1.03)'},'100%':{transform:'scale(1)'}},
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100">
+
+  <!-- 顶部导航 -->
+  <header class="sticky top-0 z-30 backdrop-blur bg-white/75 dark:bg-slate-900/75 border-b border-slate-200/70 dark:border-slate-800">
+    <div class="max-w-6xl mx-auto px-4 h-14 flex items-center gap-3">
+      <a href="#/manual" class="flex items-center gap-2 font-bold text-brand-600 dark:text-brand-100">
+        <span class="text-2xl">🚗</span>
+        <span class="hidden sm:inline">科一速记 · 刷题</span>
+      </a>
+      <nav class="flex items-center gap-1 ml-2" id="navTabs">
+        <a data-route="manual" class="nav-tab">记忆手册</a>
+        <a data-route="quiz"   class="nav-tab">顺序刷题</a>
+        <a data-route="random" class="nav-tab">随机练习</a>
+        <a data-route="wrong"  class="nav-tab">错题本</a>
+        <a data-route="fav"    class="nav-tab">收藏</a>
+        <a data-route="mock"   class="nav-tab">模拟考试</a>
+      </nav>
+      <div class="ml-auto flex items-center gap-2">
+        <span id="miniStats" class="hidden md:inline text-xs text-slate-500 dark:text-slate-400"></span>
+        <button id="dataBtn" title="数据管理" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-lg">💾</button>
+        <button id="themeBtn" title="切换主题" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-lg">🌓</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- 加载态 -->
+  <div id="loader" class="fixed inset-0 flex items-center justify-center bg-white/80 dark:bg-slate-950/80 z-50">
+    <div class="flex flex-col items-center gap-3">
+      <div class="w-10 h-10 border-4 border-brand-500 border-t-transparent rounded-full animate-spin"></div>
+      <div class="text-sm text-slate-500">题库加载中…</div>
+    </div>
+  </div>
+
+  <!-- 路由容器 -->
+  <main id="view" class="max-w-6xl mx-auto px-4 py-6 animate-fade-in"></main>
+
+  <footer class="max-w-6xl mx-auto px-4 py-10 text-xs text-slate-400 text-center">
+    <p>本站为本地离线学习工具 · 题库仅供学习研究使用 · 数据源见 <a class="underline" href="README.md" target="_blank">README</a></p>
+  </footer>
+
+  <!-- Mermaid（按需在手册模块初始化） -->
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+
+  <script src="assets/js/storage.js"></script>
+  <script src="assets/js/drawio.js"></script>
+  <script src="assets/js/manual.js"></script>
+  <script src="assets/js/quiz.js"></script>
+  <script src="assets/js/mock.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
